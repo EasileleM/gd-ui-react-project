@@ -5,9 +5,9 @@ frontend_target="FRONTEND"
 if [ "$APP_SIDE" = "$frontend_target" ]; then
   cd client
   npm install
-  npm start
+  npm run start
 else
   cd server
   npm install
-  npm build
+  npm run build
 fi
