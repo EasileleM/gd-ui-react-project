@@ -1,6 +1,8 @@
 #!/bin/bash
 
-if ["$APP_SIDE" == "FRONTEND"]; then
+frontend_target="FRONTEND"
+
+if [ "$APP_SIDE" = "$frontend_target" ]; then
   cd client
   npm install
   npm start
