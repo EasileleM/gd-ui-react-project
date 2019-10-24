@@ -1,12 +1,13 @@
 #!/bin/bash
 
-# frontend_target="FRONTEND"
-# if [ "$APP_SIDE" = "$frontend_target" ]; then
-#   cd client
-# else
-#   cd server
-# fi
+FRONTEND_TARGET="FRONTEND"
 
-cd client
+if [ $APP_SIDE = $FRONTEND_TARGET ]
+  then
+    cd client
+else
+    cd server
+fi
+
 npm install
 npm run start
