@@ -3,7 +3,7 @@
 if ["$APP_SIDE" == "FRONTEND"]; then
   cd client
   npm install
-  npm build
+  npm start
 else
   cd server
   npm install
