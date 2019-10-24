@@ -1,0 +1,14 @@
+{
+  "name": "frontendtemp",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+  },
+  "engines": {
+    "node": "12.10.0",
+    "npm": "6.11.3"
+  },
+  "scripts": {
+    "start": ""
+  }
+}
