@@ -1,0 +1,15 @@
+{
+  "name": "gd-ui-react-project",
+  "version": "1.0.0",
+  "description": "UI Internship project - web application, based on react and node js (express).",
+  "main": "index.js",
+  "dependencies": {
+  },
+  "scripts": {
+    "start": "bash deploy.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EasileleM/gd-ui-react-project.git"
+  }
+}
