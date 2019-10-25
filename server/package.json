@@ -1,18 +1,21 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "server part of online shop project",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "next": "^9.1.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "hhp-team"
+  }
 }

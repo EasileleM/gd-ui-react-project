@@ -1,13 +1,9 @@
 #!/bin/bash
 
-FRONTEND_TARGET="FRONTEND"
+frontend_target="client/Procfile"
 
-if [ $APP_SIDE = $FRONTEND_TARGET ]
-  then
-    cd client
+if [ "$PROCFILE" == "$frontend_target" ]; then
+  npm install --prefix client
 else
-    cd server
+  npm install --prefix server
 fi
-
-npm install
-npm run build
