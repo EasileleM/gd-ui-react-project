@@ -1,0 +1,19 @@
+@import '../../style/main';
+@import './buttons/main';
+@import './contentBlock/main';
+@import './imagesBlock/main';
+@import './item/main';
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  height: 650px;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    max-width: 1270px;
+    padding: 0 50px;
+  }
+}

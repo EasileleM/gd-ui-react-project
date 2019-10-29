@@ -1,0 +1,61 @@
+@import '../../../style/main.scss';
+
+.slider-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  word-wrap: break-word;
+  -ms-word-wrap: break-word;
+  height: 650px;
+
+  &__name {
+    margin: 0;
+    margin-bottom: 29px;
+    color: $color-orange;
+    font: 700 $font-size-very-large $primary-font;
+  }
+
+  &__bundle-info {
+    margin: 0;
+    margin-bottom: 13px;
+    color: $color-limed-spruce;
+    font: 400 $font-size-medium $primary-font;
+  }
+
+  &__description {
+    margin: 0;
+    margin-bottom: 63px;
+    color: $color-river-bed;
+    font: 400 $font-size-small $primary-font;
+  }
+
+  &__order-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+  }
+
+  &__price {
+    margin: 0;
+    color: $color-limed-spruce;
+    font: 400 $font-size-medium $primary-font;
+  }
+
+  &__order-button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+    color: $color-orange;
+    font: 400 $font-size-medium $primary-font;
+
+    &:before {
+      content: url('./assets/bucket.png');
+      margin-right: 9px;
+      margin-top: 3px;
+    }
+  }
+}

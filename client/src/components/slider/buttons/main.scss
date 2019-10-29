@@ -1,0 +1,48 @@
+@import '../../../style/main.scss';
+
+@keyframes activate{
+
+}
+
+@keyframes deactivate{
+
+}
+
+.slider {
+  &__button-container {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 88px;
+    width: 10px;
+  }
+
+  &__button {
+    border: 0;
+    width: 10px;
+    height: 17px;
+    padding: 0;
+    cursor: pointer;
+    background-color: $color-white;
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 10px 3px rgba(0, 0, 0, .1);
+    }
+
+    &_activate {
+      transition-property: height, background-color;
+      transition: 300ms ease;
+      height: 36px;
+      background-color: $color-orange;
+    }
+
+    &_deactivate {
+      transition-property: height, background-color;
+      transition: 300ms ease;
+      height: 17px;
+      background-color: $color-white;
+    }
+  }
+}
