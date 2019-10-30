@@ -32,18 +32,21 @@
 
   &__order-block {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    width: 250px;
+    max-width: 250px;
   }
 
   &__price {
     margin: 0;
+    margin-right: 10px;
     color: $color-limed-spruce;
     font: 400 $font-size-medium $primary-font;
   }
 
   &__order-button {
+    display: flex;
     border: 0;
     margin: 0;
     padding: 0;
@@ -51,11 +54,21 @@
     cursor: pointer;
     color: $color-orange;
     font: 400 $font-size-medium $primary-font;
+    transition: 200ms ease;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &:focus {
+      outline: 0;
+      opacity: .7;
+    }
 
     &:before {
       content: url('./assets/bucket.png');
       margin-right: 9px;
-      margin-top: 3px;
+      margin-top: 1px;
     }
   }
 }

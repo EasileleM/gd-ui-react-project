@@ -13,7 +13,17 @@ export class Slider extends React.Component {
       previousSlide: 1,
       currentSlide: 1
     };
+
+    this.switchSlide = this.switchSlideTimer();
   }
+
+  switchSlideTimer() {
+    return setInterval(() => {
+      const nextSlide = this.state.currentSlide === 2 ? 0 : this.state.currentSlide + 1;
+      this.handleOnClick(nextSlide);
+    }, 10000);
+  }
+
 
   handleOnClick(i) {
     if (i === this.state.currentSlide) {
@@ -23,6 +33,8 @@ export class Slider extends React.Component {
       previousSlide: this.state.currentSlide,
       currentSlide: i
     })
+    clearInterval(this.switchSlide);
+    this.switchSlide = this.switchSlideTimer();
   }
 
   render() {

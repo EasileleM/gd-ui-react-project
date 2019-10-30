@@ -1,13 +1,5 @@
 @import '../../../style/main.scss';
 
-@keyframes activate{
-
-}
-
-@keyframes deactivate{
-
-}
-
 .slider {
   &__button-container {
     z-index: 1;
@@ -33,14 +25,14 @@
 
     &_activate {
       transition-property: height, background-color;
-      transition: 300ms ease;
+      transition: 400ms ease-out;
       height: 36px;
       background-color: $color-orange;
     }
 
     &_deactivate {
       transition-property: height, background-color;
-      transition: 300ms ease;
+      transition: 400ms ease-in;
       height: 17px;
       background-color: $color-white;
     }
