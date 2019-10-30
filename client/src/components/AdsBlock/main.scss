@@ -11,22 +11,18 @@
   &__description {
     margin-top: 31px;
     margin-bottom: 0;
-    font-family: sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: #34404b;  
+    font: 400 $font-size-small $primary-font;
+    color: $color-limed-spruce;  
 
     &_labeled {
-      color: #ff5912;
+      color: $color-orange;
     }
   }
 
   &__resolution {
     opacity: 0.4;
     margin-bottom: 31px;
-    font-family: sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    color: #34404b;
+    font: 400 $font-size-very-small $primary-font;
+    color: $color-limed-spruce;
   }
 }
