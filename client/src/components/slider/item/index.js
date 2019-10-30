@@ -9,7 +9,7 @@ export class Item extends React.Component {
         <p className="slider-item__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry </p>
         <div className="slider-item__order-block">
           <p className="slider-item__price">Price: 120$</p>
-          <button tabindex="-1" className="slider-item__order-button">Order now</button>
+          <button tabIndex="-1" className="slider-item__order-button">Order now</button>
         </div>
       </div>
     )
