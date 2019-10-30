@@ -76,8 +76,11 @@
 
     @media screen and (max-width: 634px){
       margin: 0;
+      border-right: 0;
+      border-bottom: 1px solid $color-athens-gray;
       width: 100%;
       padding: 0;
+      padding-bottom: 10px;
       text-align: center;
     }
   }
