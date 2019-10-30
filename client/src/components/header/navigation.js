@@ -29,7 +29,7 @@ class Navigation extends React.Component {
             </input>
             <input className="header__search-bar" type="text">
             </input>
-            <label className="header__icon header__icon_search" htmlFor="search-button">
+            <label className="header__icon header__icon_search" tabIndex="5" htmlFor="search-button">
             </label>
           </form>
           <a className="header__icon header__icon_big header__icon_user" href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md">

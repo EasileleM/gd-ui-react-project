@@ -15,13 +15,13 @@ class Contacts extends React.Component {
             </span>
         </address>
         <nav className="header__wrapper">
-          <div className="header__icon header__icon_facebook">
+          <div className="header__icon header__icon_facebook" tabIndex="1">
           </div>
-          <div className="header__icon header__icon_twitter">
+          <div className="header__icon header__icon_twitter" tabIndex="2">
           </div>
-          <div className="header__icon header__icon_gplus">
+          <div className="header__icon header__icon_gplus" tabIndex="3">
           </div>
-          <div className="header__icon header__icon_instagram">
+          <div className="header__icon header__icon_instagram" tabIndex="4">
           </div>
         </nav>
       </section>
