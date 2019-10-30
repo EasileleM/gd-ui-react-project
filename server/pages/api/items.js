@@ -3,7 +3,7 @@ import {db} from "../../db/db"
 const dbInstance = new db();
 
 export default (req, res) => {
-    dbInstance.getAll("items")
+    dbInstance.getAll()
         .then(result => {
             res.statusCode = 200;
             res.json(JSON.stringify(result));

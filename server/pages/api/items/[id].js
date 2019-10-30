@@ -7,10 +7,10 @@ export default (req, res) => {
         query: { id },
     } = req;
 
-    dbInstance.getById("items", id)
+    dbInstance.getById(id)
         .then(result => {
             res.statusCode = 200;
-            res.json(JSON.stringify(result));
+            res.json(JSON.stringify(result[0]));
         })
         .catch(err => {
             res.statusCode = 500;
