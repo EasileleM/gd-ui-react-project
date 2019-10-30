@@ -3,7 +3,7 @@ import './main.scss';
 import { AdsBlock } from '../AdsBlock/index';
 import { SaleItem } from '../SaleItem/index';
 
-export class Section extends React.Component {
+export class SpecialOfferSection extends React.Component {
   render() {
     return (
       <div className="section">

@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.scss';
-import {Section} from './components/Section/index';
+import {SpecialOfferSection} from './components/SpecialOfferSection/index';
 
 function App() {
   return (
     <div className="App">
-      <Section />
+      <SpecialOfferSection />
     </div>
   );
 }
