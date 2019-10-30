@@ -1,0 +1,130 @@
+@import '../../style/main';
+
+.sale-item {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 30px;
+  min-height: 100px;
+  max-width: 670px;
+
+  @media screen and (max-width: 634px){
+    justify-content: center;
+    margin-right: 15px;
+    margin-left: 15px;
+    padding-top: 10px;
+  }
+
+  &__sale {
+    position: relative;
+    order: 1;
+    height: 80px;
+    width: 80px;
+
+    @media screen and (max-width: 634px){
+      order: 3;
+      margin-right: 20px;
+    }
+  }
+
+  &__sale-text-block {
+    z-index: 3;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  &__sale-label {
+    margin: 0;
+    font: 400 $font-size-extremely-small $primary-font;
+    font-style: italic;
+    color: $color-white;
+  }
+
+  &__sale-size {
+    margin: 0;
+    margin-top: -4px;
+    font: 700 $font-size-medium $primary-font;
+    color: $color-white;
+  }
+
+  &__decorator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    &_1 {
+      z-index: 2;
+    }
+
+    &_2 {
+      z-index: 1;
+    }
+  }
+
+  &__item-info {
+    order: 2;
+    margin-right: 10px;
+    margin-left: 30px;
+    border-right: 1px solid $color-athens-gray;
+    padding-right: 37px;
+
+    @media screen and (max-width: 634px){
+      margin: 0;
+      width: 100%;
+      padding: 0;
+      text-align: center;
+    }
+  }
+
+  &__item-name {
+    margin: 0;
+    margin-bottom: 16px;
+    font: 700 $font-size-semi-large $primary-font;
+    color: $color-limed-spruce;
+    text-transform: uppercase;
+  }
+
+  &__item-description {
+    margin: 0;
+    font: 400 $font-size-extremely-small $primary-font;
+    color: $color-river-bed;
+  }
+
+  &__purchase-info {
+    order: 3;
+    display: flex;
+    align-items: center;
+  }
+
+  &__bucket-button {
+    margin-right: 21px;
+    border: 0;
+    height: 22px;
+    width: 22px;
+    background-image: url(./assets/bucket.png);
+    cursor: pointer;
+    transition: opacity 200ms ease;
+
+    &:hover {
+      opacity: .5;
+    }
+    &:focus {
+      opacity: .5;
+      outline: 0;
+    }
+  }
+
+  &__price {
+    color: $color-orange;
+    font: 700 $font-size-large $primary-font;
+    &_money-sign {
+      font-size: $font-size-semi-large;
+    }
+  }
+}
