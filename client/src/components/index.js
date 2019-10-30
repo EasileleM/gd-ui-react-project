@@ -1,0 +1,1 @@
+export {AdsBlock} from './AdsBlock/index';
