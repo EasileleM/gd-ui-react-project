@@ -8,9 +8,6 @@ import { ColorSelector } from './components/color-selector/index.js';
 import './product-card.scss';
 
 export class ProductCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (

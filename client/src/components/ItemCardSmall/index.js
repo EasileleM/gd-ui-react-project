@@ -20,15 +20,15 @@ export class ItemCardSmall extends React.Component {
   render() {
     return (
       <div className="item-card-small">
-        <img src="#" alt="item" className="item-card-small__image" />
+        <img src={this.props.images[0]} alt="item" className="item-card-small__image" />
         <div className="item-card-small__devider"></div>
         <div className="item-card-small__info">
-          <h2 className="item-card-small__name">Reebok Track Jacket</h2>
+          <h2 className="item-card-small__name">{this.props.name}</h2>
           <div className="item-card-small__info-dynamic">
             <div className="item-card-small__price-rating-block">
-              {this.createStars(3)}
+              {this.createStars(this.props.rating % 4)}
               <p className="item-card-small__price">
-                100$
+                {this.props.price}$
               </p>
             </div>
             <div className="item-card-small__cart">
