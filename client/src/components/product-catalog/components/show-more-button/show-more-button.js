@@ -11,7 +11,7 @@ export class ShowMoreButton extends React.Component {
   render() {
     return (
       <button className='show-more-button'>
-        ...
+        ···
       </button>
     );
   }
