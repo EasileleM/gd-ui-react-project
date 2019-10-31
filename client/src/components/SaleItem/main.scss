@@ -18,8 +18,11 @@
     padding: 15px;
   }
 
-  @media screen and (max-width: 1124px){
-    margin: 0 15px 30px 15px;
+  @media screen and (max-width: 1133px){
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 30px;
   }
 
   @media screen and (max-width: 600px){
