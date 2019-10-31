@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { SectionHeader } from '../section-header/index.js';
-import { ProductCatalog } from '../product-catalog/index.js';
+import {SectionHeader} from '../section-header/index.js';
+import {ProductCatalog} from '../product-catalog/index.js';
 
 import './new-arrivals-block.scss';
 
 export class NewArrivalsBlock extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
+    constructor() {
+        super();
+        this.state = {};
+    }
 
   render() {
     return (

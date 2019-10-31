@@ -1,0 +1,29 @@
+@import '../../style/main';
+
+.empty-ads-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 470px;
+  height: 100px;
+  background-color: $color-white;
+
+  &__description {
+    margin-top: 31px;
+    margin-bottom: 0;
+    font: 400 $font-size-small $primary-font;
+    color: $color-limed-spruce;  
+
+    &_labeled {
+      color: $color-orange;
+    }
+  }
+
+  &__resolution {
+    opacity: 0.4;
+    margin-bottom: 31px;
+    font: 400 $font-size-extremely-small $primary-font;
+    color: $color-limed-spruce;
+  }
+}

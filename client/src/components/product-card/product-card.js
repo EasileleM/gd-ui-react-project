@@ -30,10 +30,10 @@ export class ProductCard extends React.Component {
               {this.props.name}
             </div>
             <div className='product-card__sizes'>
-              <SizesSelector sizes = {this.props.sizes}/>
+              <SizesSelector sizes={this.props.sizes} />
             </div>
             <div className='product-card__colors'>
-              <ColorSelector colors = {this.props.colors}/>
+              <ColorSelector colors={this.props.colors} />
             </div>
             <div className='product-card__buttons-row'>
               <a href='#' className='product-card__share'>
