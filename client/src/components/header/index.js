@@ -5,7 +5,7 @@ import Contacts from './contacts';
 
 import './header.scss';
 
-class Header extends React.Component {
+export class Header extends React.Component {
   render() {
     return (
       <header className='header'>
@@ -15,5 +15,3 @@ class Header extends React.Component {
     );
   }
 }
-
-export default Header;

@@ -1,6 +1,8 @@
 .section {
   display: flex;
   justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 50px;
 
   &__content {
     display: flex;
@@ -9,15 +11,9 @@
     flex-wrap: wrap;
     box-sizing: border-box;
     width: 100%;
-    max-width: 1270px;
-    padding: 0 50px;
 
-    @media screen and (max-width: 1124px){
+    @media screen and (max-width: 1133px){
       justify-content: center;
-    }
-
-    @media screen and (max-width: 654px){
-      padding: 0 30px;
     }
   }
 }
