@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Slider, NewArrivalsBlock, SpecialOfferSection, BestSalesBlock} from '../../components/index';
 import './main.scss';
+import Newsletter from "../../components/Newsletter/Newsletter";
 
 export function Home() {
   return (
@@ -11,6 +12,7 @@ export function Home() {
         <NewArrivalsBlock />
         <SpecialOfferSection />
         <BestSalesBlock />
+        <Newsletter />
       </div>
     </main>
   )
