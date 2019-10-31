@@ -15,6 +15,7 @@ export class ProductCatalog extends React.Component {
     return (
       <div className='product-catalog'>
         <ProductRow products = {this.props.products}/>
+        <ProductRow products = {this.props.products}/>
         <ShowMoreButton />
       </div>
     );
