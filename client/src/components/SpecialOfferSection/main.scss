@@ -1,0 +1,23 @@
+.section {
+  display: flex;
+  justify-content: center;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1270px;
+    padding: 0 50px;
+
+    @media screen and (max-width: 1124px){
+      justify-content: center;
+    }
+
+    @media screen and (max-width: 654px){
+      padding: 0 30px;
+    }
+  }
+}
