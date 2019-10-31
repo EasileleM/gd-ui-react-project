@@ -12,12 +12,11 @@ class Newsletter extends Component {
                 </div>
 
                 <div className="Newsletter__form">
-                    <Form/>
+                    <Form url="http://localhost:3000/api/newsletter" method="POST"/>
                 </div>
 
             </div>
-        )
-            ;
+        );
     }
 }
 
