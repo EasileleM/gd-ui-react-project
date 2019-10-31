@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {ShowMoreButton} from './components/show-more-button/index.js';
-import {ProductRow} from '../product-row/index.js'
 
 import './product-catalog.scss';
+import {ProductsContainer} from "../products-container";
 
 export class ProductCatalog extends React.Component {
   constructor(props) {
@@ -14,8 +14,7 @@ export class ProductCatalog extends React.Component {
   render() {
     return (
       <div className='product-catalog'>
-        <ProductRow products = {this.props.products}/>
-        <ProductRow products = {this.props.products}/>
+        <ProductsContainer products = {this.props.products}/>
         <ShowMoreButton />
       </div>
     );

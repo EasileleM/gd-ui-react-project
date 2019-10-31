@@ -13,15 +13,7 @@ $color-border: $color-athens-gray;
   font-size: 18px;
   font-weight: 700;
   perspective: 2500px;
-  margin: 0 15px;
 
-  &:nth-child(1) {
-    margin-left: 0;
-  }
-
-  &:nth-child(4) {
-    margin-right: 0;
-  }
 
   &__inner {
     position: relative;
