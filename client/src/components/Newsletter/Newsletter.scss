@@ -1,0 +1,66 @@
+.Newsletter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 35px 50px;
+  box-sizing: border-box;
+
+
+  &__text {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 60%;
+    margin-right: 50px;
+  }
+
+  &__heading {
+    color: #ff5912;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-right: 20px;
+  }
+
+  &__paragraph {
+    font-size: 14px;
+    font-style: italic;
+    color: #34404b;
+  }
+
+  &__form {
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media screen and (max-device-width: 1024px) {
+    flex-direction: column;
+
+    &__text {
+      width: 100%;
+      justify-content: center;
+      margin-right: 0;
+    }
+    &__form {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    @media screen and (max-device-width: 321px) {
+      padding: 35px 30px;
+
+      &__heading {
+        font-size: 12px;
+      }
+
+      &__paragraph {
+        font-size: 11px;
+      }
+    }
+  }
+
+
+}
