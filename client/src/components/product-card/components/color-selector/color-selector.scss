@@ -1,0 +1,34 @@
+.color-selector {
+  display: flex;
+  align-items: baseline;
+  
+  &__form {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: nowrap;
+    height: 17px;
+  }
+
+  &__container {
+    display: block;
+    position: relative;
+    content: "";
+    cursor: pointer;
+    margin-right: 6px;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:hover {
+      box-shadow: 0 2px 3px rgba(0, 0, 0, .5);
+    }
+  }
+
+  &__button {
+    display: none;
+  }
+}
