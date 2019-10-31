@@ -8,6 +8,7 @@ $color-text-secondary: $color-orange;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 
   &__title {
     color: $color-text-header;

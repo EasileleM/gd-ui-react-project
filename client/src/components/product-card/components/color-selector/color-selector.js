@@ -6,7 +6,7 @@ export class ColorSelector extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedOption: null
+      selectedOption: props.colors[0] || null
     };
   }
 
