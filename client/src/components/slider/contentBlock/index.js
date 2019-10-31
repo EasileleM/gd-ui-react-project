@@ -16,9 +16,9 @@ export class ContentBlock extends PureComponent {
       <Transition in={false} timeout={200}>
         {state => (
           <div className="slider__content-block" style={transitionStyles[state]}>
-            <Item show={0 === Number(this.props.switchTo)}/>
-            <Item show={1 === Number(this.props.switchTo)}/>
-            <Item show={2 === Number(this.props.switchTo)}/>
+            <Item data={this.props.items[0]} show={0 === Number(this.props.switchTo)}/>
+            <Item data={this.props.items[1]} show={1 === Number(this.props.switchTo)}/>
+            <Item data={this.props.items[2]} show={2 === Number(this.props.switchTo)}/>
           </div>
         )}
       </Transition>

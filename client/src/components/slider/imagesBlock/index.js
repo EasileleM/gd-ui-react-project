@@ -1,19 +1,15 @@
 import React, { PureComponent } from 'react';
 import { Transition } from 'react-transition-group';
 
-import Layer1 from '../assets/Layer_1.png';
-
-function Image() {
+function Image(props) {
   return (
     <div className="slider__image-wrapper">
-      <img src={Layer1} className="slider__image" alt="Main item" />
+      <img src={props.src} className="slider__image" alt="Main item" />
     </div>
   )
 }
 
 export class Images extends PureComponent {
-
-  
 
   render() {
     const transitionStyles = {
@@ -27,9 +23,9 @@ export class Images extends PureComponent {
       <Transition in={false} timeout={200}>
         {state => (
           <div className="slider__images" style={transitionStyles[state]}>
-            <Image />
-            <Image />
-            <Image />
+            <Image src={this.props.images[0]}/>
+            <Image src={this.props.images[1]}/>
+            <Image src={this.props.images[2]}/>
           </div>
         )}
       </Transition>
