@@ -6,7 +6,7 @@ export class SizesSelector extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedOption: null
+      selectedOption: props.sizes[0] || null
     };
   }
 
