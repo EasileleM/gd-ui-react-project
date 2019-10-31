@@ -11,7 +11,7 @@ class Footer extends React.Component {
       <footer className="footer">
         <div className="footer__wrapper footer__wrapper_column">
           <div className="footer__logo"></div>
-          <div className="footer__text">
+          <div className="footer__text footer__copyright">
             shopy © 2015 . your copy right here
           </div>
         </div>

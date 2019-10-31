@@ -39,6 +39,7 @@
 
   &__link {
     max-width: 200px;
+    width: 200px;
     color: #28313b;
     font-family: $primary-font;
     font-size: 14px;
@@ -75,9 +76,30 @@
 }
 
 @media all and (max-width: 1024px) {
+  .footer {
+    &__link {
+      width: 160px;
+    }
 
+    &__wrapper_column-wrap {
+    padding: 0 0 0 30px;
+    }
+  }
 }
 
 @media all and (max-width: 768px) {
-  
+  .footer {
+    &__copyright {
+      max-width: 120px
+    }
+
+    &__link {
+      width: auto;
+    }
+
+    &__wrapper_column-wrap {
+      padding: 0;
+      align-content: space-evenly;
+    }
+  }
 }
