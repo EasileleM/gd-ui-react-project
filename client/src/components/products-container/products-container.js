@@ -12,7 +12,7 @@ export class ProductsContainer extends React.Component {
   
   render() {
     const products = this.props.products.map(product => {
-      return <ProductCard name={product.name} price={product.price} image={product.images[0]} sizes={product.sizes} colors={product.colors}/>
+      return <ProductCard key={product.id} name={product.name} price={product.price} image={product.images[0]} sizes={product.sizes} colors={product.colors}/>
     })
     return (
       <div className='products-container'>
