@@ -1,5 +1,8 @@
 import React from 'react';
 
+import User from './user';
+import ShopCart from './cart';
+
 import './header.scss';
 
 class Navigation extends React.Component {
@@ -32,10 +35,8 @@ class Navigation extends React.Component {
             <label className="header__icon header__icon_search" tabIndex="5" htmlFor="search-button">
             </label>
           </form>
-          <a className="header__icon header__icon_big header__icon_user" href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md">
-          </a>
-          <a className="header__icon header__icon_big header__icon_cart" href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md">
-          </a>
+          <User />
+          <ShopCart />
         </nav>
       </section>
     );

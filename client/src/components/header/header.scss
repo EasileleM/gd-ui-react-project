@@ -1,5 +1,4 @@
-@import url(//db.onlinewebfonts.com/c/32eb6c28879dcfcaf97b75a5194441e9?family=HarmoniaSansProCyrRegular);
-@import url(//db.onlinewebfonts.com/c/bcc66d56db6dce82b68eeb2bb20b07ce?family=HarmoniaSansProCyrBold);
+@import '../../style/main.scss';
 
 .header {
   width: 100%;
@@ -25,12 +24,12 @@
   }
 
   &__text {
-    font-family: HarmoniaSansProCyrRegular;
+    font-family: $primary-font;
     font-style: normal;
     padding-right: 20px;
 
     &_md {
-      font-size: 12px;
+      font-size: $font-size-extremely-small;
     }
 
     &_email::before {
@@ -117,12 +116,12 @@
 
     &-item {
       text-decoration: none;
-      color: #34404b;
-      font-size: 16px;
+      color: $color-limed-spruce;
+      font-size: $font-size-small;
       padding: 0;
       margin-right: 20px;
       &:hover, &_active {
-        color: #ff5912;
+        color: $color-orange;
       }
     }
   }
@@ -136,8 +135,8 @@
 
     &-bar {
       flex-grow: 1;
-      background-color: #f4f6f8;
-      border: 1px solid #333333;
+      background-color: $color-athens-grey;
+      border: 1px solid $color-limed-spruce ;
       border-radius: 10px;
       padding: 2px 7px;
       visibility: hidden;
@@ -153,10 +152,11 @@
   }
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 1024px) {
   .header {
     &__wrapper_column {
       flex-direction: column;
+      align-items: stretch;
     }
 
     &__links-container {
@@ -165,9 +165,58 @@
       margin-top: 20px;
     }
 
+    &__logo {
+      align-self: center;
+    }
+
+    &__links-item {
+      margin-right: 14px;
+    }
+  }
+}
+
+@media all and (max-width: 1023px) {
+  .header {
+    &__links-item {
+      margin-right: 20px;
+    }
+
     &__search-container {
       order: 1;
       margin-top: 20px;
+    }
+  }
+}
+
+@media all and (max-width: 767px) {
+  .header {
+    &__wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__text {
+      margin-bottom: 10px;
+    }
+
+    &__icon {
+      margin: 0;
+      margin-top: 10px;
+      background-position: center;
+
+      &_search {
+        margin: 0;
+        margin-left: 10px;
+      }
+    }
+
+    &__links-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__links-item {
+      margin-right: 0;
     }
   }
 }
