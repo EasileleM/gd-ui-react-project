@@ -5,15 +5,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 370px;
+  width: calc(100% / 3 - 80px);
   height: 160px;
   padding: 0 28px;
   background-color: $color-white;
   cursor: pointer;
 
+  @media screen and (max-width: 1024px){
+    max-width: calc(80%);
+    width: 370px;
+    margin-bottom: 20px;
+  }
+
   &__image {
     width: 90px;
     height: 90px;
+    margin-right: 10px;
   }
 
   &__devider {

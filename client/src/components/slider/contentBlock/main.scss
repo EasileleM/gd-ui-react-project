@@ -9,9 +9,13 @@
     transition: 300ms ease-in;
     width: calc(100% - 198px);
 
-    @media screen and (max-width: 480px){
-      left: 98px;
+    @media screen and (max-width: 680px){
+      left: 100px;
       width: calc(100% - 148px);
+    }
+
+    @media screen and (max-width: 480px){
+      left: 60px;
     }
   }
 }

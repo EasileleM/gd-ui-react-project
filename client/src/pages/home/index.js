@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Slider, NewArrivalsBlock, SpecialOfferSection} from '../../components/index';
+import {Slider, NewArrivalsBlock, SpecialOfferSection, BestSalesBlock} from '../../components/index';
 import './main.scss';
 
 export function Home() {
@@ -10,6 +10,7 @@ export function Home() {
       <div className="main__content">
         <NewArrivalsBlock />
         <SpecialOfferSection />
+        <BestSalesBlock />
       </div>
     </main>
   )

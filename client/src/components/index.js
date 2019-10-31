@@ -12,3 +12,5 @@ export {Slider} from './slider/index';
 
 export {SpecialOfferSection} from './SpecialOfferSection/index';
 
+export {BestSalesBlock} from './best-sales-block/index';
+
