@@ -103,3 +103,27 @@
     }
   }
 }
+
+@media all and (max-width: 767px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+
+    &__wrapper {
+      &_column {
+        align-items: center;
+      }
+
+      &_column-wrap {
+        flex-wrap: nowrap;
+        max-height: none;
+        padding: 20px 0;
+      }
+    }
+
+    &__copyright {
+      max-width: none;
+    }
+  }
+}
