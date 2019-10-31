@@ -1,4 +1,74 @@
+@import "../../style/main.scss";
+
 .footer {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+
+  &__wrapper {
+    display: flex;
+
+    &_column {
+      flex-direction: column;
+    }
+
+    &_column-wrap {
+      flex-flow: column wrap;
+      align-content: space-between;
+      max-height: 100px;
+      flex-grow: 1;
+      padding: 0 150px;
+    }
+  }
+
+  &__logo {
+    background: url(../../assets/logo.png) no-repeat left;
+    width: 120px;
+    height: 40px;
+    margin-bottom: 20px;
+  }
+
+  &__cards {
+    background: url(../../assets/Payment_Images.png) no-repeat right;
+    width: 170px;
+    height: 20px;
+    margin-top: 20px;
+  }
+
+  &__link {
+    max-width: 200px;
+    color: #28313b;
+    font-family: "Harmonia Sans Pro Cyr";
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px;
+    text-decoration: none;
+
+    &::before {
+      content: url(../../assets/link-dot.svg);
+      width: 5px;
+      height: 5px;
+      margin-right: 10px;
+    }
+
+    &:hover {
+      color: $color-orange;
+      &::before {
+        content: url(../../assets/link-dot-active.svg);
+      }
+    }
+  }
+
+  &__text {
+    color: $color-limed-spruce;
+    font-family: $primary-font;
+    font-size: $font-size-very-small;
+    font-weight: 400;
+    line-height: 30px;
+    &_promoted {
+      color: $color-orange;
+      font-weight: 700;
+    }
+  }
 }

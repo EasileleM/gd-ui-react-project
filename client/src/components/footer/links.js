@@ -5,7 +5,7 @@ import './footer.scss';
 class Links extends React.Component {
   render() {
     return (
-      <section>
+      <section className="footer__wrapper footer__wrapper_column-wrap">
         <a className="footer__link" href="#">
           about us
         </a>
