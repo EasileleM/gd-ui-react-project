@@ -6,8 +6,22 @@ const dbInstance = new db();
 export default (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
-    if (req.method === "POST"){
-        console.log(req.body)
+    if (req.method === "POST") {
+        dbInstance.postNewsletterSignee({"email": req.body.email})
+            .then((result) => {
+                    res.statusCode = 201;
+                    res.end('Created');
+                    return;
+                }
+            ).catch(err => {
+                res.statusCode = 500;
+                res.json(JSON.stringify(err));
+                return;
+            }
+        )
+    } else {
+        res.statusCode = 404;
+        res.end('Not found')
+        return;
     }
 }
