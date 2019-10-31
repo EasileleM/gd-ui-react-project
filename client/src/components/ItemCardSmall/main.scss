@@ -1,0 +1,103 @@
+@import '../../style/main';
+
+.item-card-small {
+  transition: 400ms ease-in;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 370px;
+  height: 160px;
+  padding: 0 28px;
+  background-color: $color-white;
+  cursor: pointer;
+
+  &__image {
+    width: 90px;
+    height: 90px;
+  }
+
+  &__devider {
+    width: 1px;
+    height: 56px;
+    background-color: $color-athens-gray;
+  }
+
+  &__name {
+    margin: 0;
+    margin-bottom: 28px;
+    font: 700 $font-size-medium $primary-font;
+    color: $color-limed-spruce;
+  }
+
+  &__price {
+    margin: 0;
+    font: 700 $font-size-small $primary-font;
+    color: $color-orange;
+  }
+
+  &__info-dynamic {
+    position: relative;
+    height: 35px;
+  }
+
+  &__price-rating-block {
+    position: absolute;
+    transition: 400ms ease-in;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__cart {
+    opacity: 0;
+    transition: 400ms ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__cart-button {
+    transition: 200ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    font: 700 $font-size-small $primary-font;
+    color: $color-orange;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:before {
+      content: url(assets/Add_To_Cart_Ico.png);
+      margin-right: 9px;
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  &__rating-star {
+    width: 13px;
+    height: 13px;
+  }
+
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+
+    .item-card-small__price-rating-block {
+      opacity: 0;
+    }
+
+    .item-card-small__cart {
+      opacity: 1;
+    }
+  }
+}

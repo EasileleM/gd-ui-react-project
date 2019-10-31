@@ -1,0 +1,26 @@
+@import '../../style/main';
+@import './buttons/main';
+@import './contentBlock/main';
+@import './imagesBlock/main';
+@import './item/main';
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  height: 650px;
+  word-wrap: break-word;
+  -ms-word-wrap: break-word;
+
+  &__content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    max-width: 1270px;
+    padding: 0 50px;
+  }
+}

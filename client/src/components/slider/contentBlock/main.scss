@@ -1,0 +1,16 @@
+@import '../../../style/main.scss';
+
+.slider {
+  &__content-block {
+    position: absolute;
+    top: -650px;
+    left: 148px;
+    transition: 300ms ease-in;
+    width: calc(100% - 198px);
+
+    @media screen and (max-width: 480px){
+      left: 98px;
+      width: calc(100% - 148px);
+    }
+  }
+}
