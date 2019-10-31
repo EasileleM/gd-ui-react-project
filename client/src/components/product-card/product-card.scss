@@ -1,0 +1,142 @@
+@import "../../style/main.scss";
+
+$color-background-card: $color-white;
+$color-text-card: $color-limed-spruce;
+$color-text-secondary-card: $color-orange;
+$color-border: $color-athens-gray;
+
+.product-card {
+  background-color: transparent;
+  width: 270px;
+  height: 365px;
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-weight: 700;
+  perspective: 1000px;
+
+  &__inner {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+
+  &:hover &__inner {
+    transform: rotateY(180deg);
+  }
+
+  &__front,
+  &__back {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    box-sizing: border-box;
+    padding: 30px 0 30px 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+
+  &__front {
+    &:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    background-color: $color-background-card;
+  }
+
+  &__back {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: $color-background-card;
+    transform: rotateY(180deg);
+  }
+
+  &__image {
+    &_front {
+      height: 210px;
+      max-width: 149px;
+    }
+
+    &_back {
+      height: 87px;
+      width: 70px;
+    }
+  }
+
+  &__name {
+    &_front {
+      color: $color-text-card;
+    }
+
+    &_back {
+      margin-top: 30px;
+      color: $color-text-secondary-card;
+    }
+  }
+
+  &__price {
+    margin-top: 30px;
+    color: $color-text-secondary-card;
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+
+  &__sizes {
+    margin-top: 25px;
+  }
+
+  &__colors {
+    margin-top: 23px;
+  }
+
+  &__buttons-row {
+    display: flex;
+    position: relative;
+    margin-top: 50px;
+
+    &::before {
+      position: absolute;
+      border-bottom: 1px solid $color-border;
+      width: 169px;
+      content: "";
+      top: -25px;
+      left: -25px;
+    }
+  }
+
+  &__share {
+    display: flex;
+    border: 0;
+    margin-right: 30px;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 200ms ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:focus {
+      outline: 0;
+      opacity: 0.7;
+    }
+
+    &:before {
+      content: url("./img/Share_Ico.png");
+      margin-top: 1px;
+    }
+  }
+
+  &__add-to-cart {
+    margin-right: 30px;
+  }
+}
