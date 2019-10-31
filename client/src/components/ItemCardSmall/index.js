@@ -6,13 +6,13 @@ import star from './assets/star.svg';
 import starEmpty from './assets/star-empty.svg';
 
 export class ItemCardSmall extends React.Component {
-  createStars() {
+  createStars(rate, maxRate = 4) {
+    const stars = new Array(rate).fill(<img src={star} className="item-card-small__rating-star" alt="*" />);
+    const emptyStars = new Array(maxRate - rate).fill(<img src={starEmpty} className="item-card-small__rating-star" alt="O" />);
     return (
       <div className="item-card-small__rating">
-        <img src={star} className="item-card-small__rating-star" alt="*" />
-        <img src={star} className="item-card-small__rating-star" alt="*" />
-        <img src={star} className="item-card-small__rating-star" alt="*" />
-        <img src={starEmpty} className="item-card-small__rating-star" alt="O" />
+        {stars}
+        {emptyStars}
       </div>
     )
   }
@@ -26,7 +26,7 @@ export class ItemCardSmall extends React.Component {
           <h2 className="item-card-small__name">Reebok Track Jacket</h2>
           <div className="item-card-small__info-dynamic">
             <div className="item-card-small__price-rating-block">
-              {this.createStars()}
+              {this.createStars(3)}
               <p className="item-card-small__price">
                 100$
               </p>
