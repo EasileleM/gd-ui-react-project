@@ -1,7 +1,7 @@
 import {db} from "../../db/db"
 
 const dbInstance = new db();
-const pageCapacity = 4;
+let pageCapacity = 4;
 
 
 export default (req, res) => {
@@ -10,11 +10,20 @@ export default (req, res) => {
     dbInstance.getAll()
         .then(result => {
             res.statusCode = 200;
+            if(req.query.size) {
+                pageCapacity = req.query.size;
+            }
             if (req.query.page) {
                 const pageNumber = req.query.page;
                 const startIndex = (pageNumber - 1) * pageCapacity;
-                const endIndex = pageNumber * pageCapacity
-                res.json(JSON.stringify(result.slice(startIndex, endIndex)))
+                const endIndex = pageNumber * pageCapacity;
+
+                const resultObject = {
+                    nextPage: endIndex < result.length,
+                    items: result.slice(startIndex, endIndex),
+                };
+
+                res.json(JSON.stringify(resultObject))
             } else {
                 res.json(JSON.stringify(result));
             }
@@ -24,3 +33,4 @@ export default (req, res) => {
             res.json(JSON.stringify(err));
         })
 }
+
