@@ -9,12 +9,12 @@ export class ProductCatalog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 1,
+      page: 2,
       cards: [],
       ready: false,
       nextPage: true
     };
-    this.loadResources(this.state.page, 4);
+    this.loadResources(1, 4);
   }
 
   async loadResources(page, size) {
