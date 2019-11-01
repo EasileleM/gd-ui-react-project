@@ -6,30 +6,46 @@ class Links extends React.Component {
   render() {
     return (
       <section className="footer__wrapper footer__wrapper_column-wrap">
-        <a className="footer__link" href="#">
-          about us
+        <div className="footer__link-wrapper">
+          <a className="footer__link" href="#">
+            about us
+          </a>
+        </div>
+        <div className="footer__link-wrapper">
+          <a className="footer__link" href="#">
+            contact us
         </a>
-        <a className="footer__link" href="#">
-          contact us
+        </div>
+        <div className="footer__link-wrapper">
+          <a className="footer__link" href="#">
+            support
         </a>
-        <a className="footer__link" href="#">
-          support
+        </div>
+        <div className="footer__link-wrapper">
+          <a className="footer__link" href="#">
+            our feed
         </a>
-        <a className="footer__link" href="#">
-          our feed
+        </div>
+        <div className="footer__link-wrapper">
+          <a className="footer__link" href="#">
+            terms and conditions
         </a>
-        <a className="footer__link" href="#">
-          terms and conditions
+        </div>
+        <div className="footer__link-wrapper">
+          <a className="footer__link" href="#">
+            our privacy
         </a>
-        <a className="footer__link" href="#">
-          our privacy
+        </div>
+        <div className="footer__link-wrapper">
+          <a className="footer__link" href="#">
+            join us
         </a>
-        <a className="footer__link" href="#">
-          join us
+        </div>
+        <div className="footer__link-wrapper">
+          <a className="footer__link" href="#">
+            live support
         </a>
-        <a className="footer__link" href="#">
-          live support
-        </a>
+        </div>
       </section>
     );
   }

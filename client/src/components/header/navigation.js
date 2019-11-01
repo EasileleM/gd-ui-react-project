@@ -12,19 +12,19 @@ class Navigation extends React.Component {
         <div className="header__logo">
         </div>
         <nav className="header__links-container">
-          <a className="header__text header__links-item header__text_lg header__links-item_active" href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md">
+          <a className="header__text header__links-item header__text_lg header__links-item_active" href="#">
             Home
           </a>
-          <a className="header__text header__links-item header__text_lg" href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md">
+          <a className="header__text header__links-item header__text_lg" href="#">
             Products
           </a>
-          <a className="header__text header__links-item header__text_lg" href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md">
+          <a className="header__text header__links-item header__text_lg" href="#">
             Hot Deals
           </a>
-          <a className="header__text header__links-item header__text_lg" href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md">
+          <a className="header__text header__links-item header__text_lg" href="#">
             About
           </a>
-          <a className="header__text header__links-item header__text_lg" href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md">
+          <a className="header__text header__links-item header__text_lg" href="#">
             Contact
           </a>
           <form className="header__search-container" method="POST" name="search">
