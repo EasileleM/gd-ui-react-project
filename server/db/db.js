@@ -33,8 +33,17 @@ export class db {
             const db = client.db(this.dbName)
             return db
                 .collection("slider")
-                .find({"id": id })
+                .find({"id": id})
                 .toArray();
+        });
+    }
+
+    async postNewsletterSignee(email) {
+        return this.dbConnection.then(client => {
+            const db = client.db(this.dbName)
+            return db
+                .collection("newsletter")
+                .insertOne(email);
         });
     }
 };

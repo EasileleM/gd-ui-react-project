@@ -33,4 +33,3 @@ export default (req, res) => {
             res.json(JSON.stringify(err));
         })
 }
-

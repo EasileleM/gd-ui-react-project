@@ -1,0 +1,110 @@
+@import './../../style/main.scss';
+
+.Newsletter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 35px 50px;
+  box-sizing: border-box;
+  margin-bottom: 100px;
+
+
+  &__text {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 60%;
+    margin-right: 50px;
+  }
+
+  &__heading {
+    color: #ff5912;
+    text-transform: uppercase;
+    margin-right: 20px;
+    font: 700 $font-size-medium $primary-font;
+  }
+
+  &__paragraph {
+    font: 400 $font-size-small $primary-font;
+    font-style: italic;
+    color: #34404b;
+  }
+
+  &__form {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__input {
+    font: 400 $font-size-small $primary-font;
+    font-style: italic;
+    border: none;
+    margin: 0 10px;
+    outline: none;
+    height: 30px;
+    -webkit-transition: border-bottom .35s ease-in-out;
+    transition: border-bottom .35s ease-in-out;
+
+    &[success="true"] {
+      -webkit-transition: border-bottom .35s ease-in-out;
+      transition: border-bottom .35s ease-in-out;
+      border-bottom: $color-atomic-tangerine 10px solid;
+    }
+
+    &:focus {
+      -webkit-transition: border-bottom .35s ease-in-out;
+      transition: border-bottom .35s ease-in-out;
+      border-bottom: $color-atomic-tangerine 2px solid;
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    background-color: #ff5912;
+    font: 400 $font-size-small $primary-font;
+    color: white;
+    border: none;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+
+    &:hover {
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+  }
+
+  @media screen and (max-device-width: 1024px) {
+    flex-direction: column;
+
+    &__text {
+      width: 100%;
+      justify-content: center;
+      margin-right: 0;
+    }
+    &__form {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    @media screen and (max-device-width: 321px) {
+      padding: 35px 30px;
+
+      &__button {
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      &__heading {
+      }
+
+      &__paragraph {
+      }
+    }
+  }
+
+}
