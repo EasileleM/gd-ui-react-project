@@ -23,7 +23,7 @@ export class SaleItem extends React.Component {
   render() {
     if (this.state.ready) {
       return (
-        <div className="sale-item">
+        <a className="sale-item" href="#">
           <div className="sale-item__sale">
             <img src={square2} className="sale-item__decorator sale-item__decorator_2" alt="" />
             <img src={square1} className="sale-item__decorator sale-item__decorator_1" alt="" />
@@ -42,7 +42,7 @@ export class SaleItem extends React.Component {
             <button className="sale-item__bucket-button"></button>
             <p className="sale-item__price">{this.state.data.price}<span className="sale-item__price_money-sign">$</span></p>
           </div>
-        </div>
+        </a>
       )
     }
     return (
