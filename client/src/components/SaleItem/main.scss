@@ -1,4 +1,4 @@
-@import '../../style/main';
+@import "../../style/main";
 
 .sale-item {
   flex-grow: 1;
@@ -13,19 +13,19 @@
   padding: 0 10px;
   background-color: $color-white;
 
-  @media screen and (max-width: 655px){
+  @media screen and (max-width: 655px) {
     justify-content: center;
     padding: 15px;
   }
 
-  @media screen and (max-width: 1133px){
+  @media screen and (max-width: 1133px) {
     width: 100%;
     max-width: 100%;
     margin-right: 0;
     margin-bottom: 30px;
   }
 
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     margin: 0 0 30px 0;
   }
 
@@ -35,7 +35,7 @@
     height: 80px;
     width: 80px;
 
-    @media screen and (max-width: 654px){
+    @media screen and (max-width: 654px) {
       order: 3;
       margin-right: 20px;
     }
@@ -86,7 +86,7 @@
     border-right: 1px solid $color-athens-gray;
     padding-right: 37px;
 
-    @media screen and (max-width: 654px){
+    @media screen and (max-width: 654px) {
       margin: 0;
       border-right: 0;
       border-bottom: 1px solid $color-athens-gray;
@@ -119,19 +119,20 @@
   }
 
   &__bucket-button {
+    transition: opacity 200ms ease;
     margin-right: 21px;
     border: 0;
     height: 22px;
     width: 22px;
+    background-color: transparent;
     background-image: url(./assets/bucket.png);
     cursor: pointer;
-    transition: opacity 200ms ease;
 
     &:hover {
-      opacity: .5;
+      opacity: 0.5;
     }
     &:focus {
-      opacity: .5;
+      opacity: 0.5;
       outline: 0;
     }
   }
