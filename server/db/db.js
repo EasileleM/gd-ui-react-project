@@ -8,32 +8,33 @@ export class db {
         this.dbConnection = this.client.connect();
     }
 
-    async getAll() {
+    async getAll(collection) {
         return this.dbConnection.then(client => {
             const db = client.db(this.dbName)
             return db
-                .collection("items")
-                .find({})
+                .collection(collection)
+                .find({}, {projection:{ _id: 0 }})
                 .toArray();
         });
     }
 
-    async getById(id) {
+    async getById(id, collection) {
         return this.dbConnection.then(client => {
             const db = client.db(this.dbName)
             return db
-                .collection("items")
-                .find({"id": id})
+                .collection(collection)
+                .find({"id": id}, {projection:{ _id: 0 }})
                 .toArray();
         });
     }
 
-    async getSlider(id) {
+    async getAmount(amount, collection) {
         return this.dbConnection.then(client => {
-            const db = client.db(this.dbName)
+            const db = client.db(this.dbName);
             return db
-                .collection("slider")
-                .find({"id": id})
+                .collection(collection)
+                .find({}, {projection:{ _id: 0 }})
+                .limit(Number(amount))
                 .toArray();
         });
     }
