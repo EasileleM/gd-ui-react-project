@@ -19,7 +19,6 @@
 
   &__image {
     width: 90px;
-    //height: 90px;
     margin-right: 10px;
   }
 
@@ -40,6 +39,11 @@
     margin: 0;
     font: 700 $font-size-small $primary-font;
     color: $color-orange;
+  }
+
+  &__info {
+    margin-left: 15px;
+    flex-grow: 1;
   }
 
   &__info-dynamic {
