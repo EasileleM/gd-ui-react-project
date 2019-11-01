@@ -26,7 +26,7 @@ export class ItemCardSmall extends React.Component {
           <h2 className="item-card-small__name">{this.props.name}</h2>
           <div className="item-card-small__info-dynamic">
             <div className="item-card-small__price-rating-block">
-              {this.createStars(this.props.rating % 4)}
+              {this.createStars(this.props.rating)}
               <p className="item-card-small__price">
                 {this.props.price}$
               </p>
