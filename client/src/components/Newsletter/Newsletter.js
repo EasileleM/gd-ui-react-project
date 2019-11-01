@@ -23,7 +23,7 @@ class Newsletter extends Component {
             event.preventDefault();
         } else {
 
-            fetch('http://localhost:3000/api/newsletter', {
+            fetch('https://gd-ui-react-project-server.herokuapp.com/api/newsletter', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
