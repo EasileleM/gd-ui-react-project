@@ -1,11 +1,10 @@
 import {db} from "../../db/db"
-import { useRouter } from 'next/router'
 
 const dbInstance = new db();
 
-
 export default (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Request-Method", "POST, GET, OPTIONS, DELETE");
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     if (req.method === "POST") {
         dbInstance.postNewsletterSignee({"email": req.body.email})//todo add check if email null
