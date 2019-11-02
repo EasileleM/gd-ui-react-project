@@ -13,21 +13,21 @@
     margin: 0;
     margin-bottom: 29px;
     color: $color-orange;
-    font: 700 $font-size-very-large $primary-font;
+    font: 700 $font-size-xl $font-primary;
   }
 
   &__bundle-info {
     margin: 0;
     margin-bottom: 13px;
     color: $color-limed-spruce;
-    font: 400 $font-size-medium $primary-font;
+    font: 400 $font-size-md $font-primary;
   }
 
   &__description {
     margin: 0;
     margin-bottom: 63px;
     color: $color-river-bed;
-    font: 400 $font-size-small $primary-font;
+    font: 400 $font-size-semi-md $font-primary;
   }
 
   &__order-block {
@@ -42,7 +42,7 @@
     margin: 0;
     margin-right: 10px;
     color: $color-limed-spruce;
-    font: 400 $font-size-medium $primary-font;
+    font: 400 $font-size-md $font-primary;
   }
 
   &__order-button {
@@ -53,7 +53,7 @@
     background-color: transparent;
     cursor: pointer;
     color: $color-orange;
-    font: 400 $font-size-medium $primary-font;
+    font: 400 $font-size-md $font-primary;
     transition: 200ms ease;
 
     &:hover {

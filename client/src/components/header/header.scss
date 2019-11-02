@@ -28,12 +28,12 @@
   }
 
   &__text {
-    font-family: $primary-font;
+    font-family: $font-primary;
     font-style: normal;
     padding-right: 20px;
 
     &_md {
-      font-size: $font-size-extremely-small;
+      font-size: $font-size-xs;
     }
 
     &_email::before {
@@ -121,7 +121,7 @@
     &-item {
       text-decoration: none;
       color: $color-limed-spruce;
-      font-size: $font-size-small;
+      font-size: $font-size-semi-md;
       padding: 0;
       margin-right: 20px;
       &:hover, &_active {

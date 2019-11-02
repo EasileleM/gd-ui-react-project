@@ -53,7 +53,7 @@
 
   &__sale-label {
     margin: 0;
-    font: 400 $font-size-extremely-small $primary-font;
+    font: 400 $font-size-xs $font-primary;
     font-style: italic;
     color: $color-white;
   }
@@ -61,7 +61,7 @@
   &__sale-size {
     margin: 0;
     margin-top: -4px;
-    font: 700 $font-size-medium $primary-font;
+    font: 700 $font-size-md $font-primary;
     color: $color-white;
   }
 
@@ -102,14 +102,14 @@
   &__item-name {
     margin: 0;
     margin-bottom: 16px;
-    font: 700 $font-size-semi-large $primary-font;
+    font: 700 $font-size-semi-lg $font-primary;
     color: $color-limed-spruce;
     text-transform: uppercase;
   }
 
   &__item-description {
     margin: 0;
-    font: 400 $font-size-extremely-small $primary-font;
+    font: 400 $font-size-xs $font-primary;
     color: $color-river-bed;
   }
 
@@ -141,9 +141,9 @@
   &__price {
     margin: 0;
     color: $color-orange;
-    font: 700 $font-size-large $primary-font;
+    font: 700 $font-size-lg $font-primary;
     &_money-sign {
-      font-size: $font-size-semi-large;
+      font-size: $font-size-semi-lg;
     }
   }
 }

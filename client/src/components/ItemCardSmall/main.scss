@@ -31,14 +31,14 @@
   &__name {
     margin: 0;
     margin-bottom: 28px;
-    font: 700 $font-size-medium $primary-font;
+    font: 700 $font-size-md $font-primary;
     color: $color-limed-spruce;
   }
 
   &__price {
     margin: 0;
-    font: 700 $font-size-small $primary-font;
-    color: $color-orange;
+    font: 700 $font-size-semi-md $font-primary;
+  olor: $color-orange;
   }
 
   &__info {
@@ -79,7 +79,7 @@
     border: 0;
     background-color: transparent;
     cursor: pointer;
-    font: 700 $font-size-small $primary-font;
+    font: 700 $font-size-semi-md $font-primary;
     color: $color-orange;
 
     &:hover {
