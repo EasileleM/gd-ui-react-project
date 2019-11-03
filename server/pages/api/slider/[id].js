@@ -9,15 +9,11 @@ const cors = Cors({
 const handler = (req, res) => {
     try {
         const service = new SliderService();
-        service.getById(req.query.id)
-            .then(result => {
-                res.statusCode = 200;
-                res.json(JSON.stringify(result[0]));
-            })
-            .catch(err => {
-                res.statusCode = 500;
-                res.json(JSON.stringify(err));
-            })
+        service.getById(req.query.id).then(slider => {
+            res.statusCode = 200;
+            res.json(JSON.stringify(slider));
+        });
+
     } catch (err) {
         res.statusCode = 500;
         res.json(JSON.stringify(err));

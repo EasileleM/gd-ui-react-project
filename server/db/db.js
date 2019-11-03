@@ -38,7 +38,7 @@ export class db {
                 .toArray();
         });
     }
-
+    
     async insertOne(collection, objToInsert) {
         return this.dbConnection.then(client => {
             const db = client.db(this.dbName)
