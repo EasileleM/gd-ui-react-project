@@ -20,18 +20,18 @@
 
     &:focus {
       outline: 0;
-      box-shadow: 0 0 10px 3px rgba(0, 0, 0, .15);
+      box-shadow: 0 0 10px 3px rgba(0, 0, 0, .25);
     }
 
     &_activate {
-      transition-property: height, background-color;
+      transition-property: height, background-color, box-shadow;
       transition: 400ms ease-out;
       height: 36px;
       background-color: $color-orange;
     }
 
     &_deactivate {
-      transition-property: height, background-color;
+      transition-property: height, background-color, box-shadow;
       transition: 400ms ease-in;
       height: 17px;
       background-color: $color-white;
