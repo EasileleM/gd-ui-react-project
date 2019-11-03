@@ -12,14 +12,14 @@
   cursor: pointer;
 
   @media screen and (max-width: 1024px){
+    margin-bottom: 20px;
     max-width: calc(80%);
     width: 370px;
-    margin-bottom: 20px;
   }
 
   &__image {
-    width: 90px;
     margin-right: 10px;
+    width: 90px;
   }
 
   &__devider {
@@ -29,15 +29,15 @@
   }
 
   &__name {
+    @include font-primary-bold-md;
     margin: 0;
     margin-bottom: 28px;
-    font: 700 $font-size-md $font-primary;
     color: $color-limed-spruce;
   }
 
   &__price {
+    @include font-primary-bold-semi-md;
     margin: 0;
-    font: 700 $font-size-semi-md $font-primary;
     color: $color-orange;
   }
 
@@ -72,6 +72,7 @@
   }
 
   &__cart-button {
+    @include font-primary-bold-semi-md;
     transition: 200ms ease;
     display: flex;
     align-items: center;
@@ -79,9 +80,7 @@
     border: 0;
     background-color: transparent;
     cursor: pointer;
-    font: 700 $font-size-semi-md $font-primary;
     color: $color-orange;
-
     &:hover {
       opacity: 0.7;
     }
