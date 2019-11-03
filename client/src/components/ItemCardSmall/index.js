@@ -7,9 +7,14 @@ import starEmpty from './assets/star-empty.svg';
 
 export class ItemCardSmall extends React.Component {
   createStars(rate, maxRate = 4) {
-    console.log(rate, maxRate);
-    const stars = new Array(+rate).fill(<img src={star} className="item-card-small__rating-star" alt="*" />);
-    const emptyStars = new Array(maxRate - rate).fill(<img src={starEmpty} className="item-card-small__rating-star" alt="O" />);
+    const stars = new Array(+rate);
+    for (let i = 0; i < Number(rate); i++) {
+      stars[i] = <img key={i} src={star} className="item-card-small__rating-star" alt="*" />
+    }
+    const emptyStars = new Array(maxRate - rate);
+    for (let i = 0; i < maxRate - rate; i++) {
+      emptyStars[i] = <img key={i} src={starEmpty} className="item-card-small__rating-star" alt="O" />
+    }
     return (
       <div className="item-card-small__rating">
         {stars}
