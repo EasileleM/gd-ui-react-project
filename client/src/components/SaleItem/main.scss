@@ -20,14 +20,22 @@
   }
 
   @media screen and (max-width: 1133px) {
-    width: 100%;
-    max-width: 100%;
     margin-right: 0;
     margin-bottom: 30px;
+    width: 100%;
+    max-width: 100%;
   }
 
   @media screen and (max-width: 600px) {
     margin: 0 0 30px 0;
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
   }
 
   &__sale {
@@ -43,25 +51,25 @@
   }
 
   &__sale-text-block {
-    z-index: 3;
     position: absolute;
+    z-index: 3;
+    transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
   }
 
   &__sale-label {
+    @include font-primary-regular-xs;
     margin: 0;
-    font: 400 $font-size-xs $font-primary;
     font-style: italic;
     color: $color-white;
   }
 
   &__sale-size {
+    @include font-primary-bold-md;
     margin: 0;
     margin-top: -4px;
-    font: 700 $font-size-md $font-primary;
     color: $color-white;
   }
 
@@ -89,27 +97,27 @@
 
     @media screen and (max-width: 654px) {
       margin: 0;
+      margin-bottom: 10px;
       border-right: 0;
       border-bottom: 1px solid $color-athens-gray;
       width: 100%;
       padding: 0;
       padding-bottom: 10px;
-      margin-bottom: 10px;
       text-align: center;
     }
   }
 
   &__item-name {
+    @include font-primary-bold-semi-lg;
     margin: 0;
-    margin-bottom: 16px;
-    font: 700 $font-size-semi-lg $font-primary;
+    margin-bottom: 8px;
     color: $color-limed-spruce;
     text-transform: uppercase;
   }
 
   &__item-description {
+    @include font-primary-regular-xs;
     margin: 0;
-    font: 400 $font-size-xs $font-primary;
     color: $color-river-bed;
   }
 
@@ -126,7 +134,7 @@
     height: 22px;
     width: 22px;
     background-color: transparent;
-    background-image: url(./assets/bucket.png);
+    background-image: url(../../assets/bucket.png);
     cursor: pointer;
 
     &:hover {
@@ -139,9 +147,9 @@
   }
 
   &__price {
+    @include font-primary-bold-lg;
     margin: 0;
     color: $color-orange;
-    font: 700 $font-size-lg $font-primary;
     &_money-sign {
       font-size: $font-size-semi-lg;
     }

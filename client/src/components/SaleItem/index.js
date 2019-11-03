@@ -1,13 +1,21 @@
 import React from 'react';
 import './main.scss';
 
-import square1 from './assets/square-1.svg';
-import square2 from './assets/square-2.svg';
+import {LoadingSpinner} from '../LoadingSpinner/index';
+
+import square1 from '../../assets/square-1.svg';
+import square2 from '../../assets/square-2.svg';
 
 export class SaleItem extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {};
+
+    this.state = {
+      ready: false
+    };
+  }
+
+  componentDidMount() {
     this.loadResources();
   }
 
@@ -23,7 +31,7 @@ export class SaleItem extends React.Component {
   render() {
     if (this.state.ready) {
       return (
-        <a className="sale-item" href="#">
+        <a className="sale-item" href="google.com">
           <div className="sale-item__sale">
             <img src={square2} className="sale-item__decorator sale-item__decorator_2" alt="" />
             <img src={square1} className="sale-item__decorator sale-item__decorator_1" alt="" />
@@ -45,8 +53,12 @@ export class SaleItem extends React.Component {
         </a>
       )
     }
+
     return (
       <div className="sale-item">
+        <div className="sale-item__loading">
+          <LoadingSpinner />
+        </div>
       </div>
     )
   }
