@@ -39,12 +39,12 @@ export class db {
         });
     }
 
-    async postNewsletterSignee(email) {
+    async insertOne(collection, objToInsert) {
         return this.dbConnection.then(client => {
             const db = client.db(this.dbName)
             return db
-                .collection("newsletter")
-                .insertOne(email);
+                .collection(collection)
+                .insertOne(objToInsert);
         });
     }
 };
