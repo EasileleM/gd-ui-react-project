@@ -23,8 +23,7 @@ export class db {
             const db = client.db(this.dbName)
             return db
                 .collection(collection)
-                .find({"id": id}, {projection:{ _id: 0 }})
-                .toArray();
+                .findOne({"id": id}, {projection:{ _id: 0 }});
         });
     }
 

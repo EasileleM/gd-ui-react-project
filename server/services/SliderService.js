@@ -28,10 +28,10 @@ class SlideService {
         let slider;
         await this.dbInstance.getById(id, "slider")
             .then(res => {
-                slider = res[0];
+                slider = res;
                 return this.dbInstance.getById(slider.itemId, "items");
             }).then(res => {
-                slider.item = res[0];
+                slider.item = res;
                 slider.itemId = undefined;
             }).catch(err => {
                 throw err;
