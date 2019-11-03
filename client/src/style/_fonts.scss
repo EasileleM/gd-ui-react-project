@@ -1,12 +1,129 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,400i,600,700|Titillium+Web:700&display=swap');
 
-$primary-font: 'Open Sans', sans-serif;
+$font-primary: 'Poppins', 'Open Sans', sans-serif;
+$font-logo: 'Titillium', ;
 
-$font-size-extremely-small: 12px;
-$font-size-very-small: 14px;
-$font-size-small: 16px;
-$font-size-medium: 18px;
-$font-size-semi-large: 22px;
-$font-size-large: 32px;
-$font-size-very-large: 36px;
-$font-size-extremely-large: 52px;
+$font-size-xxs: 10px;
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-semi-md: 16px;
+$font-size-md: 18px;
+$font-size-semi-lg: 22px;
+$font-size-lg: 32px;
+$font-size-xl: 36px;
+$font-size-xxl: 52px;
+
+@mixin font-primary {
+  font-family: $font-primary;
+}
+
+@mixin font-primary-light {
+  @include font-primary;
+  font-weight: 300;
+}
+
+@mixin font-primary-light-xxs {
+  @include font-primary-light;
+  font-weight: 300;
+  font-size: $font-size-xxs;
+}
+
+@mixin font-primary-regular {
+  @include font-primary;
+  font-weight: 400;
+}
+
+@mixin font-primary-regular-xs {
+  @include font-primary-regular;
+  font-size: $font-size-xs;
+}
+
+@mixin font-primary-regular-sm {
+  @include font-primary-regular;
+  font-size: $font-size-sm;
+}
+
+@mixin font-primary-regular-sm-italic {
+  @include font-primary-regular-sm;
+  font-style: italic;
+}
+
+@mixin font-primary-regular-semi-md {
+  @include font-primary-regular;
+  font-size: $font-size-semi-md;
+}
+
+@mixin font-primary-regular-md {
+  @include font-primary-regular;
+  font-size: $font-size-md;
+}
+
+@mixin font-primary-semi-bold {
+  @include font-primary;
+  font-weight: 600;
+}
+
+@mixin font-primary-semi-bold-sm {
+  @include font-primary-semi-bold;
+  font-size: $font-size-sm;
+}
+
+@mixin font-primary-semi-bold-semi-md {
+  @include font-primary-semi-bold;
+  font-size: $font-size-semi-md;
+}
+
+@mixin font-primary-semi-bold-md {
+  @include font-primary-semi-bold;
+  font-size: $font-size-md;
+}
+
+@mixin font-primary-bold {
+  @include font-primary;
+  font-weight: 700;
+}
+
+@mixin font-primary-bold-semi-md {
+  @include font-primary-bold;
+  font-size: $font-size-semi-md;
+}
+
+@mixin font-primary-bold-md {
+  @include font-primary-bold;
+  font-size: $font-size-md;
+}
+
+@mixin font-primary-bold-semi-lg {
+  @include font-primary-bold;
+  font-size: $font-size-semi-lg;
+}
+
+@mixin font-primary-bold-lg {
+  @include font-primary-bold;
+  font-size: $font-size-lg;
+}
+
+@mixin font-primary-bold-xl {
+  @include font-primary-bold;
+  font-size: $font-size-xl;
+}
+
+@mixin font-primary-bold-xxl {
+  @include font-primary-bold;
+  font-size: $font-size-xxl;
+}
+
+@mixin font-logo {
+  font-family: $font-logo;
+}
+
+@mixin font-logo-regular {
+  @include font-logo;
+  font-weight: 400;
+}
+
+@mixin font-logo-regular-lg {
+  @include font-logo-regular;
+  font-size: $font-size-lg;
+}
