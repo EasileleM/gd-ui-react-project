@@ -12,7 +12,7 @@ const handler = (req, res) => {
         service.getById(req.query.id)
             .then(result => {
                 res.statusCode = 200;
-                res.json(JSON.stringify(result[0]));
+                res.json(JSON.stringify(result));
             })
             .catch(err => {
                 res.statusCode = 500;
