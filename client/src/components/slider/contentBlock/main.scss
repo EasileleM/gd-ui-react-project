@@ -1,7 +1,6 @@
 @import '../../../style/main.scss';
 
 .slider {
-  margin-bottom: 130px;
   &__content-block {
     position: absolute;
     top: -650px;
@@ -11,11 +10,12 @@
 
     @media screen and (max-width: 680px){
       left: 100px;
-      width: calc(100% - 148px);
+      width: calc(100% - 128px);
     }
 
     @media screen and (max-width: 480px){
       left: 60px;
+      width: calc(100% - 98px);
     }
   }
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 
 import './main.scss';
-import { Buttons } from './buttons/index.js';
-import { Images } from './imagesBlock/index.js';
-import { ContentBlock } from './contentBlock/index.js';
+import { LoadingSpinner } from '../LoadingSpinner/index';
+import { Buttons } from './Buttons/index.js';
+import { Images } from './Images/index.js';
+import { ContentBlock } from './ContentBlock/index.js';
 
 export class Slider extends React.Component {
   constructor(props) {
@@ -12,12 +13,18 @@ export class Slider extends React.Component {
     this.state = {
       previousSlide: 1,
       currentSlide: 1,
-      slidesAmount: 3
+      slidesAmount: 3,
+      ready: false
     };
+    this.slideTimer = this.switchSlideTimer();
+  }
 
-    this.loadResources(3)
+  componentDidMount() {
+    this.loadResources(3);
+  }
 
-    this.switchSlide = this.switchSlideTimer();
+  componentWillUnmount() {
+    clearInterval(this.slideTimer);
   }
 
   async loadResources(amount) {
@@ -27,7 +34,7 @@ export class Slider extends React.Component {
       try {
         requests[i - 1] = await fetch(`https://gd-ui-react-project-server.herokuapp.com/api/slider/${i}`);
       }
-      catch(e) {
+      catch (e) {
         console.log(e);
       }
     }
@@ -42,7 +49,9 @@ export class Slider extends React.Component {
 
   switchSlideTimer() {
     return setInterval(() => {
-      const nextSlide = this.state.currentSlide === this.state.slidesAmount - 1 ? 0 : this.state.currentSlide + 1;
+      const nextSlide = 
+        this.state.currentSlide === this.state.slidesAmount - 1
+        ? 0 : this.state.currentSlide + 1;
       this.handleOnClick(nextSlide);
     }, 10000);
   }
@@ -55,13 +64,17 @@ export class Slider extends React.Component {
       previousSlide: this.state.currentSlide,
       currentSlide: i
     })
-    clearInterval(this.switchSlide);
-    this.switchSlide = this.switchSlideTimer();
+    clearInterval(this.slideTimer);
+    this.slideTimer = this.switchSlideTimer();
   }
 
   render() {
     if (!this.state.ready) {
-      return (<div className="slider"></div>);
+      return (<div className="slider">
+        <div className="slider__loading">
+          <LoadingSpinner />
+        </div>
+      </div>);
     }
     return (
       <div className="slider">
