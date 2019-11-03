@@ -2,8 +2,8 @@ import React from 'react';
 
 import './main.scss';
 
-import star from './assets/star.svg';
-import starEmpty from './assets/star-empty.svg';
+import star from '../../assets/star.svg';
+import starEmpty from '../../assets/star-empty.svg';
 
 export class ItemCardSmall extends React.Component {
   createStars(rate, maxRate = 4) {

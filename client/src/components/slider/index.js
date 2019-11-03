@@ -28,19 +28,8 @@ export class Slider extends React.Component {
   }
 
   async loadResources(amount) {
-    const requests = new Array(amount);
-    const result = new Array(amount);
-    for (let i = 1; i <= amount; i++) {
-      try {
-        requests[i - 1] = await fetch(`https://gd-ui-react-project-server.herokuapp.com/api/slider/${i}`);
-      }
-      catch (e) {
-        console.log(e);
-      }
-    }
-    for (let i = 0; i < amount; i++) {
-      result[i] = await requests[i].json();
-    }
+    const request = await fetch(`https://gd-ui-react-project-server.herokuapp.com/api/slider?amount=${this.state.slidesAmount}`);
+    const result = await request.json();
     this.setState({
       ready: true,
       data: result
