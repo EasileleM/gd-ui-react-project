@@ -10,9 +10,9 @@
   background-color: $color-white;
 
   &__description {
+    @include font-primary-regular-semi-md;
     margin-top: 31px;
     margin-bottom: 0;
-    font: 400 $font-size-semi-md $font-primary;
     color: $color-limed-spruce;  
 
     &_labeled {
@@ -21,9 +21,9 @@
   }
 
   &__resolution {
+    @include font-primary-regular-xs;
     opacity: 0.4;
     margin-bottom: 31px;
-    font: 400 $font-size-xs $font-primary;
     color: $color-limed-spruce;
   }
 }
