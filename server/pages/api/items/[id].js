@@ -1,22 +1,27 @@
-import {db} from "../../../db/db"
+import ItemsService from "../../../services/ItemsService";
+import Cors from "micro-cors";
 
-const dbInstance = new db();
+const cors = Cors({
+    allowedMethods: ['GET'],
+    origin: "*"
+});
 
-export default (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+const handler = (req, res) => {
+    try {
+        const service = new ItemsService();
+        service.getById(req.query.id)
+            .then(result => {
+                res.statusCode = 200;
+                res.json(JSON.stringify(result[0]));
+            })
+            .catch(err => {
+                res.statusCode = 500;
+                res.json(JSON.stringify(err));
+            })
+    } catch (err) {
+        res.statusCode = 500;
+        res.json(JSON.stringify(err));
+    }
+};
 
-    const {
-        query: { id },
-    } = req;
-
-    dbInstance.getById(id)
-        .then(result => {
-            res.statusCode = 200;
-            res.json(JSON.stringify(result[0]));
-        })
-        .catch(err => {
-            res.statusCode = 500;
-            res.json(JSON.stringify(err));
-        })
-}
+export default cors(handler);

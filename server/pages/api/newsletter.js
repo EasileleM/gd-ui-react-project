@@ -1,26 +1,32 @@
-import {db} from "../../db/db"
+import Cors from "micro-cors";
+import NewsletterService from "../../services/NewsletterService"
 
-const dbInstance = new db();
+const cors = Cors({
+    allowedMethods: ['POST'],
+    origin: "*"
+});
 
-export default (req, res) => {
-
-    if (req.method === "POST") {
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        res.setHeader("Access-Control-Request-Method", "POST, GET, OPTIONS, DELETE");
-        res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        dbInstance.postNewsletterSignee({"email": req.body.email})//todo add check if email null
-            .then((result) => {
-                console.log(req.query.email);
+const handler = (req, res) => {
+    try {
+        if (req.method === 'OPTIONS') {
+            res.statusCode = 200;
+            res.end("OK");
+        } else {
+            const service = new NewsletterService();
+            service.addSignee(req.body).then((result) => {
                     res.statusCode = 201;
                     res.json(JSON.stringify(result))
                 }
             ).catch(err => {
-                res.statusCode = 500;
-                res.json(JSON.stringify(err));
-            }
-        );
-    } else {
-        res.statusCode = 404;
-        res.end('Not found')
+                    res.statusCode = 500;
+                    res.json(JSON.stringify(err));
+                }
+            );
+        }
+    } catch (err) {
+        res.statusCode = 500;
+        res.json(JSON.stringify(err));
     }
-}
+};
+
+export default cors(handler);

@@ -26,9 +26,9 @@ class Newsletter extends Component {
             fetch('https://gd-ui-react-project-server.herokuapp.com/api/newsletter', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 },
-                body: "email" + "=" + this.state.value
+                body: JSON.stringify({"email": this.state.value})
             }).then(res => {
                     if (res.status === 201) {
                         this.setState({value: "SUCCESS"});
