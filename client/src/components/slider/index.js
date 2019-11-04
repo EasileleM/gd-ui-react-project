@@ -2,9 +2,9 @@ import React from 'react';
 
 import './main.scss';
 import { LoadingSpinner } from '../LoadingSpinner/index';
-import { Buttons } from './Buttons/index.js';
+import { Buttons } from './buttons/index.js';
 import { Images } from './Images/index.js';
-import { ContentBlock } from './ContentBlock/index.js';
+import { ContentBlock } from './contentBlock/index.js';
 
 export class Slider extends React.Component {
   constructor(props) {
