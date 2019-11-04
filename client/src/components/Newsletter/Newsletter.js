@@ -24,7 +24,7 @@ class Newsletter extends Component {
             event.preventDefault();
         } else {
 
-            axios.post('http://localhost:3000/api/newsletter',
+            axios.post('https://gd-ui-react-project-server.herokuapp.com/api/newsletter',
             {"email": this.state.value}).then(res => {
                 if (res.status === 201) {
                     this.setState({value: "SUCCESS"});
