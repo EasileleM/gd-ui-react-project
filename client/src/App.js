@@ -1,16 +1,12 @@
 import React from 'react';
 import './App.scss';
 
-import {Header} from './components/index';
-import {Footer} from './components/index';
-import {Home} from './pages/home/index';
+import {Layout, Home} from './pages/index';
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Home />
-      <Footer />
+      <Layout page={<Home />} />
     </div>
   );
 }

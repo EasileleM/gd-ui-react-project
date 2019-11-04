@@ -3,7 +3,7 @@ import React from 'react';
 import User from './user';
 import ShopCart from './cart';
 
-import './header.scss';
+import './main.scss';
 
 class Navigation extends React.Component {
   render() {
@@ -12,19 +12,19 @@ class Navigation extends React.Component {
         <div className="header__logo">
         </div>
         <nav className="header__links-container">
-          <a className="header__text header__links-item header__text_lg header__links-item_active" href="#">
+          <a className="header__text header__links-item header__text_lg header__links-item_active" href="google.com">
             Home
           </a>
-          <a className="header__text header__links-item header__text_lg" href="#">
+          <a className="header__text header__links-item header__text_lg" href="google.com">
             Products
           </a>
-          <a className="header__text header__links-item header__text_lg" href="#">
+          <a className="header__text header__links-item header__text_lg" href="google.com">
             Hot Deals
           </a>
-          <a className="header__text header__links-item header__text_lg" href="#">
+          <a className="header__text header__links-item header__text_lg" href="google.com">
             About
           </a>
-          <a className="header__text header__links-item header__text_lg" href="#">
+          <a className="header__text header__links-item header__text_lg" href="google.com">
             Contact
           </a>
           <form className="header__search-container" method="POST" name="search">

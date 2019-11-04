@@ -2,9 +2,9 @@ import React from 'react';
 
 import './main.scss';
 import { LoadingSpinner } from '../LoadingSpinner/index';
-import { Buttons } from './buttons/index.js';
+import { Buttons } from './Buttons/index.js';
 import { Images } from './Images/index.js';
-import { ContentBlock } from './contentBlock/index.js';
+import { ContentBlock } from './ContentBlock/index.js';
 
 export class Slider extends React.Component {
   constructor(props) {
@@ -16,6 +16,8 @@ export class Slider extends React.Component {
       slidesAmount: 3,
       ready: false
     };
+
+    this.loadResources = this.props.loadResources;
     this.slideTimer = this.switchSlideTimer();
   }
 
@@ -25,15 +27,6 @@ export class Slider extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.slideTimer);
-  }
-
-  async loadResources(amount) {
-    const request = await fetch(`https://gd-ui-react-project-server.herokuapp.com/api/slider?amount=${this.state.slidesAmount}`);
-    const result = await request.json();
-    this.setState({
-      ready: true,
-      data: result
-    })
   }
 
   switchSlideTimer() {

@@ -3,7 +3,7 @@ import React from 'react';
 import Links from './links';
 import Banking from './banking';
 
-import './footer.scss';
+import './main.scss';
 
 export class Footer extends React.Component {
   render() {

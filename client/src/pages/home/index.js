@@ -1,18 +1,18 @@
 import React from 'react';
-
-import {Slider, NewArrivalsBlock, SpecialOfferSection, BestSalesBlock} from '../../components/index';
+import {loadSlides, loadItem, sendEmail} from '../../utils/index';
+import {Slider, NewArrivalsBlock, SpecialOfferSection, BestSalesBlock, Newsletter} from '../../components/index';
 import './main.scss';
-import Newsletter from "../../components/Newsletter/Newsletter";
+
 
 export function Home() {
   return (
     <main className="main">
-      <Slider />
+      <Slider loadResources={loadSlides}/>
       <div className="main__content">
         <NewArrivalsBlock />
-        <SpecialOfferSection />
+        <SpecialOfferSection loadResources={loadItem}/>
         <BestSalesBlock />
-        <Newsletter />
+        <Newsletter sendData={sendEmail}/>
       </div>
     </main>
   )

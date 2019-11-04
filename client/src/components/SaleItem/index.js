@@ -13,19 +13,12 @@ export class SaleItem extends React.Component {
     this.state = {
       ready: false
     };
+
+    this.loadResources = this.props.loadResources;
   }
 
   componentDidMount() {
     this.loadResources();
-  }
-
-  async loadResources() {
-    const response = await fetch(`https://gd-ui-react-project-server.herokuapp.com/api/items/1`);
-
-    this.setState({
-      ready: true,
-      data: await response.json()
-    })
   }
 
   render() {

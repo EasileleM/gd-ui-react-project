@@ -1,16 +1,17 @@
 export {AdsBlock} from './AdsBlock/index';
 
-export {NewArrivalsBlock} from "./new-arrivals-block/index.js";
+export {NewArrivalsBlock} from "./NewArrivalsBlock/index.js";
 
 export {ItemCardSmall} from './ItemCardSmall/index';
 
-export {Footer} from './footer/index';
+export {Footer} from './Footer/index';
 
-export {Header} from './header/index';
+export {Header} from './Header/index';
 
-export {Slider} from './slider/index';
+export {Slider} from './Slider/index';
 
 export {SpecialOfferSection} from './SpecialOfferSection/index';
 
-export {BestSalesBlock} from './best-sales-block/index';
+export {BestSalesBlock} from './BestSalesBlock/index';
 
+export {Newsletter} from './Newsletter/index';

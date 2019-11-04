@@ -3,7 +3,7 @@ import React from 'react';
 import Navigation from './navigation';
 import Contacts from './contacts';
 
-import './header.scss';
+import './main.scss';
 
 export class Header extends React.Component {
   render() {
