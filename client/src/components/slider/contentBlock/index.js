@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import { Item } from '../Item/index';
+import { Item } from '../item/index';
 
 export class ContentBlock extends PureComponent {
   constructor(props) {

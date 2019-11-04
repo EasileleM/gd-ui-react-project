@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import "./Newsletter.scss";
 import icon from "./assets/Mail_Ico_.png";
+import axios from "axios";
 
 class Newsletter extends Component {
     constructor(props) {
@@ -23,20 +24,17 @@ class Newsletter extends Component {
             event.preventDefault();
         } else {
 
-            fetch('https://gd-ui-react-project-server.herokuapp.com/api/newsletter', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({"email": this.state.value})
-            }).then(res => {
-                    if (res.status === 201) {
-                        this.setState({value: "SUCCESS"});
-                    } else {
-                        this.setState({value: "ERROR"});
-                    }
+            axios.post('http://localhost:3000/api/newsletter',
+            {"email": this.state.value}).then(res => {
+                if (res.status === 201) {
+                    this.setState({value: "SUCCESS"});
+                } else {
+                    this.setState({value: "ERROR"});
                 }
-            );
+            }).catch(err => {
+                console.error(err);
+                this.setState({value: "ERROR"});
+            });
             event.preventDefault();
         }
     }
@@ -57,7 +55,7 @@ class Newsletter extends Component {
                     <input name="email" type="email" className="Newsletter__input" value={this.state.value}
                            onChange={this.handleChange}
                            placeholder="type your email here"/>
-                    <input type="submit" className="Newsletter__button" placeholder="type your email here"/>
+                    <input type="submit" className="Newsletter__button" value="join us"/>
                 </form>
             </div>
         );
