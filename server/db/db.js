@@ -18,12 +18,22 @@ export class db {
         });
     }
 
-    async getById(id, collection) {
+    async getById(collection, id) {
         return this.dbConnection.then(client => {
             const db = client.db(this.dbName)
             return db
                 .collection(collection)
                 .findOne({"id": id}, {projection:{ _id: 0 }});
+        });
+    }
+
+    async getByArrayId(collection, id) {
+        return this.dbConnection.then(client => {
+            const db = client.db(this.dbName)
+            return db
+                .collection(collection)
+                .find({"id": {$in: id}}, {projection:{ _id: 0 }})
+                .toArray();
         });
     }
 

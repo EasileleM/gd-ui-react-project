@@ -9,17 +9,18 @@ const cors = Cors({
 const handler = (req, res) => {
     try {
         const service = new ItemsService();
-        service.getAllItems()
+        const promise = req.query.id ?
+            service.getByArrayId(req.query.id.split(',')) : service.getAllItems();
+        promise
             .then(items => {
-                    const result = service.pagination(req.query.size, req.query.page, items);
-                    res.statusCode = 200;
-                    res.json(JSON.stringify(result))
-                }
+                res.statusCode = 200;
+                res.json(JSON.stringify(items))
+            }
             )
             .catch(err => {
-                    res.statusCode = 500;
-                    res.json(JSON.stringify(err));
-                }
+                res.statusCode = 500;
+                res.json(JSON.stringify(err));
+            }
             )
     } catch (err) {
         res.statusCode = 500;

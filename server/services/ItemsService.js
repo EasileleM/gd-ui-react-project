@@ -12,7 +12,11 @@ class ItemsService {
     }
 
     getById(id) {
-        return this.dbInstance.getById(id,"items");
+        return this.dbInstance.getById("items", id);
+    }
+
+    getByArrayId(id) {
+        return this.dbInstance.getByArrayId("items", id);
     }
 
     pagination(pageSize, pageNumber, items) {
