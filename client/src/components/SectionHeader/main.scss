@@ -1,0 +1,33 @@
+@import '../../style/main.scss';
+
+$color-text-primary: $color-river-bed;
+$color-text-header: $color-limed-spruce;
+$color-text-secondary: $color-orange;
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  &__title {
+    color: $color-text-header;
+    font-family: "Open Sans";
+    font-size: 36px;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    &_colored {
+      color: $color-text-secondary;
+    }
+  }
+
+  &__description {
+    margin-top: 30px;
+    color: $color-river-bed;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 29.99px;
+  }
+}

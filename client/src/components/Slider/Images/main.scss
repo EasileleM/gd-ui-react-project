@@ -1,0 +1,26 @@
+@import '../../../style/main.scss';
+
+.slider {
+  &__images {
+    position: absolute;
+    top: -650px;
+    transition: 300ms ease-in;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__image-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 650px;
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+}

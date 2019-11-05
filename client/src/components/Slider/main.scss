@@ -1,0 +1,40 @@
+@import "../../style/main";
+@import "./Buttons/main";
+@import "./ContentBlock/main";
+@import "./Images/main";
+@import "./Item/main";
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-self: stretch;
+  margin-bottom: 130px;
+  height: 650px;
+  word-wrap: break-word;
+  -ms-word-wrap: break-word;
+
+  &__content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    max-width: 1270px;
+    padding: 0 50px;
+
+    @media screen and (max-width: 800px) {
+      padding: 0 20px;
+    }
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -1,0 +1,79 @@
+@import "../../../style/main.scss";
+
+.slider-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 650px;
+
+  &__name {
+    @include font-primary-bold-xxl;
+    margin: 0;
+    margin-bottom: 9px;
+    color: $color-orange;
+    text-transform: uppercase;
+
+    @media screen and (max-width: 480px){
+      left: 60px;
+      @include font-primary-bold-xl;
+    }
+  }
+
+  &__bundle-info {
+    @include font-primary-regular-md;
+    margin: 0;
+    margin-bottom: 13px;
+    color: $color-limed-spruce;
+  }
+
+  &__description {
+    @include font-primary-regular-semi-md;
+    margin: 0;
+    margin-bottom: 63px;
+    color: $color-river-bed;
+  }
+
+  &__order-block {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 250px;
+  }
+
+  &__price {
+    @include font-primary-regular-md;
+    margin: 0;
+    margin-right: 10px;
+    color: $color-limed-spruce;
+  }
+
+  &__order-button {
+    @include font-primary-regular-md;
+    transition: 200ms ease;
+    display: flex;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+    color: $color-orange;
+    
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:focus {
+      opacity: 0.7;
+      outline: 0;
+    }
+
+    &:before {
+      content: url("../../../assets/Cart_Ico.png");
+      margin-right: 9px;
+      margin-top: 1px;
+    }
+  }
+}
