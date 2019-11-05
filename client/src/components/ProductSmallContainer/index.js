@@ -11,25 +11,10 @@ export class ProductSmallContainer extends Component {
       cards: [],
       ready: false,
     };
-    this.loadResources(3);
+    this.loadResources = this.props.loadResources;
+    this.loadResources(1,3);
   }
 
-  async loadResources(size) {
-    let result;
-    let response;
-
-    try {
-      response = await fetch(`https://gd-ui-react-project-server.herokuapp.com/api/items?page=1`);
-    }
-    catch (e) {
-      console.log(e);
-    }
-    result = await response.json();
-    this.setState({
-      ready: true,
-      cards: [...this.state.cards, ...result.items],
-    })
-  }
 
   render() {
     if (this.state.ready) {

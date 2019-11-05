@@ -17,7 +17,7 @@ export class BestSalesBlock extends Component {
         <div className='best-sales-block__title'>
           <SectionHeader title_colored='Best' title='sales' description='Lorem Ipsum is simply dummy text of the printing and typesetting industry' />
         </div>
-        <ProductSmallContainer />
+        <ProductSmallContainer loadResources={this.props.loadResources}/>
       </section>
     );
   }

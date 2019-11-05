@@ -17,7 +17,7 @@ export class NewArrivalsBlock extends React.Component {
         <div className='new-arrivals-block__title'>
           <SectionHeader title_colored='New' title='Arrivals' description='Lorem Ipsum is simply dummy text of the printing and typesetting industry' />
         </div>
-        <ProductCatalog />
+        <ProductCatalog loadResources={this.props.loadResources}/>
       </section>
     );
   }

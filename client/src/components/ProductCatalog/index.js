@@ -14,24 +14,8 @@ export class ProductCatalog extends React.Component {
       ready: false,
       nextPage: true
     };
+    this.loadResources = this.props.loadResources;
     this.loadResources(1, 4);
-  }
-
-  async loadResources(page, size) {
-    let result;
-    let response;
-    try {
-      response = await fetch(`https://gd-ui-react-project-server.herokuapp.com/api/items?page=${page}`);
-    }
-    catch (e) {
-      console.log(e);
-    }
-    result = await response.json();
-    this.setState({
-      ready: true,
-      cards: [...this.state.cards, ...result.items],
-      nextPage: result.nextPage
-    })
   }
 
   handleOnClick() {
