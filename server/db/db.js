@@ -13,7 +13,7 @@ export class db {
             const db = client.db(this.dbName)
             return db
                 .collection(collection)
-                .find({}, {projection:{ _id: 0 }})
+                .find({})
                 .toArray();
         });
     }
@@ -23,16 +23,20 @@ export class db {
             const db = client.db(this.dbName)
             return db
                 .collection(collection)
-                .findOne({"id": id}, {projection:{ _id: 0 }});
+                .findOne({"_id": MongoDB.ObjectId(id)});
         });
     }
 
     async getByIdArray(collection, id) {
         return this.dbConnection.then(client => {
             const db = client.db(this.dbName)
+            const idArray = id
+                .slice(0)
+                .filter((id) => MongoDB.ObjectId.isValid(id))
+                .map((id) => MongoDB.ObjectId(id));
             return db
                 .collection(collection)
-                .find({"id": {$in: id}}, {projection:{ _id: 0 }})
+                .find({"_id": {$in: idArray}})
                 .toArray();
         });
     }
@@ -42,7 +46,7 @@ export class db {
             const db = client.db(this.dbName);
             return db
                 .collection(collection)
-                .find({}, {projection:{ _id: 0 }})
+                .find({})
                 .limit(Number(amount))
                 .toArray();
         });

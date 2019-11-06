@@ -9,11 +9,6 @@ const cors = Cors({
 const handler = (req, res) => {
     try {
         const service = new ItemsService();
-        if (isNaN(req.query.id) || Number(req.query.id) <= 0) {
-            res.statusCode = 400;
-            res.json(`BAD ID: ${req.query.id}`);
-            return;
-        }
         service.getById(req.query.id)
             .then(result => {
                 if (!result) {
