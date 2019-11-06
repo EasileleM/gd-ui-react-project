@@ -13,9 +13,9 @@ const handler = (req, res) => {
         service.getAllItems()
             .then(items => {
                     items.sort((a, b) => Number(b.sale) - Number(a.sale));
-                    items = size ? items.slice(0, size) : items.slice(0, 3);
+                    items = service.pagination(items, req.query.size, req.query.page);
                     res.statusCode = 200;
-                    res.json(JSON.stringify(items))
+                    res.json(JSON.stringify(items));
                 }
             )
             .catch(err => {

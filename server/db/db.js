@@ -27,7 +27,7 @@ export class db {
         });
     }
 
-    async getByArrayId(collection, id) {
+    async getByIdArray(collection, id) {
         return this.dbConnection.then(client => {
             const db = client.db(this.dbName)
             return db
