@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import "./main.scss"
-import image1 from "./assets/1.jpg"
-import image2 from "./assets/2.jpeg"
-import image3 from "./assets/3.png"
+
 
 
 class ProductImages extends Component {
