@@ -30,7 +30,7 @@ export class ProductCatalog extends React.Component {
       return (
         <div className='product-catalog'>
           <ProductsContainer products={this.state.cards} />
-          <ShowMoreButton onClick={() => this.handleOnClick()} />
+          <ShowMoreButton ready={this.state.ready} onClick={() => this.handleOnClick()} />
         </div>
       );
     } else if (this.state.ready && !this.state.nextPage) {
@@ -42,6 +42,7 @@ export class ProductCatalog extends React.Component {
     }
     return (
       <div className='product-catalog'>
+        <ShowMoreButton ready={this.state.ready} onClick={() => undefined} />
       </div>
     );
   }
