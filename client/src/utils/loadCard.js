@@ -7,6 +7,7 @@ export async function loadCard(page = 1, size = 4) {
   this.setState({
     ready: true,
     cards: [...this.state.cards, ...result.data.items],
+    loading: false,
     nextPage: result.data.nextPage
   })
 }
