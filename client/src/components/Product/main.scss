@@ -1,0 +1,10 @@
+@import "./../../style/main.scss";
+.product {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  @media screen and (max-width: $breakpoint-smartphone) {
+    flex-direction: column;
+  }
+}

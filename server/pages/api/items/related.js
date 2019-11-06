@@ -21,7 +21,6 @@ const handler = (req, res) => {
             }
             )
             .catch(err => {
-                console.log(err)
                 if (err.message === "NOT FOUND") {
                     res.statusCode = 404;
                     res.json(`NOT FOUND ${req.query.id}`);

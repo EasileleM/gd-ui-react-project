@@ -13,10 +13,11 @@ const handler = (req, res) => {
             .then(result => {
                 if (!result) {
                     res.statusCode = 404;
-                    res.json("NOT FOUND");
+                    res.json(`NOT FOUND ${req.query.id}`);
+                } else {
+                    res.statusCode = 200;
+                    res.json(JSON.stringify(result));
                 }
-                res.statusCode = 200;
-                res.json(JSON.stringify(result));
             })
             .catch(err => {
                 if (err.message === "BAD ID") {

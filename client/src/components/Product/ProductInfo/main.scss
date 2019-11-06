@@ -1,0 +1,107 @@
+@import './../../../style/main.scss';
+
+.product-info {
+  width: 60%;
+  padding: 80px;
+  padding-right: 50px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    padding-right: 30px;
+  }
+
+  @media screen and (max-width: $breakpoint-smartphone) {
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &__heading {
+    @include font-primary-bold-xxl;
+    color: $color-orange;
+    margin: 0;
+
+    &_secondary {
+      @include font-primary-regular-md;
+      margin: 0;
+      color: $color-limed-spruce;
+    }
+  }
+
+  &__paragraph {
+    @include font-primary-regular-semi-md;
+    line-height: 29.97px;
+    color: $color-river-bed;
+  }
+
+  &__order {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 40px;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      flex-direction: column;
+    }
+  }
+
+  &__price {
+    @include font-primary-regular-semi-lg;
+    margin: 0;
+    color: $color-limed-spruce;
+    display: flex;
+    align-items: center;
+
+  }
+
+  &__order-buttons {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      margin-top: 20px;
+      width: 100%;
+      justify-content: flex-start;
+    }
+    @media screen and (max-width: $breakpoint-mobile) {
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+  }
+
+  &__button-icon {
+    height: 20px;
+    @media screen and (max-width: $breakpoint-tablet) {
+      padding: 0 20px;
+    }
+  }
+
+  &__order-now-button {
+    border: 0;
+    padding: 13px 20px;
+    border-radius: 50px;
+    background-color: $color-orange;
+    color: white;
+    @include font-primary-regular-md;
+    @media screen and (max-width: $breakpoint-tablet) {
+      width: 100%;
+      order: -3;
+      max-width: 200px;
+    }
+
+    @media screen and (max-width: $breakpoint-mobile) {
+      max-width: none;
+      margin-top: 30px;
+      order: 0;
+      padding: 20px 20px;
+    }
+  }
+}
