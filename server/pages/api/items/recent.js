@@ -9,18 +9,16 @@ const cors = Cors({
 const handler = (req, res) => {
     try {
         const service = new ItemsService();
-        service.getAllItems()
+        service.getRecentItems(req.query.size, req.query.page)
             .then(items => {
-                    items.sort((a, b) => new Date(a.creationDate) - new Date(b.creationDate));
-                    items = service.pagination(items, req.query.size, req.query.page);
-                    res.statusCode = 200;
-                    res.json(JSON.stringify(items))
-                }
+                res.statusCode = 200;
+                res.json(JSON.stringify(items))
+            }
             )
             .catch(err => {
-                    res.statusCode = 500;
-                    res.json(JSON.stringify(err));
-                }
+                res.statusCode = 500;
+                res.json(JSON.stringify(err));
+            }
             )
     } catch (err) {
         res.statusCode = 500;

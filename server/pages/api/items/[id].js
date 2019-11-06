@@ -9,22 +9,22 @@ const cors = Cors({
 const handler = (req, res) => {
     try {
         const service = new ItemsService();
-        if (isNaN(req.query.id) || Number(req.query.id) <= 0) {
-            res.statusCode = 400;
-            res.json(`BAD ID: ${req.query.id}`);
-            return;
-        }
         service.getById(req.query.id)
             .then(result => {
                 if (!result) {
                     res.statusCode = 404;
-                    res.json(`NOT FOUND: ${req.query.id}`);
+                    res.json(`NOT FOUND ${req.query.id}`);
                 } else {
                     res.statusCode = 200;
                     res.json(JSON.stringify(result));
                 }
             })
             .catch(err => {
+                if (err.message === "BAD ID") {
+                    res.statusCode = 400;
+                    res.json(`BAD ID ${req.query.id}`);
+                    return;
+                }
                 res.statusCode = 500;
                 res.json(JSON.stringify(err));
             })

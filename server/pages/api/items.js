@@ -10,7 +10,7 @@ const handler = (req, res) => {
     try {
         if (!req.query.id) {
             res.statusCode = 400;
-            res.json("ID IS NOT PROVIDED");
+            res.json("NO ID PROVIDED");
             return;
         }
         const service = new ItemsService();
@@ -22,7 +22,7 @@ const handler = (req, res) => {
                 const rejectedId = [];
                 if (idArray && idArray.length > items.length) {
                     for (const id of idArray) {
-                        if (!items.some((item) => item.id === id)) {
+                        if (!items.some((item) => item._id == id)) {
                             rejectedId.push(id);
                         }
                     }
