@@ -1,7 +1,8 @@
 import axios from 'axios';
+import {SERVER_URL} from '../constants/index';
 
 export async function loadSlides(amount) {
-  const request = await axios.get(`https://gd-ui-react-project-server.herokuapp.com/api/slider?amount=${amount}`);
+  const request = await axios.get(`${SERVER_URL}/api/slider?amount=${amount}`);
   this.setState({
     ready: true,
     data: request.data

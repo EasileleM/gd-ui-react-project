@@ -12,7 +12,7 @@ const handler = (req, res) => {
         service.getAllItems()
             .then(items => {
                     items.sort((a, b) => new Date(a.creationDate) - new Date(b.creationDate));
-                    items = service.pagination(req.query.size, req.query.page, items);
+                    items = service.pagination(items, req.query.size, req.query.page);
                     res.statusCode = 200;
                     res.json(JSON.stringify(items))
                 }

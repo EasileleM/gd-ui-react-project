@@ -13,7 +13,7 @@ const handler = (req, res) => {
         service.getAllItems()
             .then(items => {
                     items.sort((a, b) => Number(b.sale) - Number(a.sale));
-                    items = service.pagination(req.query.size, req.query.page, items);
+                    items = service.pagination(items, req.query.size, req.query.page);
                     res.statusCode = 200;
                     res.json(JSON.stringify(items));
                 }

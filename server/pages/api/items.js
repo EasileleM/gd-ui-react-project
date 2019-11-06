@@ -8,20 +8,18 @@ const cors = Cors({
 
 const handler = (req, res) => {
     try {
-        const service = new ItemsService();
-        const rejectedId = [];
-        let promise;
-        let idArray = false;
-        if (req.query.id) {
-            idArray = req.query.id.split(',');
-            promise = service.getByIdArray(req.query.id.split(','));
-        } else {
-            promise = service.getAllItems();
+        if (!req.query.id) {
+            res.statusCode = 400;
+            res.json("ID IS NOT PROVIDED");
+            return;
         }
-        promise
+        const service = new ItemsService();
+        const idArray = req.query.id.split(',');
+        return service
+            .getByIdArray(idArray)
             .then(items => {
                 res.statusCode = 200;
-                let rejectedId = [];
+                const rejectedId = [];
                 if (idArray && idArray.length > items.length) {
                     for (const id of idArray) {
                         if (!items.some((item) => item.id === id)) {

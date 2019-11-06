@@ -11,7 +11,7 @@ const handler = (req, res) => {
         const service = new ItemsService();
         service.getAllItems()
             .then(items => {
-                    const result = service.pagination(req.query.size, req.query.page, items);
+                    const result = service.pagination(items, req.query.size, req.query.page);
                     res.statusCode = 200;
                     res.json(JSON.stringify(result))
                 }

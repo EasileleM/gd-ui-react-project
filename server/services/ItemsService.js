@@ -3,8 +3,6 @@ import {db} from "../db/db";
 class ItemsService {
     constructor() {
         this.dbInstance = new db();
-        this.pageSize = 4;
-        this.pageNumber = 1;
     }
 
     getAllItems() {
@@ -19,16 +17,9 @@ class ItemsService {
         return this.dbInstance.getByIdArray("items", id);
     }
 
-    pagination(pageSize = 4, pageNumber = 1, items) {
-        if (pageSize) {
-            this.pageSize = pageSize;
-        }
-        if (pageNumber) {
-            this.pageNumber = pageNumber;
-        }
-
-        const startIndex = (this.pageNumber - 1) * this.pageSize;
-        const endIndex = this.pageNumber * this.pageSize;
+    pagination(items, pageSize = 4, pageNumber = 1) {
+        const startIndex = (pageNumber - 1) * pageSize;
+        const endIndex = pageNumber * pageSize;
 
         return {
             nextPage: endIndex < items.length,

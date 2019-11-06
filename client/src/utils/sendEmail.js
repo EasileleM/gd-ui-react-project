@@ -1,7 +1,8 @@
 import axios from "axios";
+import {SERVER_URL} from '../constants/index';
 
 export function sendEmail() {
-  axios.post('https://gd-ui-react-project-server.herokuapp.com/api/newsletter',
+  axios.post(`${SERVER_URL}/api/newsletter`,
   {"email": this.state.value}).then(res => {
       if (res.status === 201) {
           this.setState({value: "SUCCESS"});
