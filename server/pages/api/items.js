@@ -10,7 +10,7 @@ const handler = (req, res) => {
     try {
         if (!req.query.id) {
             res.statusCode = 400;
-            res.json("ID IS NOT PROVIDED");
+            res.json("NO ID PROVIDED");
             return;
         }
         const service = new ItemsService();

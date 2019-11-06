@@ -21,6 +21,9 @@ export class db {
     async getById(collection, id) {
         return this.dbConnection.then(client => {
             const db = client.db(this.dbName)
+            if (!MongoDB.ObjectId.isValid(id)) {
+                return Promise.reject(new Error(`BAD ID`));
+            }
             return db
                 .collection(collection)
                 .findOne({"_id": MongoDB.ObjectId(id)});
