@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
-import {Header} from '../../components/index';
-import {Footer} from '../../components/index';
+import { Header, Footer, LoadingSpinner } from '../../components/index';
 
 export function Layout(props) {
   return (
-    <>
-      <Header />
-      {props.page}
-      <Footer />
-    </>
+    <Suspense fallback={<LoadingSpinner />}>
+      <>
+        <Header />
+        {props.page}
+        <Footer />
+      </>
+    </Suspense>
   );
 }
