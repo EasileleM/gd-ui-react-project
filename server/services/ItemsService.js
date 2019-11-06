@@ -48,7 +48,6 @@ class ItemsService {
             })
             .then(items => {
                 const alreadySorted = new Set();
-                const target = items.find((item) => item._id == id);
                 const brandRelated = items.filter((item) => {
                     return item.brand === target.brand && alreadySorted.add(item._id);
                 });
@@ -78,11 +77,13 @@ class ItemsService {
                             bMatches++;
                         }
                     }
-                    return aMatches - bMatches;
+                    return bMatches - aMatches;
                 });
                 const rest = items.filter((item) => !alreadySorted.has(item._id));
-                const sortedItems = [...brandRelated, ...rest];
-                return this.pagination(sortedItems, size, page);
+                const sortedItems = [...brandRelated, ...categoryRelated, ...rest];
+                return this
+                    .pagination(sortedItems
+                        .filter((item) => String(item._id) !== String(target._id)), size, page);
             });
     }
 
