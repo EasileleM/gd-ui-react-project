@@ -27,8 +27,8 @@ class Product extends Component {
 
     render() {
         if (!this.state.ready) {
-            return (<div className="slider">
-                <div className="slider__loading">
+            return (<div className="product">
+                <div className="product__loading">
                     <LoadingSpinner/>
                 </div>
             </div>);
