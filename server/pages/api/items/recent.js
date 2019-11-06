@@ -9,11 +9,10 @@ const cors = Cors({
 const handler = (req, res) => {
     try {
         const service = new ItemsService();
-        const size = req.query.size;
         service.getAllItems()
             .then(items => {
                     items.sort((a, b) => new Date(a.creationDate) - new Date(b.creationDate));
-                    items = size ? items.slice(0, size) : items.slice(0, 3);
+                    items = service.pagination(req.query.size, req.query.page, items);
                     res.statusCode = 200;
                     res.json(JSON.stringify(items))
                 }

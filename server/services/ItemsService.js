@@ -15,11 +15,11 @@ class ItemsService {
         return this.dbInstance.getById("items", id);
     }
 
-    getByArrayId(id) {
-        return this.dbInstance.getByArrayId("items", id);
+    getByIdArray(id) {
+        return this.dbInstance.getByIdArray("items", id);
     }
 
-    pagination(pageSize, pageNumber, items) {
+    pagination(pageSize = 4, pageNumber = 1, items) {
         if (pageSize) {
             this.pageSize = pageSize;
         }

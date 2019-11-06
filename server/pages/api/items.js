@@ -9,12 +9,27 @@ const cors = Cors({
 const handler = (req, res) => {
     try {
         const service = new ItemsService();
-        const promise = req.query.id ?
-            service.getByArrayId(req.query.id.split(',')) : service.getAllItems();
+        const rejectedId = [];
+        let promise;
+        let idArray = false;
+        if (req.query.id) {
+            idArray = req.query.id.split(',');
+            promise = service.getByIdArray(req.query.id.split(','));
+        } else {
+            promise = service.getAllItems();
+        }
         promise
             .then(items => {
                 res.statusCode = 200;
-                res.json(JSON.stringify(items))
+                let rejectedId = [];
+                if (idArray && idArray.length > items.length) {
+                    for (const id of idArray) {
+                        if (!items.some((item) => item.id === id)) {
+                            rejectedId.push(id);
+                        }
+                    }
+                }
+                res.json(JSON.stringify({ items, rejectedId }));
             }
             )
             .catch(err => {
