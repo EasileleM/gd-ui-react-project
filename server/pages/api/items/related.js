@@ -8,18 +8,24 @@ const cors = Cors({
 
 const handler = (req, res) => {
     try {
+        if (!req.query.id) {
+            res.statusCode = 400;
+            res.json("NO ID PROVIDED");
+            return;
+        }
         const service = new ItemsService();
-        service.getById(req.query.id)
-            .then(result => {
-                if (!result) {
+        service.getRelatedItems(req.query.id, req.query.size, req.query.page)
+            .then(items => {
+                res.statusCode = 200;
+                res.json(JSON.stringify(items))
+            }
+            )
+            .catch(err => {
+                if (err.message === "NOT FOUND") {
                     res.statusCode = 404;
                     res.json(`NOT FOUND ${req.query.id}`);
-                } else {
-                    res.statusCode = 200;
-                    res.json(JSON.stringify(result));
+                    return;
                 }
-            })
-            .catch(err => {
                 if (err.message === "BAD ID") {
                     res.statusCode = 400;
                     res.json(`BAD ID ${req.query.id}`);
@@ -27,7 +33,8 @@ const handler = (req, res) => {
                 }
                 res.statusCode = 500;
                 res.json(JSON.stringify(err));
-            })
+            }
+            )
     } catch (err) {
         res.statusCode = 500;
         res.json(JSON.stringify(err));

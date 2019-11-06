@@ -1,18 +1,18 @@
 import React from 'react';
 
+import dots from '../../../assets/dots.svg';
+import loadingDots from '../../../assets/loadingDots.svg';
+
 import './main.scss';
 
-export class ShowMoreButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state ={};
+export function ShowMoreButton(props){
+  let buttonImage = dots;
+  if (!props.ready) {
+    buttonImage = loadingDots;
   }
-  
-  render() {
-    return (
-      <button onClick={this.props.onClick} className='show-more-button'>
-        ...
-      </button>
-    );
-  }
+  return (
+    <button onClick={props.onClick} className='show-more-button'>
+      <img src={buttonImage} className="show-more-button__image" alt="loading"/>
+    </button>
+  );
 }
