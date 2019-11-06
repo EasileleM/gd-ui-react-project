@@ -22,7 +22,7 @@ const handler = (req, res) => {
                 const rejectedId = [];
                 if (idArray && idArray.length > items.length) {
                     for (const id of idArray) {
-                        if (!items.some((item) => item._id === id)) {
+                        if (!items.some((item) => item._id == id)) {
                             rejectedId.push(id);
                         }
                     }
