@@ -12,15 +12,20 @@ export class ProductCatalog extends React.Component {
       page: 2,
       cards: [],
       ready: false,
+      loading: true,
       nextPage: true
     };
     this.loadResources = this.props.loadResources;
+  }
+
+  componentDidMount() {
     this.loadResources(1, 4);
   }
 
   handleOnClick() {
     this.setState({
       page: this.state.page + 1,
+      loading: true
     })
     this.loadResources(this.state.page, 4);
   }
@@ -30,7 +35,7 @@ export class ProductCatalog extends React.Component {
       return (
         <div className='product-catalog'>
           <ProductsContainer products={this.state.cards} />
-          <ShowMoreButton ready={this.state.ready} onClick={() => this.handleOnClick()} />
+          <ShowMoreButton loading={this.state.loading} onClick={() => this.handleOnClick()} />
         </div>
       );
     } else if (this.state.ready && !this.state.nextPage) {
@@ -42,7 +47,7 @@ export class ProductCatalog extends React.Component {
     }
     return (
       <div className='product-catalog'>
-        <ShowMoreButton ready={this.state.ready} onClick={() => undefined} />
+        <ShowMoreButton loading={this.state.loading} onClick={() => undefined} />
       </div>
     );
   }

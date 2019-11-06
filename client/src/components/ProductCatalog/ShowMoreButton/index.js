@@ -7,7 +7,7 @@ import './main.scss';
 
 export function ShowMoreButton(props){
   let buttonImage = dots;
-  if (!props.ready) {
+  if (props.loading) {
     buttonImage = loadingDots;
   }
   return (
