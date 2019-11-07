@@ -8,7 +8,7 @@ class Banking extends React.Component {
     return (
       <Translation>
         {t =>
-          <section className="footer__wrapper footer__wrapper_column">
+          <section className="footer__mobile footer__wrapper footer__wrapper_column">
             <div className="footer__text footer__text_promoted">
             {t('footer.banking')}
             </div>

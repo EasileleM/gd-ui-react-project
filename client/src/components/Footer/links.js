@@ -8,7 +8,7 @@ class Links extends React.Component {
     return (
       <Translation>
         { t=>
-          <section className="footer__wrapper footer__wrapper_column-wrap">
+          <section className="footer__mobile footer__wrapper footer__wrapper_column-wrap">
             <div className="footer__link-wrapper">
               <a className="footer__link" href="google.com">
                 {t('footer.about')}
