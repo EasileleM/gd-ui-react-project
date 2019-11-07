@@ -70,13 +70,14 @@ $color-border: $color-athens-gray;
 
   &__image {
     &_front {
-      height: 210px;
-      //max-width: 149px;
+      object-fit: contain;
+      width: 149px;
     }
 
     &_back {
-      height: 87px;
       width: 70px;
+      object-fit: contain;
+
     }
   }
 

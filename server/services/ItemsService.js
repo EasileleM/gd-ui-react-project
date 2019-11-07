@@ -1,25 +1,51 @@
-import { db } from "../db/db";
+import {db} from "../db/db";
+
+const langs = Object.freeze({
+    ENG: "en",
+    RU: "ru",
+});
 
 class ItemsService {
-    constructor() {
+    constructor(lang = langs.ENG) {
         this.dbInstance = new db();
+        if (!Object.values(langs).includes(lang)) {
+            lang = langs.ENG;
+        }
+        this.lang = lang;
+    }
+
+    languageSpecific(items, lang) {
+        if (!Array.isArray(items)) {
+            items.description = items.description[lang];
+            items.name = items.name[lang];
+            return items;
+        }
+        return items.map(item => {
+            item.description = item.description[lang];
+            item.name = item.name[lang];
+            return item;
+        });
+    }
+
+    filter(filter) {
+        return this.dbInstance.filter("items", filter).then(items => this.languageSpecific(items, this.lang));
     }
 
     getAllItems() {
-        return this.dbInstance.getAll("items");
+        return this.dbInstance.getAll("items").then(items => this.languageSpecific(items, this.lang))
     }
 
     getById(id) {
-        return this.dbInstance.getById("items", id);
+        return this.dbInstance.getById("items", id).then(items => this.languageSpecific(items, this.lang))
     }
 
     getByIdArray(id) {
-        return this.dbInstance.getByIdArray("items", id);
+        return this.dbInstance.getByIdArray("items", id).then(items => this.languageSpecific(items, this.lang))
     }
 
     getRecentItems(size = 4, page = 1) {
         return this.dbInstance
-            .getAll("items")
+            .getAll("items").then(items => this.languageSpecific(items, this.lang))
             .then(items => {
                 items.sort((a, b) => new Date(a.creationDate) - new Date(b.creationDate));
                 return this.pagination(items, size, page);
@@ -28,7 +54,7 @@ class ItemsService {
 
     getSalesItems(size = 4, page = 1) {
         return this.dbInstance
-            .getAll("items")
+            .getAll("items").then(items => this.languageSpecific(items, this.lang))
             .then(items => {
                 items.sort((a, b) => Number(b.sale) - Number(a.sale));
                 return this.pagination(items, size, page);
@@ -38,13 +64,13 @@ class ItemsService {
     getRelatedItems(id, size = 4, page = 1) {
         let target;
         return this
-            .getById(id)
+            .getById(id).then(items => this.languageSpecific(items, this.lang))
             .then((item) => {
                 if (!item) {
                     return Promise.reject(new Error("NOT FOUND"));
                 }
                 target = item;
-                return this.dbInstance.getAll("items");
+                return this.dbInstance.getAll("items").then(items => this.languageSpecific(items, this.lang))
             })
             .then(items => {
                 const alreadySorted = new Set();

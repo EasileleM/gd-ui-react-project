@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="lds-message" preserveAspectRatio="xMidYMid" viewBox="0 0 100 100">
+<g transform="translate(30 50)">
+<circle transform="scale(0.925623 0.925623)" r="6" fill="#ff5912">
+</circle></g>
+<g transform="translate(50 50)">
+<circle transform="scale(0.925623 0.925623)" r="6" fill="#ff5912">
+</circle>
+</g>
+<g transform="translate(70 50)">
+<circle transform="scale(0.925623 0.925623)" r="6" fill="#ff5912">
+</circle>
+</g>
+</svg>

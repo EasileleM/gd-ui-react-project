@@ -5,11 +5,6 @@ import {ProductCard} from '../ProductCard/index.js';
 import './main.scss';
 
 export class ProductsContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state ={};
-  }
-  
   render() {
     const products = this.props.products.map(product => {
       return <ProductCard addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} product={product}/>

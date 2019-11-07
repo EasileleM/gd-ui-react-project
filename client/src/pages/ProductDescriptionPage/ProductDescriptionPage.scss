@@ -1,0 +1,27 @@
+@import "../../style/main";
+
+.wrapper {
+  padding: 120px 50px 20px 50px;
+  display: flex;
+  justify-content: center;
+
+  &:nth-child(1){
+      padding: 0px 50px 20px 50px;
+  }
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    padding: 120px 30px 20px 30px;
+  }
+
+  @media screen and (max-width: $breakpoint-smartphone) {
+    padding: 50px 30px 20px 30px;
+  }
+  &_secondary-color {
+    background: $color-athens-gray;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1270px;
+}

@@ -1,0 +1,54 @@
+{
+  "navigation": {
+    "home": "Home",
+    "products": "Products",
+    "hotDeals": "Hot Deals",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "newArrivals": {
+    "new": "New",
+    "arrivals": "Arrivals",
+    "description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+  },
+  "bestSales": {
+    "best": "Best",
+    "sales": "Sales",
+    "description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+  },
+  "newsLetter": {
+    "header": "News letter",
+    "description": "join us now to get all news and special offers",
+    "placeholder": "type your email here",
+    "join": "join us"
+  },
+  "footer": {
+    "about": "about us",
+    "contact": "contact us",
+    "support": "support",
+    "feed": "our feed",
+    "terms": "terms and conditions",
+    "privacy": "our privacy",
+    "join": "join us",
+    "live": "live support",
+    "banking": "Payment Methods"
+  },
+  "smallCard": {
+    "add": "add to cart"
+  },
+  "currency": "$",
+  "order": "Order Now",
+  "price": "Price",
+  "productChooser": {
+    "quantity": "Choose Quantity",
+    "size": "Choose Size"
+  },
+  "productCard": {
+    "size": "sizes"
+  },
+  "relatedProducts": {
+    "related": "Related",
+    "products": "Products",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+  }
+}

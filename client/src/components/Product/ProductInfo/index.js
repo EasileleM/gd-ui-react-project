@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Translation} from 'react-i18next';
 import "./main.scss"
 import cartIcon from "./assets/cart.png"
 import shareIcon from "./assets/share.png"
@@ -16,11 +17,12 @@ class ProductInfo extends Component {
                 sizes: props.item.sizes,
                 price: props.item.price
             },
-            chosenSize: null,
+            chosenSize: props.item.sizes[0],
             chosenQuantity: 1,
         };
 
         this.handleSize = this.handleSize.bind(this);
+        this.handleQuantity = this.handleQuantity.bind(this);
     };
 
     handleSize(size) {
@@ -40,26 +42,31 @@ class ProductInfo extends Component {
 
     render() {
         return (
-            <div className="product-info">
-                <h1 className="product-info__heading">{this.state.itemInfo.title}</h1>
-                <h2 className="product-info__heading_secondary">{this.state.itemInfo.bundleInfo}</h2>
-                <p className="product-info__paragraph">{this.state.itemInfo.description}</p>
+            <Translation>
+                {t =>
+                    <div className="product-info">
+                        <h1 className="product-info__heading">{this.state.itemInfo.title}</h1>
+                        <h2 className="product-info__heading_secondary">{this.state.itemInfo.bundleInfo}</h2>
+                        <p className="product-info__paragraph">{this.state.itemInfo.description}</p>
 
-                <Chooser sizes={this.state.itemInfo.sizes}
-                         handleSize={this.handleSize}
-                         chosenSize={this.state.chosenSize}
-                         chosenQuantity={this.state.chosenQuantity}/>
+                        <Chooser sizes={this.state.itemInfo.sizes}
+                                 handleSize={this.handleSize}
+                                 handleQuantity={this.handleQuantity}
+                                 chosenSize={this.state.chosenSize}
+                                 chosenQuantity={this.state.chosenQuantity}/>
 
-                <div className="product-info__order">
-                    <h3 className="product-info__price">Price: {this.state.itemInfo.price * this.state.chosenQuantity}$</h3>
-                    <div className="product-info__order-buttons">
-                        <img className="product-info__button-icon" src={shareIcon} alt="Share icon"/>
-                        <img className="product-info__button-icon" src={cartIcon} alt="Add to cart icon"/>
-                        <img className="product-info__button-icon" src={likeIcon} alt="Add to favorites icon"/>
-                        <button className="product-info__order-now-button">Order Now</button>
+                        <div className="product-info__order">
+                            <h3 className="product-info__price">{t('price')}: {this.state.itemInfo.price * this.state.chosenQuantity + t('currency')}</h3>
+                            <div className="product-info__order-buttons">
+                                <img className="product-info__button-icon" src={shareIcon} alt="Share icon"/>
+                                <img className="product-info__button-icon" src={cartIcon} alt="Add to cart icon"/>
+                                <img className="product-info__button-icon" src={likeIcon} alt="Add to favorites icon"/>
+                                <button className="product-info__order-now-button">{t('order')}</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                }
+            </Translation>
         );
     }
 }

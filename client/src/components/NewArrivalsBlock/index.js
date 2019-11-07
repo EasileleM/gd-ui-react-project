@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Translation } from 'react-i18next';
 
 import { SectionHeader } from '../SectionHeader/index.js';
 import { ProductCatalog } from '../ProductCatalog/index.js';
@@ -9,9 +10,13 @@ export function NewArrivalsBlock(props) {
   return (
     <section className='new-arrivals-block'>
       <div className='new-arrivals-block__title'>
-        <SectionHeader title_colored='New' title='Arrivals' description='Lorem Ipsum is simply dummy text of the printing and typesetting industry' />
+        <Translation>
+          {
+            t => <SectionHeader title_colored={t('newArrivals.new')} title={t('newArrivals.arrivals')} description={t('newArrivals.description')} />
+          }
+        </Translation>
       </div>
-      <ProductCatalog addToCard={(item, size, color, amount) => props.addToCard(item, size, color, amount)} loadResources={props.loadResources} />
+      <ProductCatalog addToCard={(item, size, color, amount) => props.addToCard(item, size, color, amount)} />
     </section>
   );
 }
