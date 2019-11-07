@@ -7,7 +7,7 @@ export function SpecialOfferSection(props) {
     return (
       <div className="section">
         <div className="section__content">
-          <SaleItem loadResources={props.loadResources} />
+          <SaleItem />
           <AdsBlock />
         </div>
       </div>

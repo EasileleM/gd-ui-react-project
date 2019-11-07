@@ -3,7 +3,7 @@ import ProductImages from "./ProductImages";
 import ProductInfo from "./ProductInfo";
 import "./main.scss"
 import {LoadingSpinner} from "../LoadingSpinner";
-import loadItem from "../../utils/loadItem_new";
+import loadItem from "../../utils/loadItem";
 
 
 class Product extends Component {

@@ -14,13 +14,19 @@ $color-border: $color-athens-gray;
   &__row {
     display: flex;
     justify-content: center;
+    padding-bottom: 100px;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      padding-bottom: 0px;
+    }
   }
 
   &__main {
     height: 275px;
     object-fit: contain;
     width: 100%;
-    padding: 80px 0;
+    padding: 80px 0 60px;
+
   }
 
   &__small-image {

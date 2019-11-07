@@ -22,9 +22,9 @@ class Chooser extends Component {
                         </div>
                         <div className="chooser__quantity">
                             <h2 className="chooser__heading_secondary">{t('productChooser.quantity')}:</h2>
-                            <div className="chooser__quantity-button" onClick={() => this.handleQuantity(true)}>+</div>
+                            <div className="chooser__quantity-button" onClick={() => this.props.handleQuantity(true)}>+</div>
                             <span className="chooser__quantity-number">{this.props.chosenQuantity}</span>
-                            <div className="chooser__quantity-button" onClick={() => this.handleQuantity(false)}>-</div>
+                            <div className="chooser__quantity-button" onClick={() => this.props.handleQuantity(false)}>-</div>
                         </div>
                     </div>
                 }

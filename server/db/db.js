@@ -1,13 +1,10 @@
 import MongoDB from "mongodb";
 import filter from "../pages/api/items/filter";
 
-const langs = Object.freeze({
-    ENG: "en",
-    RU: "ru",
-});
+
 
 export class db {
-    constructor(lang = langs.ENG) {
+    constructor() {
         this.uri = process.env.MONGODB_URI || "mongodb+srv://admin:qwerty123456789@react-vptyr.mongodb.net/test?retryWrites=true&w=majority";
         this.client = MongoDB.MongoClient(this.uri, {useNewUrlParser: true, useUnifiedTopology: true});
         this.dbName = "shop";
@@ -18,24 +15,6 @@ export class db {
             console.log( `DB is NOT connected. Error: ${err}`);
             return err;
         });
-
-        if (!Object.values(langs).includes(lang)) {
-            lang = langs.ENG;
-        }
-        this.lang = lang;
-    }
-
-    languageSpecific(items, lang) {
-        if(!Array.isArray(items)){
-            items.description = items.description[lang];
-            items.name = items.name[lang];
-            return items;
-        }
-        return items.map(item => {
-            item.description = item.description[lang];
-            item.name = item.name[lang];
-            return item;
-        });
     }
 
     getAll(collection) {
@@ -45,7 +24,7 @@ export class db {
                 .collection(collection)
                 .find({})
                 .toArray()
-                .then(items => this.languageSpecific(items, this.lang));;
+
         });
     }
 
@@ -56,7 +35,6 @@ export class db {
                 .collection(collection)
                 .find(filter)
                 .toArray()
-                .then(items => this.languageSpecific(items, this.lang));;
         });
     }
 
@@ -69,7 +47,6 @@ export class db {
             return db
                 .collection(collection)
                 .findOne({"_id": MongoDB.ObjectId(id)})
-                .then(items => this.languageSpecific(items, this.lang));;
         });
     }
 
@@ -83,7 +60,7 @@ export class db {
             return db
                 .collection(collection)
                 .find({"_id": {$in: idArray}})
-                .toArray().then(items => this.languageSpecific(items, this.lang));;
+                .toArray();
         });
     }
 
@@ -94,7 +71,7 @@ export class db {
                 .collection(collection)
                 .find({})
                 .limit(Number(amount))
-                .toArray().then(items => this.languageSpecific(items, this.lang));;
+                .toArray();
         });
     }
     
