@@ -7,14 +7,9 @@ import './main.scss';
 
 export class Header extends React.Component {
   render() {
-    const changeLanguage = lng => {
-      i18n.changeLanguage(lng);
-    };
 
     return (
       <header className='header'>
-        <button onClick={() => changeLanguage('ru')}>ru</button>
-        <button onClick={() => changeLanguage('en')}>en</button>
         <Contacts />
         <Navigation />
       </header>

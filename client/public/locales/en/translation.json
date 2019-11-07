@@ -32,5 +32,18 @@
     "join": "join us",
     "live": "live support",
     "banking": "Payment Methods"
+  },
+  "smallCard": {
+    "add": "add to cart"
+  },
+  "currency": "$",
+  "order": "Order Now",
+  "price": "Price",
+  "productChooser": {
+    "quantity": "Choose Quantity",
+    "size": "Choose Size"
+  },
+  "productCard": {
+    "size": "sizes"
   }
 }
