@@ -6,20 +6,25 @@ import { LoadingSpinner } from '../LoadingSpinner/index';
 
 import square1 from '../../assets/square-1.svg';
 import square2 from '../../assets/square-2.svg';
+import {Link} from "react-router-dom";
+import {loadItemSales} from "../../utils/loadItemSales";
 
 export class SaleItem extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       ready: false
     };
-
-    this.loadResources = this.props.loadResources;
   }
 
   componentDidMount() {
-    this.loadResources();
+    loadItemSales().then(result => {
+      this.setState({
+        ready: true,
+        data: result.data.items[0]
+      })
+    });
   }
 
   render() {
@@ -27,8 +32,8 @@ export class SaleItem extends React.Component {
       return (
         <Translation>
           {t =>
-            <a className="sale-item" href="google.com">
-              <div className="sale-item__sale">
+                <Link className="sale-item"  to={`/item/${this.state.data._id}`} style={{ textDecoration: 'none' }}>
+                <div className="sale-item__sale">
                 <img src={square2} className="sale-item__decorator sale-item__decorator_2" alt="" />
                 <img src={square1} className="sale-item__decorator sale-item__decorator_1" alt="" />
                 <div className="sale-item__sale-text-block">
@@ -46,7 +51,7 @@ export class SaleItem extends React.Component {
                 <button className="sale-item__bucket-button"></button>
                 <p className="sale-item__price">{this.state.data.price}<span className="sale-item__price_money-sign">{t('currency')}</span></p>
               </div>
-            </a>
+            </Link>
           }
         </Translation>
       )

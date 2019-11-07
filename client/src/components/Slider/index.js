@@ -5,6 +5,7 @@ import { LoadingSpinner } from '../LoadingSpinner/index';
 import { Buttons } from './Buttons/index.js';
 import { Images } from './Images/index.js';
 import { ContentBlock } from './ContentBlock/index.js';
+import loadSlides from "../../utils/loadSlides";
 
 export class Slider extends React.Component {
   constructor(props) {
@@ -14,24 +15,28 @@ export class Slider extends React.Component {
       previousSlide: 1,
       currentSlide: 1,
       slidesAmount: 3,
-      ready: false
+      ready: false,
+      slideTimes:  this.switchSlideTimer()
     };
 
-    this.loadResources = this.props.loadResources;
-    this.slideTimer = this.switchSlideTimer();
   }
 
   componentDidMount() {
-    this.loadResources(3);
+    loadSlides(3).then(res => {
+      this.setState({
+        ready: true,
+        data: res.data
+      })
+    });
   }
 
   componentWillUnmount() {
-    clearInterval(this.slideTimer);
+    clearInterval(this.state.slideTimer);
   }
 
   switchSlideTimer() {
     return setInterval(() => {
-      const nextSlide = 
+      const nextSlide =
         this.state.currentSlide === this.state.slidesAmount - 1
         ? 0 : this.state.currentSlide + 1;
       this.handleOnClick(nextSlide);
@@ -46,8 +51,8 @@ export class Slider extends React.Component {
       previousSlide: this.state.currentSlide,
       currentSlide: i
     })
-    clearInterval(this.slideTimer);
-    this.slideTimer = this.switchSlideTimer();
+    clearInterval(this.state.slideTimer);
+    this.setState({slideTimer: this.switchSlideTimer()})
   }
 
   render() {

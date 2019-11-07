@@ -18,7 +18,7 @@ export class NewArrivalsBlock extends Component {
             }
           </Translation>
         </div>
-        <ProductCatalog loadResources={this.props.loadResources} />
+        <ProductCatalog/>
       </section>
     );
   }
