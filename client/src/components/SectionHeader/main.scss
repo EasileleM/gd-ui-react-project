@@ -20,6 +20,11 @@ $color-text-secondary: $color-orange;
     &_colored {
       color: $color-text-secondary;
     }
+
+    @media screen and (max-width: $breakpoint-mobile) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   &__description {
