@@ -23,7 +23,7 @@
     &_column-wrap {
       flex-flow: column wrap;
       align-content: space-around;
-      max-height: 100px;
+      max-height: 120px;
       flex-grow: 1;
       padding: 0 150px;
     }
@@ -86,8 +86,12 @@
 
 @media all and (max-width: 1024px) {
   .footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    height: initial;
     &__wrapper_column-wrap {
-    padding: 0 0 0 30px;
+      width: 100%;
+      padding: 0 0 0 30px;
     }
 
     &__copyright {

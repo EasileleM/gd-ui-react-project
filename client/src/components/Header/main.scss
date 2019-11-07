@@ -129,6 +129,7 @@
     background: url(../../assets/logo.png) no-repeat;
     width: 120px;
     height: 40px;
+    cursor: pointer;
   }
 
   &__links {
@@ -211,6 +212,10 @@
     &__search-container {
       order: 1;
       margin-top: 20px;
+    }
+
+    &__icon_big {
+      margin: 0;
     }
   }
 }
