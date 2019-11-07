@@ -4,6 +4,7 @@ import './main.scss';
 
 import star from '../../assets/star.svg';
 import starEmpty from '../../assets/star-empty.svg';
+import {Link} from "react-router-dom";
 
 export class ItemCardSmall extends React.Component {
   createStars(rate, maxRate = 4) {
@@ -26,10 +27,14 @@ export class ItemCardSmall extends React.Component {
   render() {
     return (
       <div className="item-card-small">
-        <img src={this.props.images[0]} alt="item" className="item-card-small__image" />
+        <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
+          <img src={this.props.images[0]} alt="item" className="item-card-small__image" />
+        </Link>
         <div className="item-card-small__devider"></div>
         <div className="item-card-small__info">
-          <h2 className="item-card-small__name">{this.props.name}</h2>
+          <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
+            <h2 className="item-card-small__name">{this.props.name}</h2>
+          </Link>
           <div className="item-card-small__info-dynamic">
             <div className="item-card-small__price-rating-block">
               {this.createStars(this.props.rating)}
