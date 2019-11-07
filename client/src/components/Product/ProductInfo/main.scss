@@ -93,7 +93,6 @@
     @include font-primary-regular-md;
     @media screen and (max-width: $breakpoint-tablet) {
       width: 100%;
-      order: -3;
       max-width: 200px;
     }
 
