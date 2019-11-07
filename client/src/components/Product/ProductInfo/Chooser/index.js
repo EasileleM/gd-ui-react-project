@@ -12,7 +12,7 @@ class Chooser extends Component {
                             <h2 className="chooser__heading_secondary">{t('productChooser.size')}:</h2>
                             <div className="chooser__sizes">
                                 {this.props.sizes.map(size => {
-                                    return <span onClick={() => {
+                                    return <span key={size} onClick={() => {
                                         this.props.handleSize(size)
                                     }} className={`chooser__size-value ${size === this.props.chosenSize ? "chooser__size-value_chosen" : ""}`}>
                                         {size}
