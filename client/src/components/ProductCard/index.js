@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Translation } from 'react-i18next';
-
+import {Link} from 'react-router-dom'
 import { AddToCartButton } from './AddToCartButton/index.js';
 import { AddToFavoriteButton } from './AddToFavoriteButton/index.js';
 import { SizesSelector } from './SizesSelector/index.js';
