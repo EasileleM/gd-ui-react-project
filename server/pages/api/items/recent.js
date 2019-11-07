@@ -8,7 +8,7 @@ const cors = Cors({
 
 const handler = (req, res) => {
     try {
-        const service = new ItemsService();
+        const service = new ItemsService(req.query.lang);
         service.getRecentItems(req.query.size, req.query.page)
             .then(items => {
                 res.statusCode = 200;

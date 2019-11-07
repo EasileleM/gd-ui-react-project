@@ -13,7 +13,7 @@ const handler = (req, res) => {
             res.json("NO ID PROVIDED");
             return;
         }
-        const service = new ItemsService();
+        const service = new ItemsService(req.query.lang);
         const idArray = req.query.id.split(',');
         return service
             .getByIdArray(idArray)

@@ -8,7 +8,7 @@ const cors = Cors({
 
 const handler = (req, res) => {
     try {
-        const service = new ItemsService();
+        const service = new ItemsService(req.query.lang);
         service.getById(req.query.id)
             .then(result => {
                 if (!result) {
