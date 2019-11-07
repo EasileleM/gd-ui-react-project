@@ -24,7 +24,11 @@
     &_secondary {
       @include font-primary-regular-md;
       margin: 0;
+      width: 70%;
       color: $color-limed-spruce;
+      @media screen and (max-width: $breakpoint-smartphone){
+        width: 50%;
+      }
     }
   }
 
