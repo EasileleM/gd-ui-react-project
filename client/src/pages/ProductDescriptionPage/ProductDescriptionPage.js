@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withTranslation } from 'react-i18next';
 import Product from "../../components/Product";
 import "./ProductDescriptionPage.scss"
 
@@ -19,4 +20,4 @@ class ProductDescriptionPage extends Component {
     }
 }
 
-export default ProductDescriptionPage;
+export default withTranslation()(ProductDescriptionPage);
