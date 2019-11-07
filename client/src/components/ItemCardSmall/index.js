@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Translation } from 'react-i18next';
 
 import './main.scss';
 
 import star from '../../assets/star.svg';
 import starEmpty from '../../assets/star-empty.svg';
-import {Link} from "react-router-dom";
 
-export class ItemCardSmall extends React.Component {
+export class ItemCardSmall extends Component {
   createStars(rate, maxRate = 4) {
     const stars = new Array(+rate);
     for (let i = 0; i < Number(rate); i++) {
@@ -26,30 +26,34 @@ export class ItemCardSmall extends React.Component {
 
   render() {
     return (
-      <div className="item-card-small">
-        <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
-          <img src={this.props.images[0]} alt="item" className="item-card-small__image" />
-        </Link>
-        <div className="item-card-small__devider"></div>
-        <div className="item-card-small__info">
-          <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
-            <h2 className="item-card-small__name">{this.props.name}</h2>
-          </Link>
-          <div className="item-card-small__info-dynamic">
-            <div className="item-card-small__price-rating-block">
-              {this.createStars(this.props.rating)}
-              <p className="item-card-small__price">
-                {this.props.price}$
+      <Translation>
+        { t =>
+          <div className="item-card-small">
+              <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
+              <img src={this.props.images[0]} alt="item" className="item-card-small__image" />
+              </Link>
+            <div className="item-card-small__devider"></div>
+            <div className="item-card-small__info">
+                <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
+                <h2 className="item-card-small__name">{this.props.name}</h2>
+                </Link>
+              <div className="item-card-small__info-dynamic">
+                <div className="item-card-small__price-rating-block">
+                  {this.createStars(this.props.rating)}
+                  <p className="item-card-small__price">
+                    {this.props.price + t('currency')}
               </p>
-            </div>
-            <div className="item-card-small__cart">
-              <button className="item-card-small__cart-button">
-                add to cart
+                </div>
+                <div className="item-card-small__cart">
+                  <button className="item-card-small__cart-button">
+                    {t('smallCard.add')}
               </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        }
+      </Translation>
     )
   }
 }
