@@ -16,6 +16,7 @@ export class ChangeLanguageButton extends Component {
     this.setState({
       language: lng
     })
+    document.location.reload();
   };
 
   render() {
