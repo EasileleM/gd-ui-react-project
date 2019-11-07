@@ -26,7 +26,7 @@ export class ProductCatalog extends React.Component {
     this.setState({
       page: this.state.page + 1,
       loading: true
-    })
+    });
     this.loadResources(this.state.page, 4);
   }
 

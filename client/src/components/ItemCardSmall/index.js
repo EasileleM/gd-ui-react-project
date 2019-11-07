@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Translation } from 'react-i18next';
+import {Link} from 'react-router-dom'
 
 import './main.scss';
 
@@ -29,10 +30,14 @@ export class ItemCardSmall extends Component {
       <Translation>
         { t =>
           <div className="item-card-small">
-            <img src={this.props.images[0]} alt="item" className="item-card-small__image" />
+              <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
+              <img src={this.props.images[0]} alt="item" className="item-card-small__image" />
+              </Link>
             <div className="item-card-small__devider"></div>
             <div className="item-card-small__info">
-              <h2 className="item-card-small__name">{this.props.name}</h2>
+                <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
+                <h2 className="item-card-small__name">{this.props.name}</h2>
+                </Link>
               <div className="item-card-small__info-dynamic">
                 <div className="item-card-small__price-rating-block">
                   {this.createStars(this.props.rating)}
