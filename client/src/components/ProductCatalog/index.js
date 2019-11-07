@@ -25,6 +25,8 @@ export class ProductCatalog extends React.Component {
         loading: false,
         nextPage: result.data.nextPage
       })
+    }).catch((error)=>{
+      error.notify();
     });
   }
 
@@ -40,6 +42,8 @@ export class ProductCatalog extends React.Component {
         loading: false,
         nextPage: result.data.nextPage
       })
+    }).catch((error)=>{
+      error.notify();
     });
   }
 
