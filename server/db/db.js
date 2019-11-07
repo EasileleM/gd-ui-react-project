@@ -2,7 +2,7 @@ import MongoDB from "mongodb";
 import filter from "../pages/api/items/filter";
 
 const langs = Object.freeze({
-    ENG: "eng",
+    ENG: "en",
     RU: "ru",
 });
 
