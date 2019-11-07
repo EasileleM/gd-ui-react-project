@@ -37,6 +37,10 @@
   @include font-primary-regular;
   font-size: $font-size-semi-md;
 }
+@mixin font-primary-regular-semi-lg {
+  @include font-primary-regular;
+  font-size: $font-size-semi-lg;
+}
 
 @mixin font-primary-regular-md {
   @include font-primary-regular;

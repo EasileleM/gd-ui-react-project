@@ -1,11 +1,14 @@
 import React from 'react';
 
+import {ChangeLanguageButton} from './ChangeLanguageButton';
+
 import './main.scss';
 
 class Contacts extends React.Component {
   render() {
     return (
       <section className="header__wrapper header__wrapper_page header__wrapper_sm" >
+        <ChangeLanguageButton/>
         <address className="header__wrapper header__wrapper_row">
           <span className="header__text header__text_md header__text_email">
             info@shopy.com

@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.scss';
-
-import {Layout, Home} from './pages/index';
+import Layout from "./pages/Layout/Layout";
 
 function App() {
   return (
     <div className="App">
-      <Layout page={<Home />} />
+      <Layout/>
     </div>
   );
 }
