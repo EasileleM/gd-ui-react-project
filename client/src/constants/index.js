@@ -1,1 +1,1 @@
-export const SERVER_URL = "https://gd-ui-react-project-server.herokuapp.com";
+export const SERVER_URL = "http://localhost:3000";
