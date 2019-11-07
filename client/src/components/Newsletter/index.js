@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Translation } from 'react-i18next';
+
 import icon from "../../assets/Mail_Ico_.png";
 
 import "./main.scss";
