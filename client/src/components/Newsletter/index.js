@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import icon from "../../assets/Mail_Ico_.png";
 
 import "./main.scss";
@@ -15,7 +15,7 @@ export class Newsletter extends Component {
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({ value: event.target.value });
     }
 
     handleSubmit(event) {
@@ -30,21 +30,21 @@ export class Newsletter extends Component {
 
     render() {
         return (
-            < div className="Newsletter">
+            <div className="Newsletter">
                 <div className="Newsletter__text">
                     <h2 className="Newsletter__heading">NEWS LETTER</h2>
                     <p className="Newsletter__paragraph">join us now to get all news and special offers</p>
                 </div>
 
                 <form className="Newsletter__form"
-                      onSubmit={this.handleSubmit}>
+                        onSubmit={this.handleSubmit}>
                     <picture>
-                        <img src={icon} alt="icon of an envelope"/>
+                        <img src={icon} alt="icon of an envelope" />
                     </picture>
                     <input name="email" type="email" className="Newsletter__input" value={this.state.value}
-                           onChange={this.handleChange}
-                           placeholder="type your email here"/>
-                    <input type="submit" className="Newsletter__button" value="join us"/>
+                        onChange={this.handleChange}
+                        placeholder="type your email here" />
+                    <input type="submit" className="Newsletter__button" value="join us" />
                 </form>
             </div>
         );
