@@ -1,17 +1,29 @@
+@import '../../style/main.scss';
+
 .change-language-button {
   border: 0;
   margin: 0;
   padding: 0;
+  padding-right: 10px;
   background-color: transparent;
   cursor: pointer;
   transition: 200ms ease;
+  border-right: 1px solid $color-athens-gray;
+  @include font-primary-regular-xs;
 
   &:hover {
-    opacity: 0.2;
+    color: $color-orange;
   }
 
   &:focus {
     outline: 0;
-    opacity: 0.7;
+    color: $color-orange;
+  }
+}
+
+@media all and (max-width: $breakpoint-smartphone) {
+  .change-language-button {
+    padding-left: 5px;
+    padding-right: 9px;
   }
 }

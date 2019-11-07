@@ -38,7 +38,7 @@
 
     &_page {
       align-items: center;
-      border-bottom: 1px solid rgba($color: #e6e8e6, $alpha: 0.5);  
+      border-bottom: 1px solid rgba($color: $color-athens-gray, $alpha: 0.5);  
     }
 
     &_sm {
@@ -53,7 +53,7 @@
   &__text {
     font-family: $font-primary;
     font-style: normal;
-    padding-right: 20px;
+    padding: 0 10px;
 
     &_md {
       font-size: $font-size-xs;
@@ -66,7 +66,7 @@
       width: 18px;
       height: 12px;
       margin-bottom: -2px;
-      margin-right: 10px; 
+      margin-right: 10px;
     }
 
     &_phone::before {
@@ -230,14 +230,13 @@
       }
     }
 
-    &__text {
-      margin-bottom: 10px;
-    }
-
     &__icon {
       margin: 0;
       margin-top: 10px;
       background-position: center;
+      &_big {
+        margin: 0;
+      }
 
       &_search {
         margin: 0;
@@ -267,11 +266,6 @@
     &__menu-button {
       display: block;
       order: 1;
-
-      &::after {
-        content: attr(data-closed);
-        margin-right: -2px;
-      }
     }
 
     &__burger-menu {
