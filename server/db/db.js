@@ -10,7 +10,7 @@ export class db {
     constructor(lang = langs.ENG) {
         this.uri = process.env.MONGODB_URI || "mongodb+srv://admin:qwerty123456789@react-vptyr.mongodb.net/test?retryWrites=true&w=majority";
         this.client = MongoDB.MongoClient(this.uri, {useNewUrlParser: true, useUnifiedTopology: true});
-        this.dbName = "items_test";
+        this.dbName = "shop";
         this.dbConnection = this.client.connect().then(res => {
             console.log(`DB is connected! Yay!`);
             return res;
