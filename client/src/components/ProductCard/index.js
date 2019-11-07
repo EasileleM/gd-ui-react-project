@@ -49,7 +49,7 @@ export class ProductCard extends Component {
                 </div>
               </div>
               <div className='product-card__back'>
-                <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
+                <Link to={`/item/${this.props.product._id}`} style={{ textDecoration: 'none' }}>
                   <img src={this.props.product.images[0]} alt={this.props.product.name} className='product-card__image product-card__image_back' />
                   <div className='product-card__name product-card__name_back'>
                     {this.props.product.name}
