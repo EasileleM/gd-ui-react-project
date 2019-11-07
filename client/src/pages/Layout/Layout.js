@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
-import {Header} from "../../components/Header";
+import React, { Component, Suspense } from 'react';
+import { Header } from "../../components/Header";
 import Home from "../Home/Home";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
-import {Footer} from "../../components/Footer";
+import { Footer } from "../../components/Footer";
+import { LoadingSpinner } from '../../components//LoadingSpinner/index';
 import {
     BrowserRouter as Router,
     Route,
@@ -14,13 +15,15 @@ class Layout extends Component {
     render() {
         return (
             <Router>
-                <Header/>
-                <Switch>
-                    <Route path="/" exact component={Home}/>
-                    <Route path="/item/:id" component={ProductDescriptionPage}/>
-                    <Redirect to="/"/>
-                </Switch>
-                <Footer/>
+                <Suspense fallback={<LoadingSpinner />}>
+                    <Header />
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <Route path="/item/:id" component={ProductDescriptionPage} />
+                        <Redirect to="/" />
+                    </Switch>
+                    <Footer />
+                </Suspense>
             </Router>
         );
     }
