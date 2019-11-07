@@ -3,34 +3,22 @@ import React from 'react';
 import './main.scss';
 
 export class ColorSelector extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedOption: props.colors[0] || null
-    };
-  }
-
-  handleOptionChange = changeEvent => {
-    this.setState({
-      selectedOption: changeEvent.target.value
-    });
-  };
 
   render() {
     const colorVariants = this.props.colors.map((color) =>
       <label key={color}
         style={{
           backgroundColor: color,
-          height: this.state.selectedOption === color ? 17 : null,
-          width: this.state.selectedOption === color ? 17 : null
+          height: this.props.selectedOption === color ? 17 : null,
+          width: this.props.selectedOption === color ? 17 : null
         }}
         className="color-selector__container">
 
         <input type="radio"
           name="color"
           value={color}
-          checked={this.state.selectedOption === color}
-          onChange={this.handleOptionChange}
+          checked={this.props.selectedOption === color}
+          onChange={(e) => this.props.handleOptionChange(e)}
           className="color-selector__button"
         />
       </label>

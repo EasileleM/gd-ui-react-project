@@ -29,14 +29,14 @@ export class ProductCatalog extends React.Component {
     if (this.state.ready && this.state.nextPage) {
       return (
         <div className='product-catalog'>
-          <ProductsContainer products={this.state.cards} />
+          <ProductsContainer addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} products={this.state.cards} />
           <ShowMoreButton onClick={() => this.handleOnClick()} />
         </div>
       );
     } else if (this.state.ready && !this.state.nextPage) {
       return (
         <div className='product-catalog'>
-          <ProductsContainer products={this.state.cards} />
+          <ProductsContainer addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} products={this.state.cards} />
         </div>
       );
     }

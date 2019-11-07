@@ -24,10 +24,10 @@ export class SaleItem extends React.Component {
   render() {
     if (this.state.ready) {
       return (
-        <a className="sale-item" href="google.com">
+        <div className="sale-item">
           <div className="sale-item__sale">
-            <img src={square2} className="sale-item__decorator sale-item__decorator_2" alt="" />
-            <img src={square1} className="sale-item__decorator sale-item__decorator_1" alt="" />
+            <img src={square2} className="sale-item__decorator sale-item__decorator_2" alt="square" />
+            <img src={square1} className="sale-item__decorator sale-item__decorator_1" alt="square" />
             <div className="sale-item__sale-text-block">
               <p className="sale-item__sale-label">Sale</p>
               <p className="sale-item__sale-size">{this.state.data.sale + '%'}</p>
@@ -40,10 +40,16 @@ export class SaleItem extends React.Component {
             </p>
           </div>
           <div className="sale-item__purchase-info">
-            <button className="sale-item__bucket-button"></button>
+            <button
+              onClick={() => {
+                this.props.addToCard(this.state.data, this.state.data.sizes[0], this.state.data.colors[0])
+                }
+              }
+              className="sale-item__bucket-button"
+            />
             <p className="sale-item__price">{this.state.data.price}<span className="sale-item__price_money-sign">$</span></p>
           </div>
-        </a>
+        </div>
       )
     }
 

@@ -6,7 +6,7 @@ import {Layout, Home} from './pages/index';
 function App() {
   return (
     <div className="App">
-      <Layout page={<Home />} />
+      <Layout page={Home} />
     </div>
   );
 }

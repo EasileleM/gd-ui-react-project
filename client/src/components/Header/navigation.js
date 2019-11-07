@@ -36,7 +36,7 @@ class Navigation extends React.Component {
             </label>
           </form>
           <User />
-          <ShopCart />
+          <ShopCart cartSize={this.props.cartSize} handleOnClickOpenCart={() => this.props.handleOnClickOpenCart()}/>
         </nav>
       </section>
     );
