@@ -1,20 +1,26 @@
-import { db } from "../db/db";
+import {db} from "../db/db";
+
+
 
 class ItemsService {
-    constructor() {
-        this.dbInstance = new db();
+    constructor(lang) {
+        this.dbInstance = new db(lang);
+    }
+
+    filter(filter) {
+        return this.dbInstance.filter("items", filter);
     }
 
     getAllItems() {
-        return this.dbInstance.getAll("items");
+        return this.dbInstance.getAll("items")
     }
 
     getById(id) {
-        return this.dbInstance.getById("items", id);
+        return this.dbInstance.getById("items", id)
     }
 
     getByIdArray(id) {
-        return this.dbInstance.getByIdArray("items", id);
+        return this.dbInstance.getByIdArray("items", id)
     }
 
     getRecentItems(size = 4, page = 1) {
@@ -44,7 +50,7 @@ class ItemsService {
                     return Promise.reject(new Error("NOT FOUND"));
                 }
                 target = item;
-                return this.dbInstance.getAll("items");
+                return this.dbInstance.getAll("items")
             })
             .then(items => {
                 const alreadySorted = new Set();

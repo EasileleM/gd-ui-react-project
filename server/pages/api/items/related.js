@@ -13,7 +13,7 @@ const handler = (req, res) => {
             res.json("NO ID PROVIDED");
             return;
         }
-        const service = new ItemsService();
+        const service = new ItemsService(req.query.lang);
         service.getRelatedItems(req.query.id, req.query.size, req.query.page)
             .then(items => {
                 res.statusCode = 200;
