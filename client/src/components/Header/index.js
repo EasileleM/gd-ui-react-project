@@ -9,7 +9,7 @@ export class Header extends React.Component {
     return (
       <header className='header'>
         <Contacts />
-        <Navigation />
+        <Navigation cartSize={this.props.cartSize} handleOnClickOpenCart={() => this.props.handleOnClickOpenCart()}/>
       </header>
     );
   }

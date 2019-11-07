@@ -2,11 +2,9 @@ import React from 'react';
 
 import './main.scss';
 
-export class AddToCartButton extends React.Component {
-  render() {
+export function AddToCartButton(props){
     return (
-      <button className='add-to-cart-button'>
+      <button onClick={() => props.handleOnClickAddToCard(props.product, props.size, props.color)} className='add-to-cart-button'>
       </button>
     );
-  }
 }

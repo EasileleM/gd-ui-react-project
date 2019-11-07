@@ -26,8 +26,8 @@ export class ProductSmallContainer extends Component {
   render() {
     if (this.state.ready) {
       const smallCards = this.state.cards.map((card) => {
-        return <ItemCardSmall key={card._id} id={card._id} name={card.name} price={card.price} images={card.images} rating={card.rating}/>
-      }).slice(0,3);
+        return <ItemCardSmall addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}  item={card}/>
+      }).slice(0,3)
       return (
         <div className='product-small-container'>
           {smallCards}

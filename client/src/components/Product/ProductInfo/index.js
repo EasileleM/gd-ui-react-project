@@ -17,7 +17,7 @@ class ProductInfo extends Component {
                 sizes: props.item.sizes,
                 price: props.item.price
             },
-            chosenSize: null,
+            chosenSize: props.item.sizes[0],
             chosenQuantity: 1,
         };
 

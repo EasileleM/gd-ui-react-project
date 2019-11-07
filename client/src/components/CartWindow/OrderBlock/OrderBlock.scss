@@ -1,0 +1,43 @@
+@import "../../../style/main.scss";
+
+.card-window__order {
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background: #ff5912;
+  box-shadow: 0px 2px 17px 0px rgba(0,0,0,0.75);
+
+  &-price{
+    color: #ffffff;
+    &-wrapper {
+      @include font-primary-bold-md;
+      margin: 0;
+      margin-left: 40px;
+      color: #3c4751;
+    }
+  }
+
+  &-button {
+    @include font-primary-bold-md;
+    transition: 200ms ease;
+    margin-right: 40px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    cursor: pointer;
+    outline: 0;
+    color: #3c4751;
+    line-height: 20px;
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    &:focus {
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+  }
+}

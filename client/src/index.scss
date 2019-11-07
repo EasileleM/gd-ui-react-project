@@ -2,3 +2,13 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.scroll-disabled {
+  height: 100%;
+  overflow: hidden;
+}
+
+.scroll-enabled {
+  height: auto;
+  overflow: auto;
+}
