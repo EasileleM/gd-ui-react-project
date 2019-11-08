@@ -5,6 +5,7 @@ import User from './user';
 import ShopCart from './cart';
 
 import './main.scss';
+import {Link} from "react-router-dom";
 
 class Navigation extends Component {
   render() {
@@ -12,15 +13,17 @@ class Navigation extends Component {
       <Translation>
         {
           t =>
-            <section className="header__wrapper header__wrapper_page header__wrapper_lg header__wrapper_column">
+            <section id="header" className="header__wrapper header__wrapper_page header__wrapper_lg header__wrapper_column">
+              <Link className="header__burger-menu header__text header__links-item header__text_lg header__links-item_active" to="/">
               <div className="header__logo">
               </div>
+              </Link>
               <input type="checkbox" id="headerMenuData" className="header__menu-data-input"></input>
               <nav className="header__links-container">
                 <label onclick="" class="header__menu-button" htmlFor="headerMenuData" data-opened="⨯" data-closed="≡"></label>
-                <a className="header__burger-menu header__text header__links-item header__text_lg header__links-item_active" href="google.com">
+                <Link className="header__burger-menu header__text header__links-item header__text_lg header__links-item_active" to="/">
                   {t('navigation.home')}
-                </a>
+                </Link>
                 <a className="header__burger-menu header__text header__links-item header__text_lg" href="google.com">
                   {t('navigation.products')}
                 </a>

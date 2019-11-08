@@ -26,6 +26,11 @@
     color: $color-orange;
     margin: 0;
 
+    @media screen and (max-width: $breakpoint-smartphone){
+      width: 50%;
+      overflow-wrap: break-word;
+    }
+
     &_secondary {
       @include font-primary-regular-md;
       margin: 0;

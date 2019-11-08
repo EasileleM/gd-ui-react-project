@@ -16,6 +16,7 @@ import { loadIdArray } from '../../utils/loadIdArray';
 import interceptor from '../../utils/interceptorResponse';
 
 import { changeBodyScrollState } from '../../utils/changeBodyScrollState';
+import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
 
 class Layout extends Component {
     constructor(props) {
@@ -131,6 +132,7 @@ class Layout extends Component {
         changeBodyScrollState(this.state.cartOpened);
         return (
             <Router>
+                <ScrollToTop>
                 <Suspense fallback={<div className="spinner-wrapper"><LoadingSpinner /></div>}>
                     {
                         this.state.cartOpened &&
@@ -150,6 +152,7 @@ class Layout extends Component {
                     </Switch>
                     <Footer />
                 </Suspense>
+                </ScrollToTop>
             </Router>
         );
     }
