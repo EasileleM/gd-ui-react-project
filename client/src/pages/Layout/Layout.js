@@ -4,6 +4,7 @@ import Home from "../Home/Home";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
 import { Footer } from "../../components/Footer";
 import { LoadingSpinner } from '../../components//LoadingSpinner/index';
+import "./Layout.scss";
 import {
     BrowserRouter as Router,
     Route,
@@ -129,7 +130,7 @@ class Layout extends Component {
         changeBodyScrollState(this.state.cartOpened);
         return (
             <Router>
-                <Suspense fallback={<LoadingSpinner />}>
+                <Suspense fallback={<div className="spinner-wrapper"><LoadingSpinner /></div>}>
                     {
                         this.state.cartOpened &&
                         <CartWindow
