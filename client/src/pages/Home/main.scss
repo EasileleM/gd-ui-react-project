@@ -1,0 +1,21 @@
+@import '../../style/main';
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $color-athens-gray;
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-width: 1270px;
+    padding: 0 50px;
+    width: 100%;
+
+    @media screen and (max-width: 800px){
+      padding: 0 20px;
+    }
+  }
+}
