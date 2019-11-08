@@ -77,9 +77,10 @@ class ItemsService {
                 const brandRelated = items.filter((item) => {
                     return item.brand === target.brand && alreadySorted.add(item._id);
                 });
+                console.log(alreadySorted);
                 const categoryRelated = items
                     .filter((item) => {
-                        if (!alreadySorted.has(item._id)) {
+                        if (alreadySorted.has(item._id)) {
                             return false;
                         }
                         for (const category of target.categories) {
