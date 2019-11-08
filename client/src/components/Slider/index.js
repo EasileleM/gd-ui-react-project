@@ -27,6 +27,8 @@ export class Slider extends React.Component {
         ready: true,
         data: res.data
       })
+    }).catch((error) => {
+      error.notify();
     });
   }
 

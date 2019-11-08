@@ -15,13 +15,15 @@ export class ProductCatalogRow extends React.Component {
     };
   }
 
-  async componentDidMount() {
+ componentDidMount() {
     loadRelated(this.props.id).then(result => {
       this.setState({
         ready: true,
         cards: [...result.data.items],
         loading: false,
       })
+    }).catch((error)=>{
+      error.notify();
     });
   }
 

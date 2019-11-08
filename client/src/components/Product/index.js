@@ -21,7 +21,9 @@ class Product extends Component {
                 item: res.data,
                 ready: true,
             })
-        })
+        }).catch((error)=> {
+            error.notify();
+        });
     }
 
 
