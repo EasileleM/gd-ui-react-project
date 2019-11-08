@@ -40,6 +40,22 @@ class ProductInfo extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.item !== prevProps.item) {
+            this.setState({
+                itemInfo: {
+                    title: this.props.item.name,
+                    bundleInfo: this.props.item.bundleInfo,
+                    description: this.props.item.description,
+                    sizes: this.props.item.sizes,
+                    price: this.props.item.price
+                },
+                chosenSize: this.props.item.sizes[0],
+                chosenQuantity: 1,
+            })
+        }
+    }
+
     render() {
         return (
             <Translation>
