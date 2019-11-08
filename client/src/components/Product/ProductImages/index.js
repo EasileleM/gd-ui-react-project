@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import "./main.scss"
 
 
-
 class ProductImages extends Component {
     constructor(props) {
         super(props);
@@ -19,6 +18,15 @@ class ProductImages extends Component {
             return;
         }
         this.setState({currentIndex: index});
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.images !== prevProps.images) {
+            this.setState({
+                images: this.props.images,
+                currentIndex: 0,
+            })
+        }
     }
 
     render() {
