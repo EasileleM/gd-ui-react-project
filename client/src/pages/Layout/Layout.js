@@ -34,10 +34,7 @@ class Layout extends Component {
     }
 
     updateCartItemAmount(id, amount) {
-        if (!this.validLocalStorage()) {
-            this.setState({ cartItems: [] });
-            return;
-        }
+        this.updateCart();
         const cartArrayCopy = this.state.cartItems.slice();
         const item = this.state.cartItems.find((item) => item.item._id === id);
         if (item.amount === amount) {
@@ -51,20 +48,30 @@ class Layout extends Component {
     }
 
     deleteCartItemAmount(id) {
-        if (!this.validLocalStorage()) {
-            this.setState({ cartItems: [] });
-            return;
-        }
+        this.updateCart();
         const item = this.state.cartItems.find((item) => item.item._id === id);
         const cartArrayCopy = this.state.cartItems.slice();
         cartArrayCopy.splice(cartArrayCopy.indexOf(item), 1);
         if (!cartArrayCopy.length) {
-            this.changeCartState();
+            this.openCloseCart();
         }
         this.setState({ cartItems: cartArrayCopy, cartSize: this.state.cartSize - 1 });
         const storage = JSON.parse(localStorage.getItem('productCart'));
         delete storage[id];
         localStorage.setItem('productCart', JSON.stringify(storage));
+    }
+
+    updateCart() {
+        if (!this.validLocalStorage()) {
+            this.setState({ cartItems: [] , cartSize: 0, cartOpened: false});
+            return false;
+        }
+        const storage = JSON.parse(localStorage.getItem('productCart'));
+        const cartArrayCopy = this.state.cartItems
+            .slice()
+            .filter((item) => storage[item.item._id]);
+        this.setState({ cartItems: cartArrayCopy });
+        return true;
     }
 
     validLocalStorage() {
@@ -105,11 +112,13 @@ class Layout extends Component {
         this.setState({ cartItems: filteredData, cartReady: true, cartSize: storage.length });
     }
 
-    changeCartState() {
+    openCloseCart() {
         if (!this.state.cartReady || !this.state.cartSize) {
             return;
         }
-        this.setState({ cartOpened: !this.state.cartOpened });
+        if (this.updateCart()) {
+            this.setState({ cartOpened: !this.state.cartOpened });
+        }
     }
 
     addToCard(item, size, color, amount = 1) {
@@ -117,7 +126,7 @@ class Layout extends Component {
             return;
         }
         let cardItemsArray = this.state.cartItems;
-        if (!this.validLocalStorage()) {
+        if (!this.updateCart()) {
             cardItemsArray = [];
         }
         const storage = JSON.parse(localStorage.getItem('productCart'));
@@ -126,8 +135,9 @@ class Layout extends Component {
         }
         storage[item._id] = { size, color, amount };
         localStorage.setItem('productCart', JSON.stringify(storage));
-        this.setState({ cartItems: [...cardItemsArray, { item, size, color, amount }], cartSize: this.state.cartSize + 1 });
+        this.setState({ cartItems: [...cardItemsArray, { item, size, color, amount }], cartSize: cardItemsArray.length + 1 });
     }
+
     render() {
         changeBodyScrollState(this.state.cartOpened);
         return (
@@ -139,15 +149,15 @@ class Layout extends Component {
                         <CartWindow
                             size={this.state.cartSize}
                             data={this.state.cartItems}
-                            handleOnClickClose={() => this.changeCartState()}
+                            handleOnClickClose={() => this.openCloseCart()}
                             itemAmountChange={(id, amount) => this.updateCartItemAmount(id, amount)}
                             deleteItem={(id) => this.deleteCartItemAmount(id)}
                         />
                     }
-                    <Header cartSize={this.state.cartSize} handleOnClickOpenCart={() => this.changeCartState()}/>
+                    <Header cartSize={this.state.cartSize} handleOnClickOpenCart={() => this.openCloseCart()} />
                     <Switch>
-                        <Route path="/" exact render={() => <Home addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)}/>} />
-                        <Route path="/item/:id" render={(props) => <ProductDescriptionPage {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)}/>} />
+                        <Route path="/" exact render={(props) => <Home {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)} />} />
+                        <Route path="/item/:id" render={(props) => <ProductDescriptionPage {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)} />} />
                         <Redirect to="/" />
                     </Switch>
                     <Footer />
