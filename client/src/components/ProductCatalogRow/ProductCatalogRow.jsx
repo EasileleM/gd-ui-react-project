@@ -31,7 +31,7 @@ export class ProductCatalogRow extends React.Component {
     if (this.state.ready) {
       return (
         <div className='product-catalog-row'>
-          <ProductsContainer products={this.state.cards} />
+          <ProductsContainer  addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} products={this.state.cards} />
         </div>
       );
     }

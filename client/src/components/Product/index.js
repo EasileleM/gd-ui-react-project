@@ -21,9 +21,18 @@ class Product extends Component {
                 item: res.data,
                 ready: true,
             })
-        }).catch((error)=> {
-            error.notify();
-        });
+        })
+    }
+
+     componentDidUpdate(prevProps) {
+        if (this.props.id !== prevProps.id) {
+            loadItem(this.props.id).then(res => {
+                this.setState({
+                    item: res.data,
+                    ready: true,
+                })
+            })
+        }
     }
 
 
@@ -40,7 +49,7 @@ class Product extends Component {
                 <div className="product">
                     <ProductImages
                         images={this.state.item.images}/>
-                    <ProductInfo item={this.state.item}/>
+                    <ProductInfo addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} item={this.state.item}/>
                 </div>
             );
         }

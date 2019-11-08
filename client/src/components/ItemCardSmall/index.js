@@ -30,7 +30,6 @@ export class ItemCardSmall extends Component {
       <Translation>
         {t =>
           <div className="item-card-small">
-            {console.log(this.props.item)}
             <Link to={`/item/${this.props.item._id}`} style={{ textDecoration: 'none' }}>
               <img src={this.props.item.images[0]} alt="item" className="item-card-small__image" />
             </Link>

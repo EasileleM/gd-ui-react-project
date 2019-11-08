@@ -5,7 +5,7 @@ import User from './user';
 import ShopCart from './cart';
 
 import './main.scss';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Navigation extends Component {
   render() {
@@ -14,13 +14,12 @@ class Navigation extends Component {
         {
           t =>
             <section id="header" className="header__wrapper header__wrapper_page header__wrapper_lg header__wrapper_column">
-              <Link className="header__burger-menu header__text header__links-item header__text_lg header__links-item_active" to="/">
-              <div className="header__logo">
-              </div>
+              <Link className="header__logo" to="/">
+                
               </Link>
               <input type="checkbox" id="headerMenuData" className="header__menu-data-input"></input>
               <nav className="header__links-container">
-                <label onclick="" class="header__menu-button" htmlFor="headerMenuData" data-opened="⨯" data-closed="≡"></label>
+                <label className="header__menu-button" htmlFor="headerMenuData" data-opened="⨯" data-closed="≡"></label>
                 <Link className="header__burger-menu header__text header__links-item header__text_lg header__links-item_active" to="/">
                   {t('navigation.home')}
                 </Link>

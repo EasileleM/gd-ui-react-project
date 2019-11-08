@@ -40,6 +40,22 @@ class ProductInfo extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.item !== prevProps.item) {
+            this.setState({
+                itemInfo: {
+                    title: this.props.item.name,
+                    bundleInfo: this.props.item.bundleInfo,
+                    description: this.props.item.description,
+                    sizes: this.props.item.sizes,
+                    price: this.props.item.price
+                },
+                chosenSize: this.props.item.sizes[0],
+                chosenQuantity: 1,
+            })
+        }
+    }
+
     render() {
         return (
             <Translation>
@@ -59,7 +75,7 @@ class ProductInfo extends Component {
                             <h3 className="product-info__price">{t('price')}: {this.state.itemInfo.price * this.state.chosenQuantity + t('currency')}</h3>
                             <div className="product-info__order-buttons">
                                 <img className="product-info__button-icon" src={shareIcon} alt="Share icon"/>
-                                <img className="product-info__button-icon" src={cartIcon} alt="Add to cart icon"/>
+                                <img onClick={() => this.props.addToCard(this.props.item, this.state.chosenSize, this.props.item.colors[0], this.state.chosenQuantity)} className="product-info__button-icon" src={cartIcon} alt="Add to cart icon"/>
                                 <img className="product-info__button-icon" src={likeIcon} alt="Add to favorites icon"/>
                                 <button className="product-info__order-now-button">{t('order')}</button>
                             </div>
