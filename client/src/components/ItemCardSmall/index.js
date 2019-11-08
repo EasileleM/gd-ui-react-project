@@ -30,13 +30,14 @@ export class ItemCardSmall extends Component {
       <Translation>
         {t =>
           <div className="item-card-small">
-            <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
+            {console.log(this.props.item)}
+            <Link to={`/item/${this.props.item._id}`} style={{ textDecoration: 'none' }}>
               <img src={this.props.item.images[0]} alt="item" className="item-card-small__image" />
             </Link>
             <div className="item-card-small__devider"></div>
             <div className="item-card-small__info">
-              <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
-                <h2 className="item-card-small__name">{this.props.item.name}</h2>
+              <Link to={`/item/${this.props.item._id}`} style={{ textDecoration: 'none' }}>
+              <h2 className="item-card-small__name">{this.props.item.name}</h2>
               </Link>
               <div className="item-card-small__info-dynamic">
                 <div className="item-card-small__price-rating-block">
