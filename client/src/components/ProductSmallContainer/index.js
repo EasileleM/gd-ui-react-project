@@ -19,6 +19,8 @@ export class ProductSmallContainer extends Component {
         loading: false,
         nextPage: result.data.nextPage
       })
+    }).catch((error)=>{
+      error.notify();
     });
   }
 

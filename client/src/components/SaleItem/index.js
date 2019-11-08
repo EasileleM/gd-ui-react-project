@@ -24,6 +24,8 @@ export class SaleItem extends React.Component {
         ready: true,
         data: result.data.items[0]
       })
+    }).catch((error)=>{
+      error.notify();
     });
   }
 
