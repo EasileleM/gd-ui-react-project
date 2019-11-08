@@ -1,20 +1,25 @@
 import React, {Component} from 'react';
 import Product from "../../components/Product";
-import "./ProductDescriptionPage.scss"
-import loadItem from "./../../utils/loadItem_new"
+import {RelatedProductsBlock} from "../../components/RelatedProductsBlock/RelatedProductsBlock";
+import {Newsletter} from "../../components/Newsletter";
+
+import "./ProductDescriptionPage.scss";
 
 class ProductDescriptionPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            ready: false,
-        }
-    }
-
     render() {
         return (
-            <div class="main__content">
-                <Product id={this.props.match.params.id}/>
+            <div>
+                <div className="wrapper">
+                    <div className="container">
+                        <Product id={this.props.match.params.id}/>
+                    </div>
+                </div>
+                <div className="wrapper wrapper_secondary-color">
+                    <div className="container">
+                        <RelatedProductsBlock id={this.props.match.params.id}/>
+                        <Newsletter/>
+                    </div>
+                </div>
             </div>
         );
     }

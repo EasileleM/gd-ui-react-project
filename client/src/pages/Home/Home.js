@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Slider} from "../../components/Slider";
-import {loadCard, loadItem, loadSlides, sendEmail} from "../../utils";
 import {NewArrivalsBlock} from "../../components/NewArrivalsBlock";
 import {SpecialOfferSection} from "../../components/SpecialOfferSection";
 import {BestSalesBlock} from "../../components/BestSalesBlock";
@@ -11,12 +10,12 @@ class Home extends Component {
     render() {
         return (
             <main className="main">
-                <Slider loadResources={loadSlides}/>
+                <Slider />
                 <div className="main__content">
-                    <NewArrivalsBlock loadResources={loadCard}/>
-                    <SpecialOfferSection loadResources={loadItem}/>
-                    <BestSalesBlock loadResources={loadCard}/>
-                    <Newsletter sendData={sendEmail}/>
+                    <NewArrivalsBlock addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}/>
+                    <SpecialOfferSection addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}/>
+                    <BestSalesBlock addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}/>
+                    <Newsletter />
                 </div>
             </main>
         );

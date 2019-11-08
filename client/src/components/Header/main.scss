@@ -121,8 +121,35 @@
     }
 
     &_cart {
+      margin-left: 0;
+      border: 0;
+      width: 28px;
+      padding: 0;
+      background-color: transparent;
       background: url(../../assets/Cart_Ico.png) no-repeat right;
+      background-position: center;
     }
+  }
+
+  &__cart-counter {
+    @include font-primary-light-xxs;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    background-color: $color-limed-spruce;
+    color: $color-white;
+  }
+
+  &__icon-cart-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30px;
+    text-align: center;
   }
 
   &__logo {

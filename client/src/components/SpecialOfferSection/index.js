@@ -7,7 +7,7 @@ export function SpecialOfferSection(props) {
     return (
       <div className="section">
         <div className="section__content">
-          <SaleItem loadResources={props.loadResources} />
+          <SaleItem addToCard={(item, size, color, amount) => props.addToCard(item, size, color, amount)}  loadResources={props.loadResources} />
           <AdsBlock />
         </div>
       </div>

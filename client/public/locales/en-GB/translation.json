@@ -45,5 +45,10 @@
   },
   "productCard": {
     "size": "sizes"
+  },
+  "relatedProducts": {
+    "related": "Related",
+    "products": "Products",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
   }
 }

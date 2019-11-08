@@ -7,8 +7,8 @@ import './main.scss';
 export class ProductsContainer extends React.Component {
   render() {
     const products = this.props.products.map(product => {
-      return <ProductCard key={product._id} id={product._id} name={product.name} price={product.price} image={product.images[0]} sizes={product.sizes} colors={product.colors}/>
-    });
+      return <ProductCard addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} product={product}/>
+    })
     return (
       <div className='products-container'>
         {products}

@@ -41,8 +41,8 @@ class Navigation extends Component {
                   <label className="header__icon header__icon_search" tabIndex="5" htmlFor="search-button">
                   </label>
                 </form>
-                <User/>
-                <ShopCart/>
+                <User />
+                <ShopCart cartSize={this.props.cartSize} handleOnClickOpenCart={() => this.props.handleOnClickOpenCart()} />
               </nav>
             </section>
         }

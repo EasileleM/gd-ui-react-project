@@ -5,8 +5,11 @@ import './main.scss';
 class ShopCart extends React.Component {
   render() {
     return (
-      <a className="header__icon header__icon_big header__icon_cart" href="google.com">
-      </a>
+      <div className="header__icon-cart-wrapper">
+        <p className="header__cart-counter">{this.props.cartSize}</p>
+        <button onClick={() => this.props.handleOnClickOpenCart()} className="header__icon header__icon_big header__icon_cart">
+        </button>
+      </div>
     );
   }
 }

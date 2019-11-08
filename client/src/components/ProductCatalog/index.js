@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ShowMoreButton } from './ShowMoreButton/index.js';
 import { ProductsContainer } from '../ProductsContainer/index.js'
-
+import loadCard from "../../utils/loadCard";
 import './main.scss';
 
 export class ProductCatalog extends React.Component {
@@ -15,11 +15,17 @@ export class ProductCatalog extends React.Component {
       loading: true,
       nextPage: true
     };
-    this.loadResources = this.props.loadResources;
   }
 
   componentDidMount() {
-    this.loadResources(1, 4);
+    loadCard(1, 4).then(result => {
+      this.setState({
+        ready: true,
+        cards: [...this.state.cards, ...result.data.items],
+        loading: false,
+        nextPage: result.data.nextPage
+      })
+    });
   }
 
   handleOnClick() {
@@ -27,21 +33,28 @@ export class ProductCatalog extends React.Component {
       page: this.state.page + 1,
       loading: true
     });
-    this.loadResources(this.state.page, 4);
+    loadCard(this.state.page, 4).then(result => {
+      this.setState({
+        ready: true,
+        cards: [...this.state.cards, ...result.data.items],
+        loading: false,
+        nextPage: result.data.nextPage
+      })
+    });
   }
 
   render() {
     if (this.state.ready && this.state.nextPage) {
       return (
         <div className='product-catalog'>
-          <ProductsContainer products={this.state.cards} />
+          <ProductsContainer addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} products={this.state.cards} />
           <ShowMoreButton loading={this.state.loading} onClick={() => this.handleOnClick()} />
         </div>
       );
     } else if (this.state.ready && !this.state.nextPage) {
       return (
         <div className='product-catalog'>
-          <ProductsContainer products={this.state.cards} />
+          <ProductsContainer addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} products={this.state.cards} />
         </div>
       );
     }

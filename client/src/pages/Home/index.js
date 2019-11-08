@@ -4,15 +4,15 @@ import { Slider, NewArrivalsBlock, SpecialOfferSection, BestSalesBlock, Newslett
 import './main.scss';
 
 
-export function Home() {
+export function Home(props) {
   return (
     <main className="main">
       <Slider loadResources={loadSlides} />
       <div className="main__content">
-        <NewArrivalsBlock loadResources={loadCard} />
-        <SpecialOfferSection loadResources={loadItem} />
-        <BestSalesBlock loadResources={loadCard} />
-        <Newsletter sendData={sendEmail} />
+        <NewArrivalsBlock addToCard={(item, size, color, amount) => props.addToCard(item, size, color, amount)} loadResources={loadCard}/>
+        <SpecialOfferSection addToCard={(item, size, color, amount) => props.addToCard(item, size, color, amount)} loadResources={loadItem}/>
+        <BestSalesBlock addToCard={(item, size, color, amount) => props.addToCard(item, size, color, amount)} loadResources={loadCard}/>
+        <Newsletter sendData={sendEmail}/>
       </div>
     </main>
   )

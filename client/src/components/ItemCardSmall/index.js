@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Translation } from 'react-i18next';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import './main.scss';
 
@@ -28,27 +28,28 @@ export class ItemCardSmall extends Component {
   render() {
     return (
       <Translation>
-        { t =>
+        {t =>
           <div className="item-card-small">
-              <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
-              <img src={this.props.images[0]} alt="item" className="item-card-small__image" />
-              </Link>
+            {console.log(this.props.item)}
+            <Link to={`/item/${this.props.item._id}`} style={{ textDecoration: 'none' }}>
+              <img src={this.props.item.images[0]} alt="item" className="item-card-small__image" />
+            </Link>
             <div className="item-card-small__devider"></div>
             <div className="item-card-small__info">
-                <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
-                <h2 className="item-card-small__name">{this.props.name}</h2>
-                </Link>
+              <Link to={`/item/${this.props.item._id}`} style={{ textDecoration: 'none' }}>
+              <h2 className="item-card-small__name">{this.props.item.name}</h2>
+              </Link>
               <div className="item-card-small__info-dynamic">
                 <div className="item-card-small__price-rating-block">
-                  {this.createStars(this.props.rating)}
+                  {this.createStars(this.props.item.rating)}
                   <p className="item-card-small__price">
-                    {this.props.price + t('currency')}
-              </p>
+                    {this.props.item.price + t('currency')}
+                  </p>
                 </div>
                 <div className="item-card-small__cart">
-                  <button className="item-card-small__cart-button">
+                  <button onClick={() => this.props.addToCard(this.props.item, this.props.item.sizes[0], this.props.item.colors[0])} className="item-card-small__cart-button">
                     {t('smallCard.add')}
-              </button>
+                  </button>
                 </div>
               </div>
             </div>

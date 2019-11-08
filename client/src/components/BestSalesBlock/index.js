@@ -17,7 +17,7 @@ export class BestSalesBlock extends Component {
             }
           </Translation>
         </div>
-        <ProductSmallContainer loadResources={this.props.loadResources} />
+        <ProductSmallContainer addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} loadResources={this.props.loadResources}/>
       </section>
     );
   }
