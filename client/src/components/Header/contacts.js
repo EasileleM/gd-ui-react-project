@@ -7,9 +7,9 @@ import './main.scss';
 class Contacts extends React.Component {
   render() {
     return (
-      <section className="header__wrapper header__wrapper_page header__wrapper_sm" >
-        <ChangeLanguageButton/>
+      <section className="header__wrapper header__wrapper_page header__wrapper_sm">
         <address className="header__wrapper header__wrapper_row">
+          <ChangeLanguageButton/>
           <span className="header__text header__text_md header__text_email">
             info@shopy.com
             </span>
