@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
-import {Translation} from 'react-i18next';
+import React, { Component } from 'react';
+import { Translation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import icon from "../../assets/Mail_Ico_.png";
 
 import "./main.scss";
 import sendEmail from "../../utils/sendEmail";
+import i18n from '../../i18n';
 
 export class Newsletter extends Component {
     constructor(props) {
@@ -17,7 +19,7 @@ export class Newsletter extends Component {
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({ value: event.target.value });
     }
 
     handleSubmit(event) {
@@ -25,16 +27,27 @@ export class Newsletter extends Component {
             event.target.validate();
             event.preventDefault();
         } else {
-            sendEmail({email: this.state.value}).then(res => {
+            sendEmail({ email: this.state.value }).then(res => {
                 if (res.status === 201) {
-                    alert("SUCCESS");
+                    let message = "Sucessfully send";
+                    if (i18n.language === 'ru') {
+                        message = "Отправлено";
+                    }
+                    (() => toast(message, { type: toast.TYPE.INFO }))();
+                    this.setState({ value: "" });
                 } else {
-                    alert("ERROR");
-
+                    let message = "Can't send";
+                    if (i18n.language === 'ru') {
+                        message = "Ошибка при отправке";
+                    }
+                    (() => toast(message, { type: toast.TYPE.ERROR }))();
                 }
             }).catch(err => {
-                console.error(err);
-                alert("ERROR");
+                let message = "Can't send";
+                    if (i18n.language === 'ru') {
+                        message = "Ошибка при отправке";
+                    }
+                (() => toast(message, { type: toast.TYPE.ERROR }))();
             });
             event.preventDefault();
         }
@@ -51,14 +64,14 @@ export class Newsletter extends Component {
                         </div>
 
                         <form className="Newsletter__form"
-                              onSubmit={this.handleSubmit}>
+                            onSubmit={this.handleSubmit}>
                             <picture>
-                                <img src={icon} alt="icon of an envelope"/>
+                                <img src={icon} alt="icon of an envelope" />
                             </picture>
                             <input name="email" type="email" className="Newsletter__input" value={this.state.value}
-                                   onChange={this.handleChange}
-                                   placeholder={t('newsLetter.placeholder')}/>
-                            <input type="submit" className="Newsletter__button" value={t('newsLetter.join')}/>
+                                onChange={this.handleChange}
+                                placeholder={t('newsLetter.placeholder')} />
+                            <input type="submit" className="Newsletter__button" value={t('newsLetter.join')} />
                         </form>
                     </div>
                 }
