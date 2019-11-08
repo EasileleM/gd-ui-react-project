@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import "./main.scss"
-import loadItem from "../../../utils/loadItem";
 
 
 class ProductImages extends Component {
