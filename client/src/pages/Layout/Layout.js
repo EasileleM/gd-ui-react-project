@@ -1,4 +1,5 @@
 import React, { Component, Suspense } from 'react';
+import { toast } from 'react-toastify';
 import { Header } from "../../components/Header";
 import Home from "../Home/Home";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
@@ -17,6 +18,7 @@ import interceptor from '../../utils/interceptorResponse';
 
 import { changeBodyScrollState } from '../../utils/changeBodyScrollState';
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
+import i18n from '../../i18n';
 
 class Layout extends Component {
     constructor(props) {
@@ -65,6 +67,11 @@ class Layout extends Component {
         const storage = JSON.parse(localStorage.getItem('productCart'));
         delete storage[id];
         localStorage.setItem('productCart', JSON.stringify(storage));
+        let message = "Item succesfully deleted from cart";
+        if (i18n.language === 'ru') {
+            message = "Товар успешно удален";
+        }
+        (() => toast(message, { type: toast.TYPE.INFO }))();
     }
 
     validLocalStorage() {
@@ -107,6 +114,11 @@ class Layout extends Component {
 
     changeCartState() {
         if (!this.state.cartReady || !this.state.cartSize) {
+            let message = "Cart is empty";
+            if (i18n.language === 'ru') {
+                message = "Корзина пустая";
+            }
+            (() => toast(message, { type: toast.TYPE.INFO }))();
             return;
         }
         this.setState({ cartOpened: !this.state.cartOpened });
@@ -122,36 +134,46 @@ class Layout extends Component {
         }
         const storage = JSON.parse(localStorage.getItem('productCart'));
         if (storage[item._id]) {
+            let message = " already in cart";
+            if (i18n.language === 'ru') {
+                message = " уже в корзине";
+            }
+            (() => toast(item.name + message, { type: toast.TYPE.INFO }))();
             return;
         }
         storage[item._id] = { size, color, amount };
         localStorage.setItem('productCart', JSON.stringify(storage));
         this.setState({ cartItems: [...cardItemsArray, { item, size, color, amount }], cartSize: this.state.cartSize + 1 });
+        let message = " has been added to cart";
+        if (i18n.language === 'ru') {
+            message = " добавлен в корзину";
+        }
+        (() => toast(item.name + message, { type: toast.TYPE.INFO }))();
     }
     render() {
         changeBodyScrollState(this.state.cartOpened);
         return (
             <Router>
                 <ScrollToTop>
-                <Suspense fallback={<div className="spinner-wrapper"><LoadingSpinner /></div>}>
-                    {
-                        this.state.cartOpened &&
-                        <CartWindow
-                            size={this.state.cartSize}
-                            data={this.state.cartItems}
-                            handleOnClickClose={() => this.changeCartState()}
-                            itemAmountChange={(id, amount) => this.updateCartItemAmount(id, amount)}
-                            deleteItem={(id) => this.deleteCartItemAmount(id)}
-                        />
-                    }
-                    <Header cartSize={this.state.cartSize} handleOnClickOpenCart={() => this.changeCartState()}/>
-                    <Switch>
-                        <Route path="/" exact render={() => <Home addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)}/>} />
-                        <Route path="/item/:id" render={(props) => <ProductDescriptionPage {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)}/>} />
-                        <Redirect to="/" />
-                    </Switch>
-                    <Footer />
-                </Suspense>
+                    <Suspense fallback={<div className="spinner-wrapper"><LoadingSpinner /></div>}>
+                        {
+                            this.state.cartOpened &&
+                            <CartWindow
+                                size={this.state.cartSize}
+                                data={this.state.cartItems}
+                                handleOnClickClose={() => this.changeCartState()}
+                                itemAmountChange={(id, amount) => this.updateCartItemAmount(id, amount)}
+                                deleteItem={(id) => this.deleteCartItemAmount(id)}
+                            />
+                        }
+                        <Header cartSize={this.state.cartSize} handleOnClickOpenCart={() => this.changeCartState()} />
+                        <Switch>
+                            <Route path="/" exact render={() => <Home addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)} />} />
+                            <Route path="/item/:id" render={(props) => <ProductDescriptionPage {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)} />} />
+                            <Redirect to="/" />
+                        </Switch>
+                        <Footer />
+                    </Suspense>
                 </ScrollToTop>
             </Router>
         );
