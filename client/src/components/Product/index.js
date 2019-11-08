@@ -40,7 +40,7 @@ class Product extends Component {
                 <div className="product">
                     <ProductImages
                         images={this.state.item.images}/>
-                    <ProductInfo item={this.state.item}/>
+                    <ProductInfo addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} item={this.state.item}/>
                 </div>
             );
         }

@@ -11,12 +11,18 @@ class ProductDescriptionPage extends Component {
             <div>
                 <div className="wrapper">
                     <div className="container">
-                        <Product id={this.props.match.params.id}/>
+                        <Product
+                            id={this.props.match.params.id}
+                            addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}
+                        />
                     </div>
                 </div>
                 <div className="wrapper wrapper_secondary-color">
                     <div className="container">
-                        <RelatedProductsBlock id={this.props.match.params.id}/>
+                        <RelatedProductsBlock
+                            id={this.props.match.params.id}
+                            addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}
+                        />
                         <Newsletter/>
                     </div>
                 </div>
