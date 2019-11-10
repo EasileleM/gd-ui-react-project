@@ -84,7 +84,14 @@
       width: 100%;
       justify-content: center;
       margin-right: 0;
+      flex-direction: column;
+      text-align: center;
     }
+
+    &__heading {
+      margin: 0;
+    }
+
     &__form {
       width: 100%;
       display: flex;
@@ -95,12 +102,12 @@
       margin-left: 0;
     }
   }
-    @media screen and (max-width: 767px) {
-      padding: 35px 30px;
+  @media screen and (max-width: 767px) {
+    padding: 35px 30px;
 
-      &__button {
-        width: 100%;
-        margin-top: 20px;
-      }
+    &__button {
+      width: 100%;
+      margin-top: 20px;
     }
   }
+}
