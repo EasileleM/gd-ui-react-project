@@ -26,10 +26,10 @@
     &_secondary {
       @include font-primary-regular-md;
       margin: 0;
-      width: 160px;
       color: $color-limed-spruce;
       @media screen and (max-width: $breakpoint-smartphone){
         width: 50%;
+        padding: 20px 0;
       }
     }
   }
@@ -40,17 +40,22 @@
     color: $color-river-bed;
   }
 
-  &__size {
+  &__container {
     display: flex;
+    width: 40%;
+    justify-content: space-evenly;
+    @media screen and (max-width: $breakpoint-tablet){
+      width: 100%;
+      justify-content: space-between;
+    }
 
   }
 
-  &__sizes {
+  &__buttons {
     display: flex;
     align-items: center;
-    padding: 0 20px;
-    width: 120px;
     white-space: nowrap;
+    justify-content: center;
   }
 
   &__size-value {
@@ -61,10 +66,11 @@
 
     &_chosen {
       color: $color-orange;
-      font-size: $font-size-semi-lg;
+      text-shadow:0 0 1px $color-orange;
     }
 
     &:before {
+      text-shadow: none;
       content: "-";
       padding: 0 10px;
       color: black;
@@ -78,17 +84,14 @@
     }
   }
 
-  &__quantity {
-    display: flex;
-    align-items: center;
-  }
-
   &__quantity-number {
     @include font-primary-regular-md;
+    width: 25px;
+    text-align: center;
+    padding: 0 10px;
   }
 
   &__quantity-button {
-    padding: 0 20px;
     cursor: pointer;
     @include font-primary-regular-semi-md
   }
