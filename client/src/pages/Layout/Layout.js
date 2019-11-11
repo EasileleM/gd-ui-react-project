@@ -19,6 +19,8 @@ import interceptor from '../../utils/interceptorResponse';
 import { changeBodyScrollState } from '../../utils/changeBodyScrollState';
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
 import i18n from '../../i18n';
+import NotFound from "../errors/404/NotFound";
+import {connect} from 'react-redux';
 
 class Layout extends Component {
     constructor(props) {
@@ -176,11 +178,18 @@ class Layout extends Component {
                                 deleteItem={(id) => this.deleteCartItemAmount(id)}
                             />
                         }
+
+
+                        {
+                          (this.props.error === 404) ? <Redirect to="/404"/> : ""
+                        }
+
                         <Header cartSize={this.state.cartSize} handleOnClickOpenCart={() => this.openCloseCart()} />
                         <Switch>
                             <Route path="/" exact render={(props) => <Home {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)} />} />
                             <Route path="/item/:id" render={(props) => <ProductDescriptionPage {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)} />} />
-                            <Redirect to="/" />
+                            <Route path="/404" render={(props) => <NotFound {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)}/>}/>
+                          <Redirect to="/" />
                         </Switch>
                         <Footer />
                     </Suspense>
@@ -190,4 +199,7 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+const mapStateToProps = (state) => {
+  return {error: state.errorHandler.errorCode}
+};
+export default connect(mapStateToProps)(Layout);

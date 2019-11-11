@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import {error404} from "../actions/error-actions";
+import store from "../store"
 
 export const interceptor = axios.interceptors.response.use(function (response) {
   return response;
@@ -11,6 +13,7 @@ export const interceptor = axios.interceptors.response.use(function (response) {
   }
   if (errorCode >= 400 && errorCode < 600) {
     notify = () => toast("Error " + errorCode, { type: toast.TYPE.ERROR });
+    store.dispatch(error404);
   } else {
     notify = () => { };
   }
