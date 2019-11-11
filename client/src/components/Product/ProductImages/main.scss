@@ -2,14 +2,9 @@
 
 $color-border: $color-athens-gray;
 
-
 .product-images {
   align-items: center;
   width: 40%;
-
-  @media screen and (max-width: $breakpoint-smartphone) {
-    width: 100%;
-  }
 
   &__row {
     display: flex;
@@ -48,9 +43,14 @@ $color-border: $color-athens-gray;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .6;
+    }
 
     &_selected {
-      border: 2px solid #ff5912;
+      border: 2px solid $color-orange;
       opacity: .6;
 
       &:before {
@@ -60,10 +60,14 @@ $color-border: $color-athens-gray;
         position: absolute;
         top: 0;
         left: 0;
-        background: #ff5912;
+        background: $color-orange;
         opacity: .8;
       }
     }
+  }
+
+  @media screen and (max-width: $breakpoint-smartphone) {
+    width: 100%;
   }
 }
 
