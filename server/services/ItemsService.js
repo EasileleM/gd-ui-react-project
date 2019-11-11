@@ -129,12 +129,12 @@ class ItemsService {
             result = items.filter((item) => {
                 for (const field in filters) {
                     if (field === 'minprice') {
-                        if (Number(item.price) < Number(filters[field])) {
+                        if (!item.price || Number(item.price) < Number(filters[field])) {
                             return false;
                         }
                     }
                     else if (field === 'maxprice') {
-                        if (Number(item.price) > Number(filters[field])) {
+                        if (!item.price || Number(item.price) > Number(filters[field])) {
                             return false;
                         }
                     }
@@ -144,6 +144,9 @@ class ItemsService {
                         }
                     }
                     else {
+                        if (!item[field].length) {
+                            return false;
+                        }
                         for (const value of item[field]) {
                             if (!filters[field].has(value)) {
                                 return false;
