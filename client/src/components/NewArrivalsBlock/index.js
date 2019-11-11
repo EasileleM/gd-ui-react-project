@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Translation } from 'react-i18next';
 
 import { SectionHeader } from '../SectionHeader/index.js';

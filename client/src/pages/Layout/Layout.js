@@ -15,7 +15,6 @@ import {
 import { CartWindow } from '../../components/CartWindow/CartWindow';
 import { loadIdArray } from '../../utils/loadIdArray';
 import interceptor from '../../utils/interceptorResponse';
-
 import { changeBodyScrollState } from '../../utils/changeBodyScrollState';
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
 import i18n from '../../i18n';
