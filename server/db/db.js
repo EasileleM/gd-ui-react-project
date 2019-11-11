@@ -1,6 +1,4 @@
 import MongoDB from "mongodb";
-import filter from "../pages/api/items/filter";
-
 
 const uri = process.env.MONGODB_URI || "mongodb+srv://admin:qwerty123456789@react-vptyr.mongodb.net/test?retryWrites=true&w=majority";
 const client = MongoDB.MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -31,7 +29,6 @@ export class db {
                 .find({})
                 .toArray()
         })
-
     }
 
     filter(collection, filter = {}) {

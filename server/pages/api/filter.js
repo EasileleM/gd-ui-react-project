@@ -1,4 +1,4 @@
-import ItemsService from "../../../services/ItemsService";
+import FilterService from "../../services/FilterService";
 import Cors from "micro-cors";
 
 const cors = Cors({
@@ -8,23 +8,21 @@ const cors = Cors({
 
 const handler = (req, res) => {
     try {
-        const service = new ItemsService(req.query.lang);
-        service.getAllItems()
-            .then(items => {
-                let result = service.filter(items, req.query);
-                result = service.pagination(result, req.query.size, req.query.page);
+        const service = new FilterService(req.query.lang);
+        return service
+            .getFilterFields()
+            .then(item => {
                 res.statusCode = 200;
-                res.json(JSON.stringify(result))
+                delete item._id;
+                res.json(JSON.stringify(item));
             }
             )
             .catch(err => {
-                console.log(err)
                 res.statusCode = 500;
                 res.json(JSON.stringify(err));
             }
             )
     } catch (err) {
-        console.log(err)
         res.statusCode = 500;
         res.json(JSON.stringify(err));
     }
