@@ -144,6 +144,9 @@ class ItemsService {
                         }
                     }
                     else {
+                        if (!item[field].length) {
+                            return false;
+                        }
                         for (const value of item[field]) {
                             if (!filters[field].has(value)) {
                                 return false;
