@@ -144,15 +144,10 @@ class ItemsService {
                         }
                     }
                     else {
-                        let match = false;
                         for (const value of item[field]) {
-                            if (filters[field].has(value)) {
-                                match = true;
-                                continue;
+                            if (!filters[field].has(value)) {
+                                return false;
                             }
-                        }
-                        if (!match) {
-                            return false;
                         }
                     }
                 }
