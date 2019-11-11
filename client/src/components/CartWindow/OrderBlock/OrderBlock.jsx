@@ -3,9 +3,10 @@ import React from 'react';
 import './OrderBlock.scss';
 
 export function OrderBlock(props) {
-  const orderPrice = props.data.reduce((price, item) => {
-    return price + item.item.price * item.amount;
-  }, 0);
+  const orderPrice = 100;
+  // props.data.reduce((price, item) => {
+  //   return price + item.item.price * item.amount;
+  // }, 0);
   return (
     <div className="card-window__order">
       <p className="card-window__order-price-wrapper">

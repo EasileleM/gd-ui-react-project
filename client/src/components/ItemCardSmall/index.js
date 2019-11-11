@@ -36,7 +36,7 @@ export class ItemCardSmall extends Component {
             <div className="item-card-small__devider"></div>
             <div className="item-card-small__info">
               <Link to={`/item/${this.props.item._id}`} style={{ textDecoration: 'none' }}>
-              <h2 className="item-card-small__name">{this.props.item.name}</h2>
+                <h2 className="item-card-small__name">{this.props.item.name}</h2>
               </Link>
               <div className="item-card-small__info-dynamic">
                 <div className="item-card-small__price-rating-block">
@@ -46,7 +46,7 @@ export class ItemCardSmall extends Component {
                   </p>
                 </div>
                 <div className="item-card-small__cart">
-                  <button onClick={() => this.props.addToCard(this.props.item, this.props.item.sizes[0], this.props.item.colors[0])} className="item-card-small__cart-button">
+                  <button className="item-card-small__cart-button">
                     {t('smallCard.add')}
                   </button>
                 </div>

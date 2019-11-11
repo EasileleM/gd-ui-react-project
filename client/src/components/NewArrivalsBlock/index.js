@@ -16,7 +16,7 @@ export function NewArrivalsBlock(props) {
           }
         </Translation>
       </div>
-      <ProductCatalog addToCard={(item, size, color, amount) => props.addToCard(item, size, color, amount)} />
+      <ProductCatalog />
     </section>
   );
 }
