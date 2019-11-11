@@ -19,7 +19,7 @@ import { connect } from 'react-redux';
 import { changeBodyScrollState } from '../../utils/changeBodyScrollState';
 class Layout extends Component {
     componentDidUpdate() {
-        changeBodyScrollState(this.props.cartOpened);
+        changeBodyScrollState(this.props.cartOpened && !this.props.cartLoading);
     }
 
     render() {
