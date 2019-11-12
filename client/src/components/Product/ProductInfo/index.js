@@ -1,10 +1,13 @@
-import React, {Component} from 'react';
-import {Translation} from 'react-i18next';
+import React, { Component } from 'react';
+import { Translation } from 'react-i18next';
 import "./main.scss"
 import cartIcon from "./assets/cart.png"
 import shareIcon from "./assets/share.png"
 import likeIcon from "./assets/like.png"
 import Chooser from "./Chooser";
+
+import addItem from '../../../utils/cart/addItem';
+import store from '../../../store';
 
 class ProductInfo extends Component {
   constructor(props) {
@@ -26,16 +29,16 @@ class ProductInfo extends Component {
   };
 
   handleSize(size) {
-    this.setState({chosenSize: size});
+    this.setState({ chosenSize: size });
   }
 
   handleQuantity(more) {
     const currentQuantity = this.state.chosenQuantity;
     if (more) {
-      this.setState({chosenQuantity: currentQuantity + 1});
+      this.setState({ chosenQuantity: currentQuantity + 1 });
     } else {
       if (this.state.chosenQuantity > 1) {
-        this.setState({chosenQuantity: currentQuantity - 1});
+        this.setState({ chosenQuantity: currentQuantity - 1 });
       }
     }
   }
@@ -58,33 +61,32 @@ class ProductInfo extends Component {
 
   render() {
     return (
-        <Translation>
-          {t =>
-              <div className="product-info">
-                <h1 className="product-info__heading">{this.state.itemInfo.title}</h1>
-                <h2 className="product-info__heading_secondary">{this.state.itemInfo.bundleInfo}</h2>
-                <p className="product-info__paragraph">{this.state.itemInfo.description}</p>
+      <Translation>
+        {t =>
+          <div className="product-info">
+            <h1 className="product-info__heading">{this.state.itemInfo.title}</h1>
+            <h2 className="product-info__heading_secondary">{this.state.itemInfo.bundleInfo}</h2>
+            <p className="product-info__paragraph">{this.state.itemInfo.description}</p>
 
-                <Chooser sizes={this.state.itemInfo.sizes}
-                         handleSize={this.handleSize}
-                         handleQuantity={this.handleQuantity}
-                         chosenSize={this.state.chosenSize}
-                         chosenQuantity={this.state.chosenQuantity}/>
-
-                <div className="product-info__order">
-                  <h3 className="product-info__price">{t('price')}: {this.state.itemInfo.price * this.state.chosenQuantity + t('currency')}</h3>
-                  <div className="product-info__order-buttons">
-                    <img className="product-info__button-icon" src={shareIcon} alt="Share icon"/>
-                    <img
-                        onClick={() => this.props.addToCard(this.props.item, this.state.chosenSize, this.props.item.colors[0], this.state.chosenQuantity)}
-                        className="product-info__button-icon" src={cartIcon} alt="Add to cart icon"/>
-                    <img className="product-info__button-icon" src={likeIcon} alt="Add to favorites icon"/>
-                    <button className="product-info__order-now-button">{t('order')}</button>
-                  </div>
-                </div>
+            <Chooser sizes={this.state.itemInfo.sizes}
+              handleSize={this.handleSize}
+              handleQuantity={this.handleQuantity}
+              chosenSize={this.state.chosenSize}
+              chosenQuantity={this.state.chosenQuantity} />
+            <div className="product-info__order">
+              <h3 className="product-info__price">{t('price')}: {this.state.itemInfo.price * this.state.chosenQuantity + t('currency')}</h3>
+              <div className="product-info__order-buttons">
+                <img className="product-info__button-icon" src={shareIcon} alt="Share icon" />
+                <img
+                  onClick={() => store.dispatch(addItem(store.getState(), this.props.item, this.props.item.colors[0], this.state.chosenSize, this.state.chosenQuantity))}
+                  className="product-info__button-icon" src={cartIcon} alt="Add to cart icon" />
+                <img className="product-info__button-icon" src={likeIcon} alt="Add to favorites icon" />
+                <button className="product-info__order-now-button">{t('order')}</button>
               </div>
-          }
-        </Translation>
+            </div>
+          </div>
+        }
+      </Translation>
     );
   }
 }

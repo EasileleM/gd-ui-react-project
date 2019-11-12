@@ -13,7 +13,6 @@ class ProductDescriptionPage extends Component {
                     <div className="container">
                         <Product
                             id={this.props.match.params.id}
-                            addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}
                         />
                     </div>
                 </div>
@@ -21,7 +20,6 @@ class ProductDescriptionPage extends Component {
                     <div className="container">
                         <RelatedProductsBlock
                             id={this.props.match.params.id}
-                            addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}
                         />
                         <Newsletter/>
                     </div>

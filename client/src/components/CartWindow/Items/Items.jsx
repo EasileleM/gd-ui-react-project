@@ -1,15 +1,15 @@
 import React from 'react';
 
 import './Items.scss';
+import { connect } from 'react-redux';
 import { Item } from './Item/Item';
 
-export function Items(props) {
-  const items = props.data.map((item) => {
+function Items(props) {
+  const items = props.items.map((item, index) => {
     return <Item
-            key={item.item._id}
+            key={index}
+            index={index}
             data={item}
-            itemAmountChange={(id, amount) => props.itemAmountChange(id, amount)}
-            deleteItem={(id) => props.deleteItem(id)}
           />
   });
   return (
@@ -18,3 +18,10 @@ export function Items(props) {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+      items: state.cartController.items
+  }
+};
+export default connect(mapStateToProps)(Items);
