@@ -1,9 +1,11 @@
-import {db} from "../db/db";
+import { db } from "../db/db";
 
 const langs = Object.freeze({
     ENG: "en",
     RU: "ru",
 });
+
+const filterFields = ['categories', 'maxprice', 'minprice', 'sizes', 'brands', 'colors'];
 
 class ItemsService {
     constructor(lang = langs.ENG) {
@@ -25,10 +27,6 @@ class ItemsService {
             item.name = item.name[lang];
             return item;
         });
-    }
-
-    filter(filter) {
-        return this.dbInstance.filter("items", filter).then(items => this.languageSpecific(items, this.lang));
     }
 
     getAllItems() {
@@ -112,6 +110,54 @@ class ItemsService {
                     .pagination(sortedItems
                         .filter((item) => String(item._id) !== String(target._id)), size, page);
             });
+    }
+
+    filter(items, query) {
+        let result = items;
+        if (query.filter === 'true') {
+            const filters = {};
+            for (const field of filterFields) {
+                if (query[field]) {
+                    if (field === 'maxprice' || field === 'minprice') {
+                        filters[field] = query[field];
+                    }
+                    else {
+                        filters[field] = new Set(query[field].split(','));
+                    }
+                }
+            }
+            result = items.filter((item) => {
+                for (const field in filters) {
+                    if (field === 'minprice') {
+                        if (Number(item.price) < Number(filters[field])) {
+                            return false;
+                        }
+                    }
+                    else if (field === 'maxprice') {
+                        if (Number(item.price) > Number(filters[field])) {
+                            return false;
+                        }
+                    }
+                    else if (field === 'brands') {
+                        if (!filters[field].has(item.brand)) {
+                            return false;
+                        }
+                    }
+                    else {
+                        if (!item[field].length) {
+                            return false;
+                        }
+                        for (const value of item[field]) {
+                            if (!filters[field].has(value)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                return true;
+            })
+        }
+        return result;
     }
 
     pagination(items, pageSize = 4, pageNumber = 1) {

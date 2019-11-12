@@ -2,10 +2,8 @@ import React, { PureComponent } from 'react';
 
 export class Buttons extends PureComponent {
   renderButton(i) {
-    if (i === this.props.switchTo) {
+    if (i === this.props.currentSlide) {
       return <Button class='slider__button_activate' onClick={() => this.props.onClick(i)} />;
-    } else if (i === this.props.switchFrom) {
-      return <Button class='slider__button_deactivate' onClick={() => this.props.onClick(i)} />;
     }
     return <Button onClick={() => this.props.onClick(i)} />;
   }

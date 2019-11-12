@@ -12,9 +12,9 @@ class Home extends Component {
             <main className="main">
                 <Slider />
                 <div className="main__content">
-                    <NewArrivalsBlock addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}/>
-                    <SpecialOfferSection addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}/>
-                    <BestSalesBlock addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}/>
+                    <NewArrivalsBlock />
+                    <SpecialOfferSection />
+                    <BestSalesBlock />
                     <Newsletter />
                 </div>
             </main>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Translation } from 'react-i18next';
 
 import { SectionHeader } from '../SectionHeader/index.js';
@@ -16,7 +16,7 @@ export function NewArrivalsBlock(props) {
           }
         </Translation>
       </div>
-      <ProductCatalog addToCard={(item, size, color, amount) => props.addToCard(item, size, color, amount)} />
+      <ProductCatalog />
     </section>
   );
 }

@@ -12,13 +12,10 @@ export class Slider extends React.Component {
     super(props);
 
     this.state = {
-      previousSlide: 1,
       currentSlide: 1,
       slidesAmount: 3,
-      ready: false,
-      slideTimes:  this.switchSlideTimer()
+      ready: false
     };
-
   }
 
   componentDidMount() {
@@ -30,17 +27,18 @@ export class Slider extends React.Component {
     }).catch((error) => {
       error.notify();
     });
+    this.setState({ slideTimer: this.switchSlideTimer() });
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.slideTimer);
+    clearTimeout(this.state.slideTimer);
   }
 
   switchSlideTimer() {
-    return setInterval(() => {
+    return setTimeout(() => {
       const nextSlide =
         this.state.currentSlide === this.state.slidesAmount - 1
-        ? 0 : this.state.currentSlide + 1;
+          ? 0 : this.state.currentSlide + 1;
       this.handleOnClick(nextSlide);
     }, 10000);
   }
@@ -49,39 +47,34 @@ export class Slider extends React.Component {
     if (i === this.state.currentSlide) {
       return;
     }
-    this.setState({
-      previousSlide: this.state.currentSlide,
-      currentSlide: i
-    })
-    clearInterval(this.state.slideTimer);
-    this.setState({slideTimer: this.switchSlideTimer()})
+    clearTimeout(this.state.slideTimer);
+    const newTimer = this.switchSlideTimer();
+    this.setState({ slideTimer: newTimer, currentSlide: i })
   }
 
   render() {
     if (!this.state.ready) {
-      return (<div className="slider">
-        <div className="slider__loading">
-          <LoadingSpinner />
-        </div>
-      </div>);
+      return (
+        <div className="slider">
+          <div className="slider__loading">
+            <LoadingSpinner />
+          </div>
+        </div>);
     }
     return (
       <div className="slider">
         <Images
           images={this.state.data.map((item) => item.sliderImg)}
-          switchFrom={this.state.previousSlide}
-          switchTo={this.state.currentSlide}
+          currentSlide={this.state.currentSlide}
         />
         <div className="slider__content">
           <Buttons
-            switchFrom={this.state.previousSlide}
-            switchTo={this.state.currentSlide}
+            currentSlide={this.state.currentSlide}
             onClick={(i) => this.handleOnClick(i)}
           />
           <ContentBlock
             items={this.state.data.map((item) => item.item)}
-            switchFrom={this.state.previousSlide}
-            switchTo={this.state.currentSlide}
+            currentSlide={this.state.currentSlide}
           />
         </div>
       </div>

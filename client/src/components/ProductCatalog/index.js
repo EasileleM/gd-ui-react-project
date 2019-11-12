@@ -50,20 +50,20 @@ export class ProductCatalog extends React.Component {
     if (this.state.ready && this.state.nextPage) {
       return (
         <div className='product-catalog'>
-          <ProductsContainer rowSize={this.props.rowSize} addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} products={this.state.cards} />
+          <ProductsContainer rowSize={this.props.rowSize}  products={this.state.cards} />
           <ShowMoreButton loading={this.state.loading} onClick={() => this.handleOnClick()} />
         </div>
       );
     } else if (this.state.ready && !this.state.nextPage) {
       return (
         <div className='product-catalog'>
-          <ProductsContainer rowSize={this.props.rowSize} addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} products={this.state.cards} />
+          <ProductsContainer rowSize={this.props.rowSize}  products={this.state.cards} />
         </div>
       );
     }
     return (
       <div className='product-catalog'>
-        <ShowMoreButton loading={this.state.loading} onClick={() => undefined} />
+        <ShowMoreButton loading={this.state.loading} />
       </div>
     );
   }

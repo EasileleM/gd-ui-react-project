@@ -46,11 +46,11 @@ export class ProductCard extends Component {
     return (
         <Translation>
           {t =>
-              <div className={`product-card`}
+              <div className='product-card'
                    style={
                      this.state.width > 900 ? {
-                             width: `calc((100% - 80px) / ${this.props.rowSize ? this.props.rowSize : 4})`
-                           }: {}
+                       width: `calc((100% - 80px) / ${this.props.rowSize ? this.props.rowSize : 4})`
+                     } : {}
                    }>
                 <div className='product-card__inner'>
                   <div className='product-card__front'>
@@ -87,8 +87,7 @@ export class ProductCard extends Component {
                       <a href='google.com' className='product-card__share'>
                       </a>
                       <div className='product-card__add-to-cart'>
-                        <AddToCartButton size={this.state.size} color={this.state.color} product={this.props.product}
-                                         handleOnClickAddToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)}/>
+                        <AddToCartButton size={this.state.size} color={this.state.color} product={this.props.product}/>
                       </div>
                       <div className='product-card__add-to-favorite'>
                         <AddToFavoriteButton/>

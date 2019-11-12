@@ -44,7 +44,7 @@ class Navigation extends Component {
                   </label>
                 </form>
                 <User />
-                <ShopCart cartSize={this.props.cartSize} handleOnClickOpenCart={() => this.props.handleOnClickOpenCart()} />
+                <ShopCart />
               </nav>
             </section>
         }
