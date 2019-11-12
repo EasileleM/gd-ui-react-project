@@ -6,7 +6,7 @@ import changeItem from '../utils/cart/changeItem';
 const initialState = {
   size: 0,
   opened: false,
-  loading: true,
+  loading: false,
   items: []
 };
 
