@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { ShowMoreButton } from './ShowMoreButton/index.js';
 import { ProductsContainer } from '../ProductsContainer/index.js'
 import loadCard from "../../utils/loadCard";
@@ -17,7 +18,7 @@ export class ProductCatalog extends React.Component {
   }
 
   componentDidMount() {
-    loadCard(this.props.size, this.props.size).then(result => {
+    loadCard(1, 4).then(result => {
       this.setState({
         ready: true,
         cards: [...this.state.cards, ...result.data.items],
@@ -34,7 +35,7 @@ export class ProductCatalog extends React.Component {
       page: this.state.page + 1,
       loading: true
     });
-    loadCard(this.state.page, this.props.size).then(result => {
+    loadCard(this.state.page, 4).then(result => {
       this.setState({
         ready: true,
         cards: [...this.state.cards, ...result.data.items],
@@ -50,14 +51,14 @@ export class ProductCatalog extends React.Component {
     if (this.state.ready && this.state.nextPage) {
       return (
         <div className='product-catalog'>
-          <ProductsContainer rowSize={this.props.rowSize}  products={this.state.cards} />
+          <ProductsContainer products={this.state.cards} />
           <ShowMoreButton loading={this.state.loading} onClick={() => this.handleOnClick()} />
         </div>
       );
     } else if (this.state.ready && !this.state.nextPage) {
       return (
         <div className='product-catalog'>
-          <ProductsContainer rowSize={this.props.rowSize}  products={this.state.cards} />
+          <ProductsContainer products={this.state.cards} />
         </div>
       );
     }

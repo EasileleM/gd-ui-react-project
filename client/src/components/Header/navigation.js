@@ -15,7 +15,14 @@ class Navigation extends Component {
           t =>
             <section id="header" className="header__wrapper header__wrapper_page header__wrapper_lg header__wrapper_column">
               <Link className="header__logo" to="/">
-                
+                <div className="header__logo_title">
+                  sh
+                  <div className="header__logo_image"></div>
+                  py
+                </div>
+                <div className="header__logo_text">
+                  shope any where
+                </div>
               </Link>
               <input type="checkbox" id="headerMenuData" className="header__menu-data-input"></input>
               <nav className="header__links-container">

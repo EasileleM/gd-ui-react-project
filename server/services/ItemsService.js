@@ -122,7 +122,7 @@ class ItemsService {
                         filters[field] = query[field];
                     }
                     else {
-                        filters[field] = new Set(query[field].split(','));
+                        filters[field] = new Set(query[field].split(',').map((item) => item.split('+').join(' ')));
                     }
                 }
             }
@@ -144,13 +144,18 @@ class ItemsService {
                         }
                     }
                     else {
+                        console.log(item[field])
                         if (!item[field].length) {
                             return false;
                         }
+                        let matches = 0;
                         for (const value of item[field]) {
-                            if (!filters[field].has(value)) {
-                                return false;
+                            if (filters[field].has(value)) {
+                                matches++;
                             }
+                        }
+                        if (!matches) {
+                            return false;
                         }
                     }
                 }

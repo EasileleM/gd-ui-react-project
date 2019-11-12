@@ -21,7 +21,6 @@ import { CartWindow } from '../../components/CartWindow/CartWindow';
 import interceptor from '../../utils/interceptorResponse';
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
 import { changeBodyScrollState } from '../../utils/changeBodyScrollState';
-import Search from "../Search/Search";
 import fetchItems from '../../utils/cart/fetchItems';
 
 import store from '../../store';
@@ -51,7 +50,6 @@ class Layout extends Component {
                         <Switch>
                             <Route path="/" exact component={Home} />
                             <Route path="/item/:id" component={ProductDescriptionPage} />
-                            <Route path="/search" component={Search} />
                             <Route path="/404" component={NotFound} />
                             <Redirect to="/" />
                         </Switch>

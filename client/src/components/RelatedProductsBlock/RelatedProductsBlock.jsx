@@ -15,7 +15,7 @@ export class RelatedProductsBlock extends Component {
             <div className='related-products-block__title'>
               <SectionHeader title_colored={t('relatedProducts.related')} title={t('relatedProducts.products')} description={t('relatedProducts.description')} />
             </div>
-            <ProductCatalogRow  addToCard={(item, size, color, amount) => this.props.addToCard(item, size, color, amount)} id={this.props.id}/>
+            <ProductCatalogRow id={this.props.id}/>
           </section>
         }
       </Translation>

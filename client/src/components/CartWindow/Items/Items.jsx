@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import { Item } from './Item/Item';
 
 function Items(props) {
-  const items = props.items.map((item) => {
+  const items = props.items.map((item, index) => {
     return <Item
-            key={item.generalData._id}
-            data={item.generalData}
+            key={index}
+            index={index}
+            data={item}
           />
   });
   return (

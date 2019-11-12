@@ -1,50 +1,33 @@
 import React from 'react';
+import store from '../../../../store';
+import removeItem from '../../../../utils/cart/removeItem';
+import updateItem from '../../../../utils/cart/updateItem';
 
 import './Item.scss';
 
 export class Item extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      amount: this.props.data.amount
-    };
-  }
-
-  handleOnInput(event) {
-    if ((/^[0-9]*$/g).test(event.target.value)) {
-      this.setState({ amount: event.target.value });
-      this.props.itemAmountChange(this.props.data._id, event.target.value);
-    }
-  }
-
   handleOnClickIncrement(event) {
-    if (Number(this.state.amount) < 99) {
-      this.setState({ amount: Number(this.state.amount) + 1 });
-      this.props.itemAmountChange(this.props.data._id, Number(this.state.amount) + 1);
+    if (Number(this.props.data.amount) < 99) {
+      store.dispatch(updateItem(store.getState(), this.props.data, this.props.data.color, this.props.data.size, this.props.data.amount + 1));
     }
   }
 
   handleOnClickDecrement(event) {
-    if (Number(this.state.amount) > 1) {
-      this.setState({ amount: this.state.amount - 1 });
-      this.props.itemAmountChange(this.props.data._id, Number(this.state.amount) - 1);
+    if (Number(this.props.data.amount) > 1) {
+      store.dispatch(updateItem(store.getState(), this.props.data, this.props.data.color, this.props.data.size, this.props.data.amount - 1));
     }
-  }
-
-  handleOnClickDelete() {
-    this.props.deleteItem(this.props.data._id);
   }
 
   render() {
     return (
       <div className="card-window__item cart-window-item">
-        <img src={this.props.data.images[0]} className="cart-window-item__image" alt="item" />
+        <img src={this.props.data.generalData.images[0]} className="cart-window-item__image" alt="item" />
         <div className="cart-window-item__info">
           <h2 className="cart-window-item__name">
-            {this.props.data.name}
+            {this.props.data.generalData.name}
           </h2>
           <p className="cart-window-item__description">
-            {this.props.data.description}
+            {this.props.data.generalData.description}
           </p>
           <div className="cart-window-item__info-color-size">
             <p className="cart-window-item__size-wrapper">
@@ -53,19 +36,19 @@ export class Item extends React.Component {
             </p>
             <div className="cart-window-item__color-wrapper">
               <p className="cart-window-item__color-text">Color: </p>
-              <div style={{background: this.props.data.color}} className="cart-window-item__color"></div>
+              <div style={{ background: this.props.data.color }} className="cart-window-item__color"></div>
             </div>
             <p className="cart-window-item__price-wrapper">
               Price:
-              <span className="cart-window-item__price"> {this.props.data.price}$</span>
+              <span className="cart-window-item__price"> {this.props.data.generalData.price}$</span>
             </p>
           </div>
         </div>
         <div className="cart-window-item__item-controls">
-          <button onClick={() => this.handleOnClickDelete()} tabIndex="2" className="cart-window-item__item-controls-remove"></button>
+          <button onClick={() => store.dispatch(removeItem(store.getState(), this.props.data))} tabIndex="2" className="cart-window-item__item-controls-remove"></button>
           <div className="cart-window-item__item-controls-amount-wrapper">
             <button onClick={(event) => this.handleOnClickIncrement(event)} tabIndex="2" className="cart-window-item__item-controls-amount-button">+</button>
-            <input onChange={(event) => this.handleOnInput(event)} tabIndex="2" maxLength="2" value={this.state.amount} className="cart-window-item__item-controls-amount-input" />
+            <input disabled tabIndex="2" maxLength="2" value={this.props.data.amount} className="cart-window-item__item-controls-amount-input" />
             <button onClick={(event) => this.handleOnClickDecrement(event)} tabIndex="2" className="cart-window-item__item-controls-amount-button cart-window-item">-</button>
           </div>
         </div>

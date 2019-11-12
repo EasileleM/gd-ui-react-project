@@ -7,7 +7,7 @@ import './main.scss';
 export class ProductsContainer extends React.Component {
   render() {
     const products = this.props.products.map(product => {
-      return <ProductCard rowSize={this.props.rowSize}  product={product}/>
+      return <ProductCard product={product}/>
     })
     return (
       <div className='products-container'>
