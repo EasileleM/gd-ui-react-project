@@ -7,6 +7,7 @@ const initialState = {
   size: 0,
   opened: false,
   loading: false,
+  failure: false,
   items: []
 };
 
@@ -22,15 +23,35 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         opened: false
       }
-    case CART_ACTIONS.ADD_ITEM:
-      return addItem(state, action.item);
-    case CART_ACTIONS.CHANGE_ITEM:
-      return changeItem(state, action.item);
-    case CART_ACTIONS.REMOVE_ITEM:
-      return removeItem(state, action.item);
+    case CART_ACTIONS.UPDATE_ITEMS:
+        return {
+          ...state,
+          items: action.items,
+          size: action.items.length
+        }
     case CART_ACTIONS.FETCH_BEGINS:
+      return {
+        ...state,
+        opened: false,
+        loading: true,
+        size: 0
+      }
     case CART_ACTIONS.FETCH_SUCCESS:
+      return {
+        ...state,
+        items: action.items,
+        size: action.size,
+        orderPrice: action.orderPrice,
+        loading: false
+      }
     case CART_ACTIONS.FETCH_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        failure: true,
+        error: action.error,
+        size: 0
+      }
     default:
       return state;
   }

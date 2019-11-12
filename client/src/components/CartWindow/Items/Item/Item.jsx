@@ -13,38 +13,38 @@ export class Item extends React.Component {
   handleOnInput(event) {
     if ((/^[0-9]*$/g).test(event.target.value)) {
       this.setState({ amount: event.target.value });
-      this.props.itemAmountChange(this.props.data.item._id, event.target.value);
+      this.props.itemAmountChange(this.props.data._id, event.target.value);
     }
   }
 
   handleOnClickIncrement(event) {
     if (Number(this.state.amount) < 99) {
       this.setState({ amount: Number(this.state.amount) + 1 });
-      this.props.itemAmountChange(this.props.data.item._id, Number(this.state.amount) + 1);
+      this.props.itemAmountChange(this.props.data._id, Number(this.state.amount) + 1);
     }
   }
 
   handleOnClickDecrement(event) {
     if (Number(this.state.amount) > 1) {
       this.setState({ amount: this.state.amount - 1 });
-      this.props.itemAmountChange(this.props.data.item._id, Number(this.state.amount) - 1);
+      this.props.itemAmountChange(this.props.data._id, Number(this.state.amount) - 1);
     }
   }
 
   handleOnClickDelete() {
-    this.props.deleteItem(this.props.data.item._id);
+    this.props.deleteItem(this.props.data._id);
   }
 
   render() {
     return (
       <div className="card-window__item cart-window-item">
-        <img src={this.props.data.item.images[0]} className="cart-window-item__image" alt="item" />
+        <img src={this.props.data.images[0]} className="cart-window-item__image" alt="item" />
         <div className="cart-window-item__info">
           <h2 className="cart-window-item__name">
-            {this.props.data.item.name}
+            {this.props.data.name}
           </h2>
           <p className="cart-window-item__description">
-            {this.props.data.item.description}
+            {this.props.data.description}
           </p>
           <div className="cart-window-item__info-color-size">
             <p className="cart-window-item__size-wrapper">
@@ -57,7 +57,7 @@ export class Item extends React.Component {
             </div>
             <p className="cart-window-item__price-wrapper">
               Price:
-              <span className="cart-window-item__price"> {this.props.data.item.price}$</span>
+              <span className="cart-window-item__price"> {this.props.data.price}$</span>
             </p>
           </div>
         </div>
