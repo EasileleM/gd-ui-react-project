@@ -8,20 +8,16 @@ export const closeCart = () => {
   return cartActions.closeCart;
 }
 
-export const addItem = (item) => {
-  return {...cartActions.addItem, item};
-}
-
-export const removeItem = (item) => {
-  return {...cartActions.removeItem, item};
+export const updateItems = (items) => {
+  return {...cartActions.updateItems, items};
 }
 
 export const fetchItemsBegin = () => {
   return cartActions.fetchItemsBegin;
 }
 
-export const fetchItemsSuccess = (items) => {
-  return {...cartActions.fetchItemsSuccess, items};
+export const fetchItemsSuccess = (items, size, orderPrice) => {
+  return {...cartActions.fetchItemsSuccess, items, size, orderPrice};
 }
 
 export const fetchItemsFailure = (error) => {

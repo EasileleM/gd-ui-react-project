@@ -8,16 +8,8 @@ export const closeCart = {
   type: CART_ACTIONS.CLOSE
 };
 
-export const addItem = {
-  type: CART_ACTIONS.ADD_ITEM
-}
-
-export const removeItem = {
-  type: CART_ACTIONS.REMOVE_ITEM
-}
-
-export const changeItem = {
-  type: CART_ACTIONS.CHANGE_ITEM
+export const updateItems = {
+  type: CART_ACTIONS.UPDATE_ITEMS
 }
 
 export const fetchItemsBegin = {
