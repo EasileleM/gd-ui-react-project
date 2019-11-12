@@ -17,11 +17,16 @@ export default function addItem(state, itemToAdd, color, size, amount = 1) {
         itemAlreadyAdded = true;
         item.amount += amount;
       }
-      currentCollection[item.generalData._id] =
-        { size: item.size, color: item.color, amount: item.amount };
+      if (!currentCollection[item.generalData._id]) {
+        currentCollection[item.generalData._id] = [];
+      }
+      currentCollection[item.generalData._id].push({ size: item.size, color: item.color, amount: item.amount });
     }
     if (!itemAlreadyAdded) {
-      currentCollection[itemToAdd._id] = { size, color, amount };
+      if (!currentCollection[itemToAdd._id]) {
+        currentCollection[itemToAdd._id] = [];
+      }
+      currentCollection[itemToAdd._id].push({ size, color, amount });
       currentItems.push({ generalData: itemToAdd, size, color, amount });
     }
     dispatch(updateItemsActionCreator(currentItems));

@@ -1,14 +1,12 @@
 import { CART_ACTIONS } from '../actions/types';
-import addItem from '../utils/cart/addItem';
-import removeItem from '../utils/cart/removeItem';
-import changeItem from '../utils/cart/changeItem';
 
 const initialState = {
   size: 0,
   opened: false,
   loading: false,
   failure: false,
-  items: []
+  items: [],
+  orderPrice: 0
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -16,7 +14,7 @@ const cartReducer = (state = initialState, action) => {
     case CART_ACTIONS.OPEN:
       return {
         ...state,
-        opened: true
+        opened: !state.loading && !state.failure && state.size
       }
     case CART_ACTIONS.CLOSE:
       return {
@@ -24,10 +22,16 @@ const cartReducer = (state = initialState, action) => {
         opened: false
       }
     case CART_ACTIONS.UPDATE_ITEMS:
+        let orderPrice = 0;
+        for (const item of action.items) {
+          orderPrice += item.generalData.price * item.amount;
+        }
         return {
           ...state,
           items: action.items,
-          size: action.items.length
+          size: action.items.length,
+          orderPrice,
+          opened: state.opened && !state.loading && !state.failure && action.items.length
         }
     case CART_ACTIONS.FETCH_BEGINS:
       return {

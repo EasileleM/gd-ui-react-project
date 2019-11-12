@@ -6,7 +6,6 @@ import store from '../../../store';
 import addItem from '../../../utils/cart/addItem';
 
 export function AddToCartButton(props){
-  console.log(props.product)
     return (
       <button
         onClick={() => { 

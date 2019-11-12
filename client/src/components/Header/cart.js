@@ -10,7 +10,7 @@ class ShopCart extends React.Component {
   render() {
     return (
       <div className="header__icon-cart-wrapper">
-        <p className="header__cart-counter">{this.props.cartSize}</p>
+        <p className="header__cart-counter">{this.props.cartSize || 0}</p>
         <button onClick={() => store.dispatch(openCart())} className="header__icon header__icon_big header__icon_cart">
         </button>
       </div>
