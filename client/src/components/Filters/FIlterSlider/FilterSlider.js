@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import "./FilterSlider.scss"
 import ReactSlider from 'react-slider'
 import {toast} from 'react-toastify';
+import store from "../../../store";
+import {changeMinPriceFilter, changeMaxPriceFilter} from "../../../action-creators/filter-action-creator";
 
 
 class FilterSlider extends Component {
@@ -26,30 +28,38 @@ class FilterSlider extends Component {
       switch (e.target.name) {
         case "from":
           if (value < this.state.minValue) {
-            this.setState({minChosenValue: this.state.minValue})
+            this.setState({minChosenValue: this.state.minValue});
           } else if (value > this.state.maxChosenValue) {
-            this.setState({minChosenValue: this.state.maxChosenValue})
+            this.setState({minChosenValue: this.state.maxChosenValue});
           } else {
-            this.setState({minChosenValue: value})
+            this.setState({minChosenValue: value});
           }
           break;
         case "to":
           if (value > this.state.maxValue) {
-            this.setState({maxChosenValue: this.state.maxValue})
+            this.setState({maxChosenValue: this.state.maxValue});
           } else if (value < this.state.minChosenValue) {
-            this.setState({maxChosenValue: this.state.minChosenValue})
+            this.setState({maxChosenValue: this.state.minChosenValue});
           } else {
-            this.setState({maxChosenValue: value})
+            this.setState({maxChosenValue: value});
           }
           break;
       }
+
     }
-
-
   };
 
   componentDidMount() {
     setTimeout(() => this.forceUpdate(), 1)
+  };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(prevState.maxChosenValue !== this.state.maxChosenValue) {
+      store.dispatch(changeMaxPriceFilter( this.state.maxChosenValue));
+    }
+    if(prevState.minChosenValue !== this.state.minChosenValue) {
+      store.dispatch(changeMinPriceFilter( this.state.minChosenValue));
+    }
   }
 
   render() {

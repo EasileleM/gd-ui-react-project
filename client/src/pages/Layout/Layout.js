@@ -9,7 +9,6 @@ import {
 
 import "./Layout.scss";
 
-import Home from "../Home/Home";
 import NotFound from "../errors/404/NotFound";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
 
@@ -45,10 +44,9 @@ class Layout extends Component {
                         {
                             (this.props.error === 404) ? <Redirect to="/404" /> : null
                         }
-
                         <Header />
                         <Switch>
-                            <Route path="/" exact component={Home} />
+                            <Route path="/" exact component={Search} />
                             <Route path="/item/:id" component={ProductDescriptionPage} />
                             <Route path="/404" component={NotFound} />
                             <Redirect to="/" />

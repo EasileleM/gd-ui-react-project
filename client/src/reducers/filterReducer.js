@@ -1,21 +1,44 @@
-import {ERROR_404} from '../actions/types'
+import {FILTER_ACTIONS} from '../actions/types'
 
 
 const initialState = {
-  category: {},
-  prices
+  category: null,
+  minPrice: null,
+  maxPrice: null,
+  brands: [],
+  sizes: [],
 };
 
-const errorReducer = (state = initialState, action) => {
+const filterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ERROR_404:
+    case FILTER_ACTIONS.BRANDS:
       return {
         ...state,
-        errorCode: action.code,
+        brands: action.payload,
+      };
+      case FILTER_ACTIONS.CATEGORY:
+      return {
+        ...state,
+        category: action.payload,
+      };
+      case FILTER_ACTIONS.SIZES:
+      return {
+        ...state,
+        sizes: action.payload,
+      };
+      case FILTER_ACTIONS.MAXPRICE:
+      return {
+        ...state,
+        maxPrice: action.payload,
+      };
+      case FILTER_ACTIONS.MINPRICE:
+      return {
+        ...state,
+        minPrice: action.payload,
       };
     default:
       return state;
   }
 };
 
-export default errorReducer;
+export default filterReducer;

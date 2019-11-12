@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Filters from "../../components/Filters/Filters";
-import {ProductCatalog} from "../../components/ProductCatalog";
+import ProductCatalog from "../../components/ProductCatalog";
 import "./Search.scss"
 import {Newsletter} from "../../components/Newsletter";
 import FiltersButtonImage from "../../assets/controls.svg"
@@ -37,7 +37,7 @@ class Search extends Component {
                   <img className="search__toggle-icon" src={FiltersButtonImage} alt="Controls icon"/>
                   Filters
                 </button>
-                <ProductCatalog rowSize={3} size={3}/>
+                <ProductCatalog filtered={true} rowSize={3} size={3}/>
               </div>
             </div>
             <Newsletter/>

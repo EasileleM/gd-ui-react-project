@@ -1,24 +1,41 @@
 import React, {Component} from 'react';
 import "./FilterCheckbox.scss"
+import store from "../../../store";
+import {
+  changeBrandsFilter,
+  changeSizeFilter
+} from "../../../action-creators/filter-action-creator";
 
 class FilterCheckbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
       options: this.props.options,
-      selectedValues: [],
+      selectedValues: [this.props.options[0]],
+      name: this.props.name,
     };
   }
 
   handleClick = (e) => {
     const selectedValues = [...this.state.selectedValues];
     const value = e.target.value;
-    if(selectedValues.includes(value)) {
+    if (selectedValues.includes(value)) {
       selectedValues.splice(selectedValues.indexOf(e.target.value), 1)
     } else {
       selectedValues.push(e.target.value)
     }
-    this.setState({selectedValues: selectedValues})
+    this.setState({selectedValues: selectedValues});
+    switch (this.state.name) {
+      case "brands":
+        store.dispatch(changeBrandsFilter(selectedValues));
+        break;
+      case "sizes":
+        store.dispatch(changeSizeFilter(selectedValues));
+        break;
+      default:
+        break;
+    }
+
   };
 
   render() {

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import "./FilterRadio.scss"
+import store from '../../../store';
+import {changeCategoryFilter} from "../../../action-creators/filter-action-creator";
 
 class FilterRadio extends Component {
   constructor(props) {
@@ -11,7 +13,8 @@ class FilterRadio extends Component {
   }
 
   handleClick = (e) => {
-    this.setState({selectedValue: e.target.value})
+    this.setState({selectedValue: e.target.value});
+    store.dispatch(changeCategoryFilter(e.target.value));
   };
 
   render() {

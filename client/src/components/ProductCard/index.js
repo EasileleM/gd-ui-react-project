@@ -14,8 +14,10 @@ export class ProductCard extends Component {
     this.state = {
       amount: 1,
       size: this.props.product.sizes[0],
-      color: this.props.product.colors[0]
-    }
+      color: this.props.product.colors[0],
+      width: 0,
+    };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   handleSizeChange(changeEvent) {
