@@ -21,6 +21,7 @@ import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
 import i18n from '../../i18n';
 import NotFound from "../errors/404/NotFound";
 import {connect} from 'react-redux';
+import Search from "../Search/Search";
 
 class Layout extends Component {
     constructor(props) {
@@ -188,6 +189,7 @@ class Layout extends Component {
                         <Switch>
                             <Route path="/" exact render={(props) => <Home {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)} />} />
                             <Route path="/item/:id" render={(props) => <ProductDescriptionPage {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)} />} />
+                            <Route path="/search" render={(props) => <Search {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)} />} />
                             <Route path="/404" render={(props) => <NotFound {...props} addToCard={(item, size, color, amount) => this.addToCard(item, size, color, amount)}/>}/>
                           <Redirect to="/" />
                         </Switch>

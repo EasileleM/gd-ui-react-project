@@ -1,0 +1,72 @@
+@import "../../../style/main";
+
+
+.filter-slider {
+  margin-top: 40px;
+
+  &__slider {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  &__thumb {
+    width: 9px;
+    height: 9px;
+    border-radius: 5px;
+    background-color: $color-limed-spruce;
+    outline: none;
+    cursor: grab;
+  }
+
+  &__tooltip {
+    @include font-primary-regular-sm;
+    position: absolute;
+    color: $color-limed-spruce;
+    top: -30px;
+    left: -10px;
+
+    &_from-bottom {
+      @include font-primary-regular-sm;
+      position: absolute;
+      color: $color-limed-spruce;
+      top: 15px;
+      left: -10px;
+    }
+  }
+
+  &__track {
+    height: 3px;
+    background-color: $color-limed-spruce;
+  }
+
+  &__track-0, &__track-2 {
+    height: 3px;
+    background-color: $color-porcelain;
+  }
+
+  &__inputs-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__input-label {
+    display: flex;
+    @include font-primary-regular-sm;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__input {
+    @include font-primary-regular-sm;
+    background-color: $color-porcelain;
+    margin-left: 15px;
+    margin-right: 23px;
+    border: none;
+    width: 45px;
+    height: 25px;
+    outline: none;
+    padding-left: 10px;
+  }
+}
