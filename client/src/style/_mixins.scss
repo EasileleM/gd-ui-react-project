@@ -106,12 +106,12 @@
   font-family: $font-logo;
 }
 
-@mixin font-logo-regular {
+@mixin font-logo-bold {
   @include font-logo;
-  font-weight: 400;
+  font-weight: 700;
 }
 
-@mixin font-logo-regular-lg {
-  @include font-logo-regular;
-  font-size: $font-size-lg;
+@mixin font-logo-bold-xl {
+  @include font-logo-bold;
+  font-size: $font-size-xl;
 }

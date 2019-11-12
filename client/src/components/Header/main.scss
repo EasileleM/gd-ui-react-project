@@ -19,7 +19,7 @@
     line-height: normal;
     font-weight: 400;
     text-transform: none;
-    color: #000000;
+    color: $color-black;
     display: none;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -84,10 +84,10 @@
     box-sizing: border-box;
     margin-left: 15px;
     width: 20px;
-    height: 20px;
+    height: 21px;
 
     &:hover {
-      opacity: .5;
+      filter: invert(36%) sepia(51%) saturate(2878%);
       cursor: pointer;
     }
 
@@ -148,15 +148,54 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 30px;
     text-align: center;
   }
 
   &__logo {
-    background: url(../../assets/logo.png) no-repeat;
-    width: 120px;
-    height: 40px;
     cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+
+    &_title {
+      display: flex;
+      justify-content: space-between;
+      @include font-logo-bold-xl;
+      text-transform: uppercase;
+      color: $color-limed-spruce;
+      line-height: 23px;
+    }
+
+    &_text {
+      @include font-primary-regular-xs;
+      color: $color-river-bed;
+      opacity: 0.8;
+      letter-spacing: 2px;
+      line-height: 20px;
+    }
+
+    &_image {
+      display: inline-block;
+      width: 34px;
+      position: relative;
+      &::before {
+        content: '';
+        position: absolute;
+        width: 34px;
+        height: 17px;
+        background: url(../../assets/logo-ellipse.svg) no-repeat top;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 34px;
+        height: 20px;
+        background: url(../../assets/shopping-basket.svg) no-repeat center;
+        top: 3px;
+        filter: invert(100%);
+      }
+    }
   }
 
   &__links {
@@ -165,7 +204,7 @@
       flex-grow: 1;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       padding-left: 80px;
     }
 
@@ -218,7 +257,6 @@
       padding: 0;
       flex-wrap: wrap;
       margin-top: 20px;
-      align-items: flex-end;
     }
 
     &__logo {
@@ -240,10 +278,7 @@
     &__search-container {
       order: 1;
       margin-top: 20px;
-    }
-
-    &__icon_big {
-      margin: 0;
+      width: 100%;
     }
   }
 }
@@ -326,12 +361,10 @@
     box-sizing: border-box;
 
     & .header {
-      &__icon_big {
+      &__icon {
+        &_big, &-cart-wrapper, &_search {
         display: none;
-      }
-
-      &__icon-cart-wrapper {
-        display: none;
+        }
       }
 
       &__burger-menu {
@@ -340,6 +373,10 @@
 
       &__menu-button {
         order: 0;
+
+        &::after {
+          content: attr(data-opened);
+        }
       }
     }
   }
