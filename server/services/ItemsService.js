@@ -147,10 +147,14 @@ class ItemsService {
                         if (!item[field].length) {
                             return false;
                         }
+                        let matches = 0;
                         for (const value of item[field]) {
-                            if (!filters[field].has(value)) {
-                                return false;
+                            if (filters[field].has(value)) {
+                                matches++;
                             }
+                        }
+                        if (!matches) {
+                            return false;
                         }
                     }
                 }
