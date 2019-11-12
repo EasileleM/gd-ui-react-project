@@ -9,7 +9,7 @@ class ProductCatalog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 2,
+      page: 1,
       cards: [],
       ready: false,
       loading: true,

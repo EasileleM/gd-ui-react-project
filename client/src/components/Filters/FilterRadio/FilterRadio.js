@@ -8,7 +8,7 @@ class FilterRadio extends Component {
     super(props);
     this.state = {
       options: this.props.options,
-      selectedValue: this.props.options[0],
+      selectedValue: null,
     };
   }
 

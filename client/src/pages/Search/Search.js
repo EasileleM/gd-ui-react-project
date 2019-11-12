@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import Filters from "../../components/Filters/Filters";
 import ProductCatalog from "../../components/ProductCatalog";
-import "./Search.scss"
 import {Newsletter} from "../../components/Newsletter";
 import FiltersButtonImage from "../../assets/controls.svg"
+import "./Search.scss"
 
 class Search extends Component {
   constructor(props) {

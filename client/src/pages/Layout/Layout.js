@@ -23,6 +23,8 @@ import { changeBodyScrollState } from '../../utils/changeBodyScrollState';
 import fetchItems from '../../utils/cart/fetchItems';
 
 import store from '../../store';
+import Search from "../Search/Search";
+import Home from "../Home/Home";
 
 class Layout extends Component {
     componentDidMount() {
@@ -46,8 +48,9 @@ class Layout extends Component {
                         }
                         <Header />
                         <Switch>
-                            <Route path="/" exact component={Search} />
+                            <Route path="/" exact component={Home} />
                             <Route path="/item/:id" component={ProductDescriptionPage} />
+                            <Route path="/search" component={Search} />
                             <Route path="/404" component={NotFound} />
                             <Redirect to="/" />
                         </Switch>

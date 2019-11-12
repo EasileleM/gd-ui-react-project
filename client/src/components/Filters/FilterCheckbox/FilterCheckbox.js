@@ -11,7 +11,7 @@ class FilterCheckbox extends Component {
     super(props);
     this.state = {
       options: this.props.options,
-      selectedValues: [this.props.options[0]],
+      selectedValues: [],
       name: this.props.name,
     };
   }
