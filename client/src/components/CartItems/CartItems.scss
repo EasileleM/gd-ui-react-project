@@ -1,0 +1,23 @@
+.modal-window {
+  &__cart-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    box-sizing: border-box;
+    max-height: calc(100% - 50px);
+    padding: 40px 50px 0 50px;
+    background: #ffffff; 
+
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+     
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+     
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background: #ff5912; 
+    }
+  }
+}

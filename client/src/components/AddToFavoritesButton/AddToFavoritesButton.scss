@@ -1,0 +1,33 @@
+.addToFavoritesButton {
+  transition: 300ms ease;
+  flex-basis: 25px;
+  box-sizing: content-box;
+  border: 0;
+  height: 20px;
+  width: 25px;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  background-size: 100% 100%;
+  outline: 0;
+
+  &:hover {
+    opacity: .5;
+  }
+
+  &:focus {
+    opacity: .9;
+  }
+
+  &_enabled {
+    background-image: url("../../assets/likeEnabled.svg");
+  }
+
+  &_paddings {
+    padding: 0 18px;
+  }
+
+  &_disabled {
+    background-image: url("../../assets/likeDisabled.svg");
+  }
+}

@@ -1,7 +1,7 @@
 import React from 'react';
-import store from '../../../../store';
-import removeItem from '../../../../utils/cart/removeItem';
-import updateItem from '../../../../utils/cart/updateItem';
+import store from '../../../store';
+import removeItem from '../../../utils/cart/removeItem';
+import updateItem from '../../../utils/cart/updateItem';
 
 import './Item.scss';
 
