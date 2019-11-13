@@ -8,13 +8,13 @@ export default function notificationError(messageRu, messageEn, error) {
     if (i18n.language === 'ru') {
       (() => toast(messageRu, { type: toast.TYPE.ERROR }))();
     } else {
-      (() => toast(messageEn + errorCode, { type: toast.TYPE.ERROR }))();
+      (() => toast(messageEn, { type: toast.TYPE.ERROR }))();
     }
   } else if (errorCode >= 500 && errorCode < 600) {
     if (i18n.language === 'ru') {
       (() => toast('Сервер недоступен, попробуйте вернуться позднее.', { type: toast.TYPE.ERROR }))();
     } else {
-      (() => toast('Server is not available, try to reconnect later.' + errorCode, { type: toast.TYPE.ERROR }))();
+      (() => toast('Server is not available, try to reconnect later.', { type: toast.TYPE.ERROR }))();
     }
   }
 }
