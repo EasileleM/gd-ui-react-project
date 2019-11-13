@@ -15,6 +15,10 @@ $color-border: $color-athens-gray;
   font-weight: 700;
   perspective: 2500px;
 
+  &_three-cards {
+    width: calc((100% - 60px) / 3);
+  }
+
   @media screen and (max-width: 900px){
     width: calc((100% - 60px) / 3);
   }

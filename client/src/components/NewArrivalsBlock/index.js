@@ -2,7 +2,7 @@ import React from 'react';
 import { Translation } from 'react-i18next';
 
 import { SectionHeader } from '../SectionHeader/index.js';
-import { ProductCatalog } from '../ProductCatalog/index.js';
+import ProductCatalog  from '../ProductCatalog/index.js';
 
 import './main.scss';
 

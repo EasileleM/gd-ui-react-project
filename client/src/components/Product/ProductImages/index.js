@@ -33,7 +33,7 @@ class ProductImages extends Component {
     return (
         <div className="product-images">
           <img className="product-images__main" src={this.state.images[this.state.currentIndex]}
-               alt="Picture of the product"/>
+               alt="Product"/>
 
           <div className="product-images__row">
             {this.state.images.map((image, index) => {
@@ -44,7 +44,7 @@ class ProductImages extends Component {
                                   "product-images__image-wrapper_selected" : ""}`
                           }>
                 <img src={image}
-                     className={`product-images__small-image`} alt="Small picture of the product"/>
+                     className={`product-images__small-image`} alt="Miniature of the product"/>
               </div>
             })}
           </div>

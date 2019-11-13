@@ -14,9 +14,11 @@ export class ProductCard extends Component {
     this.state = {
       amount: 1,
       size: this.props.product.sizes[0],
-      color: this.props.product.colors[0]
-    }
+      color: this.props.product.colors[0],
+      width: 0,
+    };
   }
+
 
   handleSizeChange(changeEvent) {
     this.setState({
@@ -35,7 +37,7 @@ export class ProductCard extends Component {
     return (
       <Translation>
         {t =>
-          <div className='product-card'>
+          <div className={`product-card ${this.props.rowSize === 3 ? "product-card_three-cards": ""}`}>
             <div className='product-card__inner'>
               <div className='product-card__front'>
                 <img src={this.props.product.images[0]} alt={this.props.product.name} className='product-card__image product-card__image_front' />
