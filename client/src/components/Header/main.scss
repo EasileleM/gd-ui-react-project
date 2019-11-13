@@ -95,7 +95,11 @@
 
     &_big {
       width: 30px;
-      margin-left: 30px;
+      margin-left: 25px;
+    }
+
+    &_fav {
+      display: flex;
     }
 
     &_facebook {
@@ -160,8 +164,8 @@
       flex-grow: 1;
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
-      padding-left: 80px;
+      align-items: center;
+      padding-left: 20px;
     }
 
     &-item {
@@ -169,7 +173,8 @@
       color: $color-limed-spruce;
       font-size: $font-size-semi-md;
       padding: 0;
-      margin-right: 20px;
+      margin-right: 15px;
+      text-align: center;
       &:hover, &_active {
         color: $color-orange;
       }
@@ -234,14 +239,14 @@
 
 @media all and (max-width: $breakpoint-tablet-vertical) {
   .header {
-    &__links-item {
-      margin-right: 20px;
-    }
-
     &__search-container {
       order: 1;
       margin-top: 20px;
       width: 100%;
+    }
+
+    &__icon_fav {
+      justify-content: flex-end;
     }
   }
 }
@@ -260,8 +265,6 @@
       }
 
       &_lg {
-        position: sticky;
-        top: 0;
         background: $color-white;
         flex-direction: row;
         padding: 10px;
@@ -280,6 +283,10 @@
 
       &_big {
         margin: 0;
+      }
+
+      &_fav {
+        justify-content: center;
       }
 
       &_cart {

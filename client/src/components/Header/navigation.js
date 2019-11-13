@@ -19,7 +19,7 @@ class Navigation extends Component {
               <div className="header__logo">
                 <Logo />
               </div>
-              <input type="checkbox" id="headerMenuData" className="header__menu-data-input"></input>
+              <input type="checkbox" id="headerMenuData" className="header__menu-data-input" />
               <nav className="header__links-container">
                 <label className="header__menu-button" htmlFor="headerMenuData" data-opened="⨯" data-closed="≡"></label>
                 <Link className="header__burger-menu header__text header__links-item header__text_lg header__links-item_active" to="/">
@@ -38,15 +38,15 @@ class Navigation extends Component {
                   {t('navigation.contact')}
                 </a>
                 <form className="header__burger-menu header__search-container" method="POST" name="search">
-                  <input className="header__search-button" type="checkbox" id="search-button">
-                  </input>
-                  <input className="header__search-bar" type="text">
-                  </input>
+                  <input className="header__search-button" type="checkbox" id="search-button" />
+                  <input className="header__search-bar" type="text"/>
                   <label className="header__icon header__icon_search" tabIndex="7" htmlFor="search-button">
                   </label>
                 </form>
                 <User />
-                <AddToFavoriteButton openFavorites={true}/>
+                <div className="header__icon_big header__icon_fav">
+                  <AddToFavoriteButton openFavorites={true}/>
+                </div>
                 <ShopCart />
               </nav>
             </section>
