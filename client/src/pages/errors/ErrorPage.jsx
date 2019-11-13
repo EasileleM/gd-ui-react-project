@@ -1,22 +1,39 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import "./ErrorPage.scss"
+import i18n from '../../i18n';
 
 class ErrorPage extends Component {
+
   render() {
-    console.log(this.props.error,'errpage')
+    let message = '';
+    if (i18n.language === 'ru') {
+      if (this.props.error === 404) {
+        message = 'Страница не найдена.'
+      }
+      if (this.props.error === 400) {
+        message = 'Неверный запрос.'
+      }
+      if (this.props.error === 500) {
+        message = 'Сервер недоступен, попробуйте вернуться позднее.'
+      }
+    } else {
+      if (this.props.error === 404) {
+        message = 'Page you\'re looking for is nowhere to be found.'
+      }
+      if (this.props.error === 400) {
+        message = 'Bad request.'
+      }
+      if (this.props.error === 500) {
+        message = 'Server is not available, try to reconnect later.'
+      }
+    }
     return (
       <div className="error-page">
         <h1 className="error-page__header">{this.props.error}</h1>
-        <p className="error-page__paragraph">Page you're looking for is nowhere to be found.</p>
+        <p className="error-page__paragraph">{message}</p>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    error: state.errorHandler.errorCode,
-  }
-};
-export default connect(mapStateToProps)(ErrorPage);
+export default ErrorPage;
