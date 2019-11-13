@@ -4,6 +4,7 @@ import { ItemCardSmall } from '../ItemCardSmall/index.js';
 
 import './main.scss';
 import loadCard from "../../utils/loadCard";
+import notificationError from '../../utils/notificationError';
 
 export class ProductSmallContainer extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export class ProductSmallContainer extends Component {
         nextPage: result.data.nextPage
       })
     }).catch((error) => {
-      error.notify();
+      notificationError('Таких товаров не существует', 'Products you\'re looking for is nowhere to be found.', error)
     });
   }
 

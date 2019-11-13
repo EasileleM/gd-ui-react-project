@@ -1,4 +1,5 @@
 import { CART_ACTIONS } from '../actions/types';
+import notificationSuccess from '../utils/notificationSuccess';
 
 const initialState = {
   size: 0,
@@ -12,6 +13,9 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case CART_ACTIONS.OPEN:
+      if (!(!state.loading && !state.failure && state.size)) {
+        notificationSuccess('Корзина пустая, вы не можете открыть её', 'Cart is empty, you can\'t open it', '')
+      }
       return {
         ...state,
         opened: !state.loading && !state.failure && state.size

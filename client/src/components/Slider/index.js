@@ -6,6 +6,7 @@ import { Buttons } from './Buttons/index.js';
 import { Images } from './Images/index.js';
 import { ContentBlock } from './ContentBlock/index.js';
 import loadSlides from "../../utils/loadSlides";
+import notificationError from "../../utils/notificationError";
 
 export class Slider extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export class Slider extends React.Component {
         data: res.data
       })
     }).catch((error) => {
-      error.notify();
+      notificationError('Таких товаров для слайдера не существует', 'Products you\'re looking for slider is nowhere to be found.', error)
     });
     this.setState({ slideTimer: this.switchSlideTimer() });
   }

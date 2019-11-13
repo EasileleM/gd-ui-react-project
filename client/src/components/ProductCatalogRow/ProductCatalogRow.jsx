@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ProductsContainer } from '../ProductsContainer/index.js'
 import loadRelated from "../../utils/loadRelated";
+import notificationError from '../../utils/notificationError';
 
 import './ProductCatalogRow.scss';
 
@@ -15,15 +16,15 @@ export class ProductCatalogRow extends React.Component {
     };
   }
 
- componentDidMount() {
+  componentDidMount() {
     loadRelated(this.props.id).then(result => {
       this.setState({
         ready: true,
         cards: [...result.data.items],
         loading: false,
       })
-    }).catch((error)=>{
-      error.notify();
+    }).catch((error) => {
+      notificationError('Таких товаров не существует', 'Products you\'re looking for is nowhere to be found.', error)
     });
   }
 

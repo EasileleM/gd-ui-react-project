@@ -3,6 +3,7 @@ import {ShowMoreButton} from './ShowMoreButton/index.js';
 import {ProductsContainer} from '../ProductsContainer/index.js'
 import loadCard from "../../utils/loadCard";
 import './main.scss';
+import notificationError from '../../utils/notificationError.js';
 import {connect} from "react-redux";
 
 class ProductCatalog extends React.Component {
@@ -47,7 +48,7 @@ class ProductCatalog extends React.Component {
         nextPage: result.data.nextPage
       })
     }).catch((error) => {
-      console.log(error)
+      notificationError('Таких товаров не существует', 'Products you\'re looking for is nowhere to be found.', error);
     });
   }
 
