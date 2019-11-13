@@ -6,6 +6,7 @@ import ShopCart from './cart';
 
 import './main.scss';
 import { Link } from "react-router-dom";
+import AddToFavoriteButton from '../AddToFavoritesButton/AddToFavoritesButton';
 
 class Navigation extends Component {
   render() {
@@ -51,6 +52,7 @@ class Navigation extends Component {
                   </label>
                 </form>
                 <User />
+                <AddToFavoriteButton openFavorites={true}/>
                 <ShopCart />
               </nav>
             </section>

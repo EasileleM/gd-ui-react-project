@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Translation } from 'react-i18next';
 import { Link } from 'react-router-dom'
 import { AddToCartButton } from './AddToCartButton/index.js';
-import { AddToFavoriteButton } from './AddToFavoriteButton/index.js';
+import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import { SizesSelector } from './SizesSelector/index.js';
 import { ColorSelector } from './ColorSelector/index.js';
 
@@ -68,7 +68,7 @@ export class ProductCard extends Component {
                     <AddToCartButton size={this.state.size} color={this.state.color} product={this.props.product} />
                   </div>
                   <div className='product-card__add-to-favorite'>
-                    <AddToFavoriteButton />
+                    <AddToFavoritesButton data={this.props.product}/>
                   </div>
                 </div>
               </div>

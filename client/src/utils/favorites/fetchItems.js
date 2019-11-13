@@ -19,7 +19,7 @@ export default function fetchItems() {
           delete storage[id];
         }
         updateLocalStorageCollection('FavoritesItems', storage);
-        dispatch(fetchItemsSuccess(result.data.items));
+        dispatch(fetchItemsSuccess(result.data.items, result.data.items.length));
       })
       .catch(error => dispatch(fetchItemsFailure(error)));
   };

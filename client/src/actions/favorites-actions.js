@@ -1,10 +1,10 @@
 import { FAVORITES_ACTIONS } from './types';
 
-export const openCart = {
+export const openFavorites = {
   type: FAVORITES_ACTIONS.OPEN
 };
 
-export const closeCart = {
+export const closeFavorites = {
   type: FAVORITES_ACTIONS.CLOSE
 };
 

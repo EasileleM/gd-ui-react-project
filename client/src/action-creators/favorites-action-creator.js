@@ -1,11 +1,11 @@
 import * as fatoritesActions from '../actions/favorites-actions';
 
-export const openCart = () => {
-  return fatoritesActions.openCart;
+export const openFavorites = () => {
+  return fatoritesActions.openFavorites;
 }
 
-export const closeCart = () => {
-  return fatoritesActions.closeCart;
+export const closeFavorites = () => {
+  return fatoritesActions.closeFavorites;
 }
 
 export const updateItems = (items) => {

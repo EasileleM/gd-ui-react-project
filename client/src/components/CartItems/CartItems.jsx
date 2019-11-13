@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './Items.scss';
+import './CartItems.scss';
 import { connect } from 'react-redux';
 import { Item } from './Item/Item';
 
-function Items(props) {
+function CartItems(props) {
   const items = props.items.map((item, index) => {
     return <Item
             key={index}
@@ -24,4 +24,4 @@ const mapStateToProps = (state) => {
       items: state.cartController.items
   }
 };
-export default connect(mapStateToProps)(Items);
+export default connect(mapStateToProps)(CartItems);

@@ -1,6 +1,6 @@
 import errorReducer from './errorReducer';
 import cartReducer from './cartReducer';
-import favoritesReducer from './cartReducer';
+import favoritesReducer from './favoritesReducer';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
