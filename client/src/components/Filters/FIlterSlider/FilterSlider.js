@@ -14,6 +14,7 @@ class FilterSlider extends Component {
       minValue: props.minValue,
       minChosenValue: props.minValue,
       maxChosenValue: props.maxValue,
+      minDistanceBetweenThumbs: ((props.maxValue - props.minValue) / 100) * 20
     }
   }
 
@@ -57,8 +58,8 @@ class FilterSlider extends Component {
     if(prevState.maxChosenValue !== this.state.maxChosenValue) {
       store.dispatch(changeMaxPriceFilter( this.state.maxChosenValue));
     }
-    if(prevState.minChosenValue !== this.state.minChosenValue) {
-      store.dispatch(changeMinPriceFilter( this.state.minChosenValue));
+    if (prevState.minChosenValue !== this.state.minChosenValue) {
+      store.dispatch(changeMinPriceFilter(this.state.minChosenValue));
     }
   }
 
@@ -77,7 +78,8 @@ class FilterSlider extends Component {
               renderThumb={
                 (props, state) =>
                     <div {...props}>
-                      <div className={this.state.maxChosenValue - this.state.minChosenValue < 200 && state.index === 1? "filter-slider__tooltip_from-bottom" : "filter-slider__tooltip" }>
+                      <div
+                          className={this.state.maxChosenValue - this.state.minChosenValue < this.state.minDistanceBetweenThumbs && state.index === 1 ? "filter-slider__tooltip_from-bottom" : "filter-slider__tooltip"}>
                         {state.valueNow}$
                       </div>
                     </div>}
