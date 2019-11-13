@@ -13,7 +13,7 @@ function CartItems(props) {
           />
   });
   return (
-    <div className="card-window__items">
+    <div className="modal-window__cart-items">
       {items}
     </div>
   )

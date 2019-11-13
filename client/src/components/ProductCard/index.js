@@ -5,10 +5,11 @@ import { AddToCartButton } from './AddToCartButton/index.js';
 import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import { SizesSelector } from './SizesSelector/index.js';
 import { ColorSelector } from './ColorSelector/index.js';
+import { connect } from 'react-redux';
 
 import './main.scss';
 
-export class ProductCard extends Component {
+class ProductCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +30,6 @@ export class ProductCard extends Component {
       color: changeEvent.target.value
     });
   };
-
 
   render() {
     return (
@@ -68,7 +68,10 @@ export class ProductCard extends Component {
                     <AddToCartButton size={this.state.size} color={this.state.color} product={this.props.product} />
                   </div>
                   <div className='product-card__add-to-favorite'>
-                    <AddToFavoritesButton data={this.props.product}/>
+                    <AddToFavoritesButton
+                      enabled={this.props.favoritesItems.find((item) => item._id === this.props.product._id) !== undefined}
+                      data={this.props.product}
+                    />
                   </div>
                 </div>
               </div>
@@ -79,3 +82,10 @@ export class ProductCard extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    favoritesItems: state.favoritesController.items
+  }
+};
+export default connect(mapStateToProps)(ProductCard);

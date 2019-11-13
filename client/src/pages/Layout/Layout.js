@@ -38,7 +38,7 @@ class Layout extends Component {
     }
 
     componentDidUpdate() {
-        changeBodyScrollState(this.props.cartOpened);
+        changeBodyScrollState(this.props.cartOpened || this.props.favoritesOpened);
     }
 
     render() {

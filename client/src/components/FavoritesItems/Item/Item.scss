@@ -1,18 +1,15 @@
 @import "../../../style/main.scss";
 
-
-.card-window__item {
+.modal-window__item {
   width: 100%;
 }
 
-.cart-window-item {
+.favorites-window-item {
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
   border-bottom: 2px solid #f4f6f8;
   padding-bottom: 40px;
-
-  
 
   &__image {
     margin-right: 20px;
@@ -37,12 +34,11 @@
     }
   }
 
-  &__price{
+  &__price {
     color: #ff5912;
     &-wrapper {
       @include font-primary-semi-bold-sm;
       margin: 0;
-      margin-left: 30px;
       color: #3c4751;
     }
   }
@@ -113,11 +109,11 @@
         color: #34404b;
 
         &:hover {
-          opacity: .7;
+          opacity: 0.7;
         }
 
         &:focus {
-          opacity: .7;
+          opacity: 0.7;
         }
       }
     }

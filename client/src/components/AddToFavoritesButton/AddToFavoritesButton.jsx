@@ -11,7 +11,13 @@ class AddToFavoritesButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      enabled: false
+      enabled: props.enabled || false
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.enabled !== this.state.enabled) {
+      this.setState({enabled: this.props.enabled});
     }
   }
 
