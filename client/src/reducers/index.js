@@ -1,8 +1,8 @@
-import errorReducer from './errorReducer';
-import cartReducer from './cartReducer';
-import favoritesReducer from './favoritesReducer';
+import {errorReducer} from './errorReducer';
+import {cartReducer} from './cartReducer';
+import {favoritesReducer} from './favoritesReducer';
 import {combineReducers} from "redux";
-import filterReducer from "./filterReducer";
+import {filterReducer} from "./filterReducer";
 
 const rootReducer = combineReducers({
   errorHandler: errorReducer,

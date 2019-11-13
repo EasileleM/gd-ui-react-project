@@ -1,37 +1,37 @@
-import {FILTER_ACTIONS} from '../actions/types'
+import { FILTER_ACTIONS } from '../actions/types'
 
 
-const initialState = {
+export const initialState = {
   category: null,
   minPrice: null,
   maxPrice: null,
   brands: [],
-  sizes: [],
+  sizes: []
 };
 
-const filterReducer = (state = initialState, action) => {
+export const filterReducer = (state = initialState, action) => {
   switch (action.type) {
     case FILTER_ACTIONS.BRANDS:
       return {
         ...state,
         brands: action.payload,
       };
-      case FILTER_ACTIONS.CATEGORY:
+    case FILTER_ACTIONS.CATEGORY:
       return {
         ...state,
         category: action.payload,
       };
-      case FILTER_ACTIONS.SIZES:
+    case FILTER_ACTIONS.SIZES:
       return {
         ...state,
         sizes: action.payload,
       };
-      case FILTER_ACTIONS.MAXPRICE:
+    case FILTER_ACTIONS.MAXPRICE:
       return {
         ...state,
         maxPrice: action.payload,
       };
-      case FILTER_ACTIONS.MINPRICE:
+    case FILTER_ACTIONS.MINPRICE:
       return {
         ...state,
         minPrice: action.payload,
@@ -40,5 +40,3 @@ const filterReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default filterReducer;

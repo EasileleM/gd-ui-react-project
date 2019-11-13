@@ -1,6 +1,6 @@
 import { FAVORITES_ACTIONS } from '../actions/types';
 
-const initialState = {
+export const initialState = {
   size: 0,
   opened: false,
   loading: false,
@@ -8,12 +8,12 @@ const initialState = {
   items: []
 };
 
-const favoritesReducer = (state = initialState, action) => {
+export const favoritesReducer = (state = initialState, action) => {
   switch (action.type) {
     case FAVORITES_ACTIONS.OPEN:
       return {
         ...state,
-        opened: !state.loading && !state.failure && state.size
+        opened: Boolean(!state.loading && !state.failure && state.size)
       }
     case FAVORITES_ACTIONS.CLOSE:
       return {
@@ -25,7 +25,7 @@ const favoritesReducer = (state = initialState, action) => {
           ...state,
           items: action.items,
           size: action.items.length,
-          opened: state.opened && !state.loading && !state.failure && action.items.length
+          opened: Boolean(state.opened && !state.loading && !state.failure && action.items.length)
         }
     case FAVORITES_ACTIONS.FETCH_BEGINS:
       return {
@@ -53,5 +53,3 @@ const favoritesReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default favoritesReducer;
