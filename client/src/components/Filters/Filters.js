@@ -36,7 +36,7 @@ class Filters extends Component {
             <h2 className="filter__heading">Price Filter</h2>
             {
               this.state.filters ?
-                  <FilterSlider maxValue={Number(this.state.filters.maxprice)} minValue={Number(this.state.filters.minprice) }/> : ""
+                  <FilterSlider slideIn={this.props.slideIn} maxValue={Number(this.state.filters.maxprice)} minValue={Number(this.state.filters.minprice) }/> : ""
             }
           </div>
 

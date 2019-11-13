@@ -95,6 +95,7 @@
 
   &__toggle-off {
     display: none;
+    visibility: hidden;
 
     &_active {
       font-size: 0;
@@ -136,6 +137,20 @@
 
     @media screen and (max-width: $breakpoint-tablet) {
       margin-left: 0;
+    }
+  }
+
+  &__mobile-input {
+    display: none;
+    @media screen and (max-width: $breakpoint-smartphone) {
+      display: block;
+      position: fixed;
+      top:0;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+      border: 1px solid $color-orange;
+      border-radius: 20px;
     }
   }
 }
