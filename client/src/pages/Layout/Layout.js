@@ -9,7 +9,7 @@ import {
 
 import "./Layout.scss";
 
-import NotFound from "../errors/404/NotFound";
+import ErrorPage from "../errors/ErrorPage";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
 
 import { Header } from "../../components/Header";
@@ -44,14 +44,23 @@ class Layout extends Component {
                             (this.props.cartOpened) ? <CartWindow /> : null
                         }
                         {
-                            (this.props.error === 404) ? <Redirect to="/404" /> : null
+                            (this.props.error === 400) ? <Redirect to='/400' /> : null
+                            
+                        }
+                        {
+                            (this.props.error === 404) ? <Redirect to='/404' /> : null
+                        }
+                        {
+                            (this.props.error === 500) ? <Redirect to='/500' /> : null
                         }
                         <Header />
                         <Switch>
                             <Route path="/" exact component={Home} />
                             <Route path="/item/:id" component={ProductDescriptionPage} />
                             <Route path="/search" component={Search} />
-                            <Route path="/404" component={NotFound} />
+                            <Route path="/400" component={() => <ErrorPage error={400} />} />
+                            <Route path="/404" component={() => <ErrorPage error={404} />} />
+                            <Route path="/500" component={() => <ErrorPage error={500} />} />
                             <Redirect to="/" />
                         </Switch>
                         <Footer />
