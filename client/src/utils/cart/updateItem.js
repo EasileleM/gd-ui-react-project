@@ -42,6 +42,5 @@ export default function updateItem(state, target, color, size, amount) {
 
     dispatch(updateItemsActionCreator(currentItems));
     updateLocalStorageCollection('CartItems', currentCollection);
-    notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', target.generalData.name)
   };
 }
