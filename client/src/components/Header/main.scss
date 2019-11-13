@@ -54,9 +54,11 @@
     font-family: $font-primary;
     font-style: normal;
     padding: 0 10px;
+    text-decoration: none;
 
     &_md {
       font-size: $font-size-xs;
+      color: $color-limed-spruce;
     }
 
     &_email::before {
@@ -126,12 +128,13 @@
       width: 28px;
       padding: 0;
       background-color: transparent;
-      background: url(../../assets/Cart_Ico.png) no-repeat right;
-      background-position: center;
+      background: url(../../assets/Cart_Ico.png) no-repeat bottom;
     }
   }
 
   &__cart-counter {
+    position: absolute;
+    top: -18px;
     @include font-primary-light-xxs;
     display: flex;
     justify-content: center;
@@ -149,57 +152,10 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-  }
-
-  &__logo {
-    cursor: pointer;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-
-    &_title {
-      display: flex;
-      justify-content: space-between;
-      @include font-logo-bold-xl;
-      text-transform: uppercase;
-      color: $color-limed-spruce;
-      line-height: 23px;
-    }
-
-    &_text {
-      @include font-primary-regular-xs;
-      color: $color-river-bed;
-      opacity: 0.8;
-      letter-spacing: 2px;
-      line-height: 20px;
-    }
-
-    &_image {
-      display: inline-block;
-      width: 34px;
-      position: relative;
-      &::before {
-        content: '';
-        position: absolute;
-        width: 34px;
-        height: 17px;
-        background: url(../../assets/logo-ellipse.svg) no-repeat top;
-      }
-
-      &::after {
-        content: '';
-        position: absolute;
-        width: 34px;
-        height: 20px;
-        background: url(../../assets/shopping-basket.svg) no-repeat center;
-        top: 3px;
-        filter: invert(100%);
-      }
-    }
+    position: relative;
   }
 
   &__links {
-
     &-container {
       flex-grow: 1;
       display: flex;
@@ -246,11 +202,18 @@
   }
 }
 
-@media all and (max-width: 1024px) {
+@media all and (max-width: $breakpoint-tablet) {
   .header {
-    &__wrapper_column {
+    padding: 0 30px;
+    &__wrapper {
+      &_column {
       flex-direction: column;
       align-items: stretch;
+      }
+
+      &_lg {
+        padding: 20px 0;
+      }
     }
 
     &__links-container {
@@ -269,7 +232,7 @@
   }
 }
 
-@media all and (max-width: 1023px) {
+@media all and (max-width: $breakpoint-tablet-vertical) {
   .header {
     &__links-item {
       margin-right: 20px;
@@ -283,7 +246,7 @@
   }
 }
 
-@media all and (max-width: 767px) {
+@media all and (max-width: $breakpoint-smartphone) {
   .header {
     padding: 0;
     &__wrapper  {
@@ -295,14 +258,32 @@
         justify-content: space-around;
         width: 100%;
       }
+
+      &_lg {
+        position: sticky;
+        top: 0;
+        background: $color-white;
+        flex-direction: row;
+        padding: 10px;
+        border: 0;
+      }
+
+      &_sm {
+        padding: 10px 0;
+      }
     }
 
     &__icon {
       margin: 0;
       margin-top: 10px;
       background-position: center;
+
       &_big {
         margin: 0;
+      }
+
+      &_cart {
+        background-position: bottom;
       }
 
       &_search {
@@ -323,18 +304,19 @@
 
     &__links-container {
       flex-direction: row;
-      align-items: flex-end;
+      align-items: center;
       margin: 0;
-      margin-top: 20px;
       flex-grow: initial;
-      justify-content: space-around;
-      width: 100%;
+      justify-content: space-between;
+      flex-grow: 1;
+      padding-left: 20px;
     }
 
     &__menu-button {
       display: block;
       order: 1;
-      margin-bottom: -12px;
+      margin: 0;
+      margin-top: -12px;
     }
 
     &__burger-menu {
