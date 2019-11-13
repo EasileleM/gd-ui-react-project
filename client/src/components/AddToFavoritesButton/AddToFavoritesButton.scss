@@ -12,11 +12,11 @@
   outline: 0;
 
   &:hover {
-    opacity: .5;
+    transform: scale(1.2);
   }
 
   &:focus {
-    opacity: .9;
+    transform: scale(1.2);
   }
 
   &_enabled {
