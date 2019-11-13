@@ -1,0 +1,21 @@
+@import "../../../style/main";
+
+.filter-radio {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    @include font-primary-regular-md;
+    color: $color-limed-spruce;
+    margin-top: 20px;
+  }
+
+  &__button{
+    display: none;
+
+    &:checked + span {
+      color: $color-orange;
+      text-shadow:0px 0px 1px $color-orange;
+    }
+  }
+}
