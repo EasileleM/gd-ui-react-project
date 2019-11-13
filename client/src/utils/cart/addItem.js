@@ -1,6 +1,7 @@
 import { updateItems as updateItemsActionCreator } from '../../action-creators/cart-action-creator';
 
 import updateLocalStorageCollection from '../localStorage/updateLocalStorageCollection';
+import notificationSuccess from '../notificationSuccess';
 
 export default function addItem(state, itemToAdd, color, size, amount = 1) {
   return dispatch => {
@@ -31,5 +32,6 @@ export default function addItem(state, itemToAdd, color, size, amount = 1) {
     }
     dispatch(updateItemsActionCreator(currentItems));
     updateLocalStorageCollection('CartItems', currentCollection);
+    notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', itemToAdd.name);
   };
 }

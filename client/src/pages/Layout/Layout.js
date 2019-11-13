@@ -9,8 +9,7 @@ import {
 
 import "./Layout.scss";
 
-import Home from "../Home/Home";
-import NotFound from "../errors/404/NotFound";
+import ErrorPage from "../errors/ErrorPage";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
 
 import { Header } from "../../components/Header";
@@ -30,6 +29,8 @@ import {default as fetchFavorites} from '../../utils/favorites/fetchItems';
 import store from '../../store';
 import { closeCart } from '../../action-creators/cart-action-creator';
 import { closeFavorites } from '../../action-creators/favorites-action-creator';
+import Search from "../Search/Search";
+import Home from "../Home/Home";
 
 class Layout extends Component {
     componentDidMount() {
@@ -53,14 +54,23 @@ class Layout extends Component {
                             (this.props.favoritesOpened) ? <ModalWindow content={<><FavoritesItems /></>} onClick={() => store.dispatch(closeFavorites())} /> : null
                         }
                         {
-                            (this.props.error === 404) ? <Redirect to="/404" /> : null
+                            (this.props.error === 400) ? <Redirect to='/400' /> : null
+                            
                         }
-
+                        {
+                            (this.props.error === 404) ? <Redirect to='/404' /> : null
+                        }
+                        {
+                            (this.props.error === 500) ? <Redirect to='/500' /> : null
+                        }
                         <Header />
                         <Switch>
                             <Route path="/" exact component={Home} />
                             <Route path="/item/:id" component={ProductDescriptionPage} />
-                            <Route path="/404" component={NotFound} />
+                            <Route path="/search" component={Search} />
+                            <Route path="/400" component={() => <ErrorPage error={400} />} />
+                            <Route path="/404" component={() => <ErrorPage error={404} />} />
+                            <Route path="/500" component={() => <ErrorPage error={500} />} />
                             <Redirect to="/" />
                         </Switch>
                         <Footer />
