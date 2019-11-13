@@ -1,8 +1,8 @@
 import React from 'react';
 import { Translation } from 'react-i18next';
-import store from '../../../../store';
-import removeItem from '../../../../utils/cart/removeItem';
-import updateItem from '../../../../utils/cart/updateItem';
+import store from '../../../store';
+import removeItem from '../../../utils/cart/removeItem';
+import updateItem from '../../../utils/cart/updateItem';
 
 import './Item.scss';
 
