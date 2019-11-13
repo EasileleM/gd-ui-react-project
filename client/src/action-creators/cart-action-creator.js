@@ -13,7 +13,7 @@ export const updateItems = (items) => {
 }
 
 export const fetchItemsBegin = () => {
-  return cartActions.fetchItemsBegin;
+  return {...cartActions.fetchItemsBegin};
 }
 
 export const fetchItemsSuccess = (items, size, orderPrice) => {

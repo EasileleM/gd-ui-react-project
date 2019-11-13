@@ -1,7 +1,7 @@
 import { CART_ACTIONS } from '../actions/types';
 import notificationSuccess from '../utils/notificationSuccess';
 
-const initialState = {
+export const initialState = {
   size: 0,
   opened: false,
   loading: false,
@@ -10,7 +10,7 @@ const initialState = {
   orderPrice: 0
 };
 
-const cartReducer = (state = initialState, action) => {
+export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case CART_ACTIONS.OPEN:
       if (!(!state.loading && !state.failure && state.size)) {
@@ -18,7 +18,7 @@ const cartReducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        opened: !state.loading && !state.failure && state.size
+        opened: Boolean(!state.loading && !state.failure && state.size)
       }
     case CART_ACTIONS.CLOSE:
       return {
@@ -35,7 +35,7 @@ const cartReducer = (state = initialState, action) => {
           items: action.items,
           size: action.items.length,
           orderPrice,
-          opened: state.opened && !state.loading && !state.failure && action.items.length
+          opened: Boolean(state.opened && !state.loading && !state.failure && action.items.length)
         }
     case CART_ACTIONS.FETCH_BEGINS:
       return {
@@ -64,5 +64,3 @@ const cartReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default cartReducer;
