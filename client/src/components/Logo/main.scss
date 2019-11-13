@@ -1,0 +1,50 @@
+@import '../../style/main.scss';
+
+.logo {
+  width: 135px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    @include font-logo-bold-xl;
+    text-transform: uppercase;
+    color: $color-limed-spruce;
+    line-height: 23px;
+  }
+
+  &__text {
+    @include font-primary-regular-xs;
+    color: $color-river-bed;
+    opacity: 0.8;
+    letter-spacing: 2px;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  &__image {
+    display: inline-block;
+    width: 34px;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 34px;
+      height: 17px;
+      background: url(../../assets/logo-ellipse.svg) no-repeat top;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 34px;
+      height: 20px;
+      background: url(../../assets/shopping-basket.svg) no-repeat center;
+      top: 3px;
+      filter: invert(100%);
+    }
+  }
+}

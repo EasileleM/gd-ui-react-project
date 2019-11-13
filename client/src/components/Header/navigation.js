@@ -7,6 +7,7 @@ import ShopCart from './cart';
 import './main.scss';
 import { Link } from "react-router-dom";
 import AddToFavoriteButton from '../AddToFavoritesButton/AddToFavoritesButton';
+import { Logo } from '../Logo';
 
 class Navigation extends Component {
   render() {
@@ -15,25 +16,18 @@ class Navigation extends Component {
         {
           t =>
             <section id="header" className="header__wrapper header__wrapper_page header__wrapper_lg header__wrapper_column">
-              <Link className="header__logo" to="/">
-                <div className="header__logo_title">
-                  sh
-                  <div className="header__logo_image"></div>
-                  py
-                </div>
-                <div className="header__logo_text">
-                  shope any where
-                </div>
-              </Link>
-              <input type="checkbox" id="headerMenuData" className="header__menu-data-input"></input>
+              <div className="header__logo">
+                <Logo />
+              </div>
+              <input type="checkbox" id="headerMenuData" className="header__menu-data-input" />
               <nav className="header__links-container">
                 <label className="header__menu-button" htmlFor="headerMenuData" data-opened="⨯" data-closed="≡"></label>
                 <Link className="header__burger-menu header__text header__links-item header__text_lg header__links-item_active" to="/">
                   {t('navigation.home')}
                 </Link>
-                <a className="header__burger-menu header__text header__links-item header__text_lg" href="google.com">
+                <Link className="header__burger-menu header__text header__links-item header__text_lg" to="/search">
                   {t('navigation.products')}
-                </a>
+                </Link>
                 <a className="header__burger-menu header__text header__links-item header__text_lg" href="google.com">
                   {t('navigation.hotDeals')}
                 </a>
@@ -44,15 +38,15 @@ class Navigation extends Component {
                   {t('navigation.contact')}
                 </a>
                 <form className="header__burger-menu header__search-container" method="POST" name="search">
-                  <input className="header__search-button" type="checkbox" id="search-button">
-                  </input>
-                  <input className="header__search-bar" type="text">
-                  </input>
-                  <label className="header__icon header__icon_search" tabIndex="5" htmlFor="search-button">
+                  <input className="header__search-button" type="checkbox" id="search-button" />
+                  <input className="header__search-bar" type="text"/>
+                  <label className="header__icon header__icon_search" tabIndex="7" htmlFor="search-button">
                   </label>
                 </form>
                 <User />
-                <AddToFavoriteButton openFavorites={true}/>
+                <div className="header__icon_big header__icon_fav">
+                  <AddToFavoriteButton openFavorites={true}/>
+                </div>
                 <ShopCart />
               </nav>
             </section>
