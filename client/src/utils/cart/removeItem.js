@@ -1,6 +1,7 @@
 import { updateItems as updateItemsActionCreator } from '../../action-creators/cart-action-creator';
 
 import updateLocalStorageCollection from '../localStorage/updateLocalStorageCollection';
+import notificationSuccess from '../notificationSuccess';
 
 export default function removeItem(state, target) {
   return dispatch => {
@@ -21,5 +22,6 @@ export default function removeItem(state, target) {
     }
     dispatch(updateItemsActionCreator(currentItems));
     updateLocalStorageCollection('CartItems', currentCollection);
+    notificationSuccess(' успешно удалено из корзины', ' has been removed from cart', target.generalData.name);
   };
 }

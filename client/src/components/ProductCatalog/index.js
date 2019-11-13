@@ -4,6 +4,7 @@ import { ShowMoreButton } from './ShowMoreButton/index.js';
 import { ProductsContainer } from '../ProductsContainer/index.js'
 import loadCard from "../../utils/loadCard";
 import './main.scss';
+import notificationError from '../../utils/notificationError.js';
 
 export class ProductCatalog extends React.Component {
   constructor(props) {
@@ -25,8 +26,8 @@ export class ProductCatalog extends React.Component {
         loading: false,
         nextPage: result.data.nextPage
       })
-    }).catch((error)=>{
-      error.notify();
+    }).catch((error) => {
+      notificationError('Таких товаров не существует', 'Products you\'re looking for is nowhere to be found.', error)
     });
   }
 
@@ -42,8 +43,8 @@ export class ProductCatalog extends React.Component {
         loading: false,
         nextPage: result.data.nextPage
       })
-    }).catch((error)=>{
-      error.notify();
+    }).catch((error) => {
+      notificationError('Таких товаров не существует', 'Products you\'re looking for is nowhere to be found.', error);
     });
   }
 
