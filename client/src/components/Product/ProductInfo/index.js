@@ -3,8 +3,10 @@ import { Translation } from 'react-i18next';
 import "./main.scss"
 import cartIcon from "./assets/cart.png"
 import shareIcon from "./assets/share.png"
-import likeIcon from "./assets/like.png"
 import Chooser from "./Chooser";
+import { connect } from 'react-redux';
+
+import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButton';
 
 import addItem from '../../../utils/cart/addItem';
 import store from '../../../store';
@@ -80,7 +82,10 @@ class ProductInfo extends Component {
                 <img
                   onClick={() => store.dispatch(addItem(store.getState(), this.props.item, this.props.item.colors[0], this.state.chosenSize, this.state.chosenQuantity))}
                   className="product-info__button-icon" src={cartIcon} alt="Add to cart icon" />
-                <img className="product-info__button-icon" src={likeIcon} alt="Add to favorites icon" />
+                <AddToFavoritesButton
+                  enabled={this.props.favoritesItems.find((item) => item._id === this.props.item._id) !== undefined}
+                  paddings={true} data={this.props.item}
+                />
                 <button className="product-info__order-now-button">{t('order')}</button>
               </div>
             </div>
@@ -92,4 +97,9 @@ class ProductInfo extends Component {
 }
 
 
-export default ProductInfo;
+const mapStateToProps = (state) => {
+  return {
+    favoritesItems: state.favoritesController.items
+  }
+};
+export default connect(mapStateToProps)(ProductInfo);

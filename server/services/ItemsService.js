@@ -144,7 +144,6 @@ class ItemsService {
                         }
                     }
                     else {
-                        console.log(item[field])
                         if (!item[field].length) {
                             return false;
                         }

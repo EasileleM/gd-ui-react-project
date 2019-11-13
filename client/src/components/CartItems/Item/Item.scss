@@ -1,4 +1,4 @@
-@import "../../../../style/main.scss";
+@import "../../../style/main.scss";
 
 
 .card-window__item {
@@ -130,7 +130,7 @@
       cursor: pointer;
       background-color: transparent;
       background-size: 100% 100%;
-      background-image: url(../../../../assets/removeButton.svg);
+      background-image: url(../../../assets/removeButton.svg);
 
       &:focus {
         opacity: 0.8;

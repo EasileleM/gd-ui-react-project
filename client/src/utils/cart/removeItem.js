@@ -22,6 +22,5 @@ export default function removeItem(state, target) {
     }
     dispatch(updateItemsActionCreator(currentItems));
     updateLocalStorageCollection('CartItems', currentCollection);
-    notificationSuccess(' успешно удалено из корзины', ' has been removed from cart', target.generalData.name);
   };
 }

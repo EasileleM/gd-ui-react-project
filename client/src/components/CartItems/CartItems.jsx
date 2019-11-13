@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './Items.scss';
+import './CartItems.scss';
 import { connect } from 'react-redux';
 import { Item } from './Item/Item';
 
-function Items(props) {
+function CartItems(props) {
   const items = props.items.map((item, index) => {
     return <Item
             key={index}
@@ -13,7 +13,7 @@ function Items(props) {
           />
   });
   return (
-    <div className="card-window__items">
+    <div className="modal-window__cart-items">
       {items}
     </div>
   )
@@ -24,4 +24,4 @@ const mapStateToProps = (state) => {
       items: state.cartController.items
   }
 };
-export default connect(mapStateToProps)(Items);
+export default connect(mapStateToProps)(CartItems);
