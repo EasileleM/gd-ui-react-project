@@ -46,12 +46,7 @@ class FilterSlider extends Component {
           }
           break;
       }
-
     }
-  };
-
-  componentDidMount() {
-    setTimeout(() => this.forceUpdate(), 1)
   };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -67,10 +62,10 @@ class FilterSlider extends Component {
     return (
         <div className="filter-slider">
           <ReactSlider
+              key={`${this.props.slideIn}`}
               className="filter-slider__slider"
               thumbClassName="filter-slider__thumb"
               trackClassName="filter-slider__track"
-              defaultValue={[this.state.minChosenValue, this.state.maxChosenValue]}
               value={[this.state.minChosenValue, this.state.maxChosenValue]}
               max={this.state.maxValue}
               min={this.state.minValue}

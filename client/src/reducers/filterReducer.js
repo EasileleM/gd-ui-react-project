@@ -36,6 +36,11 @@ export const filterReducer = (state = initialState, action) => {
         ...state,
         minPrice: action.payload,
       };
+      case FILTER_ACTIONS.SEARCH:
+      return {
+        ...state,
+        searchTarget: action.payload,
+      };
     default:
       return state;
   }

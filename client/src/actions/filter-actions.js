@@ -19,3 +19,7 @@ export const changeMinPriceFilter = {
 export const changeBrandsFilter = {
   type: FILTER_ACTIONS.BRANDS,
 };
+
+export const search = {
+  type: FILTER_ACTIONS.SEARCH,
+};
