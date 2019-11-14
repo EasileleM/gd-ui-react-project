@@ -1,6 +1,6 @@
-import fetchItems from './fetchItems';
-import { fetchItemsBegin, fetchItemsSuccess, fetchItemsFailure } from '../../action-creators/favorites-action-creator';
-import * as loadIfArrayModule from '../../utils/loadIdArray';
+import fetchItems from '../fetchItems';
+import { fetchItemsBegin, fetchItemsSuccess, fetchItemsFailure } from '../../../action-creators/favorites-action-creator';
+import * as loadIfArrayModule from '../../loadIdArray';
 describe('fetchItems favorites', () => {
   const data = {
     items: [1, 2, 3],

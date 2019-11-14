@@ -1,4 +1,4 @@
-import getLocalStorageCollection from './getLocalStorageCollection';
+import getLocalStorageCollection from '../getLocalStorageCollection';
 
 describe('getLocalStorageCollection', () => {
   beforeEach(() => {

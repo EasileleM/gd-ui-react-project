@@ -1,6 +1,6 @@
-import addItem from './addItem';
-import { initialState } from '../../reducers/cartReducer';
-import { updateItems } from '../../action-creators/cart-action-creator';
+import addItem from '../addItem';
+import { initialState } from '../../../reducers/cartReducer';
+import { updateItems } from '../../../action-creators/cart-action-creator';
 
 describe('addItem cart', () => {
   beforeEach(() => {

@@ -1,6 +1,6 @@
-import removeItem from './removeItem';
-import { initialState } from '../../reducers/favoritesReducer';
-import { updateItems } from '../../action-creators/favorites-action-creator';
+import removeItem from '../removeItem';
+import { initialState } from '../../../reducers/favoritesReducer';
+import { updateItems } from '../../../action-creators/favorites-action-creator';
 
 describe('removeItem favorites', () => {
   beforeEach(() => {
