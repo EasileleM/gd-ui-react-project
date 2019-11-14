@@ -8,6 +8,14 @@ describe('Error reducer', () => {
         ...initialState,
         errorCode: 400
       });
+      expect(errorReducer(initialState, errorActionCreators.error404())).toEqual({
+        ...initialState,
+        errorCode: 404
+      });
+      expect(errorReducer(initialState, errorActionCreators.error500())).toEqual({
+        ...initialState,
+        errorCode: 500
+      });
     });
   });
   describe('Unknown action', () => {

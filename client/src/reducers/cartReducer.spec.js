@@ -75,7 +75,27 @@ describe('Cart reducer', () => {
         ...previousState,
         items: mockItems,
         size: mockItems.length,
-        orderPrice: 650
+        orderPrice: 650,
+        opened: false
+      });
+    });
+    it('CART_ACTION.UPDATE_ITEMS should update cart opened state', () => {
+      const mockItems = [];
+      const previousState = {
+        ...initialState,
+        items: [
+          { amount: 1, generalData: { price: 100 } },
+          { amount: 2, generalData: { price: 200 } }
+        ],
+        size: 2,
+        orderPrice: 400
+      };
+      expect(cartReducer(previousState, cartActionCreators.updateItems(mockItems))).toEqual({
+        ...previousState,
+        items: mockItems,
+        size: mockItems.length,
+        orderPrice: 0,
+        opened: false
       });
     });
   });
@@ -116,7 +136,7 @@ describe('Cart reducer', () => {
 
   describe('Unknown action', () => {
     it('Unknown action should do nothing', () => {
-      expect(cartReducer(initialState, {type: 'weird'})).toEqual({
+      expect(cartReducer(initialState, { type: 'weird' })).toEqual({
         ...initialState
       });
     });
