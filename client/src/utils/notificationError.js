@@ -4,7 +4,6 @@ import i18n from '../i18n';
 
 export default function notificationError(messageRu, messageEn, error) {
   const errCodes = error.message.match(/\d+/);
-  console.log(errCodes.size());
   if (errCodes) {
     const errorCode = errCodes[0];
     if (errorCode >= 400 && errorCode < 500) {
