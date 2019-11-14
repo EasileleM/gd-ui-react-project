@@ -65,7 +65,7 @@ class Navigation extends Component {
                 <a className="header__burger-menu header__text header__links-item header__text_lg" href="google.com">
                   {t('navigation.contact')}
                 </a>
-                <form onSubmit={this.handleSearch} className="header__burger-menu header__search-container" method="POST" name="search">
+                <form onSubmit={this.handleSearch} className="header__burger-menu header__search-container" name="search">
                   <input required className="header__search-bar"
                          value={this.state.searchValue}
                          onChange={this.handleChange}
