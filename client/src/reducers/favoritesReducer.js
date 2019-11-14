@@ -1,4 +1,5 @@
 import { FAVORITES_ACTIONS } from '../actions/types';
+import notificationSuccess from '../utils/notificationSuccess';
 
 export const initialState = {
   size: 0,
@@ -11,6 +12,9 @@ export const initialState = {
 export const favoritesReducer = (state = initialState, action) => {
   switch (action.type) {
     case FAVORITES_ACTIONS.OPEN:
+        if (!(!state.loading && !state.failure && state.size)) {
+          notificationSuccess('Список избранного пуст, вы не можете открыть его', 'Favourites is empty, you can\'t open it', '')
+        }
       return {
         ...state,
         opened: Boolean(!state.loading && !state.failure && state.size)
