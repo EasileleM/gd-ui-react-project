@@ -50,15 +50,15 @@
     transition: border-bottom .35s ease-in-out;
 
     &[success="true"] {
-      -webkit-transition: border-bottom .35s ease-in-out;
-      transition: border-bottom .35s ease-in-out;
+      -webkit-transition: all .35s ease-in-out;
+      transition: all .35s ease-in-out;
       border-bottom: $color-atomic-tangerine 10px solid;
     }
 
     &:focus {
-      -webkit-transition: border-bottom .35s ease-in-out;
-      transition: border-bottom .35s ease-in-out;
-      border-bottom: $color-atomic-tangerine 2px solid;
+      -webkit-transition: all .35s ease-in-out;
+      transition: all .35s ease-in-out;
+      box-shadow:  0 2px 0 0 $color-atomic-tangerine;;
     }
   }
 

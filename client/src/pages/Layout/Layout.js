@@ -55,7 +55,6 @@ class Layout extends Component {
                         }
                         {
                             (this.props.error === 400) ? <Redirect to='/400' /> : null
-                            
                         }
                         {
                             (this.props.error === 404) ? <Redirect to='/404' /> : null

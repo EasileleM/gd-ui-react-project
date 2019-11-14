@@ -8,8 +8,36 @@ import './main.scss';
 import { Link } from "react-router-dom";
 import AddToFavoriteButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import { Logo } from '../Logo';
+import { withRouter } from "react-router-dom";
+import {search} from "../../action-creators/filter-action-creator";
+import store from "../../store";
 
 class Navigation extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      searchValue: "",
+      searchInput: React.createRef(),
+    }
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      searchValue: e.target.value,
+    })
+  };
+
+  handleSearch = (e) => {
+    if(!this.state.searchValue) {
+      this.state.searchInput.current.focus();
+
+    } else {
+      this.props.history.push("/search");
+      store.dispatch(search(this.state.searchValue));
+    }
+    e.preventDefault()
+  };
+
   render() {
     return (
       <Translation>
@@ -37,11 +65,14 @@ class Navigation extends Component {
                 <a className="header__burger-menu header__text header__links-item header__text_lg" href="google.com">
                   {t('navigation.contact')}
                 </a>
-                <form className="header__burger-menu header__search-container" method="POST" name="search">
-                  <input className="header__search-button" type="checkbox" id="search-button" />
-                  <input className="header__search-bar" type="text"/>
-                  <label className="header__icon header__icon_search" tabIndex="7" htmlFor="search-button">
-                  </label>
+                <form onSubmit={this.handleSearch} className="header__burger-menu header__search-container" name="search">
+                  <input required className="header__search-bar"
+                         value={this.state.searchValue}
+                         onChange={this.handleChange}
+                         ref={this.state.searchInput}
+                         type="text"/>
+                  <div  tabIndex="7" onClick={this.handleSearch}  className="header__icon header__icon_search header__icon_big " to="/search">
+                  </div>
                 </form>
                 <User />
                 <div className="header__icon_big header__icon_fav">
@@ -56,4 +87,4 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+export default withRouter(Navigation);

@@ -26,10 +26,10 @@ class Search extends Component {
           <div className="search-wrapper__container">
             <div className="search">
               <div className={`search__filters ${this.state.filtersToggle ? "search__filters_toggled" : ""}`}>
-                <Filters/>
+                <Filters slideIn={this.state.filtersToggle}/>
                 <button className={`search__toggle-off ${this.state.filtersToggle ? "search__toggle-off_active" : ""}`}
                         onClick={this.handleClick}>
-                  Search
+                  Show
                 </button>
               </div>
               <div className="search__items">

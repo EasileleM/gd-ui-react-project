@@ -32,6 +32,10 @@ export default function loadCard(page = 1, size = 4, filters) {
     if( filters.minPrice) {
       url += `&minprice=${filters.minPrice}`;
     }
+
+    if(filters.searchTarget) {
+      url += `&search=${filters.searchTarget}`;
+    }
   }
 
   return axios.get(url);
