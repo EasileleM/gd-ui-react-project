@@ -57,4 +57,4 @@ describe('addItem favorites', () => {
       expect.objectContaining(updateItems([item]))
     );
   });
-})
+});
