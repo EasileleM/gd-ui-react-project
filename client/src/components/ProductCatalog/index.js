@@ -61,7 +61,7 @@ class ProductCatalog extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.filtered !== this.props.filtered) {
+    if (prevProps.filters !== this.props.filters) {
       this.setState(
           {
             cards: [],

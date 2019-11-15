@@ -114,7 +114,8 @@ class ItemsService {
 
     search(query) {
         if (query.search) {
-            return this.dbInstance.search("items", query.search).then(items => this.languageSpecific(items, this.lang));
+            return this.dbInstance.search("items", query.search)
+                .then(items => this.languageSpecific(items, this.lang));
         }
         else return this.getAllItems();
     }
