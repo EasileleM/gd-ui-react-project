@@ -58,14 +58,5 @@
     "size": "Size",
     "price": "Price",
     "color": "Color"
-  },
-  "filters": {
-    "categories": "Categories",
-    "price": "Price Filter",
-    "brands": "Brands",
-    "sizes": "Sizes"
-  },
-  "catalog": {
-    "notFound": "Sorry, we couldn't find anything"
   }
 }
