@@ -19,7 +19,7 @@ afterEach(() => {
 it("renders with passed props", () => {
   const fakeProps = ["#4287f5","#f54242","#400a2d"];
   act(() => {
-    render(<ColorSelector colors={fakeProps}  handleOptionChange={()=>{}}/>, container);
+    render(<ColorSelector colors={fakeProps}/>, container);
   })
   const backgroundColor = "background-color";
   expect(container.querySelector('.color-selector__container').style._values[backgroundColor]).toBe(hexToRgb(fakeProps[0]));
