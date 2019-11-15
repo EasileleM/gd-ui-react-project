@@ -19,7 +19,7 @@ describe('loadCard util', () => {
     const mock = new MockAdapter(axios);
     const data = {response: true};
     const filters = {"category": "men", "minPrice": 225, "maxPrice": 614, "brands": ["Abibas"], "sizes": ["xs"]}
-    mock.onGet(`${SERVER_URL}/api/items//all?page=1&size=4&lang=undefined&filter=true&sizes=XS&brands=Abibas&categories=men&maxprice=614&minprice=225`).reply(200, data);
+    mock.onGet(`${SERVER_URL}/api/items/all?page=1&size=4&lang=undefined&filter=true&sizes=XS&brands=Abibas&categories=men&maxprice=614&minprice=225`).reply(200, data);
 
     loadCard(1, 4, filters).then(response => {
       expect(response.data).toEqual(data);

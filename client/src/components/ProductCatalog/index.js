@@ -17,7 +17,7 @@ class ProductCatalog extends React.Component {
       loading: true,
       nextPage: true,
       filtered: this.props.filtered,
-      notFound: false,
+      notFound: false
     };
   }
 
@@ -61,7 +61,7 @@ class ProductCatalog extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.filters !== this.props.filters) {
+    if (prevProps.filtered !== this.props.filtered) {
       this.setState(
           {
             cards: [],
@@ -70,7 +70,6 @@ class ProductCatalog extends React.Component {
             this.loadItems();
           }
       );
-
     }
   }
 
