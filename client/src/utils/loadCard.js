@@ -38,5 +38,7 @@ export default function loadCard(page = 1, size = 4, filters) {
     }
   }
 
+  console.log(url)
+
   return axios.get(url);
 }

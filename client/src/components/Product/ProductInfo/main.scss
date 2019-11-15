@@ -72,7 +72,6 @@
     @media screen and (max-width: $breakpoint-tablet) {
       margin-top: 20px;
       width: 100%;
-      justify-content: flex-start;
     }
     @media screen and (max-width: $breakpoint-mobile) {
       flex-wrap: wrap;
@@ -81,11 +80,15 @@
 
   }
 
+  &__button-icon-container {
+    height: 25px;
+    margin: 0 5px
+  }
+
   &__button-icon {
-    height: 20px;
+    height: 25px;
     cursor: pointer;
     @media screen and (max-width: $breakpoint-tablet) {
-      padding: 0 20px;
     }
   }
 
@@ -96,6 +99,7 @@
     background-color: $color-orange;
     color: white;
     cursor: pointer;
+    margin-left: 30px;
     @include font-primary-regular-md;
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     outline: none;

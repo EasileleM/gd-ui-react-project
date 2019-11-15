@@ -21,7 +21,7 @@ class Chooser extends Component {
                                 })}
                             </div>
                         </div>
-                        <div className="chooser__container">
+                        <div className="chooser__container chooser__container_margined">
                             <h2 className="chooser__heading_secondary">{t('productChooser.quantity')}:</h2>
                             <div className="chooser__buttons">
                                 <div className="chooser__quantity-button"
