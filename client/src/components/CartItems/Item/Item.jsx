@@ -3,6 +3,8 @@ import { Translation } from 'react-i18next';
 import store from '../../../store';
 import removeItem from '../../../utils/cart/removeItem';
 import updateItem from '../../../utils/cart/updateItem';
+import { closeCart } from '../../../action-creators/cart-action-creator';
+import { Link } from 'react-router-dom'
 
 import './Item.scss';
 
@@ -24,14 +26,20 @@ export class Item extends React.Component {
       <Translation>
         {t =>
           <div className="card-window__item cart-window-item">
-            <img src={this.props.data.generalData.images[0]} className="cart-window-item__image" alt="item" />
+            <Link onClick={() => store.dispatch(closeCart())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
+              <img src={this.props.data.generalData.images[0]} className="cart-window-item__image" alt="item" />
+            </Link>
             <div className="cart-window-item__info">
-              <h2 className="cart-window-item__name">
-                {this.props.data.generalData.name}
-              </h2>
+              <Link onClick={() => store.dispatch(closeCart())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
+                <h2 className="cart-window-item__name">
+                  {this.props.data.generalData.name}
+                </h2>
+              </Link>
+              <Link onClick={() => store.dispatch(closeCart())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
               <p className="cart-window-item__description">
                 {this.props.data.generalData.description}
               </p>
+              </Link>
               <div className="cart-window-item__info-color-size">
                 <p className="cart-window-item__size-wrapper">
                   {t('orderItem.size')}:
@@ -42,7 +50,7 @@ export class Item extends React.Component {
                   <div style={{ background: this.props.data.color }} className="cart-window-item__color"></div>
                 </div>
                 <p className="cart-window-item__price-wrapper">
-                {t('orderItem.price')}:
+                  {t('orderItem.price')}:
               <span className="cart-window-item__price"> {this.props.data.generalData.price}{t('currency')}</span>
                 </p>
               </div>
