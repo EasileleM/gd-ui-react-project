@@ -28,6 +28,8 @@ class Navigation extends Component {
   handleChange = (e) => {
     this.setState({
       searchValue: e.target.value,
+    }, () => {
+      store.dispatch(search(this.state.searchValue));
     })
   };
 
@@ -36,7 +38,6 @@ class Navigation extends Component {
       this.state.searchInput.current.focus();
     } else {
       this.props.history.push("/search");
-      store.dispatch(search(this.state.searchValue));
       this.toggleMenu();
     }
     e.preventDefault()

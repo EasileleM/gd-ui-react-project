@@ -22,7 +22,7 @@ class Search extends Component {
     })
   };
 
-  componentDidMount() {
+  componentWillUnmount() {
     this.filterReset();
   }
 
