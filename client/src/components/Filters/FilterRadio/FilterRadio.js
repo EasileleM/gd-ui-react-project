@@ -9,6 +9,7 @@ class FilterRadio extends Component {
     this.state = {
       options: this.props.options,
       selectedValue: null,
+      hovered: false,
     };
   }
 
@@ -17,10 +18,22 @@ class FilterRadio extends Component {
     store.dispatch(changeCategoryFilter(e.target.value));
   };
 
+  resetFilters = () => {
+    this.setState({selectedValue: null});
+    store.dispatch(changeCategoryFilter(null));
+  };
+
+
+
   render() {
     return (
         <div>
-          <form className="filter-radio">
+          <form className="filter-radio"
+          onMouseEnter={() => {this.setState({hovered: true})}}
+          onMouseLeave={() => {this.setState({hovered: false})}}>
+            <div className={`filter-radio__reset-button + ${this.state.hovered ? "" : "filter-radio__reset-button_hidden"}`}
+                 onClick={this.resetFilters}
+                >Reset</div>
             {
               this.state.options.map((option, index) => {
                 return (

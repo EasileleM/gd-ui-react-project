@@ -6,6 +6,7 @@ import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import { SizesSelector } from './SizesSelector/index.js';
 import { ColorSelector } from './ColorSelector/index.js';
 import { connect } from 'react-redux';
+import {ReactComponent as ShareIcon} from "../../assets/share.svg";
 
 import './main.scss';
 
@@ -64,8 +65,7 @@ class ProductCard extends Component {
                   <ColorSelector selectedOption={this.state.color} handleOptionChange={(e) => this.handleColorChange(e)} colors={this.props.product.colors} />
                 </div>
                 <div className='product-card__buttons-row'>
-                  <a href='google.com' className='product-card__share'>
-                  </a>
+                    <ShareIcon className='product-card__share'/>
                   <div className='product-card__add-to-cart'>
                     <AddToCartButton size={this.state.size} color={this.state.color} product={this.props.product} />
                   </div>

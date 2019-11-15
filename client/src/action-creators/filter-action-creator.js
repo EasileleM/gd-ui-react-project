@@ -42,3 +42,9 @@ export const search = (target) => {
     payload: target,
   }
 };
+
+export const clear = () => {
+  return {
+    ...cartActions.clear,
+  }
+};
