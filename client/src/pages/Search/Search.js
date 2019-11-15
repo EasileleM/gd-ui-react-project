@@ -18,7 +18,6 @@ class Search extends Component {
 
   handleClick = () => {
     const toggle = this.state.filtersToggle;
-    changeBodyScrollState(!toggle);
     this.setState({
       filtersToggle: !toggle,
     })
