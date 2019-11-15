@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withTranslation } from 'react-i18next';
 import "./Filters.scss"
 import FilterRadio from "./FilterRadio/FilterRadio";
 import FilterSlider from "./FIlterSlider/FilterSlider";
@@ -7,7 +8,7 @@ import {loadFilters} from "../../utils/loadFilters";
 import {LoadingSpinner} from "../LoadingSpinner";
 import FilterSearchBar from "./FilterSearchBar/FilterSearchBar";
 
-class Filters extends Component {
+export class Filters extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +26,7 @@ class Filters extends Component {
   }
 
   render() {
+    const t = this.props.t;
     return (
         <div className="filters-container">
 
@@ -33,14 +35,14 @@ class Filters extends Component {
           </div>
 
           <div className="filter">
-            <h2 className="filter__heading">Categories</h2>
+    <h2 className="filter__heading">{t('filters.categories')}</h2>
             {
               this.state.filters ? <FilterRadio options={this.state.filters.categories}/> : <LoadingSpinner/>
             }
           </div>
 
           <div className="filter">
-            <h2 className="filter__heading">Price Filter</h2>
+            <h2 className="filter__heading">{t('filters.price')}</h2>
             {
               this.state.filters ?
                   <FilterSlider slideIn={this.props.slideIn}
@@ -50,7 +52,7 @@ class Filters extends Component {
           </div>
 
           <div className="filter">
-            <h2 className="filter__heading">Sizes</h2>
+            <h2 className="filter__heading">{t('filters.sizes')}</h2>
             {
               this.state.filters ?
                   <FilterCheckbox name="sizes" options={this.state.filters.sizes}/> : <LoadingSpinner/>
@@ -58,7 +60,7 @@ class Filters extends Component {
           </div>
 
           <div className="filter">
-            <h2 className="filter__heading">Brands</h2>
+            <h2 className="filter__heading">{t('filters.brands')}</h2>
             {
               this.state.filters ?
                   <FilterCheckbox name="brands" options={this.state.filters.brands}/> : <LoadingSpinner/>
@@ -69,4 +71,4 @@ class Filters extends Component {
   }
 }
 
-export default Filters;
+export default withTranslation()(Filters);
