@@ -6,6 +6,7 @@ import FiltersButtonImage from "../../assets/controls.svg"
 import "./Search.scss"
 import store from "../../store";
 import {clear} from "../../action-creators/filter-action-creator"
+import {changeBodyScrollState} from '../../utils/changeBodyScrollState';
 
 class Search extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Search extends Component {
 
   handleClick = () => {
     const toggle = this.state.filtersToggle;
+    changeBodyScrollState(!toggle);
     this.setState({
       filtersToggle: !toggle,
     })

@@ -57,6 +57,11 @@
         overflow-y: scroll;
         overflow-x: hidden;
 
+
+        &::-webkit-scrollbar {
+          width: 0px;
+        }
+
         @media screen and (max-width: $breakpoint-smartphone) {
           margin-bottom: 50px;
           width: 100%;
