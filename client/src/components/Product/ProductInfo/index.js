@@ -5,6 +5,8 @@ import cartIcon from "./assets/cart.png"
 import shareIcon from "./assets/share.png"
 import Chooser from "./Chooser";
 import { connect } from 'react-redux';
+import {ReactComponent as ShareIcon} from "../../../assets/share.svg";
+import {ReactComponent as AddToCartIcon} from "../../../assets/shopping-cart-add.svg";
 
 import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButton';
 
@@ -78,14 +80,18 @@ class ProductInfo extends Component {
             <div className="product-info__order">
               <h3 className="product-info__price">{t('price')}: {this.state.itemInfo.price * this.state.chosenQuantity + t('currency')}</h3>
               <div className="product-info__order-buttons">
-                <img className="product-info__button-icon" src={shareIcon} alt="Share icon" />
-                <img
-                  onClick={() => store.dispatch(addItem(store.getState(), this.props.item, this.props.item.colors[0], this.state.chosenSize, this.state.chosenQuantity))}
-                  className="product-info__button-icon" src={cartIcon} alt="Add to cart icon" />
-                <AddToFavoritesButton
-                  enabled={this.props.favoritesItems.find((item) => item._id === this.props.item._id) !== undefined}
-                  paddings={true} data={this.props.item}
-                />
+                <div className="product-info__button-icon-container">
+                  <ShareIcon className="product-info__button-icon" />
+                </div>
+                <div className="product-info__button-icon-container">
+                  <AddToCartIcon  onClick={() => store.dispatch(addItem(store.getState(), this.props.item, this.props.item.colors[0], this.state.chosenSize, this.state.chosenQuantity))}
+                                className="product-info__button-icon" />
+                </div>
+                <div className="product-info__button-icon-container">
+                  <AddToFavoritesButton
+                    enabled={this.props.favoritesItems.find((item) => item._id === this.props.item._id) !== undefined} data={this.props.item}
+                  />
+                </div>
                 <button className="product-info__order-now-button">{t('order')}</button>
               </div>
             </div>
