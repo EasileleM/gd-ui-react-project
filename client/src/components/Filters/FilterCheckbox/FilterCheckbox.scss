@@ -13,8 +13,12 @@
     margin-top: 20px;
     position: relative;
     padding-left: 25px;
+    cursor: pointer;
+    width: 0; //needed to preven element stretching
 
-
+    &:hover {
+      color: $color-orange;
+    }
   }
 
   &__button {
@@ -27,6 +31,13 @@
     left: 0;
     height: 25px;
     width: 25px;
+    cursor: pointer;
+    &:hover {
+      color: $color-orange;
+      &:after {
+        background-color: $color-orange;
+      }
+    }
 
     &:checked{
       &:after {

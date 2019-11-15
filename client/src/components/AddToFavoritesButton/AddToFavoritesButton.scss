@@ -1,33 +1,25 @@
+@import "../../style/main";
+
 .addToFavoritesButton {
-  transition: 300ms ease;
   flex-basis: 25px;
   box-sizing: content-box;
   border: 0;
-  height: 20px;
-  width: 25px;
+  height: 25px;
   padding: 0;
   cursor: pointer;
   background: transparent;
   background-size: 100% 100%;
   outline: 0;
 
-  &:hover {
-    transform: scale(1.2);
+  &_small {
+    height: 20px
   }
 
-  &:focus {
-    transform: scale(1.2);
+  &:hover, &:focus {
+    fill: $color-orange;
+    stroke: $color-orange;
   }
-
-  &_enabled {
-    background-image: url("../../assets/likeEnabled.svg");
-  }
-
   &_paddings {
     padding: 0 18px;
-  }
-
-  &_disabled {
-    background-image: url("../../assets/likeDisabled.svg");
   }
 }

@@ -23,3 +23,7 @@ export const changeBrandsFilter = {
 export const search = {
   type: FILTER_ACTIONS.SEARCH,
 };
+
+export const clear = {
+  type: FILTER_ACTIONS.CLEAR,
+};

@@ -41,6 +41,10 @@ export const filterReducer = (state = initialState, action) => {
         ...state,
         searchTarget: action.payload,
       };
+      case FILTER_ACTIONS.CLEAR:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }

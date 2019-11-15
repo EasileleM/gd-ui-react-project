@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import Filters from "../../components/Filters/Filters";
 import ProductCatalog from "../../components/ProductCatalog";
-import {Newsletter} from "../../components/Newsletter";
+import {Newsletter} from "../../components/Newsletter/Newsletter";
 import FiltersButtonImage from "../../assets/controls.svg"
 import "./Search.scss"
+import store from "../../store";
+import {clear} from "../../action-creators/filter-action-creator"
 
 class Search extends Component {
   constructor(props) {
@@ -20,7 +22,16 @@ class Search extends Component {
     })
   };
 
+  componentWillUnmount() {
+    this.filterReset();
+  }
+
+  filterReset = () => {
+    store.dispatch(clear());
+  };
+
   render() {
+
     return (
         <div className="search-wrapper">
           <div className="search-wrapper__container">

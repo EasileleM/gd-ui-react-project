@@ -1,6 +1,7 @@
 import { filterReducer, initialState } from './filterReducer';
 import * as filterActionCreator from '../action-creators/filter-action-creator';
 
+
 describe('Filter reducer', () => {
   it('FILTER_ACTIONS.BRANDS should add brands', () => {
     const items = [1, 2, 4];

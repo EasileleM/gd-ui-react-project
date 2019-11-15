@@ -27,9 +27,21 @@
   @include font-primary-regular;
   font-size: $font-size-sm;
 }
+@mixin font-primary-regular-lg {
+  @include font-primary-regular;
+  font-size: $font-size-lg;
+}
 
 @mixin font-primary-regular-sm-italic {
   @include font-primary-regular-sm;
+  font-style: italic;
+}
+@mixin font-primary-regular-lg-italic {
+  @include font-primary-regular-lg;
+  font-style: italic;
+}
+@mixin font-primary-regular-md-italic {
+  @include font-primary-regular-md;
   font-style: italic;
 }
 

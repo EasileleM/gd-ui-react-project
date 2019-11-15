@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import icon from "../../assets/Mail_Ico_.png";
 
-import "./main.scss";
+import "./Newsletter.scss";
 import sendEmail from "../../utils/sendEmail";
 import i18n from '../../i18n';
 
@@ -68,9 +68,11 @@ export class Newsletter extends Component {
                             <picture>
                                 <img src={icon} alt="icon of an envelope" />
                             </picture>
-                            <input name="email" type="email" className="Newsletter__input" value={this.state.value}
-                                onChange={this.handleChange}
-                                placeholder={t('newsLetter.placeholder')} />
+                            <input name="email" type="email"
+                                   className="Newsletter__input"
+                                   value={this.state.value}
+                                   onChange={this.handleChange}
+                                   placeholder={t('newsLetter.placeholder')} />
                             <input type="submit" className="Newsletter__button" value={t('newsLetter.join')} />
                         </form>
                     </div>
