@@ -1,0 +1,166 @@
+@import "../../style/main";
+
+.search-wrapper {
+  display: flex;
+  justify-content: center;
+  background: $color-athens-gray;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 1270px;
+    padding: 0 50px;
+    box-sizing: border-box;
+    width: 100%;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      padding: 0 30px;
+    }
+  }
+}
+
+@keyframes side-in {
+  from {
+    left: -300px;
+  }
+  to {
+    left: 0;
+  }
+}
+
+.search {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 60px;
+
+  &__filters {
+    width: 300px;
+    margin-top: 80px;
+    animation: side-in .5s cubic-bezier(.25, .8, .25, 1);
+
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      display: none;
+
+      &_toggled {
+        display: flex;
+        position: fixed;
+        z-index: 3;
+        margin-top: 0;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+
+        &::-webkit-scrollbar {
+          width: 0px;
+        }
+
+        @media screen and (max-width: $breakpoint-smartphone) {
+          margin-bottom: 50px;
+          width: 100%;
+          &:before {
+            content: "";
+            background-color: $color-porcelain;
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &__toggle {
+    display: none;
+    outline: none;
+    @media screen and (max-width: $breakpoint-tablet) {
+      display: flex;
+      @include font-primary-regular-md;
+      color: $color-limed-spruce;
+      padding: 20px;
+      border: 1px solid $color-limed-spruce;
+      border-radius: 30px;
+      background-color: $color-athens-gray;
+      align-items: center;
+      justify-content: center;
+      margin-top: 50px;
+
+    }
+  }
+
+  &__toggle-off {
+    display: none;
+    visibility: hidden;
+
+    &_active {
+      visibility: visible;
+      font-size: 0;
+      opacity: 0.3;
+      display: block;
+      position: fixed;
+      background-color: black;
+      z-index: -1;
+      top: 0;
+      width: 200%;
+      height: 100%;
+
+      @media screen and (min-width:  $breakpoint-tablet-vertical) {
+        visibility: hidden;
+      }
+
+        @media screen and (max-width: $breakpoint-smartphone) {
+        opacity: 1;
+        @include font-primary-regular-md;
+        color: $color-white;
+        display: block;
+        position: fixed;
+        background-color: $color-orange;
+        z-index: 2;
+        top: calc(100% - 50px);
+        width: 100%;
+        height: 50px;
+      }
+    }
+  }
+
+  &__toggle-icon {
+    width: 30px;
+    object-fit: contain;
+    margin-right: 30px;
+  }
+
+  &__items {
+    width: 100%;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      margin-left: 0;
+    }
+  }
+
+  &__mobile-input {
+    display: none;
+    @media screen and (max-width: $breakpoint-smartphone) {
+      display: block;
+      position: fixed;
+      top:0;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+      border: 1px solid $color-orange;
+      border-radius: 20px;
+    }
+  }
+}

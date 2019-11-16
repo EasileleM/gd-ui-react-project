@@ -1,0 +1,47 @@
+@import "../../../style/main";
+
+.filter-radio {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &__label {
+    @include font-primary-regular-md;
+    color: $color-limed-spruce;
+    margin-top: 20px;
+    cursor: pointer;
+    &:hover {
+      color: $color-orange;
+    }
+  }
+
+  &__button{
+    display: none;
+    cursor: pointer;
+
+    &:checked + span {
+      color: $color-orange;
+      text-shadow:0px 0px 1px $color-orange;
+    }
+  }
+
+  &__reset-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    @include font-primary-regular-md-italic;
+    color: $color-orange;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+    opacity: 1;
+
+    &_hidden{
+      transition: all .35s ease-in-out;
+      opacity: 0;
+    }
+
+    @media all and (max-width: $breakpoint-tablet) {
+      opacity: 1;
+    }
+  }
+}

@@ -2,16 +2,18 @@ import React from 'react';
 
 import './main.scss';
 
-export class AddToCartButton extends React.Component {
-  constructor() {
-    super();
-    this.state ={};
-  }
-  
-  render() {
+import store from '../../../store';
+import addItem from '../../../utils/cart/addItem';
+import {ReactComponent as AddToCartIcon} from "../../../assets/shopping-cart-add.svg";
+
+export function AddToCartButton(props){
     return (
-      <button className='add-to-cart-button'>
+      <button
+        onClick={() => { 
+          store.dispatch(addItem(store.getState(), props.product, props.color, props.size, 1))
+        }}
+        className='add-to-cart-button'>
+        <AddToCartIcon className='add-to-cart-button'/>
       </button>
     );
-  }
 }

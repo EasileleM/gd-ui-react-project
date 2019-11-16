@@ -1,12 +1,19 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
+import Layout from "./pages/Layout/Layout";
+import store from './store'
+import {Provider} from 'react-redux'
 
-import {Layout, Home} from './pages/index';
 
 function App() {
   return (
     <div className="App">
-      <Layout page={<Home />} />
+      <Provider store={store}>
+        <Layout />
+        <ToastContainer />
+      </Provider>
     </div>
   );
 }

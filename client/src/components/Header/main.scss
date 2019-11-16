@@ -9,13 +9,36 @@
   display: flex;
   flex-direction: column;
 
+  &__menu-data-input {
+    display: none;
+  }
+
+  &__menu-button {
+    font-size: 50px;
+    font-family: "Inconsolata", monospace;
+    line-height: normal;
+    font-weight: 400;
+    text-transform: none;
+    color: $color-black;
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    text-align: center;
+
+    &::after {
+      content: attr(data-closed);
+      margin-right: -2px;
+    }
+  }
+
   &__wrapper {
     display: flex;
     justify-content: space-between;
 
     &_page {
       align-items: center;
-      border-bottom: 1px solid rgba($color: #e6e8e6, $alpha: 0.5);  
+      border-bottom: 1px solid rgba($color: $color-athens-gray, $alpha: 0.5);  
     }
 
     &_sm {
@@ -30,10 +53,12 @@
   &__text {
     font-family: $font-primary;
     font-style: normal;
-    padding-right: 20px;
+    padding: 0 10px;
+    text-decoration: none;
 
     &_md {
       font-size: $font-size-xs;
+      color: $color-limed-spruce;
     }
 
     &_email::before {
@@ -43,7 +68,7 @@
       width: 18px;
       height: 12px;
       margin-bottom: -2px;
-      margin-right: 10px; 
+      margin-right: 10px;
     }
 
     &_phone::before {
@@ -61,16 +86,23 @@
     box-sizing: border-box;
     margin-left: 15px;
     width: 20px;
-    height: 20px;
+    height: 21px;
 
     &:hover {
-      opacity: .5;
+      fill: $color-orange;
+      stroke: $color-orange;
       cursor: pointer;
     }
 
     &_big {
-      width: 30px;
-      margin-left: 30px;
+      width: 20px;
+      height: 20px;
+      margin-left: 25px;
+      outline: none;
+    }
+
+    &_fav {
+      display: flex;
     }
 
     &_facebook {
@@ -89,33 +121,45 @@
       background: url(../../assets/instagram.svg) no-repeat right;
     }
 
-    &_search {
-      background: url(../../assets/Search_Ico.png) no-repeat right;
-    }
-
-    &_user {
-      background: url(../../assets/User_Ico.png) no-repeat right;
-    }
 
     &_cart {
-      background: url(../../assets/Cart_Ico.png) no-repeat right;
+      margin-left: 0;
+      border: 0;
+      width: 28px;
+      padding: 0;
     }
   }
 
-  &__logo {
-    background: url(../../assets/logo.png) no-repeat;
-    width: 120px;
-    height: 40px;
+  &__cart-counter {
+    position: absolute;
+    top: -16px;
+    @include font-primary-light-xxs;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    background-color: $color-limed-spruce;
+    color: $color-white;
+  }
+
+  &__icon-cart-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
   }
 
   &__links {
-
     &-container {
       flex-grow: 1;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-left: 80px;
+      padding-left: 20px;
     }
 
     &-item {
@@ -123,44 +167,103 @@
       color: $color-limed-spruce;
       font-size: $font-size-semi-md;
       padding: 0;
-      margin-right: 20px;
+      margin-right: 15px;
+      text-align: center;
+      white-space: nowrap;
       &:hover, &_active {
         color: $color-orange;
       }
     }
   }
 
-  &__search {
-    &-container {
-      flex-grow: 1;
-      display: flex;
-      align-items: flex-start;
+  &__search-clear-button{
+    position: absolute;
+    cursor: pointer;
+    top: 15px;
+    right: 55px;
+    width: 15px;
+    height: 15px;
+    transition: all .1s;
+
+    &:hover {
+      fill: $color-orange;
     }
 
-    &-bar {
-      flex-grow: 1;
-      background-color: $color-athens-gray;
-      border: 1px solid $color-limed-spruce ;
-      border-radius: 10px;
-      padding: 2px 7px;
+    &:active {
+      fill: $color-orange;
+      top: 17px;
+      right: 58px;
+      transition: all .35s;
+      width: 10px;
+      height: 10px;
+    }
+
+    &_hidden{
       visibility: hidden;
     }
 
-    &-button {
-      display: none;
+    @media screen and (max-width: $breakpoint-smartphone){
+      right: 20px;
+      &:active {
+        top: 17px;
+        right: 25px;
+        transition: all .35s;
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
 
-      &:checked ~ .header__search-bar{
-        visibility: visible;
+  &__search {
+    &-container {
+      position: relative;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+    }
+
+    &-bar {
+      @include font-primary-regular-semi-md;
+      color: $color-limed-spruce;
+      flex-grow: 1;
+      background-color: $color-white;
+      border: none ;
+      border-radius: 10px;
+      padding: 10px 10px;
+      outline: none;
+      -webkit-transition: all .35s ease-in-out;
+      transition: all .35s ease-in-out;
+      padding-right: 35px;
+      box-shadow:  0 0 0 1px $color-orange;
+
+      &_hidden {
+        box-shadow:  none;
+      }
+
+      &:focus{
+        box-shadow:  0 0 0 2px $color-orange;
+      }
+
+      @media screen and (max-width: $breakpoint-tablet) {
+        box-shadow:  0 0 0 2px $color-orange;
       }
     }
   }
 }
 
-@media all and (max-width: 1024px) {
+@media all and (max-width: 1220px) {
   .header {
-    &__wrapper_column {
+    padding: 0 30px;
+    &__wrapper {
+      &_column {
       flex-direction: column;
       align-items: stretch;
+      }
+
+      &_lg {
+        padding: 20px 0;
+      }
     }
 
     &__links-container {
@@ -179,20 +282,21 @@
   }
 }
 
-@media all and (max-width: 1023px) {
+@media all and (max-width: $breakpoint-tablet-vertical) {
   .header {
-    &__links-item {
-      margin-right: 20px;
-    }
-
     &__search-container {
       order: 1;
       margin-top: 20px;
+      width: 100%;
+    }
+
+    &__icon_fav {
+      justify-content: flex-end;
     }
   }
 }
 
-@media all and (max-width: 767px) {
+@media all and (max-width: $breakpoint-smartphone) {
   .header {
     padding: 0;
     &__wrapper  {
@@ -204,10 +308,17 @@
         justify-content: space-around;
         width: 100%;
       }
-    }
 
-    &__text {
-      margin-bottom: 10px;
+      &_lg {
+        background: $color-white;
+        flex-direction: row;
+        padding: 10px;
+        border: 0;
+      }
+
+      &_sm {
+        padding: 10px 0;
+      }
     }
 
     &__icon {
@@ -215,19 +326,112 @@
       margin-top: 10px;
       background-position: center;
 
+      &_big {
+        margin: 0;
+      }
+
+      &_fav {
+        justify-content: center;
+      }
+
+      &_cart {
+        background-color: transparent;
+      }
+
       &_search {
         margin: 0;
         margin-left: 10px;
+        align-self: center;
       }
     }
 
+    &__search-container {
+      flex-grow: initial;
+      width: 80%;
+    }
+
+    &__search-bar {
+      visibility: visible;
+    }
+
     &__links-container {
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
+      margin: 0;
+      justify-content: space-around;
+      flex-grow: 1;
+      padding-left: 20px;
+    }
+
+    &__menu-button {
+      display: block;
+      order: 1;
+      margin: 0;
+      margin-top: -12px;
+    }
+
+    &__burger-menu {
+      display: none;
     }
 
     &__links-item {
       margin-right: 0;
     }
+  }
+
+
+  .header__menu-data-input:checked + .header__links-container {
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 4;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    background: $color-white;
+    padding-bottom: 100px;
+    padding-left: 0;
+    box-sizing: border-box;
+    transition: all .35s;
+
+
+    & .header {
+      &__icon {
+        &_big, &-cart-wrapper, &_search {
+        display: none;
+        }
+      }
+
+      &__search-container {
+        margin: 0;
+      }
+
+      &__burger-menu {
+        display: flex;
+      }
+
+      &__menu-button {
+        order: 0;
+
+        &::after {
+          content: attr(data-opened);
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: $breakpoint-mobile) {
+  .header {
+    &__links-container {
+      flex-direction: row;
+      align-items: center;
+      margin: 0;
+      justify-content: space-between;
+      padding-left: 20px;
+    }
+
   }
 }

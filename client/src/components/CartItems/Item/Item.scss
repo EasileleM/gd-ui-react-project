@@ -1,0 +1,164 @@
+@import "../../../style/main.scss";
+
+
+.card-window__item {
+  width: 100%;
+}
+
+.cart-window-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  border-bottom: 2px solid #f4f6f8;
+  padding-bottom: 40px;
+
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__image {
+    margin-right: 20px;
+    max-width: 90px;
+    max-height: 100px;
+    @media screen and (max-width: 700px) {
+      margin-right: 0;
+    }
+  }
+
+  &__name {
+    @include font-primary-bold-md;
+    margin: 0;
+    color: #ff5912;
+  }
+
+  &__size {
+    color: #ff5912;
+    &-wrapper {
+      @include font-primary-semi-bold-sm;
+      margin: 0;
+      margin-right: 25px;
+      min-width: 50px;
+      color: #3c4751;
+    }
+  }
+
+  &__price{
+    color: #ff5912;
+    &-wrapper {
+      @include font-primary-semi-bold-sm;
+      margin: 0;
+      margin-left: 30px;
+      color: #3c4751;
+
+      @media screen and (max-width: 700px) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &__color-text {
+    margin: 0;
+  }
+
+  &__description {
+    @include font-primary-regular-sm;
+    margin: 0;
+    color: #495662;
+  }
+
+  &__info {
+    margin-right: 20px;
+  }
+
+  &__info-color-size {
+    display: flex;
+    margin-top: 20px;
+
+    @media screen and (max-width: 700px) {
+      flex-direction: column;
+    }
+  }
+
+  &__color {
+    margin-left: 5px;
+    border-radius: 50%;
+    height: 14px;
+    width: 14px;
+
+    &-text {
+      @include font-primary-semi-bold-sm;
+      color: #3c4751;
+    }
+  }
+
+  &__color-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &-amount {
+      &-input {
+        @include font-primary-regular-sm;
+        border: 0;
+        height: 100%;
+        width: 20px;
+        text-align: center;
+        outline: 0;
+        background-color: transparent;
+        color: #ff5912;
+      }
+      &-wrapper {
+        display: flex;
+        height: 20px;
+      }
+      &-button {
+        @include font-primary-semi-bold-sm;
+        display: flex;
+        border: 0;
+        height: 100%;
+        cursor: pointer;
+        background-color: transparent;
+        outline: 0;
+        color: #34404b;
+
+        &:hover {
+          opacity: .7;
+        }
+
+        &:focus {
+          opacity: .7;
+        }
+      }
+    }
+    &-remove {
+      align-self: flex-end;
+      border: 0;
+      height: 25px;
+      width: 25px;
+      outline: 0;
+      cursor: pointer;
+      background-color: transparent;
+      background-size: 100% 100%;
+      background-image: url(../../../assets/removeButton.svg);
+
+      &:focus {
+        opacity: 0.8;
+      }
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      justify-content: space-between;
+      flex-direction: row-reverse;
+      width: 100%;
+    }
+  }
+}

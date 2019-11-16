@@ -1,8 +1,10 @@
 import {db} from "../db/db";
+import ItemsService from "./ItemsService";
 
 class SlideService {
-    constructor() {
+    constructor(lang) {
         this.dbInstance = new db();
+        this.itemService = new ItemsService(lang)
     }
 
     getSliders(amount) {
@@ -12,7 +14,7 @@ class SlideService {
         return this.dbInstance.getAmount(amount, "slider")
             .then(res => {
                 const promises = res.map(async slider => {
-                    return await this.dbInstance.getById(slider.itemId, "items")
+                    return await this.itemService.getById(slider.itemId)
                         .then(sliderItem => {
                                 slider.item = sliderItem;
                                 slider.itemId = undefined;
@@ -26,10 +28,10 @@ class SlideService {
 
     async getById(id) {
         let slider;
-        await this.dbInstance.getById(id, "slider")
+        await this.dbInstance.getById("slider", id)
             .then(res => {
                 slider = res;
-                return this.dbInstance.getById(slider.itemId, "items");
+                return this.dbInstance.getById("items", slider.itemId);
             }).then(res => {
                 slider.item = res;
                 slider.itemId = undefined;

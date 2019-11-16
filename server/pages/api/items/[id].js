@@ -8,13 +8,23 @@ const cors = Cors({
 
 const handler = (req, res) => {
     try {
-        const service = new ItemsService();
+        const service = new ItemsService(req.query.lang);
         service.getById(req.query.id)
             .then(result => {
-                res.statusCode = 200;
-                res.json(JSON.stringify(result));
+                if (!result) {
+                    res.statusCode = 404;
+                    res.json(`NOT FOUND ${req.query.id}`);
+                } else {
+                    res.statusCode = 200;
+                    res.json(JSON.stringify(result));
+                }
             })
             .catch(err => {
+                if (err.message === "BAD ID") {
+                    res.statusCode = 400;
+                    res.json(`BAD ID ${req.query.id}`);
+                    return;
+                }
                 res.statusCode = 500;
                 res.json(JSON.stringify(err));
             })

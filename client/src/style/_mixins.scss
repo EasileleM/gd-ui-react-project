@@ -27,15 +27,31 @@
   @include font-primary-regular;
   font-size: $font-size-sm;
 }
+@mixin font-primary-regular-lg {
+  @include font-primary-regular;
+  font-size: $font-size-lg;
+}
 
 @mixin font-primary-regular-sm-italic {
   @include font-primary-regular-sm;
+  font-style: italic;
+}
+@mixin font-primary-regular-lg-italic {
+  @include font-primary-regular-lg;
+  font-style: italic;
+}
+@mixin font-primary-regular-md-italic {
+  @include font-primary-regular-md;
   font-style: italic;
 }
 
 @mixin font-primary-regular-semi-md {
   @include font-primary-regular;
   font-size: $font-size-semi-md;
+}
+@mixin font-primary-regular-semi-lg {
+  @include font-primary-regular;
+  font-size: $font-size-semi-lg;
 }
 
 @mixin font-primary-regular-md {
@@ -102,12 +118,12 @@
   font-family: $font-logo;
 }
 
-@mixin font-logo-regular {
+@mixin font-logo-bold {
   @include font-logo;
-  font-weight: 400;
+  font-weight: 700;
 }
 
-@mixin font-logo-regular-lg {
-  @include font-logo-regular;
-  font-size: $font-size-lg;
+@mixin font-logo-bold-xl {
+  @include font-logo-bold;
+  font-size: $font-size-xl;
 }

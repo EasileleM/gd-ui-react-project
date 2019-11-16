@@ -1,0 +1,27 @@
+@import "../../style/main";
+
+.error-page {
+  display: flex;
+  height: 60vh;
+  width: 100%;
+  padding: 0 50px;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+
+  &__header {
+    @include font-primary-bold-xxl;
+    color: $color-orange;
+    margin: 0
+  }
+
+  &__paragraph {
+    @include font-primary-regular-semi-lg
+  }
+
+  @media screen and (max-width:$breakpoint-tablet){
+    padding: 0 30px;
+  }
+}

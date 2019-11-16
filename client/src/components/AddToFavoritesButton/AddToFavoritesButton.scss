@@ -1,0 +1,25 @@
+@import "../../style/main";
+
+.addToFavoritesButton {
+  flex-basis: 25px;
+  box-sizing: content-box;
+  border: 0;
+  height: 25px;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  background-size: 100% 100%;
+  outline: 0;
+
+  &_small {
+    height: 20px
+  }
+
+  &:hover, &:focus {
+    fill: $color-orange;
+    stroke: $color-orange;
+  }
+  &_paddings {
+    padding: 0 18px;
+  }
+}

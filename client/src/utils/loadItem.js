@@ -1,10 +1,7 @@
 import axios from 'axios';
+import i18n from '../i18n';
+import {SERVER_URL} from '../constants/index';
 
-export async function loadItem(id = 1) {
-  const result = await axios.get(`https://gd-ui-react-project-server.herokuapp.com/api/items/${id}`);
-
-  this.setState({
-    ready: true,
-    data: result.data
-  })
+export default function loadItem(id) {
+    return axios.get(`${SERVER_URL}/api/items/${id}?lang=${i18n.language}`);
 }

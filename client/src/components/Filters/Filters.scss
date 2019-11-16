@@ -1,0 +1,35 @@
+@import "../../style/main";
+
+.filters-container {
+  @media screen and (max-width: $breakpoint-smartphone){
+    width: 100%;
+  }
+}
+
+.filter {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 40px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+
+  &_small {
+    padding: 20px;
+    margin-bottom: 1px;
+  }
+
+  &_mobile-only {
+    display: none;
+    @media screen and (max-width: $breakpoint-smartphone){
+      display: block;
+    }
+  }
+
+  &__heading {
+    margin: 0;
+    @include font-primary-bold-md;
+    color: $color-orange;
+  }
+}

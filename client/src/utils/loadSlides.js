@@ -1,9 +1,8 @@
 import axios from 'axios';
+import i18n from '../i18n';
+import {SERVER_URL} from '../constants/index';
 
-export async function loadSlides(amount) {
-  const request = await axios.get(`https://gd-ui-react-project-server.herokuapp.com/api/slider?amount=${amount}`);
-  this.setState({
-    ready: true,
-    data: request.data
-  })
+export default function loadSlides(amount) {
+  return axios.get(`${SERVER_URL}/api/slider?amount=${amount}&lang=${i18n.language}`);
+
 }

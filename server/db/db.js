@@ -1,50 +1,94 @@
 import MongoDB from "mongodb";
 
+const uri = process.env.MONGODB_URI || "mongodb+srv://admin:qwerty123456789@react-vptyr.mongodb.net/test?retryWrites=true&w=majority";
+const client = MongoDB.MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+
+
 export class db {
     constructor() {
-        this.uri = process.env.MONGODB_URI || "mongodb+srv://admin:qwerty123456789@react-vptyr.mongodb.net/test?retryWrites=true&w=majority";
-        this.client = MongoDB.MongoClient(this.uri, {useNewUrlParser: true, useUnifiedTopology: true});
         this.dbName = "shop";
-        this.dbConnection = this.client.connect();
+        this.dbPromise = this.getDbPromise()
     }
 
-    async getAll(collection) {
-        return this.dbConnection.then(client => {
-            const db = client.db(this.dbName)
+    async getDbPromise() {
+        if (!client.isConnected()) {
+            return await client.connect().then(res => {
+                console.log(`DB is connected! Yay!`);
+                return client.db(this.dbName);
+            }).catch(err => {
+                console.log(`DB is NOT connected. Error: ${err}`);
+            });
+        }
+        return client.db(this.dbName);
+    }
+
+    getAll(collection) {
+        return this.dbPromise.then(db => {
             return db
                 .collection(collection)
-                .find({}, {projection:{ _id: 0 }})
+                .find({})
                 .toArray();
-        });
+        })
     }
 
-    async getById(id, collection) {
-        return this.dbConnection.then(client => {
-            const db = client.db(this.dbName)
+    search(collection, search) {
+        return this.dbPromise.then(db => {
             return db
                 .collection(collection)
-                .findOne({"id": id}, {projection:{ _id: 0 }});
-        });
+                .find({$text: {$search: search}})
+                .toArray();
+        })
     }
 
-    async getAmount(amount, collection) {
-        return this.dbConnection.then(client => {
-            const db = client.db(this.dbName);
+    filter(collection, filter = {}) {
+        return this.dbPromise.then(db => {
             return db
                 .collection(collection)
-                .find({}, {projection:{ _id: 0 }})
+                .find(filter)
+                .toArray();
+        })
+    }
+
+    getById(collection, id) {
+        if (!MongoDB.ObjectId.isValid(id)) {
+            return Promise.reject(new Error(`BAD ID`));
+        }
+        return this.dbPromise.then(db => {
+            return db
+                .collection(collection)
+                .findOne({"_id": MongoDB.ObjectId(id)});
+        })
+    }
+
+    getByIdArray(collection, id) {
+        const idArray = id
+            .slice(0)
+            .filter((id) => MongoDB.ObjectId.isValid(id))
+            .map((id) => MongoDB.ObjectId(id));
+        return this.dbPromise.then(db => {
+            return db
+                .collection(collection)
+                .find({"_id": {$in: idArray}})
+                .toArray();
+        })
+    }
+
+    getAmount(amount, collection) {
+        return this.dbPromise.then(db => {
+            return db
+                .collection(collection)
+                .find({})
                 .limit(Number(amount))
                 .toArray();
-        });
+        })
     }
-    
-    async insertOne(collection, objToInsert) {
-        return this.dbConnection.then(client => {
-            const db = client.db(this.dbName)
+
+    insertOne(collection, objToInsert) {
+        return this.dbPromise.then(db => {
             return db
                 .collection(collection)
                 .insertOne(objToInsert);
-        });
+        })
     }
-};
+}
 

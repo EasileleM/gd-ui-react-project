@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Translation } from 'react-i18next';
+import { Link } from 'react-router-dom'
+
+import store from '../../store';
+import addItem from '../../utils/cart/addItem';
 
 import './main.scss';
 
 import star from '../../assets/star.svg';
 import starEmpty from '../../assets/star-empty.svg';
 
-export class ItemCardSmall extends React.Component {
+export class ItemCardSmall extends Component {
   createStars(rate, maxRate = 4) {
     const stars = new Array(+rate);
     for (let i = 0; i < Number(rate); i++) {
@@ -25,26 +30,42 @@ export class ItemCardSmall extends React.Component {
 
   render() {
     return (
-      <div className="item-card-small">
-        <img src={this.props.images[0]} alt="item" className="item-card-small__image" />
-        <div className="item-card-small__devider"></div>
-        <div className="item-card-small__info">
-          <h2 className="item-card-small__name">{this.props.name}</h2>
-          <div className="item-card-small__info-dynamic">
-            <div className="item-card-small__price-rating-block">
-              {this.createStars(this.props.rating)}
-              <p className="item-card-small__price">
-                {this.props.price}$
-              </p>
-            </div>
-            <div className="item-card-small__cart">
-              <button className="item-card-small__cart-button">
-                add to cart
-              </button>
+      <Translation>
+        {t =>
+          <div className="item-card-small">
+            <Link to={`/item/${this.props.item._id}`} style={{ textDecoration: 'none' }}>
+              <img src={this.props.item.images[0]} alt="item" className="item-card-small__image" />
+            </Link>
+            <div className="item-card-small__devider"></div>
+            <div className="item-card-small__info">
+              <Link to={`/item/${this.props.item._id}`} style={{ textDecoration: 'none' }}>
+                <h2 className="item-card-small__name">{this.props.item.name}</h2>
+              </Link>
+              <div className="item-card-small__info-dynamic">
+                <div className="item-card-small__price-rating-block">
+                  {this.createStars(this.props.item.rating)}
+                  <p className="item-card-small__price">
+                    {this.props.item.price + t('currency')}
+                  </p>
+                </div>
+                <div className="item-card-small__cart">
+                  <button
+                    onClick={() => store
+                      .dispatch(
+                        addItem(store.getState(),
+                          this.props.item,
+                          this.props.item.colors[0],
+                          this.props.item.sizes[0])
+                      )}
+                    className="item-card-small__cart-button">
+                    {t('smallCard.add')}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        }
+      </Translation>
     )
   }
 }

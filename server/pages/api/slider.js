@@ -8,7 +8,7 @@ const cors = Cors({
 
 const handler = (req, res) => {
     try {
-        const service = new SliderService();
+        const service = new SliderService(req.query.lang);
         service.getSliders(req.query.amount)
             .then(slides => {
                     res.statusCode = 200;

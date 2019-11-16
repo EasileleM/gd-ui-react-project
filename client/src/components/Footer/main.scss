@@ -4,14 +4,11 @@
   align-self: center;
   box-sizing: border-box;
   max-width: 1270px;
-  padding: 0 50px;
+  padding: 50px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 250px;
-  padding-top: 50px;
-  padding-bottom: 50px;
 
   &__wrapper {
     display: flex;
@@ -20,12 +17,9 @@
       flex-direction: column;
     }
 
-    &_column-wrap {
-      flex-flow: column wrap;
-      align-content: space-around;
-      max-height: 100px;
+    &_links {
       flex-grow: 1;
-      padding: 0 150px;
+      justify-content: space-evenly;
     }
   }
 
@@ -41,6 +35,7 @@
     width: 170px;
     height: 20px;
     margin-top: 20px;
+    cursor: pointer;
   }
 
   &__link {
@@ -52,6 +47,7 @@
     text-decoration: none;
 
     &-wrapper {
+      position: relative;
       max-width: 200px;
       margin-left: 20px;
     }
@@ -60,7 +56,9 @@
       content: url(../../assets/link-dot.svg);
       width: 5px;
       height: 5px;
-      margin-right: 10px;
+      left: -10px;
+      top: -2px;
+      position: absolute;
     }
 
     &:hover {
@@ -73,39 +71,37 @@
 
   &__text {
     color: $color-limed-spruce;
-    font-family: $font-primary;
-    font-size: $font-size-sm;
-    font-weight: 400;
+    @include font-primary-regular-sm;
     line-height: 30px;
     &_promoted {
       color: $color-orange;
-      font-weight: 700;
+      @include font-primary-bold-semi-md;
     }
   }
 }
 
-@media all and (max-width: 1024px) {
+@media all and (max-width: $breakpoint-tablet) {
   .footer {
-    &__wrapper_column-wrap {
-    padding: 0 0 0 30px;
-    }
-
+    padding: 30px;
     &__copyright {
       max-width: 120px;
+      text-align: center;
     }
   }
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: $breakpoint-tablet-vertical) {
   .footer {
-    &__wrapper_column-wrap {
-      padding: 0;
-      align-content: space-evenly;
+    flex-direction: column;
+
+    &__wrapper_links {
+      margin: 10px 0;
+      width: 100%;
     }
   }
 }
 
-@media all and (max-width: 767px) {
+@media all and (max-width: $breakpoint-smartphone) {
   .footer {
     flex-direction: column;
     align-items: center;
@@ -121,6 +117,10 @@
         max-height: none;
         padding: 20px 0;
       }
+    }
+
+    &__mobile {
+      display: none;
     }
 
     &__copyright {

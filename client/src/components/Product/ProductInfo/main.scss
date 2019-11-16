@@ -1,0 +1,127 @@
+@import './../../../style/main.scss';
+
+.product-info {
+  width: 60%;
+  padding: 80px;
+  padding-right: 50px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    padding-right: 30px;
+  }
+
+  @media screen and (max-width: $breakpoint-smartphone) {
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &__heading {
+    @include font-primary-bold-xxl;
+    color: $color-orange;
+    margin: 0;
+
+    @media screen and (max-width: $breakpoint-smartphone){
+      overflow-wrap: break-word;
+    }
+
+    &_secondary {
+      @include font-primary-regular-md;
+      margin: 0;
+      color: $color-limed-spruce;
+    }
+  }
+
+  &__paragraph {
+    @include font-primary-regular-semi-md;
+    line-height: 29.97px;
+    color: $color-river-bed;
+  }
+
+  &__order {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 40px;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      flex-direction: column;
+    }
+  }
+
+  &__price {
+    @include font-primary-regular-semi-lg;
+    margin: 0;
+    color: $color-limed-spruce;
+    display: flex;
+    align-items: center;
+
+  }
+
+  &__order-buttons {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      margin-top: 20px;
+      width: 100%;
+    }
+    @media screen and (max-width: $breakpoint-mobile) {
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+  }
+
+  &__button-icon-container {
+    height: 25px;
+    margin: 0 5px
+  }
+
+  &__button-icon {
+    height: 25px;
+    cursor: pointer;
+    @media screen and (max-width: $breakpoint-tablet) {
+    }
+  }
+
+  &__order-now-button {
+    border: 0;
+    padding: 13px 20px;
+    border-radius: 50px;
+    background-color: $color-orange;
+    color: white;
+    cursor: pointer;
+    margin-left: 30px;
+    @include font-primary-regular-md;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    outline: none;
+
+    &:active:focus  {
+      opacity: 0.5;
+    }
+
+    &:hover {
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      width: 100%;
+      max-width: 200px;
+    }
+
+    @media screen and (max-width: $breakpoint-mobile) {
+      max-width: none;
+      margin-top: 30px;
+      order: 0;
+      padding: 20px 20px;
+    }
+  }
+}

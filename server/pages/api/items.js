@@ -8,18 +8,32 @@ const cors = Cors({
 
 const handler = (req, res) => {
     try {
-        const service = new ItemsService();
-        service.getAllItems()
+        if (!req.query.id) {
+            res.statusCode = 400;
+            res.json("NO ID PROVIDED");
+            return;
+        }
+        const service = new ItemsService(req.query.lang);
+        const idArray = req.query.id.split(',');
+        return service
+            .getByIdArray(idArray)
             .then(items => {
-                    const result = service.pagination(req.query.size, req.query.page, items);
-                    res.statusCode = 200;
-                    res.json(JSON.stringify(result))
+                res.statusCode = 200;
+                const rejectedId = [];
+                if (idArray && idArray.length > items.length) {
+                    for (const id of idArray) {
+                        if (!items.some((item) => item._id == id)) {
+                            rejectedId.push(id);
+                        }
+                    }
                 }
+                res.json(JSON.stringify({ items, rejectedId }));
+            }
             )
             .catch(err => {
-                    res.statusCode = 500;
-                    res.json(JSON.stringify(err));
-                }
+                res.statusCode = 500;
+                res.json(JSON.stringify(err));
+            }
             )
     } catch (err) {
         res.statusCode = 500;
