@@ -4,7 +4,7 @@ import "./FilterSearchBar.scss"
 import store from "../../../store";
 import {search} from "../../../action-creators/filter-action-creator";
 
-class FilterSearchBar extends Component {
+export class FilterSearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,6 +24,9 @@ class FilterSearchBar extends Component {
     this.setState({searchValue: ""});
     store.dispatch(search(null));
   };
+
+  componentDidMount() {
+  }
 
   render() {
     return (

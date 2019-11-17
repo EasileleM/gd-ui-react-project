@@ -6,7 +6,7 @@ import store from "../../../store";
 import {changeMinPriceFilter, changeMaxPriceFilter} from "../../../action-creators/filter-action-creator";
 
 
-class FilterSlider extends Component {
+export class FilterSlider extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,6 +56,9 @@ class FilterSlider extends Component {
     if (prevState.minChosenValue !== this.state.minChosenValue) {
       store.dispatch(changeMinPriceFilter(this.state.minChosenValue));
     }
+  }
+
+  componentDidMount() {
   }
 
   render() {
