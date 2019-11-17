@@ -1,0 +1,28 @@
+@import "../../../style/main";
+
+.filter-search-bar {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+
+  &__input {
+    width: 100%;
+    @include font-primary-regular-md;
+    outline: none;
+    box-sizing: border-box;
+    border: none;
+    box-shadow: 0 0 0 2px $color-orange;
+    border-radius: 5px;
+    padding: 10px;
+    padding-right: 50px;
+  }
+
+  &__clear {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+
+  }
+}

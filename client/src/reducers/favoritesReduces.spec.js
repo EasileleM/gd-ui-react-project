@@ -61,12 +61,30 @@ describe('Favorites reducer', () => {
       const previousState = {
         ...initialState,
         items: [4, 1],
-        size: 2
+        size: 2,
+        opened: true
       };
       expect(favoritesReducer(previousState, favoritesActionCreators.updateItems(mockItems))).toEqual({
         ...previousState,
         items: mockItems,
-        size: mockItems.length
+        size: mockItems.length,
+        opened: true
+      });
+    });
+
+    it('FAVORITES_ACTION.UPDATE_ITEMS should update favorites opened state', () => {
+      const mockItems = [];
+      const previousState = {
+        ...initialState,
+        items: [1, 2],
+        size: 2,
+        opened: true
+      };
+      expect(favoritesReducer(previousState, favoritesActionCreators.updateItems(mockItems))).toEqual({
+        ...previousState,
+        items: mockItems,
+        size: mockItems.length,
+        opened: false
       });
     });
   });

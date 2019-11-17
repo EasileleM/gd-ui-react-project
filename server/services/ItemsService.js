@@ -30,15 +30,15 @@ class ItemsService {
     }
 
     getAllItems() {
-        return this.dbInstance.getAll("items").then(items => this.languageSpecific(items, this.lang))
+        return this.dbInstance.getAll("items").then(items => this.languageSpecific(items, this.lang));
     }
 
     getById(id) {
-        return this.dbInstance.getById("items", id).then(items => this.languageSpecific(items, this.lang))
+        return this.dbInstance.getById("items", id).then(items => this.languageSpecific(items, this.lang));
     }
 
     getByIdArray(id) {
-        return this.dbInstance.getByIdArray("items", id).then(items => this.languageSpecific(items, this.lang))
+        return this.dbInstance.getByIdArray("items", id).then(items => this.languageSpecific(items, this.lang));
     }
 
     getRecentItems(size = 4, page = 1) {
@@ -112,6 +112,14 @@ class ItemsService {
             });
     }
 
+    search(query) {
+        if (query.search) {
+            return this.dbInstance.search("items", query.search)
+                .then(items => this.languageSpecific(items, this.lang));
+        }
+        else return this.getAllItems();
+    }
+
     filter(items, query) {
         let result = items;
         if (query.filter === 'true') {
@@ -159,7 +167,7 @@ class ItemsService {
                     }
                 }
                 return true;
-            })
+            });
         }
         return result;
     }

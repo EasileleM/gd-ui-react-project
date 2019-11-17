@@ -57,6 +57,11 @@
         overflow-y: scroll;
         overflow-x: hidden;
 
+
+        &::-webkit-scrollbar {
+          width: 0px;
+        }
+
         @media screen and (max-width: $breakpoint-smartphone) {
           margin-bottom: 50px;
           width: 100%;
@@ -95,8 +100,10 @@
 
   &__toggle-off {
     display: none;
+    visibility: hidden;
 
     &_active {
+      visibility: visible;
       font-size: 0;
       opacity: 0.3;
       display: block;
@@ -104,10 +111,14 @@
       background-color: black;
       z-index: -1;
       top: 0;
-      width: 100%;
+      width: 200%;
       height: 100%;
 
-      @media screen and (max-width: $breakpoint-smartphone) {
+      @media screen and (min-width:  $breakpoint-tablet-vertical) {
+        visibility: hidden;
+      }
+
+        @media screen and (max-width: $breakpoint-smartphone) {
         opacity: 1;
         @include font-primary-regular-md;
         color: $color-white;
@@ -136,6 +147,20 @@
 
     @media screen and (max-width: $breakpoint-tablet) {
       margin-left: 0;
+    }
+  }
+
+  &__mobile-input {
+    display: none;
+    @media screen and (max-width: $breakpoint-smartphone) {
+      display: block;
+      position: fixed;
+      top:0;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+      border: 1px solid $color-orange;
+      border-radius: 20px;
     }
   }
 }

@@ -8,8 +8,51 @@ import './main.scss';
 import { Link } from "react-router-dom";
 import AddToFavoriteButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import { Logo } from '../Logo';
+import { withRouter } from "react-router-dom";
+import { search } from "../../action-creators/filter-action-creator";
+import store from "../../store";
+import { ReactComponent as DeleteIcon } from "../../assets/delete.svg";
+import { ReactComponent as UserIcon } from "../../assets/user.svg";
+import { ReactComponent as SearchIcon } from "../../assets/search.svg";
+import {changeBodyScrollState} from '../../utils/changeBodyScrollState';
 
 class Navigation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchValue: "",
+      searchInput: React.createRef(),
+      menuExpanded: false,
+    }
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      searchValue: e.target.value,
+    }, () => {
+      store.dispatch(search(this.state.searchValue));
+    })
+  };
+
+  handleSearch = (e) => {
+    if (!this.state.searchValue) {
+      this.state.searchInput.current.focus();
+    } else {
+      this.props.history.push("/search");
+      this.toggleMenu();
+    }
+    e.preventDefault()
+  };
+
+  clearSearch = (e) => {
+    this.setState({ searchValue: "" });
+    store.dispatch(search(null));
+  };
+
+  toggleMenu = () => {
+    this.setState({ menuExpanded: !this.state.menuExpanded }, changeBodyScrollState(!this.state.menuExpanded ))
+  };
+
   render() {
     return (
       <Translation>
@@ -19,33 +62,38 @@ class Navigation extends Component {
               <div className="header__logo">
                 <Logo />
               </div>
-              <input type="checkbox" id="headerMenuData" className="header__menu-data-input" />
+              <input onClick={this.toggleMenu} type="checkbox" id="headerMenuData" className="header__menu-data-input" checked={this.state.menuExpanded} />
               <nav className="header__links-container">
                 <label className="header__menu-button" htmlFor="headerMenuData" data-opened="⨯" data-closed="≡"></label>
-                <Link className="header__burger-menu header__text header__links-item header__text_lg header__links-item_active" to="/">
+                <Link onClick={this.toggleMenu}  className={`header__burger-menu header__text header__links-item header__text_lg ${ this.props.location.pathname === '/' ? `header__links-item_active `: ''}`} to="/">
                   {t('navigation.home')}
                 </Link>
-                <Link className="header__burger-menu header__text header__links-item header__text_lg" to="/search">
+                <Link onClick={this.toggleMenu}  className={`header__burger-menu header__text header__links-item header__text_lg ${ this.props.location.pathname === '/search' ? `header__links-item_active `: ''}`} to="/search">
                   {t('navigation.products')}
                 </Link>
-                <a className="header__burger-menu header__text header__links-item header__text_lg" href="google.com">
+                <a onClick={this.toggleMenu}  className="header__burger-menu header__text header__links-item header__text_lg" href="google.com">
                   {t('navigation.hotDeals')}
                 </a>
-                <a className="header__burger-menu header__text header__links-item header__text_lg" href="google.com">
+                <a onClick={this.toggleMenu}  className="header__burger-menu header__text header__links-item header__text_lg" href="google.com">
                   {t('navigation.about')}
                 </a>
-                <a className="header__burger-menu header__text header__links-item header__text_lg" href="google.com">
+                <a onClick={this.toggleMenu}  className="header__burger-menu header__text header__links-item header__text_lg" href="google.com">
                   {t('navigation.contact')}
                 </a>
-                <form className="header__burger-menu header__search-container" method="POST" name="search">
-                  <input className="header__search-button" type="checkbox" id="search-button" />
-                  <input className="header__search-bar" type="text"/>
-                  <label className="header__icon header__icon_search" tabIndex="7" htmlFor="search-button">
-                  </label>
+                <form onSubmit={this.handleSearch} className="header__burger-menu header__search-container" name="search">
+                  <input className={"header__search-bar " + (this.state.searchValue === "" ? "header__search-bar_hidden" : "")}
+                    value={this.state.searchValue}
+                    onChange={this.handleChange}
+                    ref={this.state.searchInput}
+                    type="text" />
+                  <DeleteIcon className={"header__search-clear-button " + (this.state.searchValue === "" ? "header__search-clear-button_hidden" : "")}
+                    onClick={this.clearSearch} />
+
+                  <SearchIcon tabIndex="7" onClick={this.handleSearch} className="header__icon header__icon_search header__icon_big " to="/search" />
                 </form>
-                <User />
+                <UserIcon className="header__icon header__icon_big header__icon_user" tabIndex="8" />
                 <div className="header__icon_big header__icon_fav">
-                  <AddToFavoriteButton openFavorites={true}/>
+                  <AddToFavoriteButton small={true} openFavorites={true} />
                 </div>
                 <ShopCart />
               </nav>
@@ -56,4 +104,4 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+export default withRouter(Navigation);

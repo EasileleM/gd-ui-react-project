@@ -89,13 +89,16 @@
     height: 21px;
 
     &:hover {
-      filter: invert(36%) sepia(51%) saturate(2878%);
+      fill: $color-orange;
+      stroke: $color-orange;
       cursor: pointer;
     }
 
     &_big {
-      width: 30px;
+      width: 20px;
+      height: 20px;
       margin-left: 25px;
+      outline: none;
     }
 
     &_fav {
@@ -118,27 +121,18 @@
       background: url(../../assets/instagram.svg) no-repeat right;
     }
 
-    &_search {
-      background: url(../../assets/Search_Ico.png) no-repeat right;
-    }
-
-    &_user {
-      background: url(../../assets/User_Ico.png) no-repeat right;
-    }
 
     &_cart {
       margin-left: 0;
       border: 0;
       width: 28px;
       padding: 0;
-      background-color: transparent;
-      background: url(../../assets/Cart_Ico.png) no-repeat bottom;
     }
   }
 
   &__cart-counter {
     position: absolute;
-    top: -18px;
+    top: -16px;
     @include font-primary-light-xxs;
     display: flex;
     justify-content: center;
@@ -175,39 +169,90 @@
       padding: 0;
       margin-right: 15px;
       text-align: center;
+      white-space: nowrap;
       &:hover, &_active {
         color: $color-orange;
       }
     }
   }
 
-  &__search {
-    &-container {
-      flex-grow: 1;
-      display: flex;
-      align-items: flex-start;
+  &__search-clear-button{
+    position: absolute;
+    cursor: pointer;
+    top: 15px;
+    right: 55px;
+    width: 15px;
+    height: 15px;
+    transition: all .1s;
+
+    &:hover {
+      fill: $color-orange;
     }
 
-    &-bar {
-      flex-grow: 1;
-      background-color: $color-white;
-      border: 1px solid $color-limed-spruce ;
-      border-radius: 10px;
-      padding: 2px 7px;
+    &:active {
+      fill: $color-orange;
+      top: 17px;
+      right: 58px;
+      transition: all .35s;
+      width: 10px;
+      height: 10px;
+    }
+
+    &_hidden{
       visibility: hidden;
     }
 
-    &-button {
-      display: none;
+    @media screen and (max-width: $breakpoint-smartphone){
+      right: 20px;
+      &:active {
+        top: 17px;
+        right: 25px;
+        transition: all .35s;
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
 
-      &:checked ~ .header__search-bar{
-        visibility: visible;
+  &__search {
+    &-container {
+      position: relative;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+    }
+
+    &-bar {
+      @include font-primary-regular-semi-md;
+      color: $color-limed-spruce;
+      flex-grow: 1;
+      background-color: $color-white;
+      border: none ;
+      border-radius: 10px;
+      padding: 10px 10px;
+      outline: none;
+      -webkit-transition: all .35s ease-in-out;
+      transition: all .35s ease-in-out;
+      padding-right: 35px;
+      box-shadow:  0 0 0 1px $color-orange;
+
+      &_hidden {
+        box-shadow:  none;
+      }
+
+      &:focus{
+        box-shadow:  0 0 0 2px $color-orange;
+      }
+
+      @media screen and (max-width: $breakpoint-tablet) {
+        box-shadow:  0 0 0 2px $color-orange;
       }
     }
   }
 }
 
-@media all and (max-width: $breakpoint-tablet) {
+@media all and (max-width: 1220px) {
   .header {
     padding: 0 30px;
     &__wrapper {
@@ -290,7 +335,7 @@
       }
 
       &_cart {
-        background-position: bottom;
+        background-color: transparent;
       }
 
       &_search {
@@ -313,8 +358,7 @@
       flex-direction: row;
       align-items: center;
       margin: 0;
-      flex-grow: initial;
-      justify-content: space-between;
+      justify-content: space-around;
       flex-grow: 1;
       padding-left: 20px;
     }
@@ -335,6 +379,7 @@
     }
   }
 
+
   .header__menu-data-input:checked + .header__links-container {
     top: 0;
     left: 0;
@@ -346,14 +391,21 @@
     width: 100%;
     height: 100%;
     background: $color-white;
-    padding-bottom: 150px;
+    padding-bottom: 100px;
+    padding-left: 0;
     box-sizing: border-box;
+    transition: all .35s;
+
 
     & .header {
       &__icon {
         &_big, &-cart-wrapper, &_search {
         display: none;
         }
+      }
+
+      &__search-container {
+        margin: 0;
       }
 
       &__burger-menu {
@@ -368,5 +420,18 @@
         }
       }
     }
+  }
+}
+
+@media all and (max-width: $breakpoint-mobile) {
+  .header {
+    &__links-container {
+      flex-direction: row;
+      align-items: center;
+      margin: 0;
+      justify-content: space-between;
+      padding-left: 20px;
+    }
+
   }
 }

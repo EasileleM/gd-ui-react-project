@@ -14,7 +14,7 @@ export class db {
         if (!client.isConnected()) {
             return await client.connect().then(res => {
                 console.log(`DB is connected! Yay!`);
-                return client.db(this.dbName)
+                return client.db(this.dbName);
             }).catch(err => {
                 console.log(`DB is NOT connected. Error: ${err}`);
             });
@@ -27,7 +27,16 @@ export class db {
             return db
                 .collection(collection)
                 .find({})
-                .toArray()
+                .toArray();
+        })
+    }
+
+    search(collection, search) {
+        return this.dbPromise.then(db => {
+            return db
+                .collection(collection)
+                .find({$text: {$search: search}})
+                .toArray();
         })
     }
 
@@ -36,7 +45,7 @@ export class db {
             return db
                 .collection(collection)
                 .find(filter)
-                .toArray()
+                .toArray();
         })
     }
 
@@ -47,7 +56,7 @@ export class db {
         return this.dbPromise.then(db => {
             return db
                 .collection(collection)
-                .findOne({"_id": MongoDB.ObjectId(id)})
+                .findOne({"_id": MongoDB.ObjectId(id)});
         })
     }
 

@@ -1,7 +1,6 @@
 import { updateItems as updateItemsActionCreator } from '../../action-creators/cart-action-creator';
 
 import updateLocalStorageCollection from '../localStorage/updateLocalStorageCollection';
-import notificationSuccess from '../notificationSuccess';
 
 export default function updateItem(state, target, color, size, amount) {
   return dispatch => {
@@ -13,13 +12,13 @@ export default function updateItem(state, target, color, size, amount) {
 
     for (let i = 0; i < currentItems.length; i++) {
       if (currentItems[i].generalData._id === target.generalData._id) {
-        if (bucketChanged && currentItems[i].color === target.color
-          && currentItems[i].size === target.size) {
+        if (bucketChanged && (currentItems[i].color === target.color)
+          && (currentItems[i].size === target.size)) {
           currentItems.splice(i--, 1);
           continue;
         }
-        else if (currentItems[i].color === color
-          && currentItems[i].size === size) {
+        else if ((currentItems[i].color === color)
+          && (currentItems[i].size === size)) {
           currentItems[i].amount =
             bucketChanged ? Number(currentItems[i].amount) + Number(amount) : Number(amount);
           targetUpdated = true;
@@ -38,6 +37,7 @@ export default function updateItem(state, target, color, size, amount) {
       }
       currentCollection[target.generalData._id]
         .push({ size, color, amount });
+      currentItems.push({ generalData: target.generalData, size, color, amount });
     }
 
     dispatch(updateItemsActionCreator(currentItems));

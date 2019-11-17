@@ -4,21 +4,14 @@
   border: 0;
   margin: 0;
   padding: 0;
-  background-color: transparent;
   cursor: pointer;
-  transition: 200ms ease;
+  height: 30px;
+  background-color: transparent;
+  outline: none;
 
-  &:hover {
-    opacity: 0.7;
-  }
+  &:hover, &:focus  {
+    fill: $color-orange;
+    stroke: $color-orange;
 
-  &:focus {
-    outline: 0;
-    opacity: 0.7;
-  }
-
-  &:before {
-    content: url("../../../assets/bucket.png");
-    margin-top: 1px;
   }
 }

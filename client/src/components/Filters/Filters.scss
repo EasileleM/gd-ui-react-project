@@ -15,6 +15,18 @@
   margin-bottom: 20px;
   box-sizing: border-box;
 
+  &_small {
+    padding: 20px;
+    margin-bottom: 1px;
+  }
+
+  &_mobile-only {
+    display: none;
+    @media screen and (max-width: $breakpoint-smartphone){
+      display: block;
+    }
+  }
+
   &__heading {
     margin: 0;
     @include font-primary-bold-md;

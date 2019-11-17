@@ -27,7 +27,7 @@ $color-border: $color-athens-gray;
     width: calc((100% - 40px) / 2);
   }
 
-  @media screen and (max-width: 460px){
+  @media screen and (max-width: 430px){
     width: calc((100% - 20px) / 1);
   }
 
@@ -79,9 +79,8 @@ $color-border: $color-athens-gray;
     }
 
     &_back {
-      width: 70px;
+      height: 70px;
       object-fit: contain;
-
     }
   }
 
@@ -118,6 +117,7 @@ $color-border: $color-athens-gray;
     display: flex;
     position: relative;
     margin-top: 50px;
+    align-items: center;
 
     &::before {
       position: absolute;
@@ -137,19 +137,12 @@ $color-border: $color-athens-gray;
     background-color: transparent;
     cursor: pointer;
     transition: 200ms ease;
+    height: 25px;
+    outline: none;
 
     &:hover {
-      opacity: 0.7;
-    }
-
-    &:focus {
-      outline: 0;
-      opacity: 0.7;
-    }
-
-    &:before {
-      content: url("../../assets/Share_Ico.png");
-      margin-top: 1px;
+      fill: $color-orange;
+      stroke: $color-orange;
     }
   }
 

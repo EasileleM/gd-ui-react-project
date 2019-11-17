@@ -5,6 +5,7 @@ import loadCard from "../../utils/loadCard";
 import './main.scss';
 import notificationError from '../../utils/notificationError.js';
 import {connect} from "react-redux";
+import {ReactComponent as NotFoundIcon} from "../../assets/not-found.svg";
 
 class ProductCatalog extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class ProductCatalog extends React.Component {
       loading: true,
       nextPage: true,
       filtered: this.props.filtered,
+      notFound: false
     };
   }
 
@@ -46,11 +48,17 @@ class ProductCatalog extends React.Component {
         cards: [...this.state.cards, ...result.data.items],
         loading: false,
         nextPage: result.data.nextPage
+      }, () => {
+        if (this.state.cards.length < 1) {
+          this.setState({notFound: true})
+        } else {
+          this.setState({notFound: false})
+        }
       })
     }).catch((error) => {
-      notificationError('Таких товаров не существует', 'Products you\'re looking for is nowhere to be found.', error);
+      notificationError('Таких товаров не существует', 'Products you\'re looking for are nowhere to be found.', error);
     });
-  }
+  };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.filters !== this.props.filters) {
@@ -62,12 +70,20 @@ class ProductCatalog extends React.Component {
             this.loadItems();
           }
       );
-
     }
   }
 
   render() {
-    if (this.state.ready && this.state.nextPage) {
+    if (this.state.notFound) {
+      return (
+          <div className='product-catalog'>
+            <div className="product-catalog__not-found-container">
+              <NotFoundIcon className="product-catalog__not-found-icon"/>
+              <div className='product-catalog__not-found'>Sorry, we couldn't find anything</div>
+            </div>
+          </div>
+          )
+    } else if (this.state.ready && this.state.nextPage) {
       return (
           <div className='product-catalog'>
             <ProductsContainer rowSize={this.props.rowSize} products={this.state.cards}/>

@@ -4,6 +4,8 @@ import FilterRadio from "./FilterRadio/FilterRadio";
 import FilterSlider from "./FIlterSlider/FilterSlider";
 import FilterCheckbox from "./FilterCheckbox/FilterCheckbox";
 import {loadFilters} from "../../utils/loadFilters";
+import {LoadingSpinner} from "../LoadingSpinner";
+import FilterSearchBar from "./FilterSearchBar/FilterSearchBar";
 
 class Filters extends Component {
   constructor(props) {
@@ -25,10 +27,15 @@ class Filters extends Component {
   render() {
     return (
         <div className="filters-container">
+
+          <div className="filter filter_small filter_mobile-only">
+            <FilterSearchBar/>
+          </div>
+
           <div className="filter">
             <h2 className="filter__heading">Categories</h2>
             {
-              this.state.filters ? <FilterRadio options={this.state.filters.categories}/> : ""
+              this.state.filters ? <FilterRadio options={this.state.filters.categories}/> : <LoadingSpinner/>
             }
           </div>
 
@@ -36,7 +43,9 @@ class Filters extends Component {
             <h2 className="filter__heading">Price Filter</h2>
             {
               this.state.filters ?
-                  <FilterSlider maxValue={Number(this.state.filters.maxprice)} minValue={Number(this.state.filters.minprice) }/> : ""
+                  <FilterSlider slideIn={this.props.slideIn}
+                                maxValue={Number(this.state.filters.maxprice)}
+                                minValue={Number(this.state.filters.minprice) }/> : <LoadingSpinner/>
             }
           </div>
 
@@ -44,7 +53,7 @@ class Filters extends Component {
             <h2 className="filter__heading">Sizes</h2>
             {
               this.state.filters ?
-                  <FilterCheckbox name="sizes" options={this.state.filters.sizes}/> : ""
+                  <FilterCheckbox name="sizes" options={this.state.filters.sizes}/> : <LoadingSpinner/>
             }
           </div>
 
@@ -52,7 +61,7 @@ class Filters extends Component {
             <h2 className="filter__heading">Brands</h2>
             {
               this.state.filters ?
-                  <FilterCheckbox name="brands" options={this.state.filters.brands}/> : ""
+                  <FilterCheckbox name="brands" options={this.state.filters.brands}/> : <LoadingSpinner/>
             }
           </div>
         </div>

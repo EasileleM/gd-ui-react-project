@@ -1,6 +1,7 @@
 import { updateItems as updateItemsActionCreator } from '../../action-creators/favorites-action-creator';
 
 import updateLocalStorageCollection from '../localStorage/updateLocalStorageCollection';
+import notificationSuccess from '../notificationSuccess';
 
 export default function addItem(state, itemToAdd) {
   return dispatch => {
@@ -16,5 +17,6 @@ export default function addItem(state, itemToAdd) {
     currentItems.push(itemToAdd);
     dispatch(updateItemsActionCreator(currentItems));
     updateLocalStorageCollection('FavoritesItems', currentCollection);
+    notificationSuccess(' успешно добавлено в избранное', ' has been added to favorites', itemToAdd.name);
   };
 }

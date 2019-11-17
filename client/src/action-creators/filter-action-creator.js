@@ -35,3 +35,16 @@ export const changeBrandsFilter = (brands) => {
     payload: brands,
   }
 };
+
+export const search = (target) => {
+  return {
+    ...cartActions.search,
+    payload: target,
+  }
+};
+
+export const clear = () => {
+  return {
+    ...cartActions.clear,
+  }
+};
