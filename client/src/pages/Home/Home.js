@@ -3,7 +3,7 @@ import {Slider} from "../../components/Slider";
 import {NewArrivalsBlock} from "../../components/NewArrivalsBlock";
 import {SpecialOfferSection} from "../../components/SpecialOfferSection";
 import {BestSalesBlock} from "../../components/BestSalesBlock";
-import {Newsletter} from "../../components/Newsletter/Newsletter";
+import Newsletter from "../../components/Newsletter/Newsletter";
 import "./Home.scss"
 
 class Home extends Component {

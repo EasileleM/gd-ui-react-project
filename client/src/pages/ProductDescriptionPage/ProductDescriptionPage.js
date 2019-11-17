@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Product from "../../components/Product";
 import {RelatedProductsBlock} from "../../components/RelatedProductsBlock/RelatedProductsBlock";
-import {Newsletter} from "../../components/Newsletter/Newsletter";
+import Newsletter from "../../components/Newsletter/Newsletter";
 
 import "./ProductDescriptionPage.scss";
 

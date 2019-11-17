@@ -1,42 +1,70 @@
+import React, {Component} from 'react';
+import {mount} from 'enzyme';
+import {expect} from 'chai';
+import sinon from 'sinon';
 import {Newsletter} from './Newsletter';
-import React, {Suspense} from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import {render, unmountComponentAtNode} from "react-dom";
-import {act} from "react-dom/test-utils";
-import sendEmail from "../../utils/sendEmail";
-import {LoadingSpinner} from '../LoadingSpinner/index';
-import Enzyme, {shallow} from "enzyme";
-import ScrollToTop from "../SectionHeader/ScrollOnTop";
+import {configure} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import * as SendEmail from "../../utils/sendEmail";
+import * as Toastify from 'react-toastify';
 
-jest.mock('../../utils/sendEmail', () => jest.fn());
+configure({adapter: new Adapter()});
 
-let container = null;
-beforeEach(() => {
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
-afterEach(() => {
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
 
-it("renders with or without a name", () => {
-  const resp = {status: 200};
-  sendEmail.mockImplementation(() => resp);
-  act(() => {
-    render(
-        <Suspense fallback={<div className="spinner-wrapper"><LoadingSpinner/></div>}>
-          <Newsletter/>
-        </Suspense>, container
-    );
+describe('<Newsletter />', () => {
+  let sandbox;
+  beforeEach(function () {
+    sandbox = sinon.createSandbox();
   });
 
-  const button = document.querySelector(".Newsletter__button");
-  console.log(container)
-  act(() => {
-    button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  afterEach(function () {
+    sandbox.restore();
   });
 
-  expect(container.querySelector('.Newsletter__input')).toBe('f');
+  it('calls componentDidMount', () => {
+    sandbox.spy(Newsletter.prototype, 'componentDidMount');
+    const wrapper = mount(<Newsletter t={key => key}/>);
+    expect(Newsletter.prototype.componentDidMount).to.have.property('callCount', 1);
+  });
+
+  it('submits form (no errors)', () => {
+    sandbox.spy(Newsletter.prototype, 'handleSubmit');
+    sandbox.stub(SendEmail, 'default').callsFake(() => {
+      return new Promise(resolve => resolve({status: 201}))
+    });
+    let typeResult;
+    sandbox.stub(Toastify, 'toast').callsFake((mes, type) => {
+      typeResult = type.type;
+    });
+    const wrapper = mount((<Newsletter t={key => key}/>));
+    wrapper.setState({value: "validemail@mail.com"});
+    wrapper.find('.Newsletter__form').simulate('submit');
+    return SendEmail.default().finally(() => {
+      expect(typeResult).to.equal('info')
+    })
+  });
+
+  it('submits form (bad response)', () => {
+    sandbox.spy(Newsletter.prototype, 'handleSubmit');
+    sandbox.stub(SendEmail, 'default').callsFake(() => {
+      return new Promise(resolve => resolve({status: 400}))
+    });
+    let typeResult;
+    sandbox.stub(Toastify, 'toast').callsFake((mes, type) => {
+      typeResult = type.type;
+    });
+    const wrapper = mount((<Newsletter t={key => key}/>));
+    wrapper.setState({value: "validemail@mail.com"});
+    wrapper.find('.Newsletter__form').simulate('submit');
+    return SendEmail.default().finally(() => {
+      expect(typeResult).to.equal('error')
+    })
+  });
+
+  it('handles changes in input', () => {
+    sandbox.spy(Newsletter.prototype, 'handleChange');
+    const wrapper = mount((<Newsletter t={key => key}/>));
+    wrapper.find("input.Newsletter__input").simulate('change', {target: {value: 'My new value'}});
+    expect(Newsletter.prototype.handleChange).to.have.property('callCount', 1);
+  });
 });
