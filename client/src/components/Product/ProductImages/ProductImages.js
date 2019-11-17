@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import "./main.scss"
+import "./ProductImages.scss"
 
 
-class ProductImages extends Component {
+export class ProductImages extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +27,9 @@ class ProductImages extends Component {
         currentIndex: 0,
       })
     }
+  }
+
+  componentDidMount() {
   }
 
   render() {
