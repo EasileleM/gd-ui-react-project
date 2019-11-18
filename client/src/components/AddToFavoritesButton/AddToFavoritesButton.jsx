@@ -9,8 +9,7 @@ import {openFavorites} from '../../action-creators/favorites-action-creator';
 import {ReactComponent as FavoritesIcon} from "../../assets/likeDisabled.svg"
 import {ReactComponent as FavoritesIconEnabled} from "../../assets/likeEnabled.svg"
 
-
-class AddToFavoritesButton extends React.Component {
+export class AddToFavoritesButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,11 +17,7 @@ class AddToFavoritesButton extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.enabled !== this.state.enabled) {
-      this.setState({enabled: this.props.enabled});
-    }
-  }
+  componentDidMount() {}
 
   handleOnClick() {
     if (this.props.openFavorites) {

@@ -1,25 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Translation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import './OrderBlock.scss';
 
-function OrderBlock(props) {
-  return (
-    <Translation>
-      {
-        t =>
-          <div className="card-window__order">
-            <p className="card-window__order-price-wrapper">
-              {t('orderBlock.price')} <span className="card-window__order-price">{`${props.orderPrice || 0}`+ t('currency')}</span>
-            </p>
-            <button tabIndex="2" className="card-window__order-button">
-              {t('order')}
-      </button>
-          </div>
-      }
-    </Translation>
-  )
+export class OrderBlock extends React.Component {
+  componentDidMount() {}
+  render() {
+    return (
+      <div className="card-window__order" >
+        <p className="card-window__order-price-wrapper">
+          {this.props.t('orderBlock.price')} <span className="card-window__order-price">{`${this.props.orderPrice || 0}` + this.props.t('currency')}</span>
+        </p>
+        <button tabIndex="2" className="card-window__order-button">
+          {this.props.t('order')}
+        </button>
+      </div >
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -27,4 +25,4 @@ const mapStateToProps = (state) => {
     orderPrice: state.cartController.orderPrice
   }
 };
-export default connect(mapStateToProps)(OrderBlock);
+export default connect(mapStateToProps)(withTranslation(OrderBlock));

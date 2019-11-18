@@ -1,7 +1,7 @@
 import React from 'react';
 import {SLIDER_HEIGHT} from '../../../constants/index';
 
-import { Item } from '../Item/index';
+import Item from '../Item/index';
 
 export class ContentBlock extends React.Component {
   constructor(props) {
