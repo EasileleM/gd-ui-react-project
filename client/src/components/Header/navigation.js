@@ -52,7 +52,7 @@ class Navigation extends Component {
 
   clearSearch = (e) => {
     this.setState({searchValue: ""});
-    this.props.history.push(` / search`);
+    this.props.history.push(`/search`);
     store.dispatch(search(null));
   };
 
