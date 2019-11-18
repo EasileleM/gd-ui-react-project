@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
-import ProductImages from "./ProductImages";
-import ProductInfo from "./ProductInfo";
-import "./main.scss"
+import ProductImages from "./ProductImages/ProductImages";
+import ProductInfo from "./ProductInfo/ProductInfo";
+import "./Product.scss"
 import {LoadingSpinner} from "../LoadingSpinner";
 import loadItem from "../../utils/loadItem";
+import i18n from "../../i18n";
+import {toast} from "react-toastify";
 
 
-class Product extends Component {
+export class Product extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
+            item: {},
             ready: false
         }
     }
@@ -21,7 +23,9 @@ class Product extends Component {
                 item: res.data,
                 ready: true,
             })
-        })
+        }).catch(err => {
+            (() => toast(err, {type: toast.TYPE.ERROR}))();
+        });
     }
 
      componentDidUpdate(prevProps) {
@@ -31,7 +35,9 @@ class Product extends Component {
                     item: res.data,
                     ready: true,
                 })
-            })
+            }).catch(err => {
+                (() => toast(err, {type: toast.TYPE.ERROR}))();
+            });
         }
     }
 

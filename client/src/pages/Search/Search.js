@@ -8,7 +8,7 @@ import store from "../../store";
 import {clear} from "../../action-creators/filter-action-creator"
 import {changeBodyScrollState} from '../../utils/changeBodyScrollState';
 
-class Search extends Component {
+export class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +22,9 @@ class Search extends Component {
       filtersToggle: !toggle,
     })
   };
+
+  componentDidMount() {
+  }
 
   componentWillUnmount() {
     this.filterReset();

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Translation } from 'react-i18next';
-import "./main.scss"
-import cartIcon from "./assets/cart.png"
-import shareIcon from "./assets/share.png"
-import Chooser from "./Chooser";
+import {withTranslation} from 'react-i18next';
+import "./ProductInfo.scss"
+import Chooser from "./Chooser/Chooser";
 import { connect } from 'react-redux';
 import {ReactComponent as ShareIcon} from "../../../assets/share.svg";
 import {ReactComponent as AddToCartIcon} from "../../../assets/shopping-cart-add.svg";
@@ -13,7 +11,7 @@ import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButto
 import addItem from '../../../utils/cart/addItem';
 import store from '../../../store';
 
-class ProductInfo extends Component {
+export class ProductInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,6 +45,9 @@ class ProductInfo extends Component {
     }
   }
 
+  componentDidMount() {
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.item !== prevProps.item) {
       this.setState({
@@ -65,8 +66,6 @@ class ProductInfo extends Component {
 
   render() {
     return (
-      <Translation>
-        {t =>
           <div className="product-info">
             <h1 className="product-info__heading">{this.state.itemInfo.title}</h1>
             <h2 className="product-info__heading_secondary">{this.state.itemInfo.bundleInfo}</h2>
@@ -78,7 +77,7 @@ class ProductInfo extends Component {
               chosenSize={this.state.chosenSize}
               chosenQuantity={this.state.chosenQuantity} />
             <div className="product-info__order">
-              <h3 className="product-info__price">{t('price')}: {this.state.itemInfo.price * this.state.chosenQuantity + t('currency')}</h3>
+              <h3 className="product-info__price">{this.props.t('price')}: {this.state.itemInfo.price * this.state.chosenQuantity + this.props.t('currency')}</h3>
               <div className="product-info__order-buttons">
                 <div className="product-info__button-icon-container">
                   <ShareIcon className="product-info__button-icon" />
@@ -92,12 +91,10 @@ class ProductInfo extends Component {
                     enabled={this.props.favoritesItems.find((item) => item._id === this.props.item._id) !== undefined} data={this.props.item}
                   />
                 </div>
-                <button className="product-info__order-now-button">{t('order')}</button>
+                <button className="product-info__order-now-button">{this.props.t('order')}</button>
               </div>
             </div>
           </div>
-        }
-      </Translation>
     );
   }
 }
@@ -108,4 +105,4 @@ const mapStateToProps = (state) => {
     favoritesItems: state.favoritesController.items
   }
 };
-export default connect(mapStateToProps)(ProductInfo);
+export default connect(mapStateToProps)(withTranslation()(ProductInfo));
