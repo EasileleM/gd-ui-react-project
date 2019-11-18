@@ -3,7 +3,7 @@ import React from 'react';
 export class Buttons extends React.Component {
   renderButton(i) {
     if (i === this.props.currentSlide) {
-      return <Button class='slider__button_activate' onClick={() => this.props.onClick(i)} />;
+      return <Button additionalClass='slider__button_activate' onClick={() => this.props.onClick(i)} />;
     }
     return <Button onClick={() => this.props.onClick(i)} />;
   }
