@@ -7,7 +7,7 @@ import {loadFilters} from "../../utils/loadFilters";
 import {LoadingSpinner} from "../LoadingSpinner";
 import FilterSearchBar from "./FilterSearchBar/FilterSearchBar";
 
-class Filters extends Component {
+export class Filters extends Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -3,7 +3,7 @@ import "./FilterRadio.scss"
 import store from '../../../store';
 import {changeCategoryFilter} from "../../../action-creators/filter-action-creator";
 
-class FilterRadio extends Component {
+export class FilterRadio extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +11,8 @@ class FilterRadio extends Component {
       selectedValue: null,
       hovered: false,
     };
+  }
+  componentDidMount() {
   }
 
   handleClick = (e) => {

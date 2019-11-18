@@ -6,7 +6,7 @@ import {
   changeSizeFilter
 } from "../../../action-creators/filter-action-creator";
 
-class FilterCheckbox extends Component {
+export class FilterCheckbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,6 +14,9 @@ class FilterCheckbox extends Component {
       selectedValues: [],
       name: this.props.name,
     };
+  }
+
+  componentDidMount() {
   }
 
   handleClick = (e) => {
