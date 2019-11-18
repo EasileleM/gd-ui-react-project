@@ -1,12 +1,14 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 
-export class Buttons extends PureComponent {
+export class Buttons extends React.Component {
   renderButton(i) {
     if (i === this.props.currentSlide) {
       return <Button class='slider__button_activate' onClick={() => this.props.onClick(i)} />;
     }
     return <Button onClick={() => this.props.onClick(i)} />;
   }
+
+  componentDidMount(){}
 
   render() {
     return (
@@ -19,8 +21,8 @@ export class Buttons extends PureComponent {
   }
 }
 
-function Button(props) {
-  const className = "slider__button " + props.class || "";
+export function Button(props) {
+  const className = "slider__button " + props.additionalClass || "";
   return (
     <button onClick={props.onClick} className={className}></button>
   )
