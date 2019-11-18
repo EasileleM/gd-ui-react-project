@@ -31,6 +31,7 @@ class Navigation extends Component {
       searchValue: e.target.value,
     }, () => {
       store.dispatch(search(this.state.searchValue));
+      this.props.history.push(`/search?search=${this.state.searchValue}`);
     })
   };
 
