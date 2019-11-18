@@ -1,10 +1,11 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import {expect} from 'chai';
 import sinon from 'sinon';
 import {configure} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {Buttons} from '../index';
+import {Button} from '../index';
 
 configure({adapter: new Adapter()});
 
@@ -25,9 +26,14 @@ describe('<Buttons />', () => {
   });
 
   it('calls renderButton', () => {
-    console.log(Buttons.prototype.renderButton)
-    sandbox.spy(Buttons.prototype, 'componentDidMount');
+    sandbox.spy(Buttons.prototype, 'renderButton');
     const wrapper = shallow(<Buttons currentSlide={1} t={key => key}/>);
-    expect(Buttons.prototype.renderButton).to.have.property('callCount', 1);
+    expect(Buttons.prototype.renderButton).to.have.property('callCount', 3);
+  });
+
+  it('renders button and set correct classes by given prop', () => {
+    const wrapper = mount(<Button additionalClass="yes" t={key => key}/>);
+    expect(wrapper.props().additionalClass).to.be.equal('yes');
+    expect(wrapper.childAt(0).hasClass('yes')).to.be.true;
   });
 }); 

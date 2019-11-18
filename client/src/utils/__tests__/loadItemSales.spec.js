@@ -1,7 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import {SERVER_URL} from "../../constants"
-import {loadItemSales} from "../loadItemSales";
+import loadItemSales from "../loadItemSales";
 
 describe('loadFilters util', () => {
   it('basic call', done => {

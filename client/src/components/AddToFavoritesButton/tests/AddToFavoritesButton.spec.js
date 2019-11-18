@@ -1,11 +1,12 @@
 import React from 'react';
 import { mount, simulate, setProps } from 'enzyme';
 import store from '../../../store';
-import { expect } from 'chai';
+import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { AddToFavoritesButton } from '../AddToFavoritesButton.jsx';
+import {openFavorites} from '../../../action-creators/favorites-action-creator';
 
 configure({ adapter: new Adapter() });
 
@@ -39,5 +40,13 @@ describe('<AddToFavoritesButton />', () => {
     sandbox.stub(store, 'dispatch').callsFake(() => {});
     wrapper.simulate('click');
     expect(wrapper.state().enabled).to.be.false;
+  });
+
+  it('implements openFavorites logic correctly', () => {
+    const data = { _id: 1 };
+    const wrapper = mount(<AddToFavoritesButton openFavorites={true} enabled={true} data={data} t={key => key} />);
+    const spy = sandbox.spy(store, 'dispatch');
+    wrapper.simulate('click');
+    assert(spy.calledWith(openFavorites()))
   });
 }); 

@@ -9,7 +9,7 @@ import { LoadingSpinner } from '../LoadingSpinner/index';
 
 import square1 from '../../assets/square-1.svg';
 import square2 from '../../assets/square-2.svg';
-import { loadItemSales } from "../../utils/loadItemSales";
+import loadItemSales from "../../utils/loadItemSales";
 import notificationError from "../../utils/notificationError";
 
 export class SaleItem extends React.Component {

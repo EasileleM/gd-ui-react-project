@@ -21,8 +21,8 @@ export class Buttons extends React.Component {
   }
 }
 
-function Button(props) {
-  const className = "slider__button " + props.class || "";
+export function Button(props) {
+  const className = "slider__button " + props.additionalClass || "";
   return (
     <button onClick={props.onClick} className={className}></button>
   )

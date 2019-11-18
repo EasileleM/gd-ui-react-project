@@ -28,7 +28,6 @@ describe('<Slider />', () => {
 
   it('fetch and store items without any error', () => {
     const data = { images: 1, items: 1 };
-    sandbox.spy(Slider.prototype, 'componentDidMount');
     sandbox.stub(loadSlides, 'default').callsFake(() => {
       return Promise.resolve(data);
     });
@@ -41,7 +40,6 @@ describe('<Slider />', () => {
 
   it('fetch and store items with fetch error', () => {
     const error = { message: 1 };
-    sandbox.spy(Slider.prototype, 'componentDidMount');
     sandbox.stub(loadSlides, 'default').callsFake(() => {
       return Promise.reject(error);
     });
@@ -51,7 +49,7 @@ describe('<Slider />', () => {
       errorType = type.type;
     });
     loadSlides.default().finally(() => {
-      expect(toastType).to.equal(error)
+      expect(errorType).to.equal(error)
       expect(wrapper.state().ready).to.not.be.true;
     });
   });
