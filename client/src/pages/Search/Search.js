@@ -4,13 +4,16 @@ import ProductCatalog from "../../components/ProductCatalog";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import FiltersButtonImage from "../../assets/controls.svg"
 import "./Search.scss"
+import queryString from 'query-string'
 import store from "../../store";
-import {clear} from "../../action-creators/filter-action-creator"
+import {clear, search, changeSizeFilter} from "../../action-creators/filter-action-creator"
 import {changeBodyScrollState} from '../../utils/changeBodyScrollState';
 
 export class Search extends Component {
   constructor(props) {
     super(props);
+    const values = queryString.parse(this.props.location.search)
+    store.dispatch(search([values.search]));
     this.state = {
       filtersToggle: false
     }

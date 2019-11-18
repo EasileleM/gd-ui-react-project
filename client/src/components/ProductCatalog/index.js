@@ -22,7 +22,7 @@ class ProductCatalog extends React.Component {
   }
 
   componentDidMount() {
-    this.loadItems();
+      this.loadItems();
   }
 
   handleOnClick() {
@@ -32,7 +32,6 @@ class ProductCatalog extends React.Component {
     }, () => {
       this.loadItems();
     });
-
   }
 
   loadItems = () => {
@@ -61,7 +60,7 @@ class ProductCatalog extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.filters !== this.props.filters) {
+    if ((JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) && this.props.filtered) {
       this.setState(
           {
             cards: [],
@@ -82,7 +81,7 @@ class ProductCatalog extends React.Component {
               <div className='product-catalog__not-found'>Sorry, we couldn't find anything</div>
             </div>
           </div>
-          )
+      )
     } else if (this.state.ready && this.state.nextPage) {
       return (
           <div className='product-catalog'>

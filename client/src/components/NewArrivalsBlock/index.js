@@ -16,7 +16,7 @@ export function NewArrivalsBlock(props) {
           }
         </Translation>
       </div>
-      <ProductCatalog />
+      <ProductCatalog size={4} />
     </section>
   );
 }
