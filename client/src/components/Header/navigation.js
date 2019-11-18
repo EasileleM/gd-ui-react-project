@@ -39,7 +39,7 @@ class Navigation extends Component {
     if (!this.state.searchValue) {
       this.state.searchInput.current.focus();
     } else {
-      this.props.history.push("/search");
+      this.props.history.push(`/search?search=${this.state.searchValue}`);
       this.toggleMenu();
     }
     e.preventDefault()
