@@ -22,7 +22,8 @@ describe('<Search />', () => {
 
   it('calls componentDidMount', () => {
     sandbox.spy(Search.prototype, 'componentDidMount');
-    const wrapper = shallow(<Search />);
+    const fakeProps = {search: ""}
+    const wrapper = shallow(<Search location={fakeProps}/>);
     expect(Search.prototype.componentDidMount).to.have.property('callCount', 1);
   });
 });
