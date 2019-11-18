@@ -14,6 +14,6 @@ export {SpecialOfferSection} from './SpecialOfferSection/index';
 
 export {BestSalesBlock} from './BestSalesBlock/index';
 
-export {Newsletter} from './Newsletter/Newsletter';
+export Newsletter from './Newsletter/Newsletter';
 
 export {LoadingSpinner} from './LoadingSpinner/index';
