@@ -32,7 +32,7 @@ class Navigation extends Component {
       searchValue: e.target.value,
     }, () => {
       store.dispatch(search(this.state.searchValue));
-      this.props.history.push(`/search?search=${this.state.searchValue}`);
+      this.props.history.push(`/search${this.state.searchValue.length > 0 ? "?search=" + this.state.searchValue : ""}`);
     })
   };
 
@@ -44,7 +44,7 @@ class Navigation extends Component {
         this.state.searchInput.current.focus();
       }
     } else {
-      this.props.history.push(`/search${this.state.searchValue.length < 1 ? "?search=" + this.state.searchValue : ""}`);
+      this.props.history.push(`/search${this.state.searchValue.length > 0 ? "?search=" + this.state.searchValue : ""}`);
       this.toggleMenu();
     }
     e.preventDefault()
