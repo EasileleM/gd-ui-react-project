@@ -12,7 +12,7 @@ import "./Layout.scss";
 import ErrorPage from "../errors/ErrorPage";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
 
-import { Header } from "../../components/Header";
+import { Header } from "../../components/Header/Header";
 import { Footer } from "../../components/Footer/Footer";
 import { LoadingSpinner } from '../../components//LoadingSpinner/index';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';

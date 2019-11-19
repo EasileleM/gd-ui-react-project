@@ -4,8 +4,6 @@ import { Translation } from 'react-i18next';
 import './main.scss';
 
 class Links extends React.Component {
-  componentDidMount() {}
-
   render() {
     return (
       <Translation>
