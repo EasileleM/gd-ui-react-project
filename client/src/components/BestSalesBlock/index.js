@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Translation } from 'react-i18next';
 
 import { SectionHeader } from '../SectionHeader/index.js';
-import { ProductSmallContainer } from '../ProductSmallContainer/index.js';
+import { ProductSmallContainer } from '../ProductSmallContainer/ProductSmallContainer.js';
 
 import './main.scss';
 

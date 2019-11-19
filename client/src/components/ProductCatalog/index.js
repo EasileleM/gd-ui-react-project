@@ -1,6 +1,6 @@
 import React from 'react';
 import {ShowMoreButton} from './ShowMoreButton/index.js';
-import {ProductsContainer} from '../ProductsContainer/index.js'
+import {ProductsContainer} from '../ProductsContainer/ProductsContainer.js'
 import loadCard from "../../utils/loadCard";
 import './main.scss';
 import notificationError from '../../utils/notificationError.js';

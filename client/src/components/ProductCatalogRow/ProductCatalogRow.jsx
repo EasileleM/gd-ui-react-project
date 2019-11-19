@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ProductsContainer } from '../ProductsContainer/index.js'
+import { ProductsContainer } from '../ProductsContainer/ProductsContainer.js'
 import loadRelated from "../../utils/loadRelated";
 import notificationError from '../../utils/notificationError';
 
