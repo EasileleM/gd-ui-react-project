@@ -6,6 +6,7 @@ import FilterCheckbox from "./FilterCheckbox/FilterCheckbox";
 import {loadFilters} from "../../utils/loadFilters";
 import {LoadingSpinner} from "../LoadingSpinner";
 import FilterSearchBar from "./FilterSearchBar/FilterSearchBar";
+import notificationError from "../../utils/notificationError";
 
 export class Filters extends Component {
   constructor(props) {
@@ -21,7 +22,11 @@ export class Filters extends Component {
             filters: res.data,
           })
         }
-    )
+    ).catch(error => {
+      notificationError("Ошибка во время загрузки фильтров",
+          "Error while loading filters",
+          error)
+    })
   }
 
   render() {

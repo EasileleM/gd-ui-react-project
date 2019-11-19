@@ -88,4 +88,5 @@ const mapStateToProps = (state) => {
     favoritesItems: state.favoritesController.items
   }
 };
+
 export default connect(mapStateToProps)(withTranslation()(ProductCard));

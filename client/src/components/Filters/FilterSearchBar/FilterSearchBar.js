@@ -34,10 +34,7 @@ export class FilterSearchBar extends Component {
           <form
               className="filter-search-bar" name="search">
             <input className="filter-search-bar__input"
-                   value={this.state.searchValue}
-                   onBlur={this.handleSearch}
-                   onChange={this.handleChange}
-                   type="text"/>
+                   value={this.state.searchValue} onBlur={this.handleSearch} onChange={this.handleChange} type="text"/>
             <DeleteIcon className="filter-search-bar__clear"
                         onClick={this.clearSearch}/>
           </form>
