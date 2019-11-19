@@ -2,11 +2,13 @@ import React from 'react';
 
 import Links from './links';
 import Banking from './banking';
-
-import './main.scss';
 import { Logo } from '../Logo/Logo';
 
+import './main.scss';
+
 export class Footer extends React.Component {
+  componentDidMount() {}
+
   render() {
     return (
       <footer className="footer">

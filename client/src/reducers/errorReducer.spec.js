@@ -3,7 +3,7 @@ import { errorReducer, initialState } from './errorReducer';
 
 describe('Error reducer', () => {
   describe('ERROR_ACTIONS', () => {
-    it('Any ERROR_ACTIONS should set a errorCode', () => {
+    it('Any ERROR_ACTIONS should set an errorCode', () => {
       expect(errorReducer(initialState, errorActionCreators.error400())).toEqual({
         ...initialState,
         errorCode: 400

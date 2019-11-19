@@ -4,6 +4,8 @@ import { Translation } from 'react-i18next';
 import './main.scss';
 
 class Banking extends React.Component {
+  componentDidMount() {}
+
   render() {
     return (
       <Translation>
