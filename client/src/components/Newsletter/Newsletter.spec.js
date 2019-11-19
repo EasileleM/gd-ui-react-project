@@ -12,6 +12,7 @@ configure({adapter: new Adapter()});
 
 
 describe('<Newsletter />', () => {
+  const flushPromises = () => new Promise(setImmediate);
   let sandbox;
   beforeEach(function () {
     sandbox = sinon.createSandbox();
@@ -27,7 +28,7 @@ describe('<Newsletter />', () => {
     expect(Newsletter.prototype.componentDidMount).to.have.property('callCount', 1);
   });
 
-  it('submits form (no errors)', () => {
+  it('submits form (no errors)', async () => {
     sandbox.spy(Newsletter.prototype, 'handleSubmit');
     sandbox.stub(SendEmail, 'default').callsFake(() => {
       return new Promise(resolve => resolve({status: 201}))
@@ -39,12 +40,11 @@ describe('<Newsletter />', () => {
     const wrapper = mount((<Newsletter t={key => key}/>));
     wrapper.setState({value: "validemail@mail.com"});
     wrapper.find('.Newsletter__form').simulate('submit');
-    return SendEmail.default().finally(() => {
-      expect(typeResult).to.equal('info')
-    })
+    await flushPromises();
+    expect(typeResult).to.equal('info')
   });
 
-  it('submits form (bad response)', () => {
+  it('submits form (bad response)', async () => {
     sandbox.spy(Newsletter.prototype, 'handleSubmit');
     sandbox.stub(SendEmail, 'default').callsFake(() => {
       return new Promise(resolve => resolve({status: 400}))
@@ -56,9 +56,40 @@ describe('<Newsletter />', () => {
     const wrapper = mount((<Newsletter t={key => key}/>));
     wrapper.setState({value: "validemail@mail.com"});
     wrapper.find('.Newsletter__form').simulate('submit');
-    return SendEmail.default().finally(() => {
-      expect(typeResult).to.equal('error')
-    })
+    await flushPromises();
+    expect(typeResult).to.equal('error')
+  });
+
+  it('submits form (error)', async () => {
+    sandbox.spy(Newsletter.prototype, 'handleSubmit');
+    sandbox.stub(SendEmail, 'default').callsFake(() => {
+      return new Promise((resolve, reject) => reject({status: 400}))
+    });
+    let typeResult;
+    sandbox.stub(Toastify, 'toast').callsFake((mes, type) => {
+      typeResult = type.type;
+    });
+    const wrapper = mount((<Newsletter t={key => key}/>));
+    wrapper.setState({value: "validemail@mail.com"});
+    wrapper.find('.Newsletter__form').simulate('submit');
+    await flushPromises();
+    expect(typeResult).to.equal('error')
+  });
+
+  it('submits form (invalid)', async () => {
+    sandbox.spy(Newsletter.prototype, 'handleSubmit');
+    sandbox.stub(SendEmail, 'default').callsFake(() => {
+      return new Promise((resolve, reject) => reject({status: 400}))
+    });
+    sandbox.spy(Toastify, 'toast');
+    const wrapper = mount((<Newsletter t={key => key}/>));
+    wrapper.instance().handleSubmit({
+      preventDefault: () => {},
+      target: {
+        checkValidity: () => {return false},
+        validate: () => {},
+      }});
+    expect(Toastify.toast).to.have.property('callCount', 0);
   });
 
   it('handles changes in input', () => {
