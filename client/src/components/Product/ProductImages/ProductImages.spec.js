@@ -26,4 +26,29 @@ describe('<ProductImages />', () => {
     const wrapper = shallow(<ProductImages images={fakeItemImages} t={key => key}/>);
     expect(ProductImages.prototype.componentDidMount).to.have.property('callCount', 1);
   });
+
+  it('should not change index', () => {
+    sandbox.spy(ProductImages.prototype, 'componentDidMount');
+    const wrapper = shallow(<ProductImages images={fakeItemImages} t={key => key}/>);
+    const initialIndex = wrapper.state().currentIndex;
+    wrapper.instance().setIndex(4);
+    expect(wrapper.state().currentIndex).to.equal(initialIndex);
+  });
+
+  it('should change index', () => {
+    sandbox.spy(ProductImages.prototype, 'componentDidMount');
+    const wrapper = shallow(<ProductImages images={fakeItemImages} t={key => key}/>);
+    const newIndex = 2;
+    wrapper.instance().setIndex(newIndex);
+    expect(wrapper.state().currentIndex).to.equal(newIndex);
+  });
+
+  it('should reset index', () => {
+    sandbox.spy(ProductImages.prototype, 'componentDidMount');
+    const wrapper = shallow(<ProductImages images={fakeItemImages} t={key => key}/>);
+    const newFakeItemImages = [...fakeItemImages, fakeItemImages[0]];
+    wrapper.instance().setIndex(2);
+    wrapper.setProps({images: newFakeItemImages});
+    expect(wrapper.state().currentIndex).to.equal(0);
+  });
 });
