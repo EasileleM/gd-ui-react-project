@@ -1,6 +1,6 @@
 import React from 'react';
-import Navigation from './navigation';
 import Contacts from './contacts';
+import Navigation from './navigation';
 
 import './main.scss';
 
