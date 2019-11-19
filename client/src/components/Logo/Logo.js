@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import './main.scss';
 
 export class Logo extends React.Component {
+  componentDidMount() {}
+
   render() {
     return (
       <Link className="logo" to="/">
