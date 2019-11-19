@@ -27,4 +27,27 @@ describe('<ProductInfo />', () => {
     const wrapper = shallow(<ProductInfo favoritesItems={[]} item={fakeItem} t={key => key}/>);
     expect(ProductInfo.prototype.componentDidMount).to.have.property('callCount', 1);
   });
+
+  it('calls componentDidUpdate', () => {
+    sandbox.spy(ProductInfo.prototype, 'componentDidUpdate');
+    const wrapper = shallow(<ProductInfo favoritesItems={[]} item={fakeItem} t={key => key}/>);
+    wrapper.setProps({item: fakeItem});
+    expect(ProductInfo.prototype.componentDidUpdate).to.have.property('callCount', 1);
+  });
+
+  it('should increase quantity', () => {
+    const wrapper = shallow(<ProductInfo favoritesItems={[]} item={fakeItem} t={key => key}/>);
+    const initialQuantity = wrapper.state().chosenQuantity;
+    wrapper.instance().handleQuantity(true);
+    expect(wrapper.state().chosenQuantity).to.equal(initialQuantity + 1);
+  });
+
+  it('should decrease quantity', () => {
+    const wrapper = shallow(<ProductInfo favoritesItems={[]} item={fakeItem} t={key => key}/>);
+    wrapper.instance().handleQuantity(true);
+    wrapper.instance().handleQuantity(true);
+    const initialQuantity = wrapper.state().chosenQuantity;
+    wrapper.instance().handleQuantity(false);
+    expect(wrapper.state().chosenQuantity).to.equal(initialQuantity - 1);
+  });
 });
