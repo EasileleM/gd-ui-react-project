@@ -30,9 +30,7 @@ export class FilterRadio extends Component {
   render() {
     return (
         <div>
-          <form className="filter-radio"
-          onMouseEnter={() => {this.setState({hovered: true})}}
-          onMouseLeave={() => {this.setState({hovered: false})}}>
+          <form className="filter-radio" onMouseEnter={() => {this.setState({hovered: true})}} onMouseLeave={() => {this.setState({hovered: false})}}>
             <div className={`filter-radio__reset-button + ${this.state.hovered ? "" : "filter-radio__reset-button_hidden"}`}
                  onClick={this.resetFilters}
                 >Reset</div>
