@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import ItemCardSmall from '../ItemCardSmall/index.js';
 
-import './main.scss';
+import './ProductSmallContainer.scss';
 import loadCard from "../../utils/loadCard";
 import notificationError from '../../utils/notificationError';
 
@@ -31,7 +31,7 @@ export class ProductSmallContainer extends Component {
   render() {
     if (this.state.ready) {
       const smallCards = this.state.cards.map((card) => {
-        return <ItemCardSmall item={card} />
+        return <ItemCardSmall key={card._id} item={card} />
       }).slice(0, 3)
       return (
         <div className='product-small-container'>
