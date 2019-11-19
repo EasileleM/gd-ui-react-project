@@ -13,8 +13,6 @@ export class ProductImages extends Component {
 
   setIndex(index) {
     if (index > this.state.images.length) {
-      alert("Error, index is out of bounds");
-      console.error("Error, index is out of bounds");
       return;
     }
     this.setState({currentIndex: index});
