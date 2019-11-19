@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {Translation} from 'react-i18next';
 
-import User from './user';
 import ShopCart from './cart';
 
 import './main.scss';
 import {Link} from "react-router-dom";
 import AddToFavoriteButton from '../AddToFavoritesButton/AddToFavoritesButton';
-import {Logo} from '../Logo';
+import {Logo} from '../Logo/Logo';
 import {withRouter} from "react-router-dom";
 import {search} from "../../action-creators/filter-action-creator";
 import store from "../../store";

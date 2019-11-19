@@ -4,7 +4,7 @@ import Links from './links';
 import Banking from './banking';
 
 import './main.scss';
-import { Logo } from '../Logo';
+import { Logo } from '../Logo/Logo';
 
 export class Footer extends React.Component {
   render() {
