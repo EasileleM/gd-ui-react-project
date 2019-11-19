@@ -32,7 +32,7 @@ import { closeFavorites } from '../../action-creators/favorites-action-creator';
 import Search from "../Search/Search";
 import Home from "../Home/Home";
 
-class Layout extends Component {
+export class Layout extends Component {
     componentDidMount() {
         store.dispatch(fetchCart());
         store.dispatch(fetchFavorites());

@@ -27,7 +27,7 @@ describe('<Slider />', () => {
   });
 
   it('fetch and store items without any error', () => {
-    const data = { images: 1, items: 1 };
+    const data = {data: [{sliderImg: 1, item: 1}, {sliderImg: 1, item: 2}]};
     sandbox.stub(loadSlides, 'default').callsFake(() => {
       return Promise.resolve(data);
     });
