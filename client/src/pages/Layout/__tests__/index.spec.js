@@ -4,11 +4,11 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { ProductCard } from '../index';
+import { Layout } from '../Layout';
 
 configure({ adapter: new Adapter() });
 
-describe('<ProductCard />', () => {
+describe('<Layout />', () => {
   let sandbox;
   beforeEach(function () {
     sandbox = sinon.createSandbox();
@@ -19,9 +19,8 @@ describe('<ProductCard />', () => {
   });
 
   it('calls componentDidMount', () => {
-    const data = {sizes: [], colors: [], images: [], _id: 1};
-    sandbox.spy(ProductCard.prototype, 'componentDidMount');
-    const wrapper = shallow(<ProductCard favoritesItems={[data]} product={data} t={key => key} />);
-    expect(ProductCard.prototype.componentDidMount).to.have.property('callCount', 1);
+    sandbox.spy(Layout.prototype, 'componentDidMount');
+    const wrapper = shallow(<Layout t={key => key} />);
+    expect(Layout.prototype.componentDidMount).to.have.property('callCount', 1);
   });
 }); 
