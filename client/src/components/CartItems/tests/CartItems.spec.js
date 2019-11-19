@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 import {expect} from 'chai';
 import sinon from 'sinon';
 import {configure} from "enzyme";
@@ -22,5 +22,14 @@ describe('<CartItems />', () => {
     sandbox.spy(CartItems.prototype, 'componentDidMount');
     const wrapper = mount(<CartItems items={[]} t={key => key}/>);
     expect(CartItems.prototype.componentDidMount).to.have.property('callCount', 1);
+  });
+
+  it('render passed items', () => {
+    const items = [
+      {_id: 1, colors: 1},
+      {_id: 2, colors: 2}
+    ]
+    const wrapper = shallow(<CartItems items={items} t={key => key}/>);
+    expect(wrapper.children()).to.have.lengthOf(items.length);
   });
 }); 
