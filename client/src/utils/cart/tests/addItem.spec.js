@@ -82,7 +82,7 @@ describe('addItem cart', () => {
     );
   });
 
-  it('Should item with id, which some of the items in cart already has, and with different color or size', () => {
+  it('Should add item with id, which some of the items in cart already has, and with different color or size', () => {
     const dispatch = jest.fn();
     const currentStateItems = [{ generalData: { _id: 1 }, color: 1, amount: 3, size: 1 }];
     const state =
