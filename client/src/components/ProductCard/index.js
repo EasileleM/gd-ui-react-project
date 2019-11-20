@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom'
 import { AddToCartButton } from './AddToCartButton/index.js';
 import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
-import { SizesSelector } from './SizesSelector/index.js';
+import SizesSelector from './SizesSelector/index.js';
 import { ColorSelector } from './ColorSelector/index.js';
 import { connect } from 'react-redux';
 import { ReactComponent as ShareIcon } from "../../assets/share.svg";

@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import {ShowMoreButton} from './ShowMoreButton/index.js';
 import {ProductsContainer} from '../ProductsContainer/ProductsContainer.js'
 import loadCard from "../../utils/loadCard";
@@ -73,12 +74,13 @@ class ProductCatalog extends React.Component {
   }
 
   render() {
+    const t = this.props.t;
     if (this.state.notFound) {
       return (
           <div className='product-catalog'>
             <div className="product-catalog__not-found-container">
               <NotFoundIcon className="product-catalog__not-found-icon"/>
-              <div className='product-catalog__not-found'>Sorry, we couldn't find anything</div>
+              <div className='product-catalog__not-found'>{t('catalog.notFound')}</div>
             </div>
           </div>
       )
@@ -109,4 +111,4 @@ const mapStateToProps = (state) => {
     filters: state.filterController,
   }
 };
-export default connect(mapStateToProps)(ProductCatalog);
+export default  withTranslation()(connect(mapStateToProps)(ProductCatalog));

@@ -7,6 +7,7 @@ import {loadFilters} from "../../utils/loadFilters";
 import {LoadingSpinner} from "../LoadingSpinner";
 import FilterSearchBar from "./FilterSearchBar/FilterSearchBar";
 import notificationError from "../../utils/notificationError";
+import { withTranslation } from 'react-i18next';
 
 export class Filters extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ export class Filters extends Component {
   }
 
   render() {
+    const t = this.props.t;
     return (
         <div className="filters-container">
 
@@ -38,14 +40,14 @@ export class Filters extends Component {
           </div>
 
           <div className="filter">
-            <h2 className="filter__heading">Categories</h2>
+            <h2 className="filter__heading">{t('filters.categories')}</h2>
             {
               this.state.filters ? <FilterRadio options={this.state.filters.categories}/> : <LoadingSpinner/>
             }
           </div>
 
           <div className="filter">
-            <h2 className="filter__heading">Price Filter</h2>
+            <h2 className="filter__heading">{t('filters.price')}</h2>
             {
               this.state.filters ?
                   <FilterSlider slideIn={this.props.slideIn}
@@ -55,7 +57,7 @@ export class Filters extends Component {
           </div>
 
           <div className="filter">
-            <h2 className="filter__heading">Sizes</h2>
+            <h2 className="filter__heading">{t('filters.sizes')}</h2>
             {
               this.state.filters ?
                   <FilterCheckbox name="sizes" options={this.state.filters.sizes}/> : <LoadingSpinner/>
@@ -63,7 +65,7 @@ export class Filters extends Component {
           </div>
 
           <div className="filter">
-            <h2 className="filter__heading">Brands</h2>
+            <h2 className="filter__heading">{t('filters.brands')}</h2>
             {
               this.state.filters ?
                   <FilterCheckbox name="brands" options={this.state.filters.brands}/> : <LoadingSpinner/>
@@ -74,4 +76,4 @@ export class Filters extends Component {
   }
 }
 
-export default Filters;
+export default withTranslation()(Filters);
