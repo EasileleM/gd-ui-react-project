@@ -83,18 +83,18 @@ export class Navigation extends Component {
             data-closed="≡"></label>
           <Link onClick={this.toggleMenu}
             className={`
-      header__burger - menu
+      header__burger-menu
       header__text
-      header__links - item
+      header__links-item
       header__text_lg ${this.props.location.pathname === '/' ? `header__links-item_active ` : ''}`}
             to="/">
             {this.props.t('navigation.home')}
           </Link>
           <Link onClick={this.toggleMenu}
             className={`
-      header__burger - menu
+      header__burger-menu
       header__text
-      header__links - item
+      header__links-item
       header__text_lg ${this.props.location.pathname === '/search' ? `header__links-item_active ` : ''}`}
             to="/search">
             {this.props.t('navigation.products')}
