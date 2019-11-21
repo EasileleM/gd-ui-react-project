@@ -1,12 +1,13 @@
 import React from 'react';
-import { Translation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import './main.scss';
 
 export class SizesSelector extends React.Component {
   render() {
+    const t = this.props.t;
     const dash = <span className="sizes-selector__dash">-</span>;
-    const checkedStyle = (size) => this.props.selectedOption === size ? { fontSize: 18, color: '#ff5912'} : null;
+    const checkedStyle = (size) => this.props.selectedOption === size ? { fontSize: 18, color: '#ff5912' } : null;
     const sizeVariants = this.props.sizes.map((size, index) =>
       <div key={size} className="sizes-selector__size">
         <label key={index} className="sizes-selector__label" style={checkedStyle(size)}>
@@ -22,18 +23,16 @@ export class SizesSelector extends React.Component {
       </div>
     )
     return (
-      <Translation>
-        { t =>
-          <div className="sizes-selector">
-            <div className="sizes-selector__title">
-              {t('productCard.size')}&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
+      <div className="sizes-selector">
+        <div className="sizes-selector__title">
+          {t('productCard.size')}&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
         </div>
-            <form className="sizes-selector__form">
-              {sizeVariants}
-            </form>
-          </div>
-        }
-      </Translation>
+        <form className="sizes-selector__form">
+          {sizeVariants}
+        </form>
+      </div>
     );
   }
 }
+
+export default withTranslation()(SizesSelector);
