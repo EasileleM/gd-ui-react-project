@@ -20,7 +20,8 @@ export class FilterSlider extends Component {
 
   handleChange = (chosenValues) => {
     const [minChosenValue, maxChosenValue] = chosenValues;
-    this.setState({minChosenValue, maxChosenValue})
+    this.setState({minChosenValue, maxChosenValue});
+    this.props.onStateChange();
   };
 
   handleInputChange = (e) => {

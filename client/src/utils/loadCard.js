@@ -8,7 +8,6 @@ export default function loadCard(page = 1, size = 4, filters) {
   if(filters) {
     url += `&filter=true`;
 
-
     if(filters.sizes && filters.sizes.length > 0) {
       const sizes = filters.sizes.map(size => {
         return size.toUpperCase();
@@ -29,7 +28,7 @@ export default function loadCard(page = 1, size = 4, filters) {
       url += `&maxprice=${filters.maxPrice}`;
     }
 
-    if( filters.minPrice) {
+    if(filters.minPrice) {
       url += `&minprice=${filters.minPrice}`;
     }
 

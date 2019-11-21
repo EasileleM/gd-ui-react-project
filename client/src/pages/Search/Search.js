@@ -12,7 +12,7 @@ import {changeBodyScrollState} from '../../utils/changeBodyScrollState';
 export class Search extends Component {
   constructor(props) {
     super(props);
-    const values = queryString.parse(this.props.location.search)
+    const values = queryString.parse(this.props.location.search);
     store.dispatch(search([values.search]));
     this.state = {
       filtersToggle: false
@@ -44,7 +44,7 @@ export class Search extends Component {
           <div className="search-wrapper__container">
             <div className="search">
               <div className={`search__filters ${this.state.filtersToggle ? "search__filters_toggled" : ""}`}>
-                <Filters slideIn={this.state.filtersToggle}/>
+                <Filters slideIn={this.state.filtersToggle} history={this.props.history}/>
                 <button className={`search__toggle-off ${this.state.filtersToggle ? "search__toggle-off_active" : ""}`}
                         onClick={this.handleClick}>
                   Show
