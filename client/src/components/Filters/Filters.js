@@ -8,7 +8,7 @@ import { LoadingSpinner } from "../LoadingSpinner";
 import FilterSearchBar from "./FilterSearchBar/FilterSearchBar";
 import notificationError from "../../utils/notificationError";
 import { withTranslation } from 'react-i18next';
-import store from '../../redux/store';
+import store from '../../store';
 
 export class Filters extends Component {
   constructor(props) {
@@ -17,9 +17,6 @@ export class Filters extends Component {
       filters: null
     }
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentWillMount() {
   }
 
   componentDidMount() {
@@ -53,6 +50,22 @@ export class Filters extends Component {
 
   onInit = (category) => {
   }
+
+  handleChange = () => {
+    const storeState = store.getState().filterController || "";
+    this.props.history.push(`/search?filter=true` +
+      `${storeState.sizes.length ? ("&sizes=" + storeState.sizes.join(',')) : ""}` +
+      `${storeState.brands.length ? ("&brands=" + storeState.brands.join(',')) : ""}` +
+      `${storeState.category ? ("&category=" + storeState.category) : ""}` +
+      `${storeState.maxPrice ? ("&maxprice=" + storeState.maxPrice) : ""}` +
+      `${storeState.minPrice ? ("&minprice=" + storeState.minPrice) : ""}` +
+      `${storeState.searchTarget[0] ? ("&search=" + storeState.searchTarget.join()) : ""}`);
+  };
+
+  clearCategory = () => {
+    this.setState({ searchTarget: [] });
+    this.handleChange();
+  };
 
   render() {
     const t = this.props.t;

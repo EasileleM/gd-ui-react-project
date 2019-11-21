@@ -13,9 +13,6 @@ export class FilterRadio extends Component {
     };
   }
 
-  componentWillMount() {
-  }
-
   componentDidMount() {
   }
 
