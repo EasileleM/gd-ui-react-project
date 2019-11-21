@@ -37,7 +37,7 @@ export class Filters extends Component {
     this.props.history.push(`/search?filter=true` +
       `${storeState.sizes.length ? ("&sizes=" + storeState.sizes.join(',')) : ""}` +
       `${storeState.brands.length ? ("&brands=" + storeState.brands.join(',')) : ""}` +
-      `${storeState.category ? ("&category=" + storeState.category) : ""}` +
+      `${storeState.category ? ("&categories=" + storeState.category) : ""}` +
       `${storeState.maxPrice ? ("&maxprice=" + storeState.maxPrice) : ""}` +
       `${storeState.minPrice ? ("&minprice=" + storeState.minPrice) : ""}` +
       `${storeState.searchTarget[0] ? ("&search=" + storeState.searchTarget.join()) : ""}`);

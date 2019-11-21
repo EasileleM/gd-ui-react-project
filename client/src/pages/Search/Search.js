@@ -38,7 +38,6 @@ export class Search extends Component {
   };
 
   render() {
-
     return (
         <div className="search-wrapper">
           <div className="search-wrapper__container">
@@ -55,7 +54,7 @@ export class Search extends Component {
                   <img className="search__toggle-icon" src={FiltersButtonImage} alt="Controls icon"/>
                   Filters
                 </button>
-                <ProductCatalog filtered={true} rowSize={3} size={3}/>
+                <ProductCatalog filterUrl={this.props.location.search} filtered={true} rowSize={3} size={3}/>
               </div>
             </div>
             <Newsletter/>

@@ -28,14 +28,14 @@ export class Navigation extends Component {
 
   componentDidMount() { }
 
-  handleChange = (e) => {
-    this.setState({
-      searchValue: e.target.value,
-    }, () => {
-      store.dispatch(search(this.state.searchValue));
-      this.props.history.push(`/search${this.state.searchValue.length > 0 ? "?search=" + this.state.searchValue : ""}`);
-    })
-  };
+  // handleChange = (e) => {
+  //   this.setState({
+  //     searchValue: e.target.value,
+  //   }, () => {
+  //     store.dispatch(search(this.state.searchValue));
+  //     this.props.history.push(`/search${this.state.searchValue.length > 0 ? "?search=" + this.state.searchValue : ""}`);
+  //   })
+  // };
 
   handleSearch = (e) => {
     if (!this.state.searchValue) {
