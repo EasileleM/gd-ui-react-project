@@ -52,6 +52,9 @@ export class Filters extends Component {
   };
 
   onInit = (category) => {
+    const filters = this.props.filterUrl.split(/[&=]/);
+    const res = filters.filter((item) => category.includes(item));
+    return res.join();
   }
 
   handleChange = () => {
