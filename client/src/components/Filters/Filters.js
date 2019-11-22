@@ -19,6 +19,9 @@ export class Filters extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentWillMount() {
+  }
+
   componentDidMount() {
     loadFilters().then(res => {
       this.setState({
@@ -63,9 +66,12 @@ export class Filters extends Component {
   };
 
   clearCategory = () => {
-    this.setState({ searchTarget: [] });
+    this.setState({ searchTarget: "" });
     this.handleChange();
   };
+
+  onInit = (category) => {
+  }
 
   render() {
     const t = this.props.t;
