@@ -1,4 +1,4 @@
-import { ERROR_ACTIONS } from "./types";
+import { ERROR_ACTIONS } from "./error-actions-types";
 
 export const error404 = {
   type: ERROR_ACTIONS.NOT_FOUND,

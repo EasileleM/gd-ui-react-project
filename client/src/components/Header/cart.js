@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import store from '../../store';
-import { openCart } from '../../action-creators/cart-action-creator';
+import { openCart } from '../../store/cart/cart-actions/cart-action-creator';
 import {ReactComponent as CartIcon} from "../../assets/shopping-basket1.svg";
 
 import './main.scss';

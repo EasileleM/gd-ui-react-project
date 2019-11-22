@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {error404, error400, error500} from "../action-creators/error-action-creator";
+import {error404, error400, error500} from "../store/error/error-actions/error-action-creator";
 import store from "../store"
 
 export const interceptor = axios.interceptors.response.use(function (response) {

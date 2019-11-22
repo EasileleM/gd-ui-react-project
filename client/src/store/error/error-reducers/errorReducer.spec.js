@@ -1,4 +1,4 @@
-import * as errorActionCreators from '../action-creators/error-action-creator';
+import * as errorActionCreators from '../../../action-creators/error-action-creator';
 import { errorReducer, initialState } from './errorReducer';
 
 describe('Error reducer', () => {

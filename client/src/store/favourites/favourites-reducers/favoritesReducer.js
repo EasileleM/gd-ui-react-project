@@ -1,5 +1,5 @@
-import { FAVORITES_ACTIONS } from '../actions/types';
-import notificationSuccess from '../utils/notificationSuccess';
+import { FAVORITES_ACTIONS } from '../favourites-actions/favourites-actions-types';
+import notificationSuccess from '../../../utils/notificationSuccess';
 
 export const initialState = {
   size: 0,

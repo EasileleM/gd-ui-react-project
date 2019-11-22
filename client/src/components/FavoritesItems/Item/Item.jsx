@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import store from '../../../store';
 import removeItem from '../../../utils/favorites/removeItem';
 import { Link } from 'react-router-dom'
-import { closeFavorites } from '../../../action-creators/favorites-action-creator';
+import { closeFavorites } from '../../../store/favourites/favourites-actions/favorites-action-creator';
 
 import './Item.scss';
 

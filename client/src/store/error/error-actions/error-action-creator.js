@@ -1,4 +1,4 @@
-import * as errorActions from '../actions/error-actions';
+import * as errorActions from './error-actions';
 
 export const error404 = () => {
   return errorActions.error404;

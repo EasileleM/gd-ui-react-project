@@ -1,4 +1,4 @@
-import { updateItems as updateItemsActionCreator } from '../../action-creators/cart-action-creator';
+import { updateItems as updateItemsActionCreator } from '../../store/cart/cart-actions/cart-action-creator';
 
 import updateLocalStorageCollection from '../localStorage/updateLocalStorageCollection';
 import notificationSuccess from '../notificationSuccess';

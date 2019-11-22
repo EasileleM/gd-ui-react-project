@@ -1,4 +1,4 @@
-import { fetchItemsBegin, fetchItemsSuccess, fetchItemsFailure } from '../../action-creators/favorites-action-creator';
+import { fetchItemsBegin, fetchItemsSuccess, fetchItemsFailure } from '../../store/favourites/favourites-actions/favorites-action-creator';
 import { loadIdArray } from '../../utils/loadIdArray';
 
 import getLocalStorageCollection from '../localStorage/getLocalStorageCollection';

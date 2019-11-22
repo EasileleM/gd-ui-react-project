@@ -1,4 +1,4 @@
-import * as cartActions from '../actions/cart-actions';
+import * as cartActions from './cart-actions';
 
 export const openCart = () => {
   return cartActions.openCart;

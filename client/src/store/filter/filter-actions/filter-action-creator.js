@@ -1,4 +1,4 @@
-import * as cartActions from '../actions/filter-actions';
+import * as cartActions from './filter-actions';
 
 export const changeSizeFilter = (sizes) => {
   return {

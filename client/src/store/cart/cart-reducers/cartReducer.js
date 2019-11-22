@@ -1,5 +1,5 @@
-import { CART_ACTIONS } from '../actions/types';
-import notificationSuccess from '../utils/notificationSuccess';
+import { CART_ACTIONS } from '../cart-actions/cart-actions-types';
+import notificationSuccess from '../../../utils/notificationSuccess';
 
 export const initialState = {
   size: 0,

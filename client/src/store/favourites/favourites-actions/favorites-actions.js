@@ -1,4 +1,4 @@
-import { FAVORITES_ACTIONS } from './types';
+import { FAVORITES_ACTIONS } from './favourites-actions-types';
 
 export const openFavorites = {
   type: FAVORITES_ACTIONS.OPEN

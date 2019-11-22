@@ -4,7 +4,7 @@ import store from "../../../store";
 import {
   changeBrandsFilter,
   changeSizeFilter
-} from "../../../action-creators/filter-action-creator";
+} from "../../../store/filter/filter-actions/filter-action-creator";
 
 export class FilterCheckbox extends Component {
   constructor(props) {

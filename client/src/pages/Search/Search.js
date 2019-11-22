@@ -6,7 +6,7 @@ import FiltersButtonImage from "../../assets/controls.svg"
 import "./Search.scss"
 import queryString from 'query-string'
 import store from "../../store";
-import {clear, search, changeSizeFilter} from "../../action-creators/filter-action-creator"
+import {clear, search, changeSizeFilter} from "../../store/filter/filter-actions/filter-action-creator"
 import {changeBodyScrollState} from '../../utils/changeBodyScrollState';
 
 export class Search extends Component {

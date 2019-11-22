@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import AddToFavoriteButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import { Logo } from '../Logo/Logo';
 import { withRouter } from "react-router-dom";
-import { search } from "../../action-creators/filter-action-creator";
+import { search } from "../../store/filter/filter-actions/filter-action-creator";
 import store from "../../store";
 import { ReactComponent as DeleteIcon } from "../../assets/delete.svg";
 import { ReactComponent as UserIcon } from "../../assets/user.svg";

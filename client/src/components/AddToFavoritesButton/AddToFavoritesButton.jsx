@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import store from '../../store';
 import addItem from '../../utils/favorites/addItem';
 import removeItem from '../../utils/favorites/removeItem';
-import {openFavorites} from '../../action-creators/favorites-action-creator';
+import {openFavorites} from '../../store/favourites/favourites-actions/favorites-action-creator';
 import {ReactComponent as FavoritesIcon} from "../../assets/likeDisabled.svg"
 import {ReactComponent as FavoritesIconEnabled} from "../../assets/likeEnabled.svg"
 

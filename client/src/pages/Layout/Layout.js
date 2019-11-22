@@ -27,8 +27,8 @@ import {default as fetchCart} from '../../utils/cart/fetchItems';
 import {default as fetchFavorites} from '../../utils/favorites/fetchItems';
 
 import store from '../../store';
-import { closeCart } from '../../action-creators/cart-action-creator';
-import { closeFavorites } from '../../action-creators/favorites-action-creator';
+import { closeCart } from '../../store/cart/cart-actions/cart-action-creator';
+import { closeFavorites } from '../../store/favourites/favourites-actions/favorites-action-creator';
 import Search from "../Search/Search";
 import Home from "../Home/Home";
 

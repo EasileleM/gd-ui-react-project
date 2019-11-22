@@ -1,5 +1,5 @@
 import { filterReducer, initialState } from './filterReducer';
-import * as filterActionCreator from '../action-creators/filter-action-creator';
+import * as filterActionCreator from '../filter-actions/filter-action-creator';
 
 
 describe('Filter reducer', () => {

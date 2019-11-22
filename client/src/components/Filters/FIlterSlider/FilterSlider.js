@@ -3,7 +3,7 @@ import "./FilterSlider.scss"
 import ReactSlider from 'react-slider'
 import {toast} from 'react-toastify';
 import store from "../../../store";
-import {changeMinPriceFilter, changeMaxPriceFilter} from "../../../action-creators/filter-action-creator";
+import {changeMinPriceFilter, changeMaxPriceFilter} from "../../../store/filter/filter-actions/filter-action-creator";
 
 
 export class FilterSlider extends Component {

@@ -1,4 +1,4 @@
-import { updateItems as updateItemsActionCreator } from '../../action-creators/favorites-action-creator';
+import { updateItems as updateItemsActionCreator } from '../../store/favourites/favourites-actions/favorites-action-creator';
 
 import updateLocalStorageCollection from '../localStorage/updateLocalStorageCollection';
 

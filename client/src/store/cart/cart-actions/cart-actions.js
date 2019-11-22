@@ -1,4 +1,4 @@
-import { CART_ACTIONS } from './types';
+import { CART_ACTIONS } from './cart-actions-types';
 
 export const openCart = {
   type: CART_ACTIONS.OPEN

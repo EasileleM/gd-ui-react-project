@@ -1,4 +1,4 @@
-import * as fatoritesActions from '../actions/favorites-actions';
+import * as fatoritesActions from './favorites-actions';
 
 export const openFavorites = () => {
   return fatoritesActions.openFavorites;
