@@ -6,7 +6,7 @@ import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { Item } from '../Item.jsx';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { closeFavorites } from '../../../../action-creators/favorites-action-creator';
+import { closeFavorites } from '../../../../store/favourites/favourites-actions/favorites-action-creator';
 import store from '../../../../store';
 import * as removeItem from '../../../../utils/favorites/removeItem';
 

@@ -1,5 +1,5 @@
 import fetchItems from '../fetchItems';
-import { fetchItemsBegin, fetchItemsSuccess, fetchItemsFailure } from '../../../action-creators/cart-action-creator';
+import { fetchItemsBegin, fetchItemsSuccess, fetchItemsFailure } from '../../../store/cart/cart-actions/cart-action-creator';
 import * as loadIfArrayModule from '../../loadIdArray';
 describe('fetchItems cart', () => {
   const data = {

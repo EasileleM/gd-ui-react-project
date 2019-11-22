@@ -6,7 +6,7 @@ import sinon from 'sinon';
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { AddToFavoritesButton } from '../AddToFavoritesButton.jsx';
-import {openFavorites} from '../../../action-creators/favorites-action-creator';
+import {openFavorites} from '../../../store/favourites/favourites-actions/favorites-action-creator';
 
 configure({ adapter: new Adapter() });
 

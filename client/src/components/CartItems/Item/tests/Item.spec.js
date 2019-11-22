@@ -7,7 +7,7 @@ import Adapter from "enzyme-adapter-react-16";
 import { Item } from '../Item.jsx';
 import { BrowserRouter as Router } from 'react-router-dom';
 import store from '../../../../store';
-import { closeCart } from '../../../../action-creators/cart-action-creator';
+import { closeCart } from '../../../../store/cart/cart-actions/cart-action-creator';
 
 
 configure({ adapter: new Adapter() });
