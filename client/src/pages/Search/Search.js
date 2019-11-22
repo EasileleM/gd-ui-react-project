@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Filters from "../../components/Filters/Filters";
-import ProductCatalog from "../../components/ProductCatalog";
+import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import FiltersButtonImage from "../../assets/controls.svg"
 import "./Search.scss"
