@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../SectionHeader/index.js';
-import ProductCatalog from '../ProductCatalog/index.js';
+import ProductCatalog from '../ProductCatalog/ProductCatalog.js';
 
 import './main.scss';
 

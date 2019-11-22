@@ -3,12 +3,12 @@ import { withTranslation } from 'react-i18next';
 import {ShowMoreButton} from './ShowMoreButton/index.js';
 import {ProductsContainer} from '../ProductsContainer/ProductsContainer.js'
 import loadCard from "../../utils/loadCard";
-import './main.scss';
+import './ProductCatalog.scss';
 import notificationError from '../../utils/notificationError.js';
 import {connect} from "react-redux";
 import {ReactComponent as NotFoundIcon} from "../../assets/not-found.svg";
 
-class ProductCatalog extends React.Component {
+export class ProductCatalog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
