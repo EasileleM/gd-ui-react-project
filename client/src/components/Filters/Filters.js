@@ -52,6 +52,9 @@ export class Filters extends Component {
   };
 
   onInit = (category) => {
+    const filters = this.props.filterUrl.split(/[&=]/);
+    const res = filters.filter((item) => category.includes(item));
+    return res.join();
   }
 
   render() {
@@ -69,7 +72,7 @@ export class Filters extends Component {
               ? <FilterRadio options={this.state.filters.categories}
                              onStateChange={this.handleChange}
                              onClear={this.clearCategory}
-                             onInit={this.onInit(this.state.filters)}/>
+                             onInit={this.onInit(this.state.filters.categories)}/>
               : <LoadingSpinner />
           }
         </div>
@@ -94,7 +97,7 @@ export class Filters extends Component {
               ? <FilterCheckbox name="sizes" 
                                 options={this.state.filters.sizes} 
                                 onStateChange={this.handleChange}
-                                onInit={this.onInit}/>
+                                onInit={this.onInit(this.state.filters.sizes)}/>
               : <LoadingSpinner />
           }
         </div>
@@ -106,7 +109,7 @@ export class Filters extends Component {
               ? <FilterCheckbox name="brands"
                                 options={this.state.filters.brands}
                                 onStateChange={this.handleChange} 
-                                onInit={this.onInit}/> 
+                                onInit={this.onInit(this.state.filters.brands)}/> 
               : <LoadingSpinner />
           }
         </div>
