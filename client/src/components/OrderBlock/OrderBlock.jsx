@@ -25,4 +25,4 @@ const mapStateToProps = (state) => {
     orderPrice: state.cartController.orderPrice
   }
 };
-export default connect(mapStateToProps)(withTranslation(OrderBlock));
+export default connect(mapStateToProps)(withTranslation()(OrderBlock));
