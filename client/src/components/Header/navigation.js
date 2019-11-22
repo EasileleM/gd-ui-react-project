@@ -28,14 +28,11 @@ export class Navigation extends Component {
 
   componentDidMount() { }
 
-  // handleChange = (e) => {
-  //   this.setState({
-  //     searchValue: e.target.value,
-  //   }, () => {
-  //     store.dispatch(search(this.state.searchValue));
-  //     this.props.history.push(`/search${this.state.searchValue.length > 0 ? "?search=" + this.state.searchValue : ""}`);
-  //   })
-  // };
+  handleChange = (e) => {
+    this.setState({
+      searchValue: e.target.value,
+    });
+  };
 
   handleSearch = (e) => {
     if (!this.state.searchValue) {
@@ -45,7 +42,15 @@ export class Navigation extends Component {
         this.state.searchInput.current.focus();
       }
     } else {
-      this.props.history.push(`/search${this.state.searchValue.length > 0 ? "?search=" + this.state.searchValue : ""}`);
+      const storeState = store.getState().filterController || "";
+      this.props.history.push(`/search?filter=true` +
+        `${storeState.sizes.length ? ("&sizes=" + storeState.sizes.join(',')) : ""}` +
+        `${storeState.brands.length ? ("&brands=" + storeState.brands.join(',')) : ""}` +
+        `${storeState.category ? ("&categories=" + storeState.category) : ""}` +
+        `${storeState.maxPrice ? ("&maxprice=" + storeState.maxPrice) : ""}` +
+        `${storeState.minPrice ? ("&minprice=" + storeState.minPrice) : ""}` +
+        `${this.state.searchValue.length > 0 ? ("&search=" + this.state.searchValue) : ""}`);
+      store.dispatch(search(this.state.searchValue));
       this.toggleMenu();
     }
     e.preventDefault()

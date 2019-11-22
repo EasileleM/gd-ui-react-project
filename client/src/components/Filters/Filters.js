@@ -19,6 +19,9 @@ export class Filters extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentWillMount() {
+  }
+
   componentDidMount() {
     loadFilters().then(res => {
       this.setState({
@@ -40,13 +43,16 @@ export class Filters extends Component {
       `${storeState.category ? ("&categories=" + storeState.category) : ""}` +
       `${storeState.maxPrice ? ("&maxprice=" + storeState.maxPrice) : ""}` +
       `${storeState.minPrice ? ("&minprice=" + storeState.minPrice) : ""}` +
-      `${storeState.searchTarget[0] ? ("&search=" + storeState.searchTarget.join()) : ""}`);
+      `${storeState.searchTarget ? ("&search=" + storeState.searchTarget) : ""}`);
   };
 
   clearCategory = () => {
-    this.setState({ searchTarget: [] });
+    this.setState({ searchTarget: "" });
     this.handleChange();
   };
+
+  onInit = (category) => {
+  }
 
   render() {
     const t = this.props.t;
@@ -56,79 +62,51 @@ export class Filters extends Component {
           <FilterSearchBar />
         </div>
 
-          <div className="filter">
-            <h2 className="filter__heading">{t('filters.categories')}</h2>
-            {
-              this.state.filters ? <FilterRadio options={this.state.filters.categories}/> : <LoadingSpinner/>
-            }
-          </div>
-
-          <div className="filter">
-            <h2 className="filter__heading">{t('filters.price')}</h2>
-            {
-              this.state.filters ?
-                  <FilterSlider slideIn={this.props.slideIn}
-                                maxValue={Number(this.state.filters.maxprice)}
-                                minValue={Number(this.state.filters.minprice) }/> : <LoadingSpinner/>
-            }
-          </div>
-
-          <div className="filter">
-            <h2 className="filter__heading">{t('filters.sizes')}</h2>
-            {
-              this.state.filters ?
-                  <FilterCheckbox name="sizes" options={this.state.filters.sizes}/> : <LoadingSpinner/>
-            }
-          </div>
-
-          <div className="filter">
-            <h2 className="filter__heading">{t('filters.brands')}</h2>
-            {
-              this.state.filters ?
-                  <FilterCheckbox name="brands" options={this.state.filters.brands}/> : <LoadingSpinner/>
-            }
-          </div>
         <div className="filter">
-          <h2 className="filter__heading">Categories</h2>
+          <h2 className="filter__heading">{t('filters.categories')}</h2>
           {
             this.state.filters
               ? <FilterRadio options={this.state.filters.categories}
                              onStateChange={this.handleChange}
-                             onClear={this.clearCategory}/>
+                             onClear={this.clearCategory}
+                             onInit={this.onInit(this.state.filters)}/>
               : <LoadingSpinner />
           }
         </div>
 
         <div className="filter">
-          <h2 className="filter__heading">Price Filter</h2>
+          <h2 className="filter__heading">{t('filters.price')}</h2>
           {
-            this.state.filters 
+            this.state.filters
               ? <FilterSlider slideIn={this.props.slideIn}
                               maxValue={Number(this.state.filters.maxprice)}
                               minValue={Number(this.state.filters.minprice)}
-                              onStateChange={this.handleChange} />
+                              onStateChange={this.handleChange}
+                              onInit={this.onInit}/>
               : <LoadingSpinner />
           }
         </div>
 
         <div className="filter">
-          <h2 className="filter__heading">Sizes</h2>
+          <h2 className="filter__heading">{t('filters.sizes')}</h2>
           {
             this.state.filters
               ? <FilterCheckbox name="sizes" 
                                 options={this.state.filters.sizes} 
-                                onStateChange={this.handleChange} />
+                                onStateChange={this.handleChange}
+                                onInit={this.onInit}/>
               : <LoadingSpinner />
           }
         </div>
 
         <div className="filter">
-          <h2 className="filter__heading">Brands</h2>
+          <h2 className="filter__heading">{t('filters.brands')}</h2>
           {
             this.state.filters
               ? <FilterCheckbox name="brands"
                                 options={this.state.filters.brands}
-                                onStateChange={this.handleChange} /> 
+                                onStateChange={this.handleChange} 
+                                onInit={this.onInit}/> 
               : <LoadingSpinner />
           }
         </div>
