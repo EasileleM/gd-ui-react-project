@@ -23,7 +23,7 @@ export class ProductCatalog extends React.Component {
   }
 
   componentDidMount() {
-      this.loadItems();
+    this.loadItems();
   }
 
   handleOnClick() {
@@ -40,9 +40,9 @@ export class ProductCatalog extends React.Component {
     let size = this.props.size;
     if (this.state.filtered) {
       filters = this.props.filters;
-      size *= 3
+      size *= 3;
     }
-    loadCard(this.state.page, size, filters).then(result => {
+    loadCard(this.state.page, size, filters, this.props.filterUrl).then(result => {
       this.setState({
         ready: true,
         cards: [...this.state.cards, ...result.data.items],

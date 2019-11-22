@@ -12,20 +12,24 @@ export class FilterRadio extends Component {
       hovered: false,
     };
   }
+
+  componentWillMount() {
+  }
+
   componentDidMount() {
   }
 
   handleClick = (e) => {
     this.setState({selectedValue: e.target.value});
     store.dispatch(changeCategoryFilter(e.target.value));
+    this.props.onStateChange();
   };
 
   resetFilters = () => {
     this.setState({selectedValue: null});
     store.dispatch(changeCategoryFilter(null));
+    this.props.onClear();
   };
-
-
 
   render() {
     return (

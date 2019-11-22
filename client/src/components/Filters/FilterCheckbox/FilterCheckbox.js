@@ -23,9 +23,9 @@ export class FilterCheckbox extends Component {
     const selectedValues = [...this.state.selectedValues];
     const value = e.target.value;
     if (selectedValues.includes(value)) {
-      selectedValues.splice(selectedValues.indexOf(e.target.value), 1)
+      selectedValues.splice(selectedValues.indexOf(e.target.value), 1);
     } else {
-      selectedValues.push(e.target.value)
+      selectedValues.push(e.target.value);
     }
     this.setState({selectedValues: selectedValues});
     switch (this.state.name) {
@@ -37,8 +37,8 @@ export class FilterCheckbox extends Component {
         break;
       default:
         break;
-    }
-
+    };
+    this.props.onStateChange();
   };
 
   render() {

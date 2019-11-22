@@ -12,8 +12,8 @@ import {changeBodyScrollState} from '../../utils/changeBodyScrollState';
 export class Search extends Component {
   constructor(props) {
     super(props);
-    const values = queryString.parse(this.props.location.search)
-    store.dispatch(search([values.search]));
+    const values = queryString.parse(this.props.location.search);
+    store.dispatch(search(values.search));
     this.state = {
       filtersToggle: false
     }
@@ -38,13 +38,12 @@ export class Search extends Component {
   };
 
   render() {
-
     return (
         <div className="search-wrapper">
           <div className="search-wrapper__container">
             <div className="search">
               <div className={`search__filters ${this.state.filtersToggle ? "search__filters_toggled" : ""}`}>
-                <Filters slideIn={this.state.filtersToggle}/>
+                <Filters filterUrl={this.props.location.search} slideIn={this.state.filtersToggle} history={this.props.history}/>
                 <button className={`search__toggle-off ${this.state.filtersToggle ? "search__toggle-off_active" : ""}`}
                         onClick={this.handleClick}>
                   Show
@@ -55,7 +54,7 @@ export class Search extends Component {
                   <img className="search__toggle-icon" src={FiltersButtonImage} alt="Controls icon"/>
                   Filters
                 </button>
-                <ProductCatalog filtered={true} rowSize={3} size={3}/>
+                <ProductCatalog filterUrl={this.props.location.search} filtered={true} rowSize={3} size={3}/>
               </div>
             </div>
             <Newsletter/>
