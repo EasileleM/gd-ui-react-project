@@ -2,8 +2,8 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import './main.scss';
 
-import store from '../../store';
-import addItem from '../../utils/cart/addItem';
+import store from '../../redux/store';
+import addItem from '../../redux/thunks/cart/addItem';
 
 import { LoadingSpinner } from '../LoadingSpinner/index';
 

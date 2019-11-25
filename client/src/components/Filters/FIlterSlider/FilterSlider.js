@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import "./FilterSlider.scss"
 import ReactSlider from 'react-slider'
 import {toast} from 'react-toastify';
-import store from "../../../store";
-import {changeMinPriceFilter, changeMaxPriceFilter} from "../../../action-creators/filter-action-creator";
+import store from "../../../redux/store";
+import {changeMinPriceFilter, changeMaxPriceFilter} from "../../../redux/action-creators/filter-action-creator";
 
 
 export class FilterSlider extends Component {

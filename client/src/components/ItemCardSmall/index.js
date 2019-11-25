@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom'
 
-import store from '../../store';
-import addItem from '../../utils/cart/addItem';
+import store from '../../redux/store';
+import addItem from '../../redux/thunks/cart/addItem';
 
 import './main.scss';
 
@@ -52,7 +52,7 @@ export class ItemCardSmall extends Component {
               <button
                 onClick={() => store
                   .dispatch(
-                    addItem(store.getState(),
+                    addItem(
                       this.props.item,
                       this.props.item.colors[0],
                       this.props.item.sizes[0])

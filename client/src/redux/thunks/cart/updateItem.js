@@ -1,10 +1,10 @@
 import { updateItems as updateItemsActionCreator } from '../../action-creators/cart-action-creator';
 
-import updateLocalStorageCollection from '../localStorage/updateLocalStorageCollection';
+import updateLocalStorageCollection from '../../../utils/localStorage/updateLocalStorageCollection';
 
-export default function updateItem(state, target, color, size, amount) {
-  return dispatch => {
-    const currentItems = state.cartController.items.slice();
+export default function updateItem(target, color, size, amount) {
+  return (dispatch, getState) => {
+    const currentItems = getState().cartController.items.slice();
     const currentCollection = {};
 
     const bucketChanged = target.color !== color || target.size !== size;

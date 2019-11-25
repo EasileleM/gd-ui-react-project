@@ -8,8 +8,8 @@ import {ReactComponent as AddToCartIcon} from "../../../assets/shopping-cart-add
 
 import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButton';
 
-import addItem from '../../../utils/cart/addItem';
-import store from '../../../store';
+import addItem from '../../../redux/thunks/cart/addItem';
+import store from '../../../redux/store';
 
 export class ProductInfo extends Component {
   constructor(props) {
@@ -83,7 +83,7 @@ export class ProductInfo extends Component {
                   <ShareIcon className="product-info__button-icon" />
                 </div>
                 <div className="product-info__button-icon-container">
-                  <AddToCartIcon  onClick={() => store.dispatch(addItem(store.getState(), this.props.item, this.props.item.colors[0], this.state.chosenSize, this.state.chosenQuantity))}
+                  <AddToCartIcon  onClick={() => store.dispatch(addItem(this.props.item, this.props.item.colors[0], this.state.chosenSize, this.state.chosenQuantity))}
                                 className="product-info__button-icon" />
                 </div>
                 <div className="product-info__button-icon-container">
