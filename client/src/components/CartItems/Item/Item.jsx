@@ -56,7 +56,7 @@ export class Item extends React.Component {
           </div>
         </div>
         <div className="cart-window-item__item-controls">
-          <button onClick={() => store.dispatch(removeItem(store.getState(), this.props.data))} tabIndex="2" className="cart-window-item__item-controls-remove"></button>
+          <button onClick={() => store.dispatch(removeItem(this.props.data))} tabIndex="2" className="cart-window-item__item-controls-remove"></button>
           <div className="cart-window-item__item-controls-amount-wrapper">
             <button onClick={(event) => this.handleOnClickIncrement(event)} tabIndex="2" className="cart-window-item__item-controls-amount-button">+</button>
             <input disabled tabIndex="2" maxLength="2" value={this.props.data.amount} className="cart-window-item__item-controls-amount-input" />
