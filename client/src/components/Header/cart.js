@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import store from '../../store';
-import { openCart } from '../../action-creators/cart-action-creator';
+import store from '../../redux/store';
+import { openCart } from '../../redux/action-creators/cart-action-creator';
 import {ReactComponent as CartIcon} from "../../assets/shopping-basket1.svg";
 
 import './main.scss';

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import "./FilterCheckbox.scss"
-import store from "../../../store";
+import store from "../../../redux/store";
 import {
   changeBrandsFilter,
   changeSizeFilter
-} from "../../../action-creators/filter-action-creator";
+} from "../../../redux/action-creators/filter-action-creator";
 
 export class FilterCheckbox extends Component {
   constructor(props) {

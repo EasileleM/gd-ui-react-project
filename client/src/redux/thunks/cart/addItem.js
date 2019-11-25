@@ -1,14 +1,14 @@
 import { updateItems as updateItemsActionCreator } from '../../action-creators/cart-action-creator';
 
-import updateLocalStorageCollection from '../localStorage/updateLocalStorageCollection';
-import notificationSuccess from '../notificationSuccess';
+import updateLocalStorageCollection from '../../../utils/localStorage/updateLocalStorageCollection';
+import notificationSuccess from '../../../utils/notificationSuccess';
 
-export default function addItem(state, itemToAdd, color, size, amount = 1) {
-  return dispatch => {
+export default function addItem(itemToAdd, color, size, amount = 1) {
+  return (dispatch, getState) => {
     if (Number(amount) <= 0) {
       return;
     }
-    const currentItems = state.cartController.items.slice();
+    const currentItems = getState().cartController.items.slice();
     const currentCollection = {};
     let itemAlreadyAdded = false;
     for (const item of currentItems) {
@@ -24,6 +24,7 @@ export default function addItem(state, itemToAdd, color, size, amount = 1) {
       currentCollection[item.generalData._id].push({ size: item.size, color: item.color, amount: item.amount });
     }
     if (!itemAlreadyAdded) {
+      notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', itemToAdd.name);
       if (!currentCollection[itemToAdd._id]) {
         currentCollection[itemToAdd._id] = [];
       }
@@ -32,6 +33,5 @@ export default function addItem(state, itemToAdd, color, size, amount = 1) {
     }
     dispatch(updateItemsActionCreator(currentItems));
     updateLocalStorageCollection('CartItems', currentCollection);
-    notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', itemToAdd.name);
   };
 }

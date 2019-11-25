@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "./FilterRadio.scss"
-import store from '../../../store';
-import {changeCategoryFilter} from "../../../action-creators/filter-action-creator";
+import store from '../../../redux/store';
+import {changeCategoryFilter} from "../../../redux/action-creators/filter-action-creator";
 
 export class FilterRadio extends Component {
   constructor(props) {

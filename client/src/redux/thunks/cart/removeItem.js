@@ -1,10 +1,10 @@
 import { updateItems as updateItemsActionCreator } from '../../action-creators/cart-action-creator';
 
-import updateLocalStorageCollection from '../localStorage/updateLocalStorageCollection';
+import updateLocalStorageCollection from '../../../utils/localStorage/updateLocalStorageCollection';
 
-export default function removeItem(state, target) {
-  return dispatch => {
-    const currentItems = state.cartController.items.slice();
+export default function removeItem(target) {
+  return (dispatch, getState) => {
+    const currentItems = getState().cartController.items.slice();
     const currentCollection = {};
     for (let i = 0; i < currentItems.length; i++) {
       if (currentItems[i].generalData._id === target.generalData._id

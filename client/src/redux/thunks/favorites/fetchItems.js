@@ -1,8 +1,8 @@
 import { fetchItemsBegin, fetchItemsSuccess, fetchItemsFailure } from '../../action-creators/favorites-action-creator';
-import { loadIdArray } from '../../utils/loadIdArray';
+import { loadIdArray } from '../../../utils/loadIdArray';
 
-import getLocalStorageCollection from '../localStorage/getLocalStorageCollection';
-import updateLocalStorageCollection from '../localStorage/updateLocalStorageCollection';
+import getLocalStorageCollection from '../../../utils/localStorage/getLocalStorageCollection';
+import updateLocalStorageCollection from '../../../utils/localStorage/updateLocalStorageCollection';
 
 export default function fetchItems() {
   return dispatch => {

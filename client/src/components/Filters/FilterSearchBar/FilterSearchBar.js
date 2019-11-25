@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {ReactComponent as DeleteIcon} from "../../../assets/delete.svg";
 import "./FilterSearchBar.scss"
-import store from "../../../store";
-import {search} from "../../../action-creators/filter-action-creator";
+import store from "../../../redux/store";
+import {search} from "../../../redux/action-creators/filter-action-creator";
 
 export class FilterSearchBar extends Component {
   constructor(props) {

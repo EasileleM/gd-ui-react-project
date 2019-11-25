@@ -1,9 +1,9 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import store from '../../../store';
-import removeItem from '../../../utils/cart/removeItem';
-import updateItem from '../../../utils/cart/updateItem';
-import { closeCart } from '../../../action-creators/cart-action-creator';
+import store from '../../../redux/store';
+import removeItem from '../../../redux/thunks/cart/removeItem';
+import updateItem from '../../../redux/thunks/cart/updateItem';
+import { closeCart } from '../../../redux/action-creators/cart-action-creator';
 import { Link } from 'react-router-dom'
 
 import './Item.scss';
@@ -11,13 +11,13 @@ import './Item.scss';
 export class Item extends React.Component {
   handleOnClickIncrement(event) {
     if (Number(this.props.data.amount) < 99) {
-      store.dispatch(updateItem(store.getState(), this.props.data, this.props.data.color, this.props.data.size, this.props.data.amount + 1));
+      store.dispatch(updateItem(this.props.data, this.props.data.color, this.props.data.size, this.props.data.amount + 1));
     }
   }
 
   handleOnClickDecrement(event) {
     if (Number(this.props.data.amount) > 1) {
-      store.dispatch(updateItem(store.getState(), this.props.data, this.props.data.color, this.props.data.size, this.props.data.amount - 1));
+      store.dispatch(updateItem(this.props.data, this.props.data.color, this.props.data.size, this.props.data.amount - 1));
     }
   }
 
@@ -56,7 +56,7 @@ export class Item extends React.Component {
           </div>
         </div>
         <div className="cart-window-item__item-controls">
-          <button onClick={() => store.dispatch(removeItem(store.getState(), this.props.data))} tabIndex="2" className="cart-window-item__item-controls-remove"></button>
+          <button onClick={() => store.dispatch(removeItem(this.props.data))} tabIndex="2" className="cart-window-item__item-controls-remove"></button>
           <div className="cart-window-item__item-controls-amount-wrapper">
             <button onClick={(event) => this.handleOnClickIncrement(event)} tabIndex="2" className="cart-window-item__item-controls-amount-button">+</button>
             <input disabled tabIndex="2" maxLength="2" value={this.props.data.amount} className="cart-window-item__item-controls-amount-input" />

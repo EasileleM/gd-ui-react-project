@@ -23,12 +23,12 @@ import OrderBlock from '../../components/OrderBlock/OrderBlock';
 import interceptor from '../../utils/interceptorResponse';
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
 import { changeBodyScrollState } from '../../utils/changeBodyScrollState';
-import {default as fetchCart} from '../../utils/cart/fetchItems';
-import {default as fetchFavorites} from '../../utils/favorites/fetchItems';
+import {default as fetchCart} from '../../redux/thunks/cart/fetchItems';
+import {default as fetchFavorites} from '../../redux/thunks/favorites/fetchItems';
 
-import store from '../../store';
-import { closeCart } from '../../action-creators/cart-action-creator';
-import { closeFavorites } from '../../action-creators/favorites-action-creator';
+import store from '../../redux/store';
+import { closeCart } from '../../redux/action-creators/cart-action-creator';
+import { closeFavorites } from '../../redux/action-creators/favorites-action-creator';
 import Search from "../Search/Search";
 import Home from "../Home/Home";
 
