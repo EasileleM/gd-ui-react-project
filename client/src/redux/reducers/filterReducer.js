@@ -1,4 +1,4 @@
-import { FILTER_ACTIONS } from '../actions/types'
+import { FILTER_ACTIONS } from '../action-types/filterActionTypes';
 
 
 export const initialState = {

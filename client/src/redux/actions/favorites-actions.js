@@ -1,12 +1,4 @@
-import { FAVORITES_ACTIONS } from './types';
-
-export const openFavorites = {
-  type: FAVORITES_ACTIONS.OPEN
-};
-
-export const closeFavorites = {
-  type: FAVORITES_ACTIONS.CLOSE
-};
+import { FAVORITES_ACTIONS } from '../action-types/favoritesActionTypes';
 
 export const updateItems = {
   type: FAVORITES_ACTIONS.UPDATE_ITEMS

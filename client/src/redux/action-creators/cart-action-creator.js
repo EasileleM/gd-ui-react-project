@@ -1,13 +1,5 @@
 import * as cartActions from '../actions/cart-actions';
 
-export const openCart = () => {
-  return cartActions.openCart;
-}
-
-export const closeCart = () => {
-  return cartActions.closeCart;
-}
-
 export const updateItems = (items) => {
   return {...cartActions.updateItems, items};
 }

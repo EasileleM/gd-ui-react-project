@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import store from '../../../redux/store';
 import removeItem from '../../../redux/thunks/favorites/removeItem';
 import { Link } from 'react-router-dom';
-import { closeFavorites } from '../../../redux/action-creators/favorites-action-creator';
+import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
 
 import './Item.scss';
 
@@ -12,16 +12,16 @@ export class Item extends React.Component {
   render() {
     return (
       <div className="modal-window__item  favorites-window-item">
-        <Link onClick={() => store.dispatch(closeFavorites())} to={`/item/${this.props.data._id}`} style={{ textDecoration: 'none' }}>
+        <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data._id}`} style={{ textDecoration: 'none' }}>
           <img src={this.props.data.images[0]} className="favorites-window-item__image" alt="item" />
         </Link >
         <div className="favorites-window-item__info">
-          <Link onClick={() => store.dispatch(closeFavorites())} to={`/item/${this.props.data._id}`} style={{ textDecoration: 'none' }}>
+          <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data._id}`} style={{ textDecoration: 'none' }}>
             <h2 className="favorites-window-item__name">
               {this.props.data.name}
             </h2>
           </Link>
-          <Link onClick={() => store.dispatch(closeFavorites())} to={`/item/${this.props.data._id}`} style={{ textDecoration: 'none' }}>
+          <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data._id}`} style={{ textDecoration: 'none' }}>
             <p className="favorites-window-item__description">
               {this.props.data.description}
             </p>

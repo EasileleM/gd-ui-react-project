@@ -9,59 +9,29 @@ import {
 
 import "./Layout.scss";
 
-import ErrorPage from "../errors/ErrorPage";
-import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
-
 import { Header } from "../../components/Header/Header";
 import { Footer } from "../../components/Footer/Footer";
 import { LoadingSpinner } from '../../components//LoadingSpinner/index';
-import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
-import CartItems from '../../components/CartItems/CartItems';
-import FavoritesItems from '../../components/FavoritesItems/FavoritesItems.jsx';
-import OrderBlock from '../../components/OrderBlock/OrderBlock';
+import ModalWindow from '../../components/ModalWindow/ModalWindow';
 
 import interceptor from '../../utils/interceptorResponse';
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
-import { changeBodyScrollState } from '../../utils/changeBodyScrollState';
-import {default as fetchCart} from '../../redux/thunks/cart/fetchItems';
-import {default as fetchFavorites} from '../../redux/thunks/favorites/fetchItems';
 
-import store from '../../redux/store';
-import { closeCart } from '../../redux/action-creators/cart-action-creator';
-import { closeFavorites } from '../../redux/action-creators/favorites-action-creator';
 import Search from "../Search/Search";
 import Home from "../Home/Home";
+import ErrorPage from "../errors/ErrorPage";
+import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
 
 export class Layout extends Component {
-    componentDidMount() {
-        store.dispatch(fetchCart());
-        store.dispatch(fetchFavorites());
-    }
-
-    componentDidUpdate() {
-        changeBodyScrollState(this.props.cartOpened || this.props.favoritesOpened);
-    }
+    componentDidMount() { }
 
     render() {
         return (
             <Router>
                 <ScrollToTop>
                     <Suspense fallback={<div className="spinner-wrapper"><LoadingSpinner /></div>}>
-                        {
-                            (this.props.cartOpened) ? <ModalWindow content={<><CartItems /><OrderBlock /></>} onClick={() => store.dispatch(closeCart())} /> : null
-                        }
-                        {
-                            (this.props.favoritesOpened) ? <ModalWindow content={<><FavoritesItems /></>} onClick={() => store.dispatch(closeFavorites())} /> : null
-                        }
-                        {
-                            (this.props.error === 400) ? <Redirect to='/400' /> : null
-                        }
-                        {
-                            (this.props.error === 404) ? <Redirect to='/404' /> : null
-                        }
-                        {
-                            (this.props.error === 500) ? <Redirect to='/500' /> : null
-                        }
+                        <ModalWindow />
+                        <RedirectWrapper error={this.props.error} />
                         <Header />
                         <Switch>
                             <Route path="/" exact component={Home} />
@@ -80,11 +50,18 @@ export class Layout extends Component {
     }
 }
 
+function RedirectWrapper({ error }) {
+    switch (error) {
+        case 400: return <Redirect to='/400' />;
+        case 404: return <Redirect to='/404' />;
+        case 500: return <Redirect to='/500' />;
+        default: return null;
+    }
+}
+
 const mapStateToProps = (state) => {
     return {
-        error: state.errorHandler.errorCode,
-        cartOpened: state.cartController.opened,
-        favoritesOpened: state.favoritesController.opened
+        error: state.errorHandler.errorCode
     }
 };
 export default connect(mapStateToProps)(Layout);

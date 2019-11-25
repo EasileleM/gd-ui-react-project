@@ -1,4 +1,4 @@
-import {FILTER_ACTIONS} from "./types";
+import {FILTER_ACTIONS} from "../action-types/filterActionTypes";
 
 export const changeSizeFilter = {
   type: FILTER_ACTIONS.SIZES,
