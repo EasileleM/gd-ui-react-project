@@ -26,13 +26,13 @@ export class ProductCard extends Component {
     this.setState({
       size: changeEvent.target.value
     });
-  };
+  }
 
   handleColorChange(changeEvent) {
     this.setState({
       color: changeEvent.target.value
     });
-  };
+  }
 
   componentDidMount() {}
 
@@ -71,7 +71,7 @@ export class ProductCard extends Component {
               </div>
               <div className='product-card__add-to-favorite'>
                 <AddToFavoritesButton
-                  enabled={this.props.favoritesItems.find((item) => item._id === this.props.product._id) !== undefined}
+                  enabled={Boolean(this.props.favoritesItems.find((item) => item._id === this.props.product._id))}
                   data={this.props.product}
                 />
               </div>
@@ -89,4 +89,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(withTranslation()(ProductCard));
+export default withTranslation()(connect(mapStateToProps)(ProductCard));

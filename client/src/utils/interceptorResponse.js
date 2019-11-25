@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {error404, error400, error500} from "../action-creators/error-action-creator";
-import store from "../store"
+import {error404, error400, error500} from "../redux/action-creators/error-action-creator";
+import store from "../redux/store"
 
 export const interceptor = axios.interceptors.response.use(function (response) {
   return response;

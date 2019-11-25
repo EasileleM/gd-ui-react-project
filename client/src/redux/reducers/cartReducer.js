@@ -1,51 +1,58 @@
-import { FAVORITES_ACTIONS } from '../actions/types';
-import notificationSuccess from '../utils/notificationSuccess';
+import { CART_ACTIONS } from '../actions/types';
+import notificationSuccess from '../../utils/notificationSuccess';
 
 export const initialState = {
   size: 0,
   opened: false,
   loading: false,
   failure: false,
-  items: []
+  items: [],
+  orderPrice: 0
 };
 
-export const favoritesReducer = (state = initialState, action) => {
+export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FAVORITES_ACTIONS.OPEN:
-        if (!(!state.loading && !state.failure && state.size)) {
-          notificationSuccess('Список избранного пуст, вы не можете открыть его', 'Favourites is empty, you can\'t open it', '')
-        }
+    case CART_ACTIONS.OPEN:
+      if (!(!state.loading && !state.failure && state.size)) {
+        notificationSuccess('Корзина пустая, вы не можете открыть её', 'Cart is empty, you can\'t open it', '')
+      }
       return {
         ...state,
         opened: Boolean(!state.loading && !state.failure && state.size)
       }
-    case FAVORITES_ACTIONS.CLOSE:
+    case CART_ACTIONS.CLOSE:
       return {
         ...state,
         opened: false
       }
-    case FAVORITES_ACTIONS.UPDATE_ITEMS:
+    case CART_ACTIONS.UPDATE_ITEMS:
+        let orderPrice = 0;
+        for (const item of action.items) {
+          orderPrice += item.generalData.price * item.amount;
+        }
         return {
           ...state,
           items: action.items,
           size: action.items.length,
+          orderPrice,
           opened: Boolean(state.opened && !state.loading && !state.failure && action.items.length)
         }
-    case FAVORITES_ACTIONS.FETCH_BEGINS:
+    case CART_ACTIONS.FETCH_BEGINS:
       return {
         ...state,
         opened: false,
         loading: true,
         size: 0
       }
-    case FAVORITES_ACTIONS.FETCH_SUCCESS:
+    case CART_ACTIONS.FETCH_SUCCESS:
       return {
         ...state,
         items: action.items,
         size: action.size,
+        orderPrice: action.orderPrice,
         loading: false
       }
-    case FAVORITES_ACTIONS.FETCH_FAILURE:
+    case CART_ACTIONS.FETCH_FAILURE:
       return {
         ...state,
         loading: false,
