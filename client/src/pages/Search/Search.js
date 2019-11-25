@@ -5,8 +5,8 @@ import Newsletter from "../../components/Newsletter/Newsletter";
 import FiltersButtonImage from "../../assets/controls.svg"
 import "./Search.scss"
 import queryString from 'query-string'
-import store from "../../store";
-import {clear, search, changeSizeFilter} from "../../action-creators/filter-action-creator"
+import store from "../../redux/store";
+import {clear, search, changeSizeFilter} from "../../redux/action-creators/filter-action-creator"
 import {changeBodyScrollState} from '../../utils/changeBodyScrollState';
 
 export class Search extends Component {

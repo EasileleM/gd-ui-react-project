@@ -1,9 +1,9 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import store from '../../../store';
-import removeItem from '../../../utils/favorites/removeItem';
-import { Link } from 'react-router-dom'
-import { closeFavorites } from '../../../action-creators/favorites-action-creator';
+import store from '../../../redux/store';
+import removeItem from '../../../redux/thunks/favorites/removeItem';
+import { Link } from 'react-router-dom';
+import { closeFavorites } from '../../../redux/action-creators/favorites-action-creator';
 
 import './Item.scss';
 
@@ -34,7 +34,7 @@ export class Item extends React.Component {
           </div>
         </div>
         <div className="favorites-window-item__item-controls">
-          <button onClick={() => store.dispatch(removeItem(store.getState(), this.props.data))} tabIndex="2" className="favorites-window-item__item-controls-remove"></button>
+          <button onClick={() => store.dispatch(removeItem(this.props.data))} tabIndex="2" className="favorites-window-item__item-controls-remove"></button>
         </div>
       </div>
     )
