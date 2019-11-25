@@ -6,8 +6,8 @@ import store from '../../redux/store';
 import addItem from '../../redux/thunks/favorites/addItem';
 import removeItem from '../../redux/thunks/favorites/removeItem';
 import {openFavorites} from '../../redux/action-creators/favorites-action-creator';
-import {ReactComponent as FavoritesIcon} from "../../assets/likeDisabled.svg"
-import {ReactComponent as FavoritesIconEnabled} from "../../assets/likeEnabled.svg"
+import {ReactComponent as FavoritesIcon} from "../../assets/likeDisabled.svg";
+import {ReactComponent as FavoritesIconEnabled} from "../../assets/likeEnabled.svg";
 
 export class AddToFavoritesButton extends React.Component {
   constructor(props) {
@@ -18,6 +18,12 @@ export class AddToFavoritesButton extends React.Component {
   }
 
   componentDidMount() {}
+
+  componentDidUpdate(props, state) {
+    if (this.props.enabled !== state.enabled) {
+      this.setState({enabled: this.props.enabled});
+    }
+  }
 
   handleOnClick() {
     if (this.props.openFavorites) {
@@ -47,9 +53,4 @@ export class AddToFavoritesButton extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    items: state.favoritesController.items
-  }
-};
-export default connect(mapStateToProps)(AddToFavoritesButton);
+export default AddToFavoritesButton;
