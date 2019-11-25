@@ -75,7 +75,8 @@ $color-border: $color-athens-gray;
   &__image {
     &_front {
       object-fit: contain;
-      width: 149px;
+      height: 200px;
+      width: calc(100% - 5px);
     }
 
     &_back {

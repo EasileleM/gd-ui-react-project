@@ -8,7 +8,7 @@ import { ColorSelector } from './ColorSelector/index.js';
 import { connect } from 'react-redux';
 import { ReactComponent as ShareIcon } from "../../assets/share.svg";
 
-import './main.scss';
+import './ProductCard.scss';
 
 export class ProductCard extends Component {
   constructor(props) {

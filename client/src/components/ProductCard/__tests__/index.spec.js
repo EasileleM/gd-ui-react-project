@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { ProductCard } from '../index';
+import { ProductCard } from '../ProductCard';
 
 configure({ adapter: new Adapter() });
 
