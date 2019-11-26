@@ -54,7 +54,7 @@ export class SaleItem extends React.Component {
             <button
               onClick={() => store
                 .dispatch(
-                  addItem(store.getState(),
+                  addItem(
                     this.state.data,
                     this.state.data.colors[0],
                     this.state.data.sizes[0])
