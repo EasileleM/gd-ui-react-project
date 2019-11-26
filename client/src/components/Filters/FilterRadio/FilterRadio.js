@@ -13,11 +13,6 @@ export class FilterRadio extends Component {
     };
   }
 
-  componentWillMount() {
-    this.setState({selectedValue: this.props.onInit});
-    store.dispatch(changeCategoryFilter(this.props.onInit));
-  }
-
   componentDidMount() {
   }
 

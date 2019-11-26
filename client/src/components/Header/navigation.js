@@ -60,12 +60,19 @@ export class Navigation extends Component {
       store.dispatch(search(this.state.searchValue));
       this.closeMenu();
     }
-    e.preventDefault()
+    e.preventDefault();
   };
 
   clearSearch = (e) => {
     this.setState({ searchValue: "" });
-    this.props.history.push(`/search`);
+    const storeState = store.getState().filterController || "";
+    this.props.history.push(`/search?filter=true` +
+      `${storeState.sizes.length ? ("&sizes=" + storeState.sizes.join(',')) : ""}` +
+      `${storeState.brands.length ? ("&brands=" + storeState.brands.join(',')) : ""}` +
+      `${storeState.category ? ("&categories=" + storeState.category) : ""}` +
+      `${storeState.maxPrice ? ("&maxprice=" + storeState.maxPrice) : ""}` +
+      `${storeState.minPrice ? ("&minprice=" + storeState.minPrice) : ""}` +
+      `${this.state.searchValue.length > 0 ? ("&search=" + this.state.searchValue) : ""}`);
     store.dispatch(search(null));
   };
 
@@ -86,6 +93,7 @@ export class Navigation extends Component {
   handleBlur = () => {
     this.setState({ searchInputIsFocused: false });
   };
+
   handleFocus = () => {
     this.setState({ searchInputIsFocused: true });
   };

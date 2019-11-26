@@ -1,15 +1,18 @@
 import { FILTER_ACTIONS } from '../action-types/filterActionTypes';
 
 
+
 export const initialState = {
   category: null,
   minPrice: null,
   maxPrice: null,
   brands: [],
-  sizes: []
+  sizes: [],
+  search: ""
 };
 
 export const filterReducer = (state = initialState, action) => {
+
   switch (action.type) {
     case FILTER_ACTIONS.BRANDS:
       return {

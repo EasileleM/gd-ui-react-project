@@ -8,7 +8,7 @@ import { LoadingSpinner } from "../LoadingSpinner";
 import FilterSearchBar from "./FilterSearchBar/FilterSearchBar";
 import notificationError from "../../utils/notificationError";
 import { withTranslation } from 'react-i18next';
-import store from '../../store';
+import store from '../../redux/store';
 
 export class Filters extends Component {
   constructor(props) {
@@ -17,9 +17,6 @@ export class Filters extends Component {
       filters: null
     }
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentWillMount() {
   }
 
   componentDidMount() {
@@ -52,28 +49,9 @@ export class Filters extends Component {
   };
 
   onInit = (category) => {
-    const filters = this.props.filterUrl.split(/[&=]/);
-    const res = filters.filter((item) => category.includes(item));
-    return res.join();
-  }
-
-  handleChange = () => {
-    const storeState = store.getState().filterController || "";
-    this.props.history.push(`/search?filter=true` +
-      `${storeState.sizes.length ? ("&sizes=" + storeState.sizes.join(',')) : ""}` +
-      `${storeState.brands.length ? ("&brands=" + storeState.brands.join(',')) : ""}` +
-      `${storeState.category ? ("&category=" + storeState.category) : ""}` +
-      `${storeState.maxPrice ? ("&maxprice=" + storeState.maxPrice) : ""}` +
-      `${storeState.minPrice ? ("&minprice=" + storeState.minPrice) : ""}` +
-      `${storeState.searchTarget[0] ? ("&search=" + storeState.searchTarget.join()) : ""}`);
-  };
-
-  clearCategory = () => {
-    this.setState({ searchTarget: "" });
-    this.handleChange();
-  };
-
-  onInit = (category) => {
+    // const filters = this.props.filterUrl.split(/[&=]/);
+    // const res = filters.filter((item) => category.includes(item));
+    // return res.join();
   }
 
   render() {
@@ -91,7 +69,7 @@ export class Filters extends Component {
               ? <FilterRadio options={this.state.filters.categories}
                 onStateChange={this.handleChange}
                 onClear={this.clearCategory}
-                onInit={this.onInit(this.state.filters)} />
+                onInit={this.onInit} />
               : <LoadingSpinner />
           }
         </div>

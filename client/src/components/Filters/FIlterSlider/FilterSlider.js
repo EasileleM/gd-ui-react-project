@@ -20,7 +20,7 @@ export class FilterSlider extends Component {
   handleChange = (chosenValues) => {
     const [minChosenValue, maxChosenValue] = chosenValues;
     this.setState({minChosenValue, maxChosenValue});
-    this.props.onStateChange();
+    // console.log(this.props.onStateChange);
   };
 
   handleInputChange = (e) => {
@@ -53,9 +53,11 @@ export class FilterSlider extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if(prevState.maxChosenValue !== this.state.maxChosenValue) {
       store.dispatch(changeMaxPriceFilter( this.state.maxChosenValue));
+      this.props.onStateChange();
     }
     if (prevState.minChosenValue !== this.state.minChosenValue) {
       store.dispatch(changeMinPriceFilter(this.state.minChosenValue));
+      this.props.onStateChange();
     }
   }
 

@@ -6,14 +6,14 @@ import FiltersButtonImage from "../../assets/controls.svg";
 import "./Search.scss";
 import queryString from 'query-string'
 import store from "../../redux/store";
-import {clear, search} from "../../redux/action-creators/filter-action-creator";
+import {clear, search, changeCategoryFilter} from "../../redux/action-creators/filter-action-creator";
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 export class Search extends Component {
   constructor(props) {
     super(props);
     const values = queryString.parse(this.props.location.search);
-    store.dispatch(search(values.search));
+    store.dispatch(changeCategoryFilter(values.categories), search(values.search));
     this.state = {
       filtersToggle: false
     }
