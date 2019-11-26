@@ -1,5 +1,5 @@
 import React from 'react';
-import {SLIDER_HEIGHT} from '../../../constants/index';
+import {SLIDER_HEIGHT} from '../../../constants/constants';
 
 import Item from '../Item/index';
 

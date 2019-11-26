@@ -41,7 +41,7 @@ export class ProductCard extends Component {
       <div className={`product-card ${this.props.rowSize === 3 ? "product-card_three-cards" : ""}`}>
         <div className='product-card__inner'>
           <div className='product-card__front'>
-            <img src={this.props.product.images[0]} alt={this.props.product.name} className='product-card__image product-card__image_front' />
+            <img srcSet={this.props.product.images[0].srcset.join(", ")} alt={this.props.product.name} src={this.props.product.images[0].src}  className='product-card__image product-card__image_front' />
             <div className='product-card__description'>
               <div className='product-card__name product-card__name_front'>
                 {this.props.product.name}
@@ -53,7 +53,7 @@ export class ProductCard extends Component {
           </div>
           <div className='product-card__back'>
             <Link to={`/item/${this.props.product._id}`} style={{ textDecoration: 'none' }}>
-              <img src={this.props.product.images[0]} alt={this.props.product.name} className='product-card__image product-card__image_back' />
+              <img src={this.props.product.images[0].src} srcSet={this.props.product.images[0].srcset.join(", ")} alt={this.props.product.name} className='product-card__image product-card__image_back' />
               <div className='product-card__name product-card__name_back'>
                 {this.props.product.name}
               </div>

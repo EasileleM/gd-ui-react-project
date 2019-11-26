@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ItemCardSmall from '../ItemCardSmall/index.js';
+import ItemCardSmall from '../ItemCardSmall/ItemCardSmall.js';
 
 import './ProductSmallContainer.scss';
 import loadCard from "../../utils/loadCard";
