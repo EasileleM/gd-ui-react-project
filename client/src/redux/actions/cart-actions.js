@@ -1,12 +1,4 @@
-import { CART_ACTIONS } from './types';
-
-export const openCart = {
-  type: CART_ACTIONS.OPEN
-};
-
-export const closeCart = {
-  type: CART_ACTIONS.CLOSE
-};
+import { CART_ACTIONS } from '../action-types/cartActionTypes';
 
 export const updateItems = {
   type: CART_ACTIONS.UPDATE_ITEMS

@@ -1,25 +1,17 @@
-import * as fatoritesActions from '../actions/favorites-actions';
-
-export const openFavorites = () => {
-  return fatoritesActions.openFavorites;
-}
-
-export const closeFavorites = () => {
-  return fatoritesActions.closeFavorites;
-}
+import * as favoritesActions from '../actions/favorites-actions';
 
 export const updateItems = (items) => {
-  return {...fatoritesActions.updateItems, items};
+  return {...favoritesActions.updateItems, items};
 }
 
 export const fetchItemsBegin = () => {
-  return fatoritesActions.fetchItemsBegin;
+  return favoritesActions.fetchItemsBegin;
 }
 
 export const fetchItemsSuccess = (items, size) => {
-  return {...fatoritesActions.fetchItemsSuccess, items, size};
+  return {...favoritesActions.fetchItemsSuccess, items, size};
 }
 
 export const fetchItemsFailure = (error) => {
-  return {...fatoritesActions.fetchItemsFailure, error};
+  return {...favoritesActions.fetchItemsFailure, error};
 }

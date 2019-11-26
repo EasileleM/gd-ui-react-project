@@ -13,7 +13,7 @@ import store from "../../redux/store";
 import { ReactComponent as DeleteIcon } from "../../assets/delete.svg";
 import { ReactComponent as UserIcon } from "../../assets/user.svg";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
-import { changeBodyScrollState } from '../../utils/changeBodyScrollState';
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 export class Navigation extends Component {
   constructor(props) {
@@ -26,7 +26,8 @@ export class Navigation extends Component {
     }
   }
 
-  componentDidMount() { }
+  componentDidMount() {
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -63,14 +64,14 @@ export class Navigation extends Component {
   };
 
   closeMenu = () => {
+    clearAllBodyScrollLocks(this.bodyElement);
     this.setState({ menuExpanded: false }, changeBodyScrollState(!this.state.menuExpanded))
   };
 
   openMenu = () => {
+    disableBodyScroll(this.bodyElement);
     this.setState({ menuExpanded: true })
   };
-
-
 
   handleBlur = () => {
     this.setState({ searchInputIsFocused: false })
