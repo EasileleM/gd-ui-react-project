@@ -67,9 +67,9 @@ export class Filters extends Component {
           {
             this.state.filters
               ? <FilterRadio options={this.state.filters.categories}
-                             onStateChange={this.handleChange}
-                             onClear={this.clearCategory}
-                             onInit={this.onInit(this.state.filters)}/>
+                onStateChange={this.handleChange}
+                onClear={this.clearCategory}
+                onInit={this.onInit(this.state.filters)} />
               : <LoadingSpinner />
           }
         </div>
@@ -79,10 +79,10 @@ export class Filters extends Component {
           {
             this.state.filters
               ? <FilterSlider slideIn={this.props.slideIn}
-                              maxValue={Number(this.state.filters.maxprice)}
-                              minValue={Number(this.state.filters.minprice)}
-                              onStateChange={this.handleChange}
-                              onInit={this.onInit}/>
+                maxValue={Number(this.state.filters.maxprice)}
+                minValue={Number(this.state.filters.minprice)}
+                onStateChange={this.handleChange}
+                onInit={this.onInit} />
               : <LoadingSpinner />
           }
         </div>
@@ -91,10 +91,10 @@ export class Filters extends Component {
           <h2 className="filter__heading">{t('filters.sizes')}</h2>
           {
             this.state.filters
-              ? <FilterCheckbox name="sizes" 
-                                options={this.state.filters.sizes} 
-                                onStateChange={this.handleChange}
-                                onInit={this.onInit}/>
+              ? <FilterCheckbox name="sizes"
+                options={this.state.filters.sizes}
+                onStateChange={this.handleChange}
+                onInit={this.onInit} />
               : <LoadingSpinner />
           }
         </div>
@@ -104,9 +104,9 @@ export class Filters extends Component {
           {
             this.state.filters
               ? <FilterCheckbox name="brands"
-                                options={this.state.filters.brands}
-                                onStateChange={this.handleChange} 
-                                onInit={this.onInit}/> 
+                options={this.state.filters.brands}
+                onStateChange={this.handleChange}
+                onInit={this.onInit} />
               : <LoadingSpinner />
           }
         </div>

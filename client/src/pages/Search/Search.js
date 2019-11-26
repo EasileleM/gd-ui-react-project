@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import Filters from "../../components/Filters/Filters";
 import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import Newsletter from "../../components/Newsletter/Newsletter";
-import FiltersButtonImage from "../../assets/controls.svg"
-import "./Search.scss"
+import FiltersButtonImage from "../../assets/controls.svg";
+import "./Search.scss";
 import queryString from 'query-string'
 import store from "../../redux/store";
-import {clear, search, changeSizeFilter} from "../../redux/action-creators/filter-action-creator"
-import {changeBodyScrollState} from '../../utils/changeBodyScrollState';
+import {clear, search} from "../../redux/action-creators/filter-action-creator";
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 export class Search extends Component {
   constructor(props) {
@@ -24,6 +24,12 @@ export class Search extends Component {
     this.setState({
       filtersToggle: !toggle,
     })
+    if (!toggle) {
+      disableBodyScroll( this.bodyElement);
+    }
+    else {
+      clearAllBodyScrollLocks(this.bodyElement);
+    }
   };
 
   componentDidMount() {

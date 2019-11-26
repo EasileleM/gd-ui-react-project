@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import "./FilterSlider.scss"
 import ReactSlider from 'react-slider'
-import {toast} from 'react-toastify';
 import store from "../../../redux/store";
 import {changeMinPriceFilter, changeMaxPriceFilter} from "../../../redux/action-creators/filter-action-creator";
 
@@ -46,6 +45,7 @@ export class FilterSlider extends Component {
             this.setState({maxChosenValue: value});
           }
           break;
+        default: break;
       }
     }
   };

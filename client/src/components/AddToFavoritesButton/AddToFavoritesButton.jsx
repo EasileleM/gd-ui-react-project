@@ -1,11 +1,10 @@
 import React from 'react';
 
 import './AddToFavoritesButton.scss';
-import {connect} from 'react-redux';
 import store from '../../redux/store';
 import addItem from '../../redux/thunks/favorites/addItem';
 import removeItem from '../../redux/thunks/favorites/removeItem';
-import {openFavorites} from '../../redux/action-creators/favorites-action-creator';
+import { changeModalWindowContent } from '../../redux/action-creators/modalWindow-action-creator';
 import {ReactComponent as FavoritesIcon} from "../../assets/likeDisabled.svg";
 import {ReactComponent as FavoritesIconEnabled} from "../../assets/likeEnabled.svg";
 
@@ -27,7 +26,7 @@ export class AddToFavoritesButton extends React.Component {
 
   handleOnClick() {
     if (this.props.openFavorites) {
-      store.dispatch(openFavorites());
+      store.dispatch(changeModalWindowContent('favorites'));
       return;
     }
     if (this.state.enabled) {

@@ -3,8 +3,8 @@ import { withTranslation } from 'react-i18next';
 import store from '../../../redux/store';
 import removeItem from '../../../redux/thunks/cart/removeItem';
 import updateItem from '../../../redux/thunks/cart/updateItem';
-import { closeCart } from '../../../redux/action-creators/cart-action-creator';
-import { Link } from 'react-router-dom'
+import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
+import { Link } from 'react-router-dom';
 
 import './Item.scss';
 
@@ -26,16 +26,16 @@ export class Item extends React.Component {
   render() {
     return (
       <div className="card-window__item cart-window-item">
-        <Link onClick={() => store.dispatch(closeCart())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
+        <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
           <img src={this.props.data.generalData.images[0]} className="cart-window-item__image" alt="item" />
         </Link>
         <div className="cart-window-item__info">
-          <Link onClick={() => store.dispatch(closeCart())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
+          <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
             <h2 className="cart-window-item__name">
               {this.props.data.generalData.name}
             </h2>
           </Link>
-          <Link onClick={() => store.dispatch(closeCart())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
+          <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
             <p className="cart-window-item__description">
               {this.props.data.generalData.description}
             </p>

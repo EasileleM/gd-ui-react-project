@@ -4,7 +4,6 @@ import ProductInfo from "./ProductInfo/ProductInfo";
 import "./Product.scss"
 import {LoadingSpinner} from "../LoadingSpinner";
 import loadItem from "../../utils/loadItem";
-import i18n from "../../i18n";
 import {toast} from "react-toastify";
 
 

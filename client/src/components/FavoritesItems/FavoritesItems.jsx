@@ -3,10 +3,18 @@ import React from 'react';
 import './FavoritesItems.scss';
 import { connect } from 'react-redux';
 import Item from './Item/Item';
+import store from '../../redux/store';
+import { closeModalWindow } from '../../redux/action-creators/modalWindow-action-creator';
 
 export class FavoritesItems extends React.Component {
-  componentDidMount() { }
+  componentDidMount() {
+  }
+
   render() {
+    if (!this.props.items.length) {
+      store.dispatch(closeModalWindow());
+      return null;
+    }
     const items = this.props.items.map((item) => {
       return <Item
         key={item._id}
