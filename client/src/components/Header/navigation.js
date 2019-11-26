@@ -51,7 +51,7 @@ export class Navigation extends Component {
         `${storeState.minPrice ? ("&minprice=" + storeState.minPrice) : ""}` +
         `${this.state.searchValue.length > 0 ? ("&search=" + this.state.searchValue) : ""}`);
       store.dispatch(search(this.state.searchValue));
-      this.toggleMenu();
+      this.closeMenu();
     }
     e.preventDefault()
   };
@@ -62,9 +62,14 @@ export class Navigation extends Component {
     store.dispatch(search(null));
   };
 
-  toggleMenu = () => {
-    this.setState({ menuExpanded: !this.state.menuExpanded }, changeBodyScrollState(!this.state.menuExpanded))
+  closeMenu = () => {
+    this.setState({ menuExpanded: false }, changeBodyScrollState(!this.state.menuExpanded))
   };
+
+  openMenu = () => {
+    this.setState({ menuExpanded: true })
+  };
+
 
 
   handleBlur = () => {
@@ -81,12 +86,12 @@ export class Navigation extends Component {
         <div className="header__logo">
           <Logo />
         </div>
-        <input onClick={this.toggleMenu} type="checkbox" id="headerMenuData"
-          className="header__menu-data-input" checked={this.state.menuExpanded} />
+        <input onClick={this.openMenu} type="checkbox" id="headerMenuData"
+               className="header__menu-data-input" checked={this.state.menuExpanded} />
         <nav className="header__links-container">
           <label className="header__menu-button" htmlFor="headerMenuData" data-opened="⨯"
             data-closed="≡"></label>
-          <Link onClick={this.toggleMenu}
+          <Link onClick={this.closeMenu}
             className={`
       header__burger-menu
       header__text
@@ -95,7 +100,7 @@ export class Navigation extends Component {
             to="/">
             {this.props.t('navigation.home')}
           </Link>
-          <Link onClick={this.toggleMenu}
+          <Link onClick={this.closeMenu}
             className={`
       header__burger-menu
       header__text
@@ -104,17 +109,17 @@ export class Navigation extends Component {
             to="/search">
             {this.props.t('navigation.products')}
           </Link>
-          <a onClick={this.toggleMenu}
+          <a onClick={this.closeMenu}
             className="header__burger-menu header__text header__links-item header__text_lg"
             href="google.com">
             {this.props.t('navigation.hotDeals')}
           </a>
-          <a onClick={this.toggleMenu}
+          <a onClick={this.closeMenu}
             className="header__burger-menu header__text header__links-item header__text_lg"
             href="google.com">
             {this.props.t('navigation.about')}
           </a>
-          <a onClick={this.toggleMenu}
+          <a onClick={this.closeMenu}
             className="header__burger-menu header__text header__links-item header__text_lg"
             href="google.com">
             {this.props.t('navigation.contact')}
