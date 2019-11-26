@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import sinon from 'sinon';
 import {configure} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import {ItemCardSmall} from '../index';
+import {ItemCardSmall} from '../ItemCardSmall';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 configure({adapter: new Adapter()});

@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import sinon from 'sinon';
 import {configure} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { SaleItem } from "../index";
+import { SaleItem } from "../SaleItem";
 import * as notificationError from "../../../utils/notificationError";
 import * as loadItemSales from "../../../utils/loadItemSales";
 

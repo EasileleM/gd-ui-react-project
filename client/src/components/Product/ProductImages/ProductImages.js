@@ -33,7 +33,7 @@ export class ProductImages extends Component {
   render() {
     return (
         <div className="product-images">
-          <img className="product-images__main" src={this.state.images[this.state.currentIndex]}
+          <img className="product-images__main"srcSet={this.state.images[this.state.currentIndex].srcset.join(", ")} src={this.state.images[this.state.currentIndex].src}
                alt="Product"/>
 
           <div className="product-images__row">
@@ -44,7 +44,7 @@ export class ProductImages extends Component {
                               this.state.currentIndex === index ?
                                   "product-images__image-wrapper_selected" : ""}`
                           }>
-                <img src={image}
+                <img srcSet={image.srcset.join(", ")} src={image.src}
                      className={`product-images__small-image`} alt="Miniature of the product"/>
               </div>
             })}
