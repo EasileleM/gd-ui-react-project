@@ -65,19 +65,23 @@ export class Navigation extends Component {
 
   closeMenu = () => {
     clearAllBodyScrollLocks(this.bodyElement);
-    this.setState({ menuExpanded: false }, changeBodyScrollState(!this.state.menuExpanded))
+    this.setState({ menuExpanded: false });
   };
 
   openMenu = () => {
+    if (this.state.menuExpanded) { 
+      this.closeMenu();
+      return;
+    }
     disableBodyScroll(this.bodyElement);
-    this.setState({ menuExpanded: true })
+    this.setState({ menuExpanded: true });
   };
 
   handleBlur = () => {
-    this.setState({ searchInputIsFocused: false })
+    this.setState({ searchInputIsFocused: false });
   };
   handleFocus = () => {
-    this.setState({ searchInputIsFocused: true })
+    this.setState({ searchInputIsFocused: true });
   };
 
   render() {
