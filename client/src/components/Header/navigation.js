@@ -27,6 +27,12 @@ export class Navigation extends Component {
   }
 
   componentDidMount() {
+    const queries = this.props.location.search.split('&')
+      .map((item) => item.split('='));
+    const currentSearchQuery = queries.find((item) => item[0] === 'search');
+    if (currentSearchQuery) {
+      this.setState({searchValue: currentSearchQuery[1]});
+    }
   }
 
   handleChange = (e) => {
