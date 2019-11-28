@@ -14,12 +14,13 @@ export class FilterRadio extends Component {
   }
 
   componentDidMount() {
+    const selectedValue = store.getState().filterController.category;
+    this.setState({selectedValue});
   }
 
   handleClick = (e) => {
     this.setState({selectedValue: e.target.value});
     store.dispatch(changeCategoryFilter(e.target.value));
-    this.props.onStateChange();
   };
 
   resetFilters = () => {

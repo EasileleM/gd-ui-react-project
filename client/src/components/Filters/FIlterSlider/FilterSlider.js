@@ -62,6 +62,9 @@ export class FilterSlider extends Component {
   }
 
   componentDidMount() {
+    const minChosenValue = store.getState().filterController.minPrice;
+    const maxChosenValue = store.getState().filterController.maxPrice;
+    this.setState({minChosenValue, maxChosenValue});
   }
 
   render() {
