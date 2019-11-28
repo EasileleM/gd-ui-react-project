@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {SERVER_URL} from '../constants/constants';
 
-export function signIn() {
-  return Promise.resolve({firstName: 'Meesha', lastName: 'Yes'});
-  // return axios.get(`${SERVER_URL}/api/user/isAuth`);
+export function signIn(data) {
+  return axios.post(`${SERVER_URL}/api/signIn`, data);
 }

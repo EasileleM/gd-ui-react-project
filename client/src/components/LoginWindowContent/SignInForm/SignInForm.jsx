@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../../constants/constants';
 
@@ -14,10 +15,9 @@ import { signIn } from '../../../utils/signIn';
 import { userAuthorize } from '../../../redux/action-creators/user-action-creator';
 import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
 
-
 const formErrors = {
-  email: 'Incorrect email.',
-  password: 'Incorrect password. Password should contain minimum eight characters, at least one letter, one number and one special character.'
+  email: null,
+  password: null
 };
 
 export class SignInForm extends React.Component {
@@ -87,7 +87,7 @@ export class SignInForm extends React.Component {
     return (
       <form style={{ display: this.props.display }} onSubmit={this.handleOnSubmit} method="POST" className="login-window-content__form">
         <UserInfoInput
-          placeholder="Email"
+          placeholder={this.props.t('signInForm.email')}
           name="email"
           value={this.state.email}
           handleOnChange={this.handleOnChange}
@@ -97,7 +97,7 @@ export class SignInForm extends React.Component {
           maxLength="140"
         />
         <UserInfoInput
-          placeholder="Password"
+          placeholder={this.props.t('signInForm.password')}
           name="password"
           value={this.state.password}
           handleOnChange={this.handleOnChange}
@@ -106,9 +106,9 @@ export class SignInForm extends React.Component {
           type="password"
           maxLength="140"
         />
-        <InvalidFormNotification content={formErrors[currentError] || ''} />
-        <Link to='/404' onClick={this.props.close} className="login-window-content__form-password-link">Forgot password?</Link>
-        <LoginWindowFormButton additionalClasses="login-window-content__form-button_none-margin-top" content="Sign In" />
+        <InvalidFormNotification content={currentError && this.props.t(`signUpForm.${currentError}Error`)} />
+        <Link to='/404' onClick={this.props.close} className="login-window-content__form-password-link">{this.props.t('signInForm.forgotPassword')}</Link>
+        <LoginWindowFormButton additionalClasses="login-window-content__form-button_none-margin-top" content={this.props.t('signInForm.signIn')} />
       </form>
     )
   }
@@ -121,4 +121,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(null, mapDispatchToProps)(SignInForm);
+export default connect(null, mapDispatchToProps)(withTranslation()(SignInForm));

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 
 import { EMAIL_REGEX, PASSWORD_REGEX, FIRST_NAME_REGEX, LAST_NAME_REGEX } from '../../../constants/constants';
 
@@ -14,11 +15,11 @@ import { userAuthorize } from '../../../redux/action-creators/user-action-creato
 import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
 
 const formErrors = {
-  firstName: 'Incorrect first name. It should contain one or more latin characters',
-  lastName: 'Incorrect last name. It should contain one or more latin characters',
-  email: 'Incorrect email.',
-  password: 'Incorrect password. Password should contain minimum eight characters, at least one letter, one number and one special character.',
-  confirmPassword: 'Passwords don\'t match.'
+  firstName: null,
+  lastName: null,
+  email: null,
+  password: null,
+  confirmPassword: null
 };
 
 export class SignUpForm extends React.Component {
@@ -117,7 +118,7 @@ export class SignUpForm extends React.Component {
     return (
       <form style={{ display: this.props.display }} onSubmit={this.handleOnSubmit} method="POST" className="login-window-content__form">
         <UserInfoInput
-          placeholder="First name"
+          placeholder={this.props.t('signUpForm.firstName')}
           name="firstName"
           value={this.state.firstName}
           handleOnChange={this.handleOnChange}
@@ -127,7 +128,7 @@ export class SignUpForm extends React.Component {
           maxLength="140"
         />
         <UserInfoInput
-          placeholder="Last name"
+          placeholder={this.props.t('signUpForm.lastName')}
           name="lastName"
           value={this.state.lastName}
           handleOnChange={this.handleOnChange}
@@ -137,7 +138,7 @@ export class SignUpForm extends React.Component {
           maxLength="140"
         />
         <UserInfoInput
-          placeholder="Email"
+          placeholder={this.props.t('signUpForm.email')}
           name="email"
           value={this.state.email}
           handleOnChange={this.handleOnChange}
@@ -147,7 +148,7 @@ export class SignUpForm extends React.Component {
           maxLength="140"
         />
         <UserInfoInput
-          placeholder="Password"
+          placeholder={this.props.t('signUpForm.password')}
           name="password"
           value={this.state.password}
           handleOnChange={this.handleOnChange}
@@ -157,7 +158,7 @@ export class SignUpForm extends React.Component {
           maxLength="140"
         />
         <UserInfoInput
-          placeholder="Confirm Password"
+          placeholder={this.props.t('signUpForm.confirmPassword')}
           name="confirmPassword"
           value={this.state.confirmPassword}
           handleOnChange={this.handleOnChange}
@@ -166,8 +167,8 @@ export class SignUpForm extends React.Component {
           type="password"
           maxLength="140"
         />
-        <InvalidFormNotification content={formErrors[currentError]} />
-        <LoginWindowFormButton onSumbit={this.handleOnSubmit} content="Sign Up" />
+        <InvalidFormNotification content={currentError && this.props.t(`signUpForm.${currentError}Error`)} />
+        <LoginWindowFormButton onSumbit={this.handleOnSubmit} content={this.props.t('signUpForm.signUp')} />
       </form>
     )
   }
@@ -181,4 +182,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(null, mapDispatchToProps)(SignUpForm);
+export default connect(null, mapDispatchToProps)(withTranslation()(SignUpForm));

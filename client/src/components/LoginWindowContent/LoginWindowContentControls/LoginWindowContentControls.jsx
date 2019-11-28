@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 
 import './LoginWindowContentControls.scss';
 
@@ -10,13 +11,15 @@ export function LoginWindowContentControls(props) {
         className={'login-window-content__controls-button'
           + (props.currentMode === 'signIn' ?
           ' login-window-content__controls-button_enabled' : '')}
-      > Sign In </button>
+      > {props.t('signInForm.signIn')} </button>
       <button
         onClick={() => props.handleOnClick('signUp')}
         className={'login-window-content__controls-button'
           + (props.currentMode === 'signUp' ?
           ' login-window-content__controls-button_enabled' : '')}
-      > Sign Up </button>
+      > {props.t('signUpForm.signUp')} </button>
     </div>
   );
 }
+
+export default withTranslation()(LoginWindowContentControls);

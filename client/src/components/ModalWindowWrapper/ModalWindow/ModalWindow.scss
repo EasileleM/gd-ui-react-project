@@ -17,6 +17,22 @@
     background: rgba(0, 0, 0, 0.55);
   }
 
+  &__content-top {
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    box-shadow: 0px 2px 17px 0px rgba(202, 156, 156, 0.15);
+    background: $color-white;
+  }
+
+  &__header {
+    @include font-primary-bold-semi-lg;
+    margin: 0;
+    color: $color-orange;
+  }
+
   &__content {
     z-index: 5;
     overflow: hidden;

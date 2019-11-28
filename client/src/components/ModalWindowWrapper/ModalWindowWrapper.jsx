@@ -30,7 +30,7 @@ export class ModalWindowWrapper extends React.Component {
         case 'cart':
           if (!this.props.cartSize) {
             notificationSuccess('Нет товаров в корзине.', 'Cart is empty.', '');
-            this.props.close()
+            this.props.close();
             break;
           }
           this.setState({
@@ -41,7 +41,7 @@ export class ModalWindowWrapper extends React.Component {
         case 'favorites':
           if (!this.props.favoritesSize) {
             notificationSuccess('Нет избранных товаров.', 'Favorites is empty.', '');
-            this.props.close()
+            this.props.close();
             break;
           }
           this.setState({
@@ -73,7 +73,7 @@ export class ModalWindowWrapper extends React.Component {
 
   render() {
     return (
-      <ModalWindow currentContent={this.state.currentContent} additionalClasses={this.state.additionalClasses} />
+      <ModalWindow name={this.props.modalWindowMode} currentContent={this.state.currentContent} additionalClasses={this.state.additionalClasses} />
     )
   }
 }

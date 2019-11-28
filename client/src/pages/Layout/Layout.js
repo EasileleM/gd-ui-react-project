@@ -30,7 +30,7 @@ export class Layout extends Component {
         isAuth()
             .then((res) => {
                 this.props.authorize(res);
-            })
+            });
     }
 
     render() {

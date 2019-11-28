@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 
 import { userLogout } from '../../redux/action-creators/user-action-creator';
 import { closeModalWindow } from '../../redux/action-creators/modalWindow-action-creator';
@@ -26,8 +27,8 @@ export class UserInfoContent extends React.Component {
   render() {
     return (
       <div className="user-info-content">
-        <button onClick={() => this.handleOnLogout()} className="user-info-content__logout-button">Logout</button>
-        <p className="user-info-content__greetings">{`Hi, ${this.props.firstName}!`}</p>
+        <button onClick={() => this.handleOnLogout()} className="user-info-content__logout-button">{this.props.t('logout')}</button>
+        <p className="user-info-content__greetings">{`${this.props.t('welcome')}, ${this.props.firstName}!`}</p>
       </div>
     );
   }
@@ -47,4 +48,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserInfoContent);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(UserInfoContent));

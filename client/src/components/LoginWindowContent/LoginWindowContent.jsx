@@ -1,5 +1,6 @@
 import React from 'react';
-import { LoginWindowContentControls } from './LoginWindowContentControls/LoginWindowContentControls';
+
+import LoginWindowContentControls from './LoginWindowContentControls/LoginWindowContentControls';
 import SignInForm from './SignInForm/SignInForm';
 import SignUpForm from './SignUpForm/SignUpForm';
 
