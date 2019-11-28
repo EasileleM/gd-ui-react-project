@@ -27,7 +27,7 @@ export class Item extends React.Component {
     return (
       <div className="card-window__item cart-window-item">
         <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
-          <img src={this.props.data.generalData.images[0]} className="cart-window-item__image" alt="item" />
+          <img srcSet={this.props.data.generalData.images[0].srcset.join(", ")} className="cart-window-item__image" alt="item" />
         </Link>
         <div className="cart-window-item__info">
           <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>

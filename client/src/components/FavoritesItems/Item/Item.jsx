@@ -13,7 +13,7 @@ export class Item extends React.Component {
     return (
       <div className="modal-window__item  favorites-window-item">
         <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data._id}`} style={{ textDecoration: 'none' }}>
-          <img src={this.props.data.images[0]} className="favorites-window-item__image" alt="item" />
+          <img srcSet={this.props.data.images[0].srcset.join(", ")}className="favorites-window-item__image" alt="item" />
         </Link >
         <div className="favorites-window-item__info">
           <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data._id}`} style={{ textDecoration: 'none' }}>

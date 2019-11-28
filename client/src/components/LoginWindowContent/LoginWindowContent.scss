@@ -1,0 +1,42 @@
+@import '../../style/main.scss';
+
+.login-window-content {
+  @include font-primary-regular-sm;
+  overflow-y: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background: $color-white;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+   
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+   
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #ff5912; 
+  }
+
+  &__form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__form-password-link {
+    transition: 200ms ease;
+    margin-top: auto;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: $color-limed-spruce;
+
+    &:hover {
+      color: $color-slate-gray;
+    }
+  }
+}

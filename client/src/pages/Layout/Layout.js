@@ -9,12 +9,13 @@ import {
 
 import "./Layout.scss";
 
-import { Header } from "../../components/Header/Header";
+import { Header } from "../../components/Header/Header.jsx";
 import { Footer } from "../../components/Footer/Footer";
 import { LoadingSpinner } from '../../components//LoadingSpinner/index';
-import ModalWindow from '../../components/ModalWindow/ModalWindow';
+import ModalWindowWrapper from '../../components/ModalWindowWrapper/ModalWindowWrapper';
 
 import interceptor from '../../utils/interceptorResponse';
+import { isAuth } from '../../utils/isAuth';
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
 
 import Search from "../Search/Search";
@@ -22,15 +23,22 @@ import Home from "../Home/Home";
 import ErrorPage from "../errors/ErrorPage";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
 
+import { userAuthorize } from '../../redux/action-creators/user-action-creator';
+
 export class Layout extends Component {
-    componentDidMount() { }
+    componentDidMount() {
+        isAuth()
+            .then((res) => {
+                this.props.authorize(res);
+            })
+    }
 
     render() {
         return (
             <Router>
                 <ScrollToTop>
                     <Suspense fallback={<div className="spinner-wrapper"><LoadingSpinner /></div>}>
-                        <ModalWindow />
+                        <ModalWindowWrapper />
                         <RedirectWrapper error={this.props.error} />
                         <Header />
                         <Switch>
@@ -61,7 +69,14 @@ function RedirectWrapper({ error }) {
 
 const mapStateToProps = (state) => {
     return {
-        error: state.errorHandler.errorCode
+        error: state.errorHandler.errorCode,
+        authorized: true
     }
 };
-export default connect(mapStateToProps)(Layout);
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        authorize: (data) => dispatch(userAuthorize(data))
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

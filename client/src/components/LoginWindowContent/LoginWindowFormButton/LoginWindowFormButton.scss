@@ -1,0 +1,28 @@
+@import '../../../style/main.scss';
+
+.login-window-content__form-button {
+  @include font-primary-regular-md;
+  margin-top: auto;
+  margin-bottom: 20px;
+  transition: 200ms ease-out;
+  border: 0;
+  width: 310px;
+  height: 45px;
+  cursor: pointer;
+  outline: none;
+  color: $color-white;
+  background: $color-orange;
+
+  &_none-margin-top {
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile){
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  &:hover {
+    opacity: .8;
+  }
+}

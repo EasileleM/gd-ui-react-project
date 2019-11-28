@@ -5,7 +5,7 @@ import store from '../../redux/store';
 import { changeModalWindowContent } from '../../redux/action-creators/modalWindow-action-creator';
 import {ReactComponent as CartIcon} from "../../assets/shopping-basket1.svg";
 
-import './main.scss';
+import './Header.scss';
 
 class ShopCart extends React.Component {
   render() {
