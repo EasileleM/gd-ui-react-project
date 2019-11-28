@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom'
-import { AddToCartButton } from './AddToCartButton/index.js';
+import { AddToCartButton } from '../AddToCartButton/AddToCartButton.jsx';
 import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import SizesSelector from './SizesSelector/index.js';
 import { ColorSelector } from './ColorSelector/index.js';
