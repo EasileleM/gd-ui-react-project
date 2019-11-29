@@ -1,28 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import store from '../../redux/store';
 import { closeModalWindow } from '../../redux/action-creators/modalWindow-action-creator';
 import { default as fetchItemsCart } from '../../redux/thunks/cart/fetchItems';
 import { default as fetchItemsFavorites } from '../../redux/thunks/favorites/fetchItems';
 
-import CloseButton from './CloseButton/CloseButton';
 import CartItems from '../CartItems/CartItems';
 import FavoritesItems from '../FavoritesItems/FavoritesItems';
 import OrderBlock from '../OrderBlock/OrderBlock';
-
+import { LoginWindowContent } from '../LoginWindowContent/LoginWindowContent';
+import UserInfoContent from '../UserInfoContent/UserInfoContent';
+import ModalWindow from './ModalWindow/ModalWindow';
 import notificationSuccess from '../../utils/notificationSuccess';
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
-import './ModalWindow.scss';
-
-export class ModalWindow extends React.Component {
+export class ModalWindowWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   componentDidMount() {
-    store.dispatch(fetchItemsCart());
-    store.dispatch(fetchItemsFavorites());
+    this.props.fetchItemsCart();
+    this.props.fetchItemsFavorites();
   }
 
   componentDidUpdate(prevProps) {
@@ -32,44 +30,50 @@ export class ModalWindow extends React.Component {
         case 'cart':
           if (!this.props.cartSize) {
             notificationSuccess('Нет товаров в корзине.', 'Cart is empty.', '');
-            store.dispatch(closeModalWindow());
+            this.props.close();
             break;
           }
           this.setState({
-            currentContent: <><CartItems /><OrderBlock /></>
+            currentContent: <><CartItems /><OrderBlock /></>,
+            additionalClasses: ''
           });
           break;
         case 'favorites':
           if (!this.props.favoritesSize) {
             notificationSuccess('Нет избранных товаров.', 'Favorites is empty.', '');
-            store.dispatch(closeModalWindow());
+            this.props.close();
             break;
           }
           this.setState({
-            currentContent: <><FavoritesItems /></>
+            currentContent: <><FavoritesItems /></>,
+            additionalClasses: ''
+          });
+          break;
+        case 'loginWindowContent':
+          this.setState({
+            currentContent: <><LoginWindowContent /></>,
+            additionalClasses: 'modal-window__content_narrow'
+          });
+          break;
+        case 'userInfo':
+          this.setState({
+            currentContent: <><UserInfoContent /></>,
+            additionalClasses: ''
           });
           break;
         default:
           clearAllBodyScrollLocks(this.bodyElement);
           this.setState({
-            currentContent: null
+            currentContent: null,
+            additionalClasses: ''
           });
       }
     }
   }
 
   render() {
-    if (!this.state.currentContent) {
-      return null;
-    }
     return (
-      <div className="modal-window">
-        <button className="modal-window__background" onClick={() => store.dispatch(closeModalWindow())}></button>
-        <div className="modal-window__content">
-          <CloseButton onClick={() => store.dispatch(closeModalWindow())} />
-          {this.state.currentContent}
-        </div>
-      </div>
+      <ModalWindow name={this.props.modalWindowMode} currentContent={this.state.currentContent} additionalClasses={this.state.additionalClasses} />
     )
   }
 }
@@ -81,4 +85,13 @@ const mapStateToProps = (state) => {
     modalWindowMode: state.modalWindowController.currentModal
   }
 };
-export default connect(mapStateToProps)(ModalWindow);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    close: () => dispatch(closeModalWindow()),
+    fetchItemsCart: () => dispatch(fetchItemsCart()),
+    fetchItemsFavorites: () => dispatch(fetchItemsFavorites())
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalWindowWrapper);

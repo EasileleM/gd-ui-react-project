@@ -7,7 +7,7 @@ import store from '../../redux/store';
 import { closeModalWindow } from '../../redux/action-creators/modalWindow-action-creator';
 
 export class CartItems extends React.Component {
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     if (!this.props.items.length) {

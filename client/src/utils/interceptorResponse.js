@@ -5,6 +5,9 @@ import store from "../redux/store"
 export const interceptor = axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
+  if (error.message === 'Network Error') {
+    return Promise.reject(error);
+  }
   let errorCode = Number(error.message.match(/\d+/)[0]);
   if (errorCode === 400) {
     store.dispatch(error400());
