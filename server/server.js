@@ -29,12 +29,12 @@ mongoose.connect(dbUri, {
   console.log(`Error while connecting DB: ${err}!`)
 });
 
-initialize(passport, );
+initialize(passport,);
 
 nextApp.prepare().then(() => {
   const app = express();
   app.use(bodyParser.json());
-  app.use(flash())
+  app.use(flash());
   app.use(session({
     secret: "Meesha Track Jacket",
     resave: false,
@@ -45,9 +45,9 @@ nextApp.prepare().then(() => {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cors());
 
-  app.post('/api/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
+  app.post('/api/signIn', checkNotAuthenticated, passport.authenticate('local', {
+    successRedirect: '/api/items',
+    failureRedirect: '/api/items/all',
     failureFlash: true
   }));
 
@@ -72,21 +72,25 @@ nextApp.prepare().then(() => {
       })
     } catch (e) {
       res.statusCode = 500;
-      console.log("error : " + e)
+      console.log("error : " + e);
       res.json(JSON.stringify(e));
     }
   });
 
-  app.delete('/api/logout', checkAuthenticated ,(req, res) => {
+  app.delete('/api/logout', checkAuthenticated, (req, res) => {
     req.logOut();
     res.redirect('/login')
   });
 
   app.get('/api/isAuth', (req, res) => {
-    res.json(req.isAuthenticated());
+    if (req.isAuthenticated()) {
+      res.json(req.user);
+    } else {
+      res.json(req.isAuthenticated());
+    }
   });
 
-  app.all('*',(req, res) => {
+  app.all('*', (req, res) => {
     return handle(req, res)
   });
 

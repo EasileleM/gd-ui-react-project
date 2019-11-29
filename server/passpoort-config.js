@@ -10,7 +10,7 @@ async function initialize(passport) {
       return done(null, false, {message: 'No user with that email'})
     }
     try {
-      console.log(user.password)
+      console.log(user.password);
       if (password === user.password) {
         return done(null, user)
       } else {
