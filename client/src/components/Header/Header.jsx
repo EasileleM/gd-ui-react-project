@@ -1,8 +1,8 @@
 import React from 'react';
-import Contacts from './contacts';
-import Navigation from './navigation';
+import Contacts from './contacts.jsx';
+import Navigation from './navigation.jsx';
 
-import './main.scss';
+import './Header.scss';
 
 export class Header extends React.Component {
   render() {

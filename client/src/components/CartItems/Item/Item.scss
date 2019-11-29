@@ -1,6 +1,5 @@
 @import "../../../style/main.scss";
 
-
 .card-window__item {
   width: 100%;
 }
@@ -22,6 +21,8 @@
     max-width: 90px;
     max-height: 100px;
     @media screen and (max-width: 700px) {
+      max-width: 400px;
+      max-height: 200px;
       margin-right: 0;
     }
   }
@@ -43,7 +44,7 @@
     }
   }
 
-  &__price{
+  &__price {
     color: #ff5912;
     &-wrapper {
       @include font-primary-semi-bold-sm;
@@ -69,6 +70,11 @@
 
   &__info {
     margin-right: 20px;
+
+    @media screen and (max-width: 700px) {
+      margin-right: 0;
+      align-self: flex-start;
+    }
   }
 
   &__info-color-size {
@@ -127,11 +133,11 @@
         color: #34404b;
 
         &:hover {
-          opacity: .7;
+          opacity: 0.7;
         }
 
         &:focus {
-          opacity: .7;
+          opacity: 0.7;
         }
       }
     }

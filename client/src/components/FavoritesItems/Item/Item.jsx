@@ -2,6 +2,7 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import store from '../../../redux/store';
 import removeItem from '../../../redux/thunks/favorites/removeItem';
+import { AddToCartButton } from '../../AddToCartButton/AddToCartButton.jsx';
 import { Link } from 'react-router-dom';
 import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
 
@@ -13,7 +14,7 @@ export class Item extends React.Component {
     return (
       <div className="modal-window__item  favorites-window-item">
         <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data._id}`} style={{ textDecoration: 'none' }}>
-          <img src={this.props.data.images[0]} className="favorites-window-item__image" alt="item" />
+          <img srcSet={this.props.data.images[0].srcset.join(", ")} className="favorites-window-item__image" alt="item" />
         </Link >
         <div className="favorites-window-item__info">
           <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data._id}`} style={{ textDecoration: 'none' }}>
@@ -31,6 +32,7 @@ export class Item extends React.Component {
               {this.props.t('orderItem.price')}:
               <span className="favorites-window-item__price"> {this.props.data.price}{this.props.t('currency')}</span>
             </p>
+            <AddToCartButton mode={'small'} product={this.props.data} color={this.props.data.colors[0]} size={this.props.data.sizes[0]}/>
           </div>
         </div>
         <div className="favorites-window-item__item-controls">

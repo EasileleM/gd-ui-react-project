@@ -2,7 +2,7 @@ import React from 'react';
 
 import {ChangeLanguageButton} from './ChangeLanguageButton';
 
-import './main.scss';
+import './Header.scss';
 
 class Contacts extends React.Component {
   render() {

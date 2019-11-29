@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 
-import ShopCart from './cart';
+import ShopCart from './cart.jsx';
 
-import './main.scss';
+import './Header.scss';
 import { Link } from "react-router-dom";
 import AddToFavoriteButton from '../AddToFavoritesButton/AddToFavoritesButton';
+import UserButton from './UserButton/UserButton';
 import { Logo } from '../Logo/Logo';
 import { withRouter } from "react-router-dom";
 import { search } from "../../redux/action-creators/filter-action-creator";
 import store from "../../redux/store";
 import { ReactComponent as DeleteIcon } from "../../assets/delete.svg";
-import { ReactComponent as UserIcon } from "../../assets/user.svg";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
@@ -22,7 +22,7 @@ export class Navigation extends Component {
       searchValue: "",
       searchInput: React.createRef(),
       searchInputIsFocused: false,
-      menuExpanded: false,
+      menuExpanded: false
     }
   }
 
@@ -31,7 +31,7 @@ export class Navigation extends Component {
       .map((item) => item.split('='));
     const currentSearchQuery = queries.find((item) => item[0] === 'searchTarget');
     if (currentSearchQuery) {
-      this.setState({searchValue: currentSearchQuery[1]});
+      this.setState({ searchValue: currentSearchQuery[1] });
     }
   }
 
@@ -66,7 +66,7 @@ export class Navigation extends Component {
   };
 
   openMenu = () => {
-    if (this.state.menuExpanded) { 
+    if (this.state.menuExpanded) {
       this.closeMenu();
       return;
     }
@@ -90,7 +90,7 @@ export class Navigation extends Component {
           <Logo />
         </div>
         <input onClick={this.openMenu} type="checkbox" id="headerMenuData"
-               className="header__menu-data-input" checked={this.state.menuExpanded} />
+          className="header__menu-data-input" checked={this.state.menuExpanded} />
         <nav className="header__links-container">
           <label className="header__menu-button" htmlFor="headerMenuData" data-opened="⨯"
             data-closed="≡"></label>
@@ -144,7 +144,7 @@ export class Navigation extends Component {
             <SearchIcon tabIndex="7" onClick={this.handleSearch}
               className="header__icon header__icon_search header__icon_big " to="/search" />
           </form>
-          <UserIcon className="header__icon header__icon_big header__icon_user" tabIndex="8" />
+          <UserButton />
           <div className="header__icon_big header__icon_fav">
             <AddToFavoriteButton small={true} openFavorites={true} />
           </div>

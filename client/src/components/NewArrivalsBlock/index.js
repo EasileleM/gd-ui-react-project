@@ -5,7 +5,7 @@ import ProductCatalog from '../ProductCatalog/ProductCatalog.js';
 
 import './main.scss';
 
-export function NewArrivalsBlock(props) {
+export function NewArrivalsBlock() {
   const [ t ] = useTranslation();
   return (
     <section className='new-arrivals-block'>
