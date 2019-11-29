@@ -25,7 +25,7 @@ export const changeMaxPriceFilter = (maxPrice) => {
 export const changeMinPriceFilter = (minPrice) => {
   return {
     ...cartActions.changeMinPriceFilter,
-    payload: minPrice
+    payload: minPrice,
   }
 };
 
@@ -48,3 +48,10 @@ export const clear = () => {
     ...cartActions.clear,
   }
 };
+
+export const setInitState = (URI) => {
+  return {
+    ...cartActions.setInitState,
+    payload: URI,
+  }
+}

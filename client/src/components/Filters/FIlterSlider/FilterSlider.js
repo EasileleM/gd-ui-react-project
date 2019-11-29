@@ -20,7 +20,6 @@ export class FilterSlider extends Component {
   handleChange = (chosenValues) => {
     const [minChosenValue, maxChosenValue] = chosenValues;
     this.setState({minChosenValue, maxChosenValue});
-    this.props.onStateChange();
   };
 
   handleInputChange = (e) => {
@@ -52,14 +51,27 @@ export class FilterSlider extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if(prevState.maxChosenValue !== this.state.maxChosenValue) {
-      store.dispatch(changeMaxPriceFilter( this.state.maxChosenValue));
+      if (this.state.maxChosenValue === this.state.maxValue) {
+        store.dispatch(changeMaxPriceFilter(null));
+      } else {
+        store.dispatch(changeMaxPriceFilter(this.state.maxChosenValue));
+      }
     }
     if (prevState.minChosenValue !== this.state.minChosenValue) {
-      store.dispatch(changeMinPriceFilter(this.state.minChosenValue));
+      if (this.state.minChosenValue === this.state.minValue) {
+        store.dispatch(changeMinPriceFilter(null));
+      } else {
+        store.dispatch(changeMinPriceFilter(this.state.minChosenValue));
+      }
     }
   }
 
   componentDidMount() {
+    const minChosenValue = store.getState().filterController.minPrice;
+    const maxChosenValue = store.getState().filterController.maxPrice;
+    if (minChosenValue && maxChosenValue) {
+      this.setState({minChosenValue, maxChosenValue});
+    }
   }
 
   render() {
