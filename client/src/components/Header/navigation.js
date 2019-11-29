@@ -29,7 +29,7 @@ export class Navigation extends Component {
   componentDidMount() {
     const queries = this.props.location.search.split('&')
       .map((item) => item.split('='));
-    const currentSearchQuery = queries.find((item) => item[0] === 'search');
+    const currentSearchQuery = queries.find((item) => item[0] === 'searchTarget');
     if (currentSearchQuery) {
       this.setState({searchValue: currentSearchQuery[1]});
     }
@@ -57,14 +57,6 @@ export class Navigation extends Component {
 
   clearSearch = (e) => {
     this.setState({ searchValue: "" });
-    const storeState = store.getState().filterController || "";
-    this.props.history.push(`/search?filter=true` +
-      `${storeState.sizes.length ? ("&sizes=" + storeState.sizes.join(',')) : ""}` +
-      `${storeState.brands.length ? ("&brands=" + storeState.brands.join(',')) : ""}` +
-      `${storeState.category ? ("&categories=" + storeState.category) : ""}` +
-      `${storeState.maxPrice ? ("&maxprice=" + storeState.maxPrice) : ""}` +
-      `${storeState.minPrice ? ("&minprice=" + storeState.minPrice) : ""}` +
-      `${this.state.searchValue.length > 0 ? ("&search=" + this.state.searchValue) : ""}`);
     store.dispatch(search(null));
   };
 

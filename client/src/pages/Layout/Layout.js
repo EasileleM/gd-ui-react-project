@@ -27,20 +27,12 @@ import { setInitState } from '../../redux/action-creators/filter-action-creator'
 
 export class Layout extends Component {
     componentDidMount() {
-        // console.log(this.history);
         store.dispatch(setInitState(this.props.location.search));
-        // console.log('mount');
-        // console.log(store.getState());
-        // console.log(this.props);
     }
 
     componentDidUpdate(prevProps) {
-        // console.log('update');
-        // console.log(this.props);
         if (this.props.URI !== prevProps.URI && this.props.location.pathname === '/search') {
-            // console.log('change');
-            // this.props.history.push(this.props.URI);
-            // console.log(this.props);
+            this.props.history.push(this.props.URI);
         }
     }
 

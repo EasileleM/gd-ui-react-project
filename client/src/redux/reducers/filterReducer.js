@@ -13,44 +13,63 @@ export const initialState = {
 export const filterReducer = (state = initialState, action) => {
 
   // console.log('switch!');
+  let filters = {};
   switch (action.type) {
     case FILTER_ACTIONS.BRANDS:
-      return {
+      filters = {
         ...state,
         brands: action.payload,
-        // URI: updateURI(state),
+      };
+      return {
+        ...filters,
+        URI: updateURI(filters),
       };
     case FILTER_ACTIONS.CATEGORY:
-      // console.log('category');
-      // console.log(state);
-      return {
+      filters = {
         ...state,
         category: action.payload,
-        // URI: updateURI(state, action.payload),
+      }
+      console.log('cata');
+      console.log(filters);
+      return {
+        ...filters,
+        URI: updateURI(filters),
       };
     case FILTER_ACTIONS.SIZES:
-      return {
+      filters = {
         ...state,
         sizes: action.payload,
-        // URI: updateURI(state),
+      }
+      return {
+        ...filters,
+        URI: updateURI(filters),
       };
     case FILTER_ACTIONS.MAXPRICE:
-      return {
+      filters = {
         ...state,
         maxPrice: action.payload,
-        // URI: updateURI(state),
+      }
+      return {
+        ...filters,
+        URI: updateURI(filters),
       };
     case FILTER_ACTIONS.MINPRICE:
-      return {
+      filters = {
         ...state,
         minPrice: action.payload,
-        // URI: updateURI(state),
+      }
+      return {
+        ...filters,
+        URI: updateURI(filters),
       };
     case FILTER_ACTIONS.SEARCH:
-      return {
+      filters = {
         ...state,
         searchTarget: action.payload,
-        // URI: updateURI(state),
+      }
+      return {
+        ...filters,
+        URI: updateURI(filters),
       };
     case FILTER_ACTIONS.CLEAR:
       return {
@@ -62,12 +81,14 @@ export const filterReducer = (state = initialState, action) => {
           ...state,
         };
       }
-      // console.log('set');
       const newState = parseURI(action.payload);
-      return {
+      filters = {
         ...state,
         ...newState,
-        URI: updateURI(newState),
+      }
+      return {
+        ...filters,
+        URI: updateURI(filters),
       };
     default:
       return state;
@@ -83,17 +104,19 @@ const parseURI = (URI) => {
     }
     return filter;
   });
-  // console.log(filtersArr);
-  // console.log(filterValues);
-  // console.log(Object.fromEntries(filterValues));
   return Object.fromEntries(filterValues)
 }
 
-const updateURI = (state) =>
-  (`/search?filter=true` +
-    `${state.sizes ? ("&sizes=" + state.sizes.join(',')) : ""}` +
-    `${state.brands ? ("&brands=" + state.brands.join(',')) : ""}` +
+const updateURI = (state) => {
+  const URI = `/search?filter=true` +
+    `${state.sizes.length ? ("&sizes=" + state.sizes.join(',')) : ""}` +
+    `${state.brands.length ? ("&brands=" + state.brands.join(',')) : ""}` +
     `${state.category ? ("&category=" + state.category) : ""}` +
     `${state.maxPrice ? ("&maxPrice=" + state.maxPrice) : ""}` +
     `${state.minPrice ? ("&minPrice=" + state.minPrice) : ""}` +
-    `${state.searchTarget ? ("&searchTarget=" + state.searchTarget) : ""}`);
+    `${state.searchTarget ? ("&searchTarget=" + state.searchTarget) : ""}`;
+  if (URI === `/search?filter=true`) {
+    return `/search`;
+  }
+  return URI;
+}
