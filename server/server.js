@@ -29,7 +29,7 @@ mongoose.connect(dbUri, {
   console.log(`Error while connecting DB: ${err}!`)
 });
 
-initialize(passport,);
+initialize(passport);
 
 nextApp.prepare().then(() => {
   const app = express();
@@ -77,18 +77,16 @@ nextApp.prepare().then(() => {
     }
   });
 
-  app.delete('/api/logout', checkAuthenticated, (req, res) => {
-    req.logOut();
-    res.redirect('/login')
+  app.post('/api/logout', checkAuthenticated, (req, res) => {
+    req.logout();
+    res.status(200).send();
   });
 
-  app.get('/api/isAuth', (req, res) => {
-    if (req.isAuthenticated()) {
-      res.json(req.user);
-    } else {
-      res.json(req.isAuthenticated());
-    }
+  app.get('/api/isAuth',checkAuthenticated, (req, res) => {
+    res.json(req.user);
   });
+
+  app.options('*', cors());
 
   app.all('*', (req, res) => {
     return handle(req, res)
@@ -107,10 +105,9 @@ function checkNotAuthenticated(req, res, next) {
   next()
 }
 
-
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next()
   }
-  res.redirect('/login')
+  res.status(401).send();
 }

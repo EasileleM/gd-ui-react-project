@@ -5,13 +5,14 @@ const User  = require('./db/Models/user.model');
 async function initialize(passport) {
   const authenticateUser = async (email, password, done) => {
     let user = await User.findOne({email});
-    console.log(user)
+    console.log(user);
     if (!user) {
       return done(null, false, {message: 'No user with that email'})
     }
     try {
       console.log(user.password);
       if (password === user.password) {
+        console.log("authorized");
         return done(null, user)
       } else {
         return done(null, false, {message: 'Password incorrect'})
