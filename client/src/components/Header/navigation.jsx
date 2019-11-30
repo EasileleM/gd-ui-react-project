@@ -89,7 +89,7 @@ export class Navigation extends Component {
         <div className="header__logo">
           <Logo />
         </div>
-        <input onClick={this.openMenu} type="checkbox" id="headerMenuData"
+        <input onChange={this.openMenu} type="checkbox" id="headerMenuData"
           className="header__menu-data-input" checked={this.state.menuExpanded} />
         <nav className="header__links-container">
           <label className="header__menu-button" htmlFor="headerMenuData" data-opened="⨯"

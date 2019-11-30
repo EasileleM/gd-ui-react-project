@@ -23,7 +23,7 @@ export class Search extends Component {
     const toggle = this.state.filtersToggle;
     this.setState({
       filtersToggle: !toggle,
-    })
+    });
     if (!toggle) {
       disableBodyScroll( this.bodyElement);
     }
