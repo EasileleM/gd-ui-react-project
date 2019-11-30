@@ -12,7 +12,6 @@ export const initialState = {
 
 export const filterReducer = (state = initialState, action) => {
 
-  // console.log('switch!');
   let filters = {};
   switch (action.type) {
     case FILTER_ACTIONS.BRANDS:
@@ -28,9 +27,7 @@ export const filterReducer = (state = initialState, action) => {
       filters = {
         ...state,
         category: action.payload,
-      }
-      console.log('cata');
-      console.log(filters);
+      };
       return {
         ...filters,
         URI: updateURI(filters),
@@ -39,7 +36,7 @@ export const filterReducer = (state = initialState, action) => {
       filters = {
         ...state,
         sizes: action.payload,
-      }
+      };
       return {
         ...filters,
         URI: updateURI(filters),
@@ -48,7 +45,7 @@ export const filterReducer = (state = initialState, action) => {
       filters = {
         ...state,
         maxPrice: action.payload,
-      }
+      };
       return {
         ...filters,
         URI: updateURI(filters),
@@ -57,7 +54,7 @@ export const filterReducer = (state = initialState, action) => {
       filters = {
         ...state,
         minPrice: action.payload,
-      }
+      };
       return {
         ...filters,
         URI: updateURI(filters),
@@ -66,7 +63,7 @@ export const filterReducer = (state = initialState, action) => {
       filters = {
         ...state,
         searchTarget: action.payload,
-      }
+      };
       return {
         ...filters,
         URI: updateURI(filters),
@@ -85,7 +82,7 @@ export const filterReducer = (state = initialState, action) => {
       filters = {
         ...state,
         ...newState,
-      }
+      };
       return {
         ...filters,
         URI: updateURI(filters),
@@ -105,7 +102,7 @@ const parseURI = (URI) => {
     return filter;
   });
   return Object.fromEntries(filterValues)
-}
+};
 
 const updateURI = (state) => {
   const URI = `/search?filter=true` +
@@ -119,4 +116,4 @@ const updateURI = (state) => {
     return `/search`;
   }
   return URI;
-}
+};

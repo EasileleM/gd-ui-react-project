@@ -34,13 +34,13 @@ export class Layout extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.URI !== prevProps.URI && this.props.location.pathname === '/search') {
+        if (this.props.URI !== prevProps.URI && this.props.URI ) {
             this.props.history.push(this.props.URI);
         }
-        isAuth()
-            .then((res) => {
-                this.props.authorize(res);
-            });
+        // isAuth()
+        //     .then((res) => {
+        //         this.props.authorize(res);
+        //     });
     }
 
     render() {
