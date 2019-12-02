@@ -1,7 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'react-redux';
 import {
-    BrowserRouter as Router,
     Route,
     Switch,
     Redirect,
@@ -37,10 +36,10 @@ export class Layout extends Component {
         if (this.props.URI !== prevProps.URI && this.props.URI ) {
             this.props.history.push(this.props.URI);
         }
-        // isAuth()
-        //     .then((res) => {
-        //         this.props.authorize(res);
-        //     });
+        isAuth()
+            .then((res) => {
+                this.props.authorize(res.data);
+            });
     }
 
     render() {

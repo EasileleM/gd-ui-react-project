@@ -1,4 +1,5 @@
-import { db } from "../db/db";
+import {Items} from '../db/Models/item.model';
+import mongoose from 'mongoose';
 
 const langs = Object.freeze({
     ENG: "en",
@@ -9,7 +10,6 @@ const filterFields = ['categories', 'maxprice', 'minprice', 'sizes', 'brands', '
 
 class ItemsService {
     constructor(lang = langs.ENG) {
-        this.dbInstance = new db();
         if (!Object.values(langs).includes(lang)) {
             lang = langs.ENG;
         }
@@ -22,6 +22,7 @@ class ItemsService {
             items.name = items.name[lang];
             return items;
         }
+
         return items.map(item => {
             item.description = item.description[lang];
             item.name = item.name[lang];
@@ -30,20 +31,40 @@ class ItemsService {
     }
 
     getAllItems() {
-        return this.dbInstance.getAll("items").then(items => this.languageSpecific(items, this.lang));
+        return Items
+            .find()
+            .lean()
+            .exec()
+            .then(items => {
+            return this.languageSpecific(items, this.lang);
+        });
     }
 
     getById(id) {
-        return this.dbInstance.getById("items", id).then(items => this.languageSpecific(items, this.lang));
+        return Items
+            .findById(id)
+            .lean()
+            .exec()
+            .then(items => this.languageSpecific(items, this.lang));
     }
 
-    getByIdArray(id) {
-        return this.dbInstance.getByIdArray("items", id).then(items => this.languageSpecific(items, this.lang));
+    getByIdArray(ids) {
+        const objectIds = ids.map((current) => {
+           return mongoose.Types.ObjectId(current);
+        });
+        return Items
+            .find({'_id': { $in: objectIds}})
+            .lean()
+            .exec()
+            .then(items => this.languageSpecific(items, this.lang));
     }
 
     getRecentItems(size = 4, page = 1) {
-        return this.dbInstance
-            .getAll("items").then(items => this.languageSpecific(items, this.lang))
+        return Items
+            .find()
+            .lean()
+            .exec()
+            .then(items => this.languageSpecific(items, this.lang))
             .then(items => {
                 items.sort((a, b) => new Date(a.creationDate) - new Date(b.creationDate));
                 return this.pagination(items, size, page);
@@ -51,8 +72,10 @@ class ItemsService {
     }
 
     getSalesItems(size = 4, page = 1) {
-        return this.dbInstance
-            .getAll("items").then(items => this.languageSpecific(items, this.lang))
+        return Items
+            .find()
+            .lean()
+            .exec().then(items => this.languageSpecific(items, this.lang))
             .then(items => {
                 items.sort((a, b) => Number(b.sale) - Number(a.sale));
                 return this.pagination(items, size, page);
@@ -68,7 +91,11 @@ class ItemsService {
                     return Promise.reject(new Error("NOT FOUND"));
                 }
                 target = item;
-                return this.dbInstance.getAll("items").then(items => this.languageSpecific(items, this.lang))
+                return Items
+                    .find()
+                    .lean()
+                    .exec()
+                    .then(items => this.languageSpecific(items, this.lang))
             })
             .then(items => {
                 const alreadySorted = new Set();
@@ -114,7 +141,10 @@ class ItemsService {
 
     search(query) {
         if (query.search) {
-            return this.dbInstance.search("items", query.search)
+            return Items
+                .find({$text: {$search: query.search}})
+                .lean()
+                .exec()
                 .then(items => this.languageSpecific(items, this.lang));
         }
         else return this.getAllItems();

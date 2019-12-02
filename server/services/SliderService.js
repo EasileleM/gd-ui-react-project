@@ -1,9 +1,9 @@
-import {db} from "../db/db";
 import ItemsService from "./ItemsService";
+import {Slider} from "../db/Models/slider.model"
+import {Items} from "../db/Models/item.model";
 
 class SlideService {
     constructor(lang) {
-        this.dbInstance = new db();
         this.itemService = new ItemsService(lang)
     }
 
@@ -11,7 +11,11 @@ class SlideService {
         if (!amount) {
             amount = 0;
         }
-        return this.dbInstance.getAmount(amount, "slider")
+        return Slider
+            .find()
+            .limit(Number(amount))
+            .lean()
+            .exec()
             .then(res => {
                 const promises = res.map(async slider => {
                     return await this.itemService.getById(slider.itemId)
@@ -28,10 +32,14 @@ class SlideService {
 
     async getById(id) {
         let slider;
-        await this.dbInstance.getById("slider", id)
+        await Slider.findById(id)
+            .lean()
+            .exec()
             .then(res => {
                 slider = res;
-                return this.dbInstance.getById("items", slider.itemId);
+                return Items.findById(slider.itemId)
+                    .lean()
+                    .exec();
             }).then(res => {
                 slider.item = res;
                 slider.itemId = undefined;
