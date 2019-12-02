@@ -48,7 +48,7 @@ nextApp.prepare().then(() => {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cors({
     credentials: true,
-    origin: 'https://gd-ui-react-project-client.herokuapp.com'
+    origin: process.env.ORIGIN || 'http://localhost:3001',
   }));
   app.options('*', cors());
 
@@ -102,14 +102,23 @@ nextApp.prepare().then(() => {
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
+    console.log(`isAuthenticated`);
+    console.log(`\nreq: ${req},\nres: ${res}`);
     return res.redirect('/api/isAuth')
   }
+  console.log(`isNOTAuthenticated`);
+  console.log(`\nreq: ${req},\nres: ${res}`);
   next()
 }
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
+    console.log(`isAuthenticated`);
+    console.log(`\nreq: ${req},\nres: ${res}`);
+
     return next()
   }
+  console.log(`isNOTAuthenticated`);
+  console.log(`\nreq: ${req},\nres: ${res}`);
   res.status(401).send();
 }
