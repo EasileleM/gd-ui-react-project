@@ -29,6 +29,8 @@ export class Layout extends Component {
     componentDidMount() {
         isAuth()
             .then((res) => {
+                console.log("------------------------------------------------------------")
+                console.log(res)
                 this.props.authorize(res);
             });
     }

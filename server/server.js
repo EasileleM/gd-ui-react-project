@@ -43,7 +43,9 @@ nextApp.prepare().then(() => {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(bodyParser.urlencoded({extended: true}));
-  app.use(cors());
+  app.use(cors({
+    credential: true,
+  }));
 
   app.post('/api/signIn', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/api/items',
@@ -61,13 +63,11 @@ nextApp.prepare().then(() => {
       });
       newUser.save().then((result) => {
         res.statusCode = 201;
-        console.log("nice : " + res.statusCode);
 
         res.json(JSON.stringify(result))
       }).catch(err => {
         res.statusCode = 500;
         res.json(JSON.stringify(err));
-        console.log("error : " + err)
 
       })
     } catch (e) {
