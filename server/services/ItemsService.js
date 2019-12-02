@@ -76,7 +76,6 @@ class ItemsService {
             .find()
             .lean()
             .exec().then(items => this.languageSpecific(items, this.lang))
-            .exec().then(items => this.languageSpecific(items, this.lang))
             .then(items => {
                 items.sort((a, b) => Number(b.sale) - Number(a.sale));
                 return this.pagination(items, size, page);
