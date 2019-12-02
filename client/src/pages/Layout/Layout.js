@@ -31,9 +31,10 @@ export class Layout extends Component {
             .then((res) => {
                 console.log("------------------------------------------------------------")
                 console.log(res)
-                this.props.authorize(res);
+                this.props.authorize(res.data);
             });
     }
+
 
     render() {
         return (

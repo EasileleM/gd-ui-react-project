@@ -56,7 +56,7 @@ export class SignUpForm extends React.Component {
         firstName: this.state.firstName, lastName: this.state.lastName
       })
         .then((res) => {
-          this.props.authorize(res);
+          this.props.authorize(res.data);
           this.props.close();
           notificationSuccess('Добро пожаловать!', 'Welcome!', '');
         })

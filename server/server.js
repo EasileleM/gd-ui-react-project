@@ -38,19 +38,23 @@ nextApp.prepare().then(() => {
   app.use(session({
     secret: "Meesha Track Jacket",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 10 * 60 * 1000,
+    },
   }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cors({
     credentials: true,
+    origin: 'http://localhost:3001'
   }));
   app.options('*', cors());
 
   app.post('/api/signIn', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/api/items',
-    failureRedirect: '/api/items/all',
+    successRedirect: '/api/isAuth',
+    failureRedirect: '/api/isAuth',
     failureFlash: true
   }));
 

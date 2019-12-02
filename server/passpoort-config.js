@@ -25,11 +25,9 @@ function initialize(passport) {
   passport.use(new LocalStrategy({usernameField: 'email'}, authenticateUser));
   passport.serializeUser((user, done) => {
     console.log("serializeUser:")
-    console.log(user)
-    return done(null, user._id)
+    return done(null, user)
   });
   passport.deserializeUser( (id, done) => {
-    console.log(id);
     return done(null, id)//todo переделоть
   })
 }
