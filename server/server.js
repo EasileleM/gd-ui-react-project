@@ -46,6 +46,7 @@ nextApp.prepare().then(() => {
   app.use(cors({
     credential: true,
   }));
+  app.options('*', cors());
 
   app.post('/api/signIn', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/api/items',
@@ -85,8 +86,6 @@ nextApp.prepare().then(() => {
   app.get('/api/isAuth',checkAuthenticated, (req, res) => {
     res.json(req.user);
   });
-
-  app.options('*', cors());
 
   app.all('*', (req, res) => {
     return handle(req, res)
