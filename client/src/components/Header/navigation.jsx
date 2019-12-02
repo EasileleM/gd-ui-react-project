@@ -29,7 +29,7 @@ export class Navigation extends Component {
   componentDidMount() {
     const queries = this.props.location.search.split('&')
       .map((item) => item.split('='));
-    const currentSearchQuery = queries.find((item) => item[0] === 'search');
+    const currentSearchQuery = queries.find((item) => item[0] === 'searchTarget');
     if (currentSearchQuery) {
       this.setState({ searchValue: currentSearchQuery[1] });
     }
@@ -49,23 +49,14 @@ export class Navigation extends Component {
         this.state.searchInput.current.focus();
       }
     } else {
-      const storeState = store.getState().filterController || "";
-      this.props.history.push(`/search?filter=true` +
-        `${storeState.sizes.length ? ("&sizes=" + storeState.sizes.join(',')) : ""}` +
-        `${storeState.brands.length ? ("&brands=" + storeState.brands.join(',')) : ""}` +
-        `${storeState.category ? ("&categories=" + storeState.category) : ""}` +
-        `${storeState.maxPrice ? ("&maxprice=" + storeState.maxPrice) : ""}` +
-        `${storeState.minPrice ? ("&minprice=" + storeState.minPrice) : ""}` +
-        `${this.state.searchValue.length > 0 ? ("&search=" + this.state.searchValue) : ""}`);
       store.dispatch(search(this.state.searchValue));
       this.closeMenu();
     }
-    e.preventDefault()
+    e.preventDefault();
   };
 
   clearSearch = (e) => {
     this.setState({ searchValue: "" });
-    this.props.history.push(`/search`);
     store.dispatch(search(null));
   };
 
@@ -86,6 +77,7 @@ export class Navigation extends Component {
   handleBlur = () => {
     this.setState({ searchInputIsFocused: false });
   };
+
   handleFocus = () => {
     this.setState({ searchInputIsFocused: true });
   };
@@ -97,7 +89,7 @@ export class Navigation extends Component {
         <div className="header__logo">
           <Logo />
         </div>
-        <input onClick={this.openMenu} type="checkbox" id="headerMenuData"
+        <input onChange={this.openMenu} type="checkbox" id="headerMenuData"
           className="header__menu-data-input" checked={this.state.menuExpanded} />
         <nav className="header__links-container">
           <label className="header__menu-button" htmlFor="headerMenuData" data-opened="⨯"

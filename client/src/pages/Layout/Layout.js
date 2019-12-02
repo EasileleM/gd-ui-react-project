@@ -1,10 +1,10 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'react-redux';
 import {
-    BrowserRouter as Router,
     Route,
     Switch,
-    Redirect
+    Redirect,
+    withRouter
 } from "react-router-dom";
 
 import "./Layout.scss";
@@ -22,41 +22,45 @@ import Search from "../Search/Search";
 import Home from "../Home/Home";
 import ErrorPage from "../errors/ErrorPage";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
+import store from '../../redux/store';
+import { setInitState } from '../../redux/action-creators/filter-action-creator';
 
 import { userAuthorize } from '../../redux/action-creators/user-action-creator';
 
 export class Layout extends Component {
     componentDidMount() {
+        store.dispatch(setInitState(this.props.location.search));
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.URI !== prevProps.URI && this.props.URI ) {
+            this.props.history.push(this.props.URI);
+        }
         isAuth()
             .then((res) => {
-                console.log("------------------------------------------------------------")
-                console.log(res)
                 this.props.authorize(res.data);
             });
     }
 
-
     render() {
         return (
-            <Router>
-                <ScrollToTop>
-                    <Suspense fallback={<div className="spinner-wrapper"><LoadingSpinner /></div>}>
-                        <ModalWindowWrapper />
-                        <RedirectWrapper error={this.props.error} />
-                        <Header />
-                        <Switch>
-                            <Route path="/" exact component={Home} />
-                            <Route path="/item/:id" component={ProductDescriptionPage} />
-                            <Route path="/search" component={Search} />
-                            <Route path="/400" component={() => <ErrorPage error={400} />} />
-                            <Route path="/404" component={() => <ErrorPage error={404} />} />
-                            <Route path="/500" component={() => <ErrorPage error={500} />} />
-                            <Redirect to="/" />
-                        </Switch>
-                        <Footer />
-                    </Suspense >
-                </ScrollToTop>
-            </Router>
+            <ScrollToTop>
+                <Suspense fallback={<div className="spinner-wrapper"><LoadingSpinner /></div>}>
+                    <ModalWindowWrapper />
+                    <RedirectWrapper error={this.props.error} />
+                    <Header />
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <Route path="/item/:id" component={ProductDescriptionPage} />
+                        <Route path="/search" component={Search} />
+                        <Route path="/400" component={() => <ErrorPage error={400} />} />
+                        <Route path="/404" component={() => <ErrorPage error={404} />} />
+                        <Route path="/500" component={() => <ErrorPage error={500} />} />
+                        <Redirect to="/" />
+                    </Switch>
+                    <Footer />
+                </Suspense >
+            </ScrollToTop>
         );
     }
 }
@@ -73,7 +77,8 @@ function RedirectWrapper({ error }) {
 const mapStateToProps = (state) => {
     return {
         error: state.errorHandler.errorCode,
-        authorized: true
+        URI: state.filterController.URI,
+        authorized: true,
     }
 };
 
@@ -82,4 +87,5 @@ const mapDispatchToProps = (dispatch) => {
         authorize: (data) => dispatch(userAuthorize(data))
     }
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));

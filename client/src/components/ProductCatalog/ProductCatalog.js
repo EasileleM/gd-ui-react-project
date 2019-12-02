@@ -42,7 +42,7 @@ export class ProductCatalog extends React.Component {
       filters = this.props.filters;
       size *= 3;
     }
-    loadCard(this.state.page, size, filters, this.props.filterUrl).then(result => {
+    loadCard(this.state.page, size, filters).then(result => {
       this.setState({
         ready: true,
         cards: [...this.state.cards, ...result.data.items],

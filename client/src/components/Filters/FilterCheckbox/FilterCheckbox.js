@@ -17,6 +17,19 @@ export class FilterCheckbox extends Component {
   }
 
   componentDidMount() {
+    let selectedValues = [];
+    switch (this.state.name) {
+      case "brands":
+        selectedValues = [...store.getState().filterController.brands];
+        this.setState({selectedValues});
+        break;
+      case "sizes":
+        selectedValues = [...store.getState().filterController.sizes];
+        this.setState({selectedValues});
+        break;
+      default:
+        break;
+    };
   }
 
   handleClick = (e) => {
@@ -38,7 +51,6 @@ export class FilterCheckbox extends Component {
       default:
         break;
     };
-    this.props.onStateChange();
   };
 
   render() {

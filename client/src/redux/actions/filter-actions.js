@@ -27,3 +27,7 @@ export const search = {
 export const clear = {
   type: FILTER_ACTIONS.CLEAR,
 };
+
+export const setInitState = {
+  type: FILTER_ACTIONS.SET_INITIAL_STATE,
+};

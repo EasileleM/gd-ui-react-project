@@ -12,10 +12,10 @@ import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 export class Search extends Component {
   constructor(props) {
     super(props);
-    const values = queryString.parse(this.props.location.search);
-    store.dispatch(search(values.search));
+    // const values = queryString.parse(this.props.location.search);
+    // store.dispatch(changeCategoryFilter(values.categories), search(values.search));
     this.state = {
-      filtersToggle: false
+      filtersToggle: false,
     }
   }
 
@@ -23,7 +23,7 @@ export class Search extends Component {
     const toggle = this.state.filtersToggle;
     this.setState({
       filtersToggle: !toggle,
-    })
+    });
     if (!toggle) {
       disableBodyScroll( this.bodyElement);
     }
@@ -35,6 +35,12 @@ export class Search extends Component {
   componentDidMount() {
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.location.search !== prevProps.location.search) {
+      this.updateStore();
+    }
+  }
+
   componentWillUnmount() {
     this.filterReset();
   }
@@ -42,6 +48,11 @@ export class Search extends Component {
   filterReset = () => {
     store.dispatch(clear());
   };
+
+  updateStore() {
+    const values = queryString.parse(this.props.location.search);
+    store.dispatch(search(values.searchTarget));
+  }
 
   render() {
     return (

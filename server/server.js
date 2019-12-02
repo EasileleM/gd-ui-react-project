@@ -68,8 +68,7 @@ nextApp.prepare().then(() => {
       });
       newUser.save().then((result) => {
         res.statusCode = 201;
-
-        res.json(JSON.stringify(result))
+        res.json(JSON.stringify({data: result}))
       }).catch(err => {
         res.statusCode = 500;
         res.json(JSON.stringify(err));
@@ -103,7 +102,7 @@ nextApp.prepare().then(() => {
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    return res.redirect('/')
+    return res.redirect('/api/isAuth')
   }
   next()
 }
