@@ -46,9 +46,7 @@ nextApp.prepare().then(() => {
   app.use(cors({
     credentials: true,
   }));
-  app.options('*', cors({
-    credentials: true,
-  }));
+  app.options('*', cors());
 
   app.post('/api/signIn', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/api/items',
