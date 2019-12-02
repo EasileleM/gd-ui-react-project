@@ -44,9 +44,11 @@ nextApp.prepare().then(() => {
   app.use(passport.session());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cors({
-    credential: true,
+    credentials: true,
   }));
-  app.options('*', cors());
+  app.options('*', cors({
+    credentials: true,
+  }));
 
   app.post('/api/signIn', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/api/items',
