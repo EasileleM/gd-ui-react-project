@@ -23,8 +23,8 @@ export default function addItem(itemToAdd, color, size, amount = 1) {
       }
       currentCollection[item.generalData._id].push({ size: item.size, color: item.color, amount: item.amount });
     }
+    notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', itemToAdd.name);
     if (!itemAlreadyAdded) {
-      notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', itemToAdd.name);
       if (!currentCollection[itemToAdd._id]) {
         currentCollection[itemToAdd._id] = [];
       }

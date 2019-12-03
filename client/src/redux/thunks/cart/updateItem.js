@@ -2,6 +2,8 @@ import { updateItems as updateItemsActionCreator } from '../../action-creators/c
 
 import updateLocalStorageCollection from '../../../utils/localStorage/updateLocalStorageCollection';
 
+import notificationSuccess from '../../../utils/notificationSuccess';
+
 export default function updateItem(target, color, size, amount) {
   return (dispatch, getState) => {
     const currentItems = getState().cartController.items.slice();
