@@ -1,3 +1,5 @@
+@import '../../../style/colors';
+
 .card-window{
   &__close-button {
     transition: color 300ms ease;
@@ -7,8 +9,8 @@
     background: transparent;
     outline: 0;
     cursor: pointer;
-    color: #ff5912;
-    font-size: 40px;
+    color: $color-orange;
+    font-size: 30px;
 
     &:hover {
       opacity: .7;
