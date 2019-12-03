@@ -39,7 +39,7 @@ export class SignInForm extends React.Component {
   handleOnSubmit = (e) => {
     e.preventDefault();
     if (this.state.emailValid && this.state.passwordValid) {
-      signIn({email: this.state.email, password: this.state.password})
+      signIn({ email: this.state.email, password: this.state.password })
         .then((res) => {
           this.props.authorize(res.data);
           this.props.close();
@@ -77,6 +77,10 @@ export class SignInForm extends React.Component {
   }
 
   render() {
+    let buttonDisabledClass = '';
+    if (!(this.state.emailValid && this.state.passwordValid)) {
+      buttonDisabledClass = 'login-window-content__form-button_disabled';
+    }
     let currentError = null;
     for (const key of Object.keys(formErrors)) {
       if (this.state[key + 'Valid'] === false) {
@@ -108,7 +112,7 @@ export class SignInForm extends React.Component {
         />
         <InvalidFormNotification content={currentError && this.props.t(`signUpForm.${currentError}Error`)} />
         <Link to='/404' onClick={this.props.close} className="login-window-content__form-password-link">{this.props.t('signInForm.forgotPassword')}</Link>
-        <LoginWindowFormButton additionalClasses="login-window-content__form-button_none-margin-top" content={this.props.t('signInForm.signIn')} />
+        <LoginWindowFormButton additionalClasses={`login-window-content__form-button_none-margin-top ${buttonDisabledClass}`} content={this.props.t('signInForm.signIn')} />
       </form>
     )
   }
@@ -116,8 +120,8 @@ export class SignInForm extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      close: () => dispatch(closeModalWindow()),
-      authorize: (data) => dispatch(userAuthorize(data))
+    close: () => dispatch(closeModalWindow()),
+    authorize: (data) => dispatch(userAuthorize(data))
   }
 };
 

@@ -108,6 +108,14 @@ export class SignUpForm extends React.Component {
   }
 
   render() {
+    let buttonDisabledClass = '';
+    if (!(this.state.emailValid
+      && this.state.passwordValid
+      && this.state.firstNameValid
+      && this.state.lastNameValid
+      && this.state.confirmPasswordValid)) {
+      buttonDisabledClass = 'login-window-content__form-button_disabled';
+    }
     let currentError = null;
     for (const key of Object.keys(formErrors)) {
       if (this.state[key + 'Valid'] === false) {
@@ -168,7 +176,7 @@ export class SignUpForm extends React.Component {
           maxLength="140"
         />
         <InvalidFormNotification content={currentError && this.props.t(`signUpForm.${currentError}Error`)} />
-        <LoginWindowFormButton onSumbit={this.handleOnSubmit} content={this.props.t('signUpForm.signUp')} />
+        <LoginWindowFormButton additionalClasses={buttonDisabledClass} onSumbit={this.handleOnSubmit} content={this.props.t('signUpForm.signUp')} />
       </form>
     )
   }
