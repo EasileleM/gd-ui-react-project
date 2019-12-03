@@ -1,22 +1,18 @@
 import React from 'react';
-import { Translation } from 'react-i18next';
-
+import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../SectionHeader/index.js';
-import ProductCatalog  from '../ProductCatalog/index.js';
+import ProductCatalog from '../ProductCatalog/ProductCatalog.js';
 
 import './main.scss';
 
-export function NewArrivalsBlock(props) {
+export function NewArrivalsBlock() {
+  const [ t ] = useTranslation();
   return (
     <section className='new-arrivals-block'>
       <div className='new-arrivals-block__title'>
-        <Translation>
-          {
-            t => <SectionHeader title_colored={t('newArrivals.new')} title={t('newArrivals.arrivals')} description={t('newArrivals.description')} />
-          }
-        </Translation>
+        <SectionHeader title_colored={t('newArrivals.new')} title={t('newArrivals.arrivals')} description={t('newArrivals.description')} />
       </div>
-      <ProductCatalog />
+      <ProductCatalog size={4} />
     </section>
   );
 }

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import "./FilterRadio.scss"
-import store from '../../../store';
-import {changeCategoryFilter} from "../../../action-creators/filter-action-creator";
+import store from '../../../redux/store';
+import {changeCategoryFilter} from "../../../redux/action-creators/filter-action-creator";
 
-class FilterRadio extends Component {
+export class FilterRadio extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +11,11 @@ class FilterRadio extends Component {
       selectedValue: null,
       hovered: false,
     };
+  }
+
+  componentDidMount() {
+    const selectedValue = store.getState().filterController.category;
+    this.setState({selectedValue});
   }
 
   handleClick = (e) => {
@@ -21,16 +26,13 @@ class FilterRadio extends Component {
   resetFilters = () => {
     this.setState({selectedValue: null});
     store.dispatch(changeCategoryFilter(null));
+    this.props.onClear();
   };
-
-
 
   render() {
     return (
         <div>
-          <form className="filter-radio"
-          onMouseEnter={() => {this.setState({hovered: true})}}
-          onMouseLeave={() => {this.setState({hovered: false})}}>
+          <form className="filter-radio" onMouseEnter={() => {this.setState({hovered: true})}} onMouseLeave={() => {this.setState({hovered: false})}}>
             <div className={`filter-radio__reset-button + ${this.state.hovered ? "" : "filter-radio__reset-button_hidden"}`}
                  onClick={this.resetFilters}
                 >Reset</div>

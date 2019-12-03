@@ -19,7 +19,7 @@ afterEach(() => {
 it("renders with passed props", () => {
   const fakeProps = ["S", "M", "L", "XL"];
   act(() => {
-    render(<SizesSelector sizes={fakeProps} />, container);
+    render(<SizesSelector t={key => key} sizes={fakeProps} />, container);
   })
   for (let i = 0; i < fakeProps.length; i++) {
     expect(container.textContent).toContain(fakeProps[i]);

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import "./FilterCheckbox.scss"
-import store from "../../../store";
+import store from "../../../redux/store";
 import {
   changeBrandsFilter,
   changeSizeFilter
-} from "../../../action-creators/filter-action-creator";
+} from "../../../redux/action-creators/filter-action-creator";
 
-class FilterCheckbox extends Component {
+export class FilterCheckbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,13 +16,29 @@ class FilterCheckbox extends Component {
     };
   }
 
+  componentDidMount() {
+    let selectedValues = [];
+    switch (this.state.name) {
+      case "brands":
+        selectedValues = [...store.getState().filterController.brands];
+        this.setState({selectedValues});
+        break;
+      case "sizes":
+        selectedValues = [...store.getState().filterController.sizes];
+        this.setState({selectedValues});
+        break;
+      default:
+        break;
+    };
+  }
+
   handleClick = (e) => {
     const selectedValues = [...this.state.selectedValues];
     const value = e.target.value;
     if (selectedValues.includes(value)) {
-      selectedValues.splice(selectedValues.indexOf(e.target.value), 1)
+      selectedValues.splice(selectedValues.indexOf(e.target.value), 1);
     } else {
-      selectedValues.push(e.target.value)
+      selectedValues.push(e.target.value);
     }
     this.setState({selectedValues: selectedValues});
     switch (this.state.name) {
@@ -34,8 +50,7 @@ class FilterCheckbox extends Component {
         break;
       default:
         break;
-    }
-
+    };
   };
 
   render() {

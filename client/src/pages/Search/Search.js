@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
 import Filters from "../../components/Filters/Filters";
-import ProductCatalog from "../../components/ProductCatalog";
-import {Newsletter} from "../../components/Newsletter/Newsletter";
-import FiltersButtonImage from "../../assets/controls.svg"
-import "./Search.scss"
-import store from "../../store";
-import {clear} from "../../action-creators/filter-action-creator"
-import {changeBodyScrollState} from '../../utils/changeBodyScrollState';
+import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
+import Newsletter from "../../components/Newsletter/Newsletter";
+import FiltersButtonImage from "../../assets/controls.svg";
+import "./Search.scss";
+import queryString from 'query-string'
+import store from "../../redux/store";
+import {clear, search} from "../../redux/action-creators/filter-action-creator";
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
-class Search extends Component {
+export class Search extends Component {
   constructor(props) {
     super(props);
+    // const values = queryString.parse(this.props.location.search);
+    // store.dispatch(changeCategoryFilter(values.categories), search(values.search));
     this.state = {
-      filtersToggle: false
+      filtersToggle: false,
     }
   }
 
@@ -20,8 +23,23 @@ class Search extends Component {
     const toggle = this.state.filtersToggle;
     this.setState({
       filtersToggle: !toggle,
-    })
+    });
+    if (!toggle) {
+      disableBodyScroll( this.bodyElement);
+    }
+    else {
+      clearAllBodyScrollLocks(this.bodyElement);
+    }
   };
+
+  componentDidMount() {
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.search !== prevProps.location.search) {
+      this.updateStore();
+    }
+  }
 
   componentWillUnmount() {
     this.filterReset();
@@ -31,14 +49,18 @@ class Search extends Component {
     store.dispatch(clear());
   };
 
-  render() {
+  updateStore() {
+    const values = queryString.parse(this.props.location.search);
+    store.dispatch(search(values.searchTarget));
+  }
 
+  render() {
     return (
         <div className="search-wrapper">
           <div className="search-wrapper__container">
             <div className="search">
               <div className={`search__filters ${this.state.filtersToggle ? "search__filters_toggled" : ""}`}>
-                <Filters slideIn={this.state.filtersToggle}/>
+                <Filters filterUrl={this.props.location.search} slideIn={this.state.filtersToggle} history={this.props.history}/>
                 <button className={`search__toggle-off ${this.state.filtersToggle ? "search__toggle-off_active" : ""}`}
                         onClick={this.handleClick}>
                   Show
@@ -49,7 +71,7 @@ class Search extends Component {
                   <img className="search__toggle-icon" src={FiltersButtonImage} alt="Controls icon"/>
                   Filters
                 </button>
-                <ProductCatalog filtered={true} rowSize={3} size={3}/>
+                <ProductCatalog filterUrl={this.props.location.search} filtered={true} rowSize={3} size={3}/>
               </div>
             </div>
             <Newsletter/>

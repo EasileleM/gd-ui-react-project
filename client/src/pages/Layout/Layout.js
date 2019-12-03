@@ -1,90 +1,91 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'react-redux';
 import {
-    BrowserRouter as Router,
     Route,
     Switch,
-    Redirect
+    Redirect,
+    withRouter
 } from "react-router-dom";
 
 import "./Layout.scss";
 
-import ErrorPage from "../errors/ErrorPage";
-import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
-
-import { Header } from "../../components/Header";
-import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Header/Header.jsx";
+import { Footer } from "../../components/Footer/Footer";
 import { LoadingSpinner } from '../../components//LoadingSpinner/index';
-import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
-import CartItems from '../../components/CartItems/CartItems';
-import FavoritesItems from '../../components/FavoritesItems/FavoritesItems.jsx';
-import OrderBlock from '../../components/OrderBlock/OrderBlock';
+import ModalWindowWrapper from '../../components/ModalWindowWrapper/ModalWindowWrapper';
 
 import interceptor from '../../utils/interceptorResponse';
+import { isAuth } from '../../utils/isAuth';
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
-import { changeBodyScrollState } from '../../utils/changeBodyScrollState';
-import {default as fetchCart} from '../../utils/cart/fetchItems';
-import {default as fetchFavorites} from '../../utils/favorites/fetchItems';
 
-import store from '../../store';
-import { closeCart } from '../../action-creators/cart-action-creator';
-import { closeFavorites } from '../../action-creators/favorites-action-creator';
 import Search from "../Search/Search";
 import Home from "../Home/Home";
+import ErrorPage from "../errors/ErrorPage";
+import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
+import store from '../../redux/store';
+import { setInitState } from '../../redux/action-creators/filter-action-creator';
 
-class Layout extends Component {
+import { userAuthorize } from '../../redux/action-creators/user-action-creator';
+
+export class Layout extends Component {
     componentDidMount() {
-        store.dispatch(fetchCart());
-        store.dispatch(fetchFavorites());
+        store.dispatch(setInitState(this.props.location.search));
     }
 
-    componentDidUpdate() {
-        changeBodyScrollState(this.props.cartOpened || this.props.favoritesOpened);
+    componentDidUpdate(prevProps) {
+        if (this.props.URI !== prevProps.URI && this.props.URI ) {
+            this.props.history.push(this.props.URI);
+        }
+        isAuth()
+            .then((res) => {
+                this.props.authorize(res.data);
+            });
     }
 
     render() {
         return (
-            <Router>
-                <ScrollToTop>
-                    <Suspense fallback={<div className="spinner-wrapper"><LoadingSpinner /></div>}>
-                        {
-                            (this.props.cartOpened) ? <ModalWindow content={<><CartItems /><OrderBlock /></>} onClick={() => store.dispatch(closeCart())} /> : null
-                        }
-                        {
-                            (this.props.favoritesOpened) ? <ModalWindow content={<><FavoritesItems /></>} onClick={() => store.dispatch(closeFavorites())} /> : null
-                        }
-                        {
-                            (this.props.error === 400) ? <Redirect to='/400' /> : null
-                        }
-                        {
-                            (this.props.error === 404) ? <Redirect to='/404' /> : null
-                        }
-                        {
-                            (this.props.error === 500) ? <Redirect to='/500' /> : null
-                        }
-                        <Header />
-                        <Switch>
-                            <Route path="/" exact component={Home} />
-                            <Route path="/item/:id" component={ProductDescriptionPage} />
-                            <Route path="/search" component={Search} />
-                            <Route path="/400" component={() => <ErrorPage error={400} />} />
-                            <Route path="/404" component={() => <ErrorPage error={404} />} />
-                            <Route path="/500" component={() => <ErrorPage error={500} />} />
-                            <Redirect to="/" />
-                        </Switch>
-                        <Footer />
-                    </Suspense >
-                </ScrollToTop>
-            </Router>
+            <ScrollToTop>
+                <Suspense fallback={<div className="spinner-wrapper"><LoadingSpinner /></div>}>
+                    <ModalWindowWrapper />
+                    <RedirectWrapper error={this.props.error} />
+                    <Header />
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <Route path="/item/:id" component={ProductDescriptionPage} />
+                        <Route path="/search" component={Search} />
+                        <Route path="/400" component={() => <ErrorPage error={400} />} />
+                        <Route path="/404" component={() => <ErrorPage error={404} />} />
+                        <Route path="/500" component={() => <ErrorPage error={500} />} />
+                        <Redirect to="/" />
+                    </Switch>
+                    <Footer />
+                </Suspense >
+            </ScrollToTop>
         );
+    }
+}
+
+function RedirectWrapper({ error }) {
+    switch (error) {
+        case 400: return <Redirect to='/400' />;
+        case 404: return <Redirect to='/404' />;
+        case 500: return <Redirect to='/500' />;
+        default: return null;
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         error: state.errorHandler.errorCode,
-        cartOpened: state.cartController.opened,
-        favoritesOpened: state.favoritesController.opened
+        URI: state.filterController.URI,
+        authorized: true,
     }
 };
-export default connect(mapStateToProps)(Layout);
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        authorize: (data) => dispatch(userAuthorize(data))
+    }
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));

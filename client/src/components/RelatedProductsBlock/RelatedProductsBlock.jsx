@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Translation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import { SectionHeader } from '../SectionHeader/index.js';
 import { ProductCatalogRow } from '../ProductCatalogRow/ProductCatalogRow';
@@ -7,18 +7,21 @@ import { ProductCatalogRow } from '../ProductCatalogRow/ProductCatalogRow';
 import './RelatedProductsBlock.scss';
 
 export class RelatedProductsBlock extends Component {
+  componentDidMount() {
+  }
+
   render() {
     return (
-      <Translation>
-        {t =>
-          <section className='related-products-block'>
-            <div className='related-products-block__title'>
-              <SectionHeader title_colored={t('relatedProducts.related')} title={t('relatedProducts.products')} description={t('relatedProducts.description')} />
-            </div>
-            <ProductCatalogRow id={this.props.id}/>
-          </section>
-        }
-      </Translation>
+      <section className='related-products-block'>
+        <div className='related-products-block__title'>
+          <SectionHeader title_colored={this.props.t('relatedProducts.related')}
+            title={this.props.t('relatedProducts.products')}
+            description={this.props.t('relatedProducts.description')} />
+        </div>
+        <ProductCatalogRow id={this.props.id} />
+      </section>
     );
   }
 }
+
+export default withTranslation()(RelatedProductsBlock)

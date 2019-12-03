@@ -1,0 +1,7 @@
+@import "../../../style/main.scss";
+
+.login-window-content__form-error-notification {
+  @include font-primary-regular-md;
+  max-width: 310px;
+  color: $color-red;
+}

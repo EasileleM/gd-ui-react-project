@@ -1,0 +1,19 @@
+@import '../../.././style/main.scss';
+
+.login-window-content__controls-button {
+  @include font-primary-regular-md;
+  transition: 200ms ease-in;
+  border: 0;
+  height: 50px;
+  width: 50%;
+  cursor: pointer;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+  background: $color-athens-gray;
+  outline: 0;
+
+  &_enabled {
+    box-shadow: none;
+    background: transparent;
+    color: $color-orange;
+  }
+}

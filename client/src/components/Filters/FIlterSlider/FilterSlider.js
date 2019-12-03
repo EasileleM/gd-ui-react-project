@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import "./FilterSlider.scss"
 import ReactSlider from 'react-slider'
-import {toast} from 'react-toastify';
-import store from "../../../store";
-import {changeMinPriceFilter, changeMaxPriceFilter} from "../../../action-creators/filter-action-creator";
+import store from "../../../redux/store";
+import {changeMinPriceFilter, changeMaxPriceFilter} from "../../../redux/action-creators/filter-action-creator";
 
 
-class FilterSlider extends Component {
+export class FilterSlider extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +19,7 @@ class FilterSlider extends Component {
 
   handleChange = (chosenValues) => {
     const [minChosenValue, maxChosenValue] = chosenValues;
-    this.setState({minChosenValue, maxChosenValue})
+    this.setState({minChosenValue, maxChosenValue});
   };
 
   handleInputChange = (e) => {
@@ -45,16 +44,33 @@ class FilterSlider extends Component {
             this.setState({maxChosenValue: value});
           }
           break;
+        default: break;
       }
     }
   };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if(prevState.maxChosenValue !== this.state.maxChosenValue) {
-      store.dispatch(changeMaxPriceFilter( this.state.maxChosenValue));
+      if (this.state.maxChosenValue === this.state.maxValue) {
+        store.dispatch(changeMaxPriceFilter(null));
+      } else {
+        store.dispatch(changeMaxPriceFilter(this.state.maxChosenValue));
+      }
     }
     if (prevState.minChosenValue !== this.state.minChosenValue) {
-      store.dispatch(changeMinPriceFilter(this.state.minChosenValue));
+      if (this.state.minChosenValue === this.state.minValue) {
+        store.dispatch(changeMinPriceFilter(null));
+      } else {
+        store.dispatch(changeMinPriceFilter(this.state.minChosenValue));
+      }
+    }
+  }
+
+  componentDidMount() {
+    const minChosenValue = store.getState().filterController.minPrice;
+    const maxChosenValue = store.getState().filterController.maxPrice;
+    if (minChosenValue && maxChosenValue) {
+      this.setState({minChosenValue, maxChosenValue});
     }
   }
 

@@ -1,0 +1,36 @@
+@import '../../style/main.scss';
+
+.user-info-input {
+  @include font-primary-regular-md;
+  transition: 200ms ease;
+  margin: 20px 0;
+  border: 0;
+  border-bottom: 2px solid $color-porcelain;
+  height: 35px;
+  width: 290px;
+  padding: 0 10px;
+  color: $color-limed-spruce;
+  outline: 0;
+
+  &__label {
+    display: none;
+  }
+
+  &_valid {
+    border-bottom: 2px solid $color-green;
+    &:focus {
+      border-bottom: 2px solid $color-green;
+    }
+  }
+
+  &_invalid {
+    border-bottom: 2px solid $color-red;
+    &:focus {
+      border-bottom: 2px solid $color-red;
+    }
+  }
+
+  &:focus {
+    border-bottom: 2px solid $color-slate-gray;
+  }
+}
