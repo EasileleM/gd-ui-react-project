@@ -15,7 +15,18 @@ function App() {
         <Router>
           <Layout />
         </Router>
-        <ToastContainer />
+        <ToastContainer 
+        toastClassName='notification-info'
+        position='bottom-right'
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnVisibilityChange
+        draggable
+        closeButton={false}
+        pauseOnHover={false}/>
       </Provider>
     </div>
   );
