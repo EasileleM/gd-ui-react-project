@@ -10,13 +10,13 @@ export function LoginWindowContentControls(props) {
         onClick={() => props.handleOnClick('signIn')}
         className={'login-window-content__controls-button'
           + (props.currentMode === 'signIn' ?
-          ' login-window-content__controls-button_enabled' : '')}
+            ' login-window-content__controls-button_enabled' : '')}
       > {props.t('signInForm.signIn')} </button>
       <button
         onClick={() => props.handleOnClick('signUp')}
         className={'login-window-content__controls-button'
           + (props.currentMode === 'signUp' ?
-          ' login-window-content__controls-button_enabled' : '')}
+            ' login-window-content__controls-button_enabled' : '')}
       > {props.t('signUpForm.signUp')} </button>
     </div>
   );

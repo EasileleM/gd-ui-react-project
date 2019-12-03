@@ -7,11 +7,8 @@ import SignUpForm from './SignUpForm/SignUpForm';
 import './LoginWindowContent.scss';
 
 export class LoginWindowContent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentMode: 'signIn'
-    };
+  state = {
+    currentMode: 'signIn'
   }
 
   handleOnClick = (mode) => {
@@ -25,8 +22,8 @@ export class LoginWindowContent extends React.Component {
           currentMode={this.state.currentMode}
           handleOnClick={this.handleOnClick}
         />
-        <SignInForm display={this.state.currentMode === 'signIn' ? 'flex' : 'none'}/>
-        <SignUpForm display={this.state.currentMode === 'signUp' ? 'flex' : 'none'}/>
+        <SignInForm display={this.state.currentMode === 'signIn' ? 'flex' : 'none'} />
+        <SignUpForm display={this.state.currentMode === 'signUp' ? 'flex' : 'none'} />
       </div>
     )
   }
