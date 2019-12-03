@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { withTranslation } from 'react-i18next';
 import './SaleItem.scss';
 
@@ -13,13 +14,9 @@ import loadItemSales from "../../utils/loadItemSales";
 import notificationError from "../../utils/notificationError";
 
 export class SaleItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ready: false
-    };
-  }
+  state = {
+    ready: false
+  };
 
   componentDidMount() {
     loadItemSales().then(result => {
@@ -45,10 +42,14 @@ export class SaleItem extends React.Component {
             </div>
           </div>
           <div className="sale-item__item-info">
-            <h2 className="sale-item__item-name">{this.state.data.name}</h2>
-            <p className="sale-item__item-description">
-              {this.state.data.bundleInfo}
-            </p>
+            <Link to={`/item/${this.state.data._id}`} style={{ textDecoration: 'none' }}>
+              <h2 className="sale-item__item-name">{this.state.data.name}</h2>
+            </Link>
+            <Link to={`/item/${this.state.data._id}`} style={{ textDecoration: 'none' }}>
+              <p className="sale-item__item-description">
+                {this.state.data.bundleInfo}
+              </p>
+            </Link>
           </div>
           <div className="sale-item__purchase-info">
             <button
