@@ -1,4 +1,4 @@
-@import '../../../style/main.scss';
+@import "../../../style/main.scss";
 
 .login-window-content__form-button {
   @include font-primary-regular-md;
@@ -17,7 +17,15 @@
     margin-top: 0;
   }
 
-  @media screen and (max-width: $breakpoint-mobile){
+  &_disabled {
+    opacity: .8;
+    cursor: not-allowed;
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
     margin-bottom: 0;
     width: 100%;
   }

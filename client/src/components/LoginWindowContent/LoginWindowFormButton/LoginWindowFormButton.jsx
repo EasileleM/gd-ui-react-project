@@ -2,8 +2,10 @@ import React from 'react';
 
 import './LoginWindowFormButton.scss';
 
-export function LoginWindowFormButton(props) {
-  return (
-    <button type="submit" className={`login-window-content__form-button ${props.additionalClasses}`}>{props.content}</button>
-  )
+export class LoginWindowFormButton extends React.Component {
+  render() {
+    return (
+      <button type="submit" className={`login-window-content__form-button ${this.props.additionalClasses}`}>{this.props.content}</button>
+    )
+  }
 }
