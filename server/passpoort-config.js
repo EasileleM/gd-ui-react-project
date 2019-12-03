@@ -1,33 +1,34 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const User  = require('./db/Models/user.model');
+const User = require('./db/Models/user.model');
 
 function initialize(passport) {
-  const authenticateUser = async (email, password, done) => {
-    let user = await User.findOne({email});
-    console.log(user);
-    if (!user) {
-      return done(null, false, {message: 'No user with that email'})
-    }
-    try {
-      console.log(user.password);
-      if (password === user.password) {
-        console.log("authorized");
-        return done(null, user)
-      } else {
-        return done(null, false, {message: 'Password incorrect'})
+  const authenticateUser = function (email, password, done) {
+    console.log("got there")
+    User.findOne({'email': email}, function (err, user) {
+      if (err) {
+        console.log(`Error: ${err}`);
+        return done(err);
       }
-    } catch (e) {
-      return done(e)
-    }
+      if (!user) {
+        console.log(`user wasn't found`);
+        return done(null, false);
+      }
+      console.log(user, password)
+      if (user.password !== password) {
+        console.log(`wrong password`);
+        return done(null, false);
+      }
+      return done(null, user);
+    });
   };
 
   passport.use(new LocalStrategy({usernameField: 'email'}, authenticateUser));
   passport.serializeUser((user, done) => {
-    console.log("serializeUser:")
+    console.log("serializeUser:");
     return done(null, user)
   });
-  passport.deserializeUser( (id, done) => {
+  passport.deserializeUser((id, done) => {
     return done(null, id)//todo переделоть
   })
 }
