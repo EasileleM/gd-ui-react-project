@@ -1,6 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const User = require('./db/Models/user.model');
+const AnonymIdStrategy = require('passport-anonym-uuid').Strategy;
 
 function initialize(passport) {
   const authenticateUser =  function (email, password, done) {
@@ -23,6 +24,9 @@ function initialize(passport) {
   };
 
   passport.use(new LocalStrategy({usernameField: 'email'}, authenticateUser));
+
+  passport.use(new AnonymIdStrategy());
+
   passport.serializeUser((user, done) => {
     console.log("serializeUser:");
     return done(null, user)

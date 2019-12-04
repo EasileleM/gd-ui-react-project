@@ -58,7 +58,7 @@ nextApp.prepare().then(() => {
   }));
   app.options('*', cors());
 
-  app.post('/api/signIn', checkNotAuthenticated, passport.authenticate('local', {
+  app.post('/api/signIn', checkNotAuthenticated, passport.authenticate(['local', 'anonymId'], {
     successRedirect: '/api/isAuth',
     failureRedirect: '/api/isAuth',
     failureFlash: true
@@ -128,6 +128,7 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 function checkAuthenticated(req, res, next) {
+  console.log(req.user.uuid)
   if (req.isAuthenticated()) {
     console.log(`isAuthenticated`);
     console.log(`\nreq: ${req},\nres: ${res}`);
