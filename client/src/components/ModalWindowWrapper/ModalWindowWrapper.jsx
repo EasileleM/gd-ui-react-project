@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { closeModalWindow } from '../../redux/action-creators/modalWindow-action-creator';
-import { default as fetchItemsCart } from '../../redux/thunks/cart/fetchItems';
 import { default as fetchItemsFavorites } from '../../redux/thunks/favorites/fetchItems';
 
 import CartItems from '../CartItems/CartItems';
@@ -19,7 +18,6 @@ export class ModalWindowWrapper extends React.Component {
     this.state = {};
   }
   componentDidMount() {
-    this.props.fetchItemsCart();
     this.props.fetchItemsFavorites();
   }
 
@@ -89,7 +87,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     close: () => dispatch(closeModalWindow()),
-    fetchItemsCart: () => dispatch(fetchItemsCart()),
     fetchItemsFavorites: () => dispatch(fetchItemsFavorites())
   }
 };

@@ -1,6 +1,6 @@
 import { updateItems } from '../../action-creators/cart-action-creator';
 
-export default function setItems(items) {
+export function setItems(items) {
   return async (dispatch) => {
     let cartSize = 0;
     let orderPrice = 0;
