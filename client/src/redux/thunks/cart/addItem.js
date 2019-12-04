@@ -1,11 +1,12 @@
-import { updateItems as updateItemsActionCreator } from '../../action-creators/cart-action-creator';
+import { updateUserCart } from '../../../utils/updateUserCart';
 
-import updateLocalStorageCollection from '../../../utils/localStorage/updateLocalStorageCollection';
+import { setItems } from './setItems';
+
 import notificationSuccess from '../../../utils/notificationSuccess';
 
 export default function addItem(itemToAdd, color, size, amount = 1) {
   return (dispatch, getState) => {
-    if (Number(amount) <= 0) {
+    if (Number(amount) <= 0) { //TODO thunk is too big
       return;
     }
     const currentItems = getState().cartController.items.slice();
@@ -23,7 +24,6 @@ export default function addItem(itemToAdd, color, size, amount = 1) {
       }
       currentCollection[item.generalData._id].push({ size: item.size, color: item.color, amount: item.amount });
     }
-    notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', itemToAdd.name);
     if (!itemAlreadyAdded) {
       if (!currentCollection[itemToAdd._id]) {
         currentCollection[itemToAdd._id] = [];
@@ -31,7 +31,13 @@ export default function addItem(itemToAdd, color, size, amount = 1) {
       currentCollection[itemToAdd._id].push({ size, color, amount });
       currentItems.push({ generalData: itemToAdd, size, color, amount });
     }
-    dispatch(updateItemsActionCreator(currentItems));
-    updateLocalStorageCollection('CartItems', currentCollection);
+    updateUserCart(currentCollection)
+      .then(() => {
+        notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', itemToAdd.name); //TODO dispatch it
+        dispatch(setItems(currentItems));
+      })
+      .catch((err) => {
+        //TODO notify about cart error or do something another
+      });
   };
 }

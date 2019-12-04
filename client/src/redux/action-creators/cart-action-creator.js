@@ -1,17 +1,10 @@
-import * as cartActions from '../actions/cart-actions';
+export const CART_ACTIONS = {
+  UPDATE_ITEMS: 'UPDATE_ITEMS_CART'
+};
 
-export const updateItems = (items) => {
-  return {...cartActions.updateItems, items};
+export const updateItems = (items, size, orderPrice) => {
+  return { type: CART_ACTIONS.UPDATE_ITEMS, items, size, orderPrice };
 }
 
-export const fetchItemsBegin = () => {
-  return {...cartActions.fetchItemsBegin};
-}
-
-export const fetchItemsSuccess = (items, size, orderPrice) => {
-  return {...cartActions.fetchItemsSuccess, items, size, orderPrice};
-}
-
-export const fetchItemsFailure = (error) => {
-  return {...cartActions.fetchItemsFailure, error};
-}
+// TODO rename current action creators to actions
+// and make their structure looks like one above
