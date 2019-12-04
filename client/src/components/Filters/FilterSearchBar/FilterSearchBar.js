@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {ReactComponent as DeleteIcon} from "../../../assets/delete.svg";
 import "./FilterSearchBar.scss"
-import store from "../../../store";
-import {search} from "../../../action-creators/filter-action-creator";
+import store from "../../../redux/store";
+import {search} from "../../../redux/action-creators/filter-action-creator";
 
-class FilterSearchBar extends Component {
+export class FilterSearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,16 +25,16 @@ class FilterSearchBar extends Component {
     store.dispatch(search(null));
   };
 
+  componentDidMount() {
+  }
+
   render() {
     return (
         <div>
           <form
               className="filter-search-bar" name="search">
             <input className="filter-search-bar__input"
-                   value={this.state.searchValue}
-                   onBlur={this.handleSearch}
-                   onChange={this.handleChange}
-                   type="text"/>
+                   value={this.state.searchValue} onBlur={this.handleSearch} onChange={this.handleChange} type="text"/>
             <DeleteIcon className="filter-search-bar__clear"
                         onClick={this.clearSearch}/>
           </form>

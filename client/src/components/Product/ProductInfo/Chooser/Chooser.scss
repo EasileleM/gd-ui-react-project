@@ -1,0 +1,104 @@
+@import './../../../../style/main.scss';
+
+.chooser {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  border-top: 1px solid $color-athens-gray;
+  border-bottom: 1px solid $color-athens-gray;
+  padding: 40px 0;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+  }
+
+  &__heading {
+    @include font-primary-bold-xxl;
+    color: $color-orange;
+    margin: 0;
+
+
+    &_secondary {
+      @include font-primary-regular-md;
+      margin: 0;
+      color: $color-limed-spruce;
+      @media screen and (max-width: $breakpoint-smartphone){
+        width: 50%;
+        padding: 20px 0;
+      }
+    }
+  }
+
+  &__paragraph {
+    @include font-primary-regular-sm;
+    line-height: 29.97px;
+    color: $color-river-bed;
+  }
+
+  &__container {
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+    @media screen and (max-width: $breakpoint-tablet){
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    &_margined {
+      margin-left: 30px;
+      @media screen and (max-width: $breakpoint-tablet){
+        margin-left: 0;
+      }
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: center;
+    margin-left: 30px;
+  }
+
+  &__size-value {
+    @include font-primary-regular-md;
+    text-transform: uppercase;
+    cursor: pointer;
+    line-height: 20px;
+
+    &_chosen {
+      color: $color-orange;
+      text-shadow:0 0 1px $color-orange;
+    }
+
+    &:before {
+      text-shadow: none;
+      content: "-";
+      padding: 0 10px;
+      color: black;
+    }
+
+    &:nth-child(1) {
+      &:before {
+        content: "";
+        padding: 0;
+      }
+    }
+  }
+
+  &__quantity-number {
+    @include font-primary-regular-md;
+    width: 25px;
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  &__quantity-button {
+    cursor: pointer;
+    @include font-primary-regular-semi-md
+  }
+}

@@ -1,16 +1,14 @@
 import React from 'react';
 
 import './AddToFavoritesButton.scss';
-import {connect} from 'react-redux';
-import store from '../../store';
-import addItem from '../../utils/favorites/addItem';
-import removeItem from '../../utils/favorites/removeItem';
-import {openFavorites} from '../../action-creators/favorites-action-creator';
-import {ReactComponent as FavoritesIcon} from "../../assets/likeDisabled.svg"
-import {ReactComponent as FavoritesIconEnabled} from "../../assets/likeEnabled.svg"
+import store from '../../redux/store';
+import addItem from '../../redux/thunks/favorites/addItem';
+import removeItem from '../../redux/thunks/favorites/removeItem';
+import { changeModalWindowContent } from '../../redux/action-creators/modalWindow-action-creator';
+import {ReactComponent as FavoritesIcon} from "../../assets/likeDisabled.svg";
+import {ReactComponent as FavoritesIconEnabled} from "../../assets/likeEnabled.svg";
 
-
-class AddToFavoritesButton extends React.Component {
+export class AddToFavoritesButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,21 +16,23 @@ class AddToFavoritesButton extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.enabled !== this.state.enabled) {
+  componentDidMount() {}
+
+  componentDidUpdate(props, state) {
+    if (this.props.enabled !== state.enabled) {
       this.setState({enabled: this.props.enabled});
     }
   }
 
   handleOnClick() {
     if (this.props.openFavorites) {
-      store.dispatch(openFavorites());
+      store.dispatch(changeModalWindowContent('favorites'));
       return;
     }
     if (this.state.enabled) {
-      store.dispatch(removeItem(store.getState(), this.props.data));
+      store.dispatch(removeItem(this.props.data));
     } else {
-      store.dispatch(addItem(store.getState(), this.props.data));
+      store.dispatch(addItem(this.props.data));
     }
     this.setState({enabled: !this.state.enabled});
   }
@@ -52,9 +52,4 @@ class AddToFavoritesButton extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    items: state.favoritesController.items
-  }
-};
-export default connect(mapStateToProps)(AddToFavoritesButton);
+export default AddToFavoritesButton;

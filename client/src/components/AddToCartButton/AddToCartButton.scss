@@ -1,0 +1,25 @@
+@import "../../style/main.scss";
+
+.add-to-cart-button {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  outline: none;
+
+  &__icon {
+    cursor: pointer;
+    height: 30px;
+
+    &_small {
+      margin-left: 10px;
+      height: 22px;
+    }
+
+    &:hover,
+    &:focus {
+      fill: $color-orange;
+      stroke: $color-orange;
+    }
+  }
+}

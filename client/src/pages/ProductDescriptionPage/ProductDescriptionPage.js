@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import Product from "../../components/Product";
-import {RelatedProductsBlock} from "../../components/RelatedProductsBlock/RelatedProductsBlock";
-import {Newsletter} from "../../components/Newsletter/Newsletter";
+import Product from "../../components/Product/Product";
+import RelatedProductsBlock from "../../components/RelatedProductsBlock/RelatedProductsBlock";
+import Newsletter from "../../components/Newsletter/Newsletter";
 
 import "./ProductDescriptionPage.scss";
 
 class ProductDescriptionPage extends Component {
-    render() {
+  componentDidMount() {
+  }
+
+  render() {
         return (
             <div>
                 <div className="wrapper">

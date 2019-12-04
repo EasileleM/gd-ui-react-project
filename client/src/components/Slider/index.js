@@ -2,9 +2,9 @@ import React from 'react';
 
 import './main.scss';
 import { LoadingSpinner } from '../LoadingSpinner/index';
-import { Buttons } from './Buttons/index.js';
+import { Buttons } from './Buttons/Buttons.js';
 import { Images } from './Images/index.js';
-import { ContentBlock } from './ContentBlock/index.js';
+import { ContentBlock } from './ContentBlock/ContentBlock.js';
 import loadSlides from "../../utils/loadSlides";
 import notificationError from "../../utils/notificationError";
 
