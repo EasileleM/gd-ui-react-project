@@ -8,17 +8,17 @@ const flash = require('express-flash');
 const {createServer} = require('http');
 const passport = require('passport')
     , LocalStrategy = require('passport-local').Strategy;
-const session = require('express-session');
-const initialize = require('./passpoort-config');
+const initialize = require('./passport-config');
 const cors = require('cors');
-
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const users = [];
-//next.js configuration
 const dev = process.env.NODE_DEV !== 'production';
 const nextApp = next({dev});
 const handle = nextApp.getRequestHandler();
 const port = process.env.PORT || 3000;
 const dbUri = process.env.MONGODB_URI || "mongodb+srv://admin:qwerty123456789@react-vptyr.mongodb.net/shop?retryWrites=true&w=majority";
+const bcrypt = require('bcrypt');
 
 mongoose.connect(dbUri, {
   useNewUrlParser: true,
@@ -29,6 +29,8 @@ mongoose.connect(dbUri, {
   console.log(`Error while connecting DB: ${err}!`)
 });
 
+const db = mongoose.connection;
+
 initialize(passport);
 
 nextApp.prepare().then(() => {
@@ -36,9 +38,13 @@ nextApp.prepare().then(() => {
   app.use(bodyParser.json());
   app.use(flash());
   app.use(session({
-    secret: "Meesha Track Jacket",
+    secret: 'Meesha Track Jacket',
     resave: false,
     saveUninitialized: false,
+    store: new MongoStore({
+      mongooseConnection: db,
+      secret: 'Misha Track Jacket'
+    }),
     cookie: {
       maxAge: 10 * 60 * 1000,
     },
@@ -58,21 +64,31 @@ nextApp.prepare().then(() => {
     failureFlash: true
   }));
 
-  app.post('/api/signUp', checkNotAuthenticated, (req, res) => {
+  app.post('/api/signUp', checkNotAuthenticated, async (req, res) => {
     try {
+      const salt = await bcrypt.genSaltSync(10);
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+      const userInDb = await User.findOne({'email': req.body.email}).exec();
+      if (userInDb) {
+        res.status(409).send();
+        return;
+      }
       const newUser = new User({
         email: req.body.email,
-        password: req.body.password,
+        password: hashedPassword,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
       });
-      newUser.save().then((result) => {
+      newUser.save().then((user) => {
         res.statusCode = 201;
-        res.json(JSON.stringify({data: result}))
+        req.login(user, function(err) {
+          if (err) { return next(err); }
+          return res.redirect('/api/isAuth');
+        });
       }).catch(err => {
         res.statusCode = 500;
         res.json(JSON.stringify(err));
-
       })
     } catch (e) {
       res.statusCode = 500;
@@ -86,7 +102,7 @@ nextApp.prepare().then(() => {
     res.status(200).send();
   });
 
-  app.get('/api/isAuth',checkAuthenticated, (req, res) => {
+  app.get('/api/isAuth', checkAuthenticated, (req, res) => {
     res.json(req.user);
   });
 
