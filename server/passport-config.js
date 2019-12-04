@@ -3,9 +3,8 @@ const bcrypt = require('bcrypt');
 const User = require('./db/Models/user.model');
 
 function initialize(passport) {
-  const authenticateUser = function (email, password, done) {
-    console.log("got there")
-    User.findOne({'email': email}, function (err, user) {
+  const authenticateUser =  function (email, password, done) {
+    User.findOne({'email': email}, async function (err, user) {
       if (err) {
         console.log(`Error: ${err}`);
         return done(err);
@@ -14,8 +13,8 @@ function initialize(passport) {
         console.log(`user wasn't found`);
         return done(null, false);
       }
-      console.log(user, password)
-      if (user.password !== password) {
+      const isPasswordRight = await bcrypt.compare(password, user.password);
+      if (!isPasswordRight) {
         console.log(`wrong password`);
         return done(null, false);
       }
