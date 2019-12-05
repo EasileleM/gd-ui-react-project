@@ -6,32 +6,33 @@ import notificationSuccess from '../../../utils/notificationSuccess';
 
 export default function addItem(itemToAdd, color, size, amount = 1) {
   return (dispatch, getState) => {
-    if (Number(amount) <= 0) { //TODO thunk is too big
+    if (Number(amount) <= 0) {
       return;
     }
     const currentItems = getState().cartController.items.slice();
-    const currentCollection = {};
-    let itemAlreadyAdded = false;
-    for (const item of currentItems) {
-      if (item.generalData._id === itemToAdd._id
+    const targetItemIndex = currentItems.findIndex((item) => {
+      return item.generalData._id === itemToAdd._id
         && item.color === color
-        && item.size === size) {
-        itemAlreadyAdded = true;
-        item.amount += amount;
-      }
-      if (!currentCollection[item.generalData._id]) {
-        currentCollection[item.generalData._id] = [];
-      }
-      currentCollection[item.generalData._id].push({ size: item.size, color: item.color, amount: item.amount });
+        && item.size === size;
+    });
+
+    if (targetItemIndex) {
+      currentItems[targetItemIndex].amount++;
     }
-    if (!itemAlreadyAdded) {
-      if (!currentCollection[itemToAdd._id]) {
-        currentCollection[itemToAdd._id] = [];
-      }
-      currentCollection[itemToAdd._id].push({ size, color, amount });
-      currentItems.push({ generalData: itemToAdd, size, color, amount });
+    else {
+      currentItems[targetItemIndex].push({ generalData: itemToAdd, size, color, amount });
     }
-    updateUserCart(currentCollection)
+
+    const currentItemsToServer = currentItems.filter((item) => {
+      return {
+        size: item.size,
+        color: item.color,
+        amount: item.amount,
+        _id: item.generalData._id
+      }
+    });
+
+    updateUserCart(currentItemsToServer)
       .then(() => {
         notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', itemToAdd.name); //TODO dispatch it
         dispatch(setItems(currentItems));
