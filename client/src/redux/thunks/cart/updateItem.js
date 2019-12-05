@@ -1,11 +1,8 @@
-import { updateItems as updateItemsActionCreator } from '../../action-creators/cart-action-creator';
-
-import updateLocalStorageCollection from '../../../utils/localStorage/updateLocalStorageCollection';
-
-import notificationSuccess from '../../../utils/notificationSuccess';
+import { setItems } from './setItems';
+import { updateUserCart } from '../../../utils/updateUserCart';
 
 export default function updateItem(target, color, size, amount) {
-  return (dispatch, getState) => {
+  return (dispatch, getState) => { //TODO make this function shorter
     const currentItems = getState().cartController.items.slice();
     const currentCollection = {};
 
@@ -42,7 +39,12 @@ export default function updateItem(target, color, size, amount) {
       currentItems.push({ generalData: target.generalData, size, color, amount });
     }
 
-    dispatch(updateItemsActionCreator(currentItems));
-    updateLocalStorageCollection('CartItems', currentCollection);
+    updateUserCart(currentCollection)
+      .then(() => {
+        dispatch(setItems(currentItems));
+      })
+      .catch((err) => {
+        //TODO notify about cart error or do something another
+      });
   };
 }

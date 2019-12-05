@@ -1,6 +1,6 @@
-import { updateItems as updateItemsActionCreator } from '../../action-creators/cart-action-creator';
+import { updateUserCart } from '../../../utils/updateUserCart';
 
-import updateLocalStorageCollection from '../../../utils/localStorage/updateLocalStorageCollection';
+import { setItems } from './setItems';
 
 export default function removeItem(target) {
   return (dispatch, getState) => {
@@ -19,7 +19,12 @@ export default function removeItem(target) {
       currentCollection[currentItems[i].generalData._id]
         .push({ size: currentItems[i].size, color: currentItems[i].color, amount: currentItems[i].amount });
     }
-    dispatch(updateItemsActionCreator(currentItems));
-    updateLocalStorageCollection('CartItems', currentCollection);
+    updateUserCart(currentCollection)
+      .then(() => {
+        dispatch(setItems(currentItems));
+      })
+      .catch((err) => {
+        //TODO notify about cart error or do something another
+      });
   };
 }

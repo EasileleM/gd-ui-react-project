@@ -8,7 +8,6 @@ import { LoadingSpinner } from "../LoadingSpinner";
 import FilterSearchBar from "./FilterSearchBar/FilterSearchBar";
 import notificationError from "../../utils/notificationError";
 import { withTranslation } from 'react-i18next';
-import store from '../../redux/store';
 
 export class Filters extends Component {
   constructor(props) {

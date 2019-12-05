@@ -2,8 +2,8 @@ import React from 'react';
 
 import './AddToFavoritesButton.scss';
 import store from '../../redux/store';
-import addItem from '../../redux/thunks/favorites/addItem';
-import removeItem from '../../redux/thunks/favorites/removeItem';
+import { addItem } from '../../redux/thunks/favorites/addItem';
+import { removeItem } from '../../redux/thunks/favorites/removeItem';
 import { changeModalWindowContent } from '../../redux/action-creators/modalWindow-action-creator';
 import {ReactComponent as FavoritesIcon} from "../../assets/likeDisabled.svg";
 import {ReactComponent as FavoritesIconEnabled} from "../../assets/likeEnabled.svg";
