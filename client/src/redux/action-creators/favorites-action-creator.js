@@ -1,17 +1,7 @@
-import * as favoritesActions from '../actions/favorites-actions';
+export const FAVORITES_ACTIONS = {
+  UPDATE_ITEMS: 'UPDATE_ITEMS_FAVORITES'
+};
 
-export const updateItems = (items) => {
-  return {...favoritesActions.updateItems, items};
-}
-
-export const fetchItemsBegin = () => {
-  return favoritesActions.fetchItemsBegin;
-}
-
-export const fetchItemsSuccess = (items, size) => {
-  return {...favoritesActions.fetchItemsSuccess, items, size};
-}
-
-export const fetchItemsFailure = (error) => {
-  return {...favoritesActions.fetchItemsFailure, error};
+export const updateItems = (items, size) => {
+  return { type: FAVORITES_ACTIONS.UPDATE_ITEMS, items, size};
 }

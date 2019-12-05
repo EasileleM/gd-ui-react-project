@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { closeModalWindow } from '../../redux/action-creators/modalWindow-action-creator';
-import { default as fetchItemsCart } from '../../redux/thunks/cart/fetchItems';
-import { default as fetchItemsFavorites } from '../../redux/thunks/favorites/fetchItems';
 
 import CartItems from '../CartItems/CartItems';
 import FavoritesItems from '../FavoritesItems/FavoritesItems';
@@ -18,14 +16,9 @@ export class ModalWindowWrapper extends React.Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    this.props.fetchItemsCart();
-    this.props.fetchItemsFavorites();
-  }
 
   componentDidUpdate(prevProps) {
     if (this.props.modalWindowMode !== prevProps.modalWindowMode) {
-      disableBodyScroll(this.bodyElement);
       switch (this.props.modalWindowMode) {
         case 'cart':
           if (!this.props.cartSize) {
@@ -33,6 +26,7 @@ export class ModalWindowWrapper extends React.Component {
             this.props.close();
             break;
           }
+          disableBodyScroll(this.bodyElement);
           this.setState({
             currentContent: <><CartItems /><OrderBlock /></>,
             additionalClasses: ''
@@ -44,18 +38,21 @@ export class ModalWindowWrapper extends React.Component {
             this.props.close();
             break;
           }
+          disableBodyScroll(this.bodyElement);
           this.setState({
             currentContent: <><FavoritesItems /></>,
             additionalClasses: ''
           });
           break;
         case 'loginWindowContent':
+          disableBodyScroll(this.bodyElement);
           this.setState({
             currentContent: <><LoginWindowContent /></>,
             additionalClasses: 'modal-window__content_narrow'
           });
           break;
         case 'userInfo':
+          disableBodyScroll(this.bodyElement);
           this.setState({
             currentContent: <><UserInfoContent /></>,
             additionalClasses: ''
@@ -88,9 +85,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    close: () => dispatch(closeModalWindow()),
-    fetchItemsCart: () => dispatch(fetchItemsCart()),
-    fetchItemsFavorites: () => dispatch(fetchItemsFavorites())
+    close: () => dispatch(closeModalWindow())
   }
 };
 

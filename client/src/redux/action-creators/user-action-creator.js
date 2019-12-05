@@ -1,9 +1,12 @@
-import * as userActions from '../actions/user-actions';
+export const USER_ACTIONS = {
+  AUTHORIZE: 'AUTHORIZE',
+  LOGOUT: 'LOGOUT'
+}
 
 export const userAuthorize = (data) => {
-  return {...userActions.authorize, data};
+  return { type: USER_ACTIONS.AUTHORIZE, data };
 }
 
 export const userLogout = () => {
-  return {...userActions.logout};
+  return { type: USER_ACTIONS.LOGOUT };
 }

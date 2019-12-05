@@ -1,9 +1,12 @@
-import * as modalWindowActions from '../actions/modalWindow-action';
+export const MODAL_WINDOW_ACTIONS = {
+  CLOSE: 'CLOSE',
+  CONTENT_CHANGE: 'CONTENT_CHANGE'
+}
 
 export const closeModalWindow = () => {
-  return {...modalWindowActions.closeWindow};
+  return { type: MODAL_WINDOW_ACTIONS.CLOSE };
 }
 
 export const changeModalWindowContent = (content) => {
-  return {...modalWindowActions.contentChange, content};
+  return { type: MODAL_WINDOW_ACTIONS.CONTENT_CHANGE, content };
 }

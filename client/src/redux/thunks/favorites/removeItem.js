@@ -1,19 +1,26 @@
-import { updateItems as updateItemsActionCreator } from '../../action-creators/favorites-action-creator';
+import { setItems } from './setItems';
+import { updateUserFavorites } from '../../../utils/updateUserFavorites';
 
-import updateLocalStorageCollection from '../../../utils/localStorage/updateLocalStorageCollection';
-
-export default function removeItem(target) {
+export function removeItem(target) {
   return (dispatch, getState) => {
     const currentItems = getState().favoritesController.items.slice();
-    const currentCollection = {};
-    for (let i = 0; i < currentItems.length; i++) {
-      if (currentItems[i]._id === target._id) {
-          currentItems.splice(i--, 1);
-          continue;
+
+    currentItems.splice(currentItems.find((item) => {
+      return item._id === target._id;
+    }))
+
+    const currentItemsToServer = currentItems.filter((item) => {
+      return {
+        _id: item._id
       }
-      currentCollection[currentItems[i]._id] = true;
-    }
-    dispatch(updateItemsActionCreator(currentItems));
-    updateLocalStorageCollection('FavoritesItems', currentCollection);
+    });
+
+    updateUserFavorites(currentItemsToServer)
+      .then(() => {
+        dispatch(setItems(currentItems));
+      })
+      .catch((err) => {
+        //TODO notify about cart error or do something another
+      });
   };
 }
