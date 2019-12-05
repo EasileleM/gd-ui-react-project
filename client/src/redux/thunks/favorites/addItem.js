@@ -13,10 +13,9 @@ export function addItem(itemToAdd) {
 
     const currentItemsToServer = currentItems.filter((item) => {
       return {
-        _id: item.generalData._id
+        _id: item._id
       }
     });
-
     updateUserFavorites(currentItemsToServer)
       .then(() => {
         notificationSuccess(' успешно добавлено в избранное', ' has been added to favorites', itemToAdd.name); //TODO dispatch it

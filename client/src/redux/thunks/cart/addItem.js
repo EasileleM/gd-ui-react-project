@@ -16,11 +16,11 @@ export default function addItem(itemToAdd, color, size, amount = 1) {
         && item.size === size;
     });
 
-    if (targetItemIndex) {
+    if (~targetItemIndex) {
       currentItems[targetItemIndex].amount++;
     }
     else {
-      currentItems[targetItemIndex].push({ generalData: itemToAdd, size, color, amount });
+      currentItems.push({ generalData: itemToAdd, size, color, amount });
     }
 
     const currentItemsToServer = currentItems.filter((item) => {

@@ -14,19 +14,18 @@ export default function updateItem(target, color, size, amount) {
 
     if (bucketChanged) {
       currentItems.splice(currentBucketToChange, 1);
-      const newBucket = currentItems.findIndex((item) => {
+      currentBucketToChange = currentItems.findIndex((item) => {
         return item.generalData._id === target.generalData._id
           && item.color === color
           && item.size === size;
       });
-      currentBucketToChange = newBucket;
     }
 
-    if (currentBucketToChange) {
-      currentItems[currentBucketToChange] = { generalData: target, size, color, amount };
+    if (~currentBucketToChange) {
+      currentItems[currentBucketToChange] = { generalData: target.generalData, size, color, amount };
     }
     else {
-      currentItems.push({ generalData: target, size, color, amount });
+      currentItems.push({ generalData: target.generalData, size, color, amount });
     }
 
     const currentItemsToServer = currentItems.filter((item) => {

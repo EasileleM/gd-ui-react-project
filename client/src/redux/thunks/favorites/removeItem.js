@@ -11,7 +11,7 @@ export function removeItem(target) {
 
     const currentItemsToServer = currentItems.filter((item) => {
       return {
-        _id: item.generalData._id
+        _id: item._id
       }
     });
 
