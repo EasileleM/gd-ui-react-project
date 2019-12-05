@@ -12,8 +12,6 @@ import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 export class Search extends Component {
   constructor(props) {
     super(props);
-    // const values = queryString.parse(this.props.location.search);
-    // store.dispatch(changeCategoryFilter(values.categories), search(values.search));
     this.state = {
       filtersToggle: false,
     }
