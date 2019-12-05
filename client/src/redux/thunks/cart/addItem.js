@@ -31,13 +31,13 @@ export default function addItem(itemToAdd, color, size, amount = 1) {
         _id: item.generalData._id
       }
     });
-
+    dispatch(setItems(currentItems));
     updateUserCart(currentItemsToServer)
       .then(() => {
         notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', itemToAdd.name); //TODO dispatch it
-        dispatch(setItems(currentItems));
       })
       .catch((err) => {
+        console.log(err);
         //TODO notify about cart error or do something another
       });
   };

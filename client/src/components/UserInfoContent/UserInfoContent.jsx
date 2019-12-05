@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
-import { userLogout } from '../../redux/action-creators/user-action-creator';
 import { closeModalWindow } from '../../redux/action-creators/modalWindow-action-creator';
 
 import notificationSuccess from '../../utils/notificationSuccess';
+
+import { logout as logoutThunk} from '../../redux/thunks/logout';
 
 import { logout } from '../../utils/logout';
 
@@ -43,7 +44,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logout: () => dispatch(userLogout()),
+    logout: () => dispatch(logoutThunk()),
     close: () => dispatch(closeModalWindow())
   }
 };

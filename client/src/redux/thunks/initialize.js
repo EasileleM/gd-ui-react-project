@@ -12,9 +12,11 @@ export function initialize() {
     interceptorInit();
     getAuthentificationInfo()
       .then((data) => {
-        dispatch(userAuthorize(data.user.info));
-        dispatch(setCartItems(data.user.cartItems));
-        dispatch(setFavoritesItems(data.user.favoritesItems));
+        if (data.info) {
+          dispatch(userAuthorize(data.info));
+        }
+        dispatch(setCartItems(data.cartItems));
+        //dispatch(setFavoritesItems(data.favoritesItems));
       });
   };
 }

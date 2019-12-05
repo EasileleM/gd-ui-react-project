@@ -2,12 +2,13 @@ import passportLocal from 'passport-local';
 import bcrypt from 'bcrypt';
 import passportAnonymUuid from 'passport-anonym-uuid';
 import {User} from "./db/Models/user.model"
+import {Items} from "./db/Models/item.model";
 
 const LocalStrategy = passportLocal.Strategy;
 const AnonymIdStrategy = passportAnonymUuid.Strategy;
 
 function initialize(passport) {
-  const authenticateUser =  function (email, password, done) {
+  const authenticateUser = function (email, password, done) {
     User.findOne({'email': email}, async function (err, user) {
       console.log(user);
       if (err) {
@@ -23,6 +24,7 @@ function initialize(passport) {
         console.log(`wrong password`);
         return done(null, false);
       }
+      console.log("user was found successfully")
       return done(null, user);
     });
   };
@@ -35,7 +37,44 @@ function initialize(passport) {
     return done(null, user._id)
   });
   passport.deserializeUser(async (id, done) => {
-    return done(null, await User.findOne({_id: id}))
+    const user = await User.findOne({_id: id}).lean();
+
+    user.info = {
+      _id: user._id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    };
+    delete user._id;
+    delete user.__v;
+    delete user.password;
+    delete user.email;
+    delete user.firstName;
+    delete user.lastName;
+
+
+    const cartDataPromises = user.cart.map((item) => {
+
+      return Items
+          .findById(item.itemId)
+          .lean()
+          .exec()
+          .then((generalData) => {
+            generalData.description = generalData.description["en"];
+            generalData.name = generalData.name["en"];
+
+
+            return {
+              color: item.color,
+              amount: item.amount,
+              size: item.size,
+              generalData
+            }
+          })
+    });
+    user.cartItems = await Promise.all(cartDataPromises);
+    delete user.cart;
+    return done(null, user);
   })
 }
 
