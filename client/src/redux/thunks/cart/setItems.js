@@ -2,10 +2,9 @@ import { updateItems } from '../../action-creators/cart-action-creator';
 
 export function setItems(items) {
   return async (dispatch) => {
-    let cartSize = 0;
+    let cartSize = items.length;
     let orderPrice = 0;
     for (const item of items) {
-      cartSize++;
       orderPrice += item.generalData.price * item.amount;
     }
     dispatch(updateItems(items, cartSize, orderPrice));

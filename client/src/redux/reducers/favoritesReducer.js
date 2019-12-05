@@ -1,4 +1,4 @@
-import { FAVORITES_ACTIONS } from '../action-types/favoritesActionTypes';
+import { FAVORITES_ACTIONS } from '../action-creators/favorites-action-creator';
 
 export const initialState = {
   size: 0,
@@ -12,7 +12,7 @@ export const favoritesReducer = (state = initialState, action) => {
         return {
           ...state,
           items: action.items,
-          size: action.items.length
+          size: action.size
         }
     case FAVORITES_ACTIONS.FETCH_BEGINS:
       return {

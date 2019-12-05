@@ -1,4 +1,4 @@
-import { USER_ACTIONS } from '../action-types/userActionTypes';
+import { USER_ACTIONS } from '../action-creators/user-action-creator';
 
 export const initialState = {
   isAuthorized: false,

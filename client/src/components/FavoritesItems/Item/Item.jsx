@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import store from '../../../redux/store';
-import removeItem from '../../../redux/thunks/favorites/removeItem';
+import { removeItem } from '../../../redux/thunks/favorites/removeItem';
 import { AddToCartButton } from '../../AddToCartButton/AddToCartButton.jsx';
 import { Link } from 'react-router-dom';
 import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
