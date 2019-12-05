@@ -1,6 +1,7 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import store from '../../redux/store';
 
 import "./Layout.scss";
 
@@ -11,6 +12,7 @@ import ModalWindowWrapper from '../../components/ModalWindowWrapper/ModalWindowW
 import { RedirectWrapper } from '../../components/RedirectWrapper/RedirectWrapper';
 
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
+import { setInitSearchState } from '../../redux/action-creators/filter-action-creator';
 
 import Search from "../Search/Search";
 import Home from "../Home/Home";
@@ -18,6 +20,10 @@ import ErrorPage from "../errors/ErrorPage";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
 
 export class Layout extends Component {
+    componentDidMount() {
+        store.dispatch(setInitSearchState(this.props.location.search))
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.URI !== prevProps.URI && this.props.URI) {
             this.props.history.push(this.props.URI);
