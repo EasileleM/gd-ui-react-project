@@ -1,10 +1,18 @@
-const mongoose = require('mongoose');
+import mongoose, {ObjectId} from 'mongoose';
 
 const userSchema = new mongoose.Schema({
   email: String,
   firstName: String,
   lastName: String,
   password: String,
+  cart: [
+    {
+      itemId: ObjectId,
+      size: String,
+      color: String,
+      amount: Number
+    }
+  ]
 }, {collection : 'users'});
 
 userSchema.set('toJSON', {
@@ -14,5 +22,4 @@ userSchema.set('toJSON', {
   }
 });
 
-const User = mongoose.models.User || mongoose.model('User', userSchema);
-module.exports = User;
+export const User = mongoose.models.User || mongoose.model('User', userSchema);

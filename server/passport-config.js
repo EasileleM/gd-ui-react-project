@@ -1,11 +1,15 @@
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
-const User = require('./db/Models/user.model');
-const AnonymIdStrategy = require('passport-anonym-uuid').Strategy;
+import passportLocal from 'passport-local';
+import bcrypt from 'bcrypt';
+import passportAnonymUuid from 'passport-anonym-uuid';
+import {User} from "./db/Models/user.model"
+
+const LocalStrategy = passportLocal.Strategy;
+const AnonymIdStrategy = passportAnonymUuid.Strategy;
 
 function initialize(passport) {
   const authenticateUser =  function (email, password, done) {
     User.findOne({'email': email}, async function (err, user) {
+      console.log(user);
       if (err) {
         console.log(`Error: ${err}`);
         return done(err);
@@ -28,12 +32,11 @@ function initialize(passport) {
   passport.use(new AnonymIdStrategy());
 
   passport.serializeUser((user, done) => {
-    console.log("serializeUser:");
-    return done(null, user)
+    return done(null, user._id)
   });
-  passport.deserializeUser((id, done) => {
-    return done(null, id)//todo переделоть
+  passport.deserializeUser(async (id, done) => {
+    return done(null, await User.findOne({_id: id}))
   })
 }
 
-module.exports = initialize;
+export default initialize;

@@ -77,10 +77,6 @@ $main-breakpoint: 500px;
   &__info-color-size {
     display: flex;
     margin-top: 20px;
-
-    @media screen and (max-width: $main-breakpoint) {
-      flex-direction: column;
-    }
   }
 
   &__color {
@@ -104,65 +100,31 @@ $main-breakpoint: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    &-amount {
-      &-input {
-        @include font-primary-regular-sm;
-        border: 0;
-        height: 100%;
-        width: 20px;
-        text-align: center;
-        outline: 0;
-        background-color: transparent;
-        color: #ff5912;
-      }
-      &-wrapper {
-        display: flex;
-        height: 20px;
-      }
-      &-button {
-        @include font-primary-semi-bold-sm;
-        display: flex;
-        border: 0;
-        height: 100%;
-        cursor: pointer;
-        background-color: transparent;
-        outline: 0;
-        color: #34404b;
-
-        &:hover {
-          opacity: 0.7;
-        }
-
-        &:focus {
-          opacity: 0.7;
-        }
-      }
-    }
-    &-remove {
-      align-self: flex-end;
-      border: 0;
-      height: 25px;
-      width: 25px;
-      outline: 0;
-      cursor: pointer;
-      background-color: transparent;
-      background-size: 100% 100%;
-      background-image: url(../../../assets/removeButton.svg);
-
-      &:focus {
-        opacity: 0.8;
-      }
-
-      &:hover {
-        opacity: 0.8;
-      }
-    }
-
+    margin-left: auto;
     @media screen and (max-width: $main-breakpoint) {
       justify-content: space-between;
       flex-direction: row-reverse;
       margin-top: -25px;
-      width: 100%;
+    }
+  }
+
+  &__item-controls-remove {
+    align-self: flex-end;
+    border: 0;
+    height: 25px;
+    width: 25px;
+    outline: 0;
+    cursor: pointer;
+    background-color: transparent;
+    background-size: 100% 100%;
+    background-image: url(../../../assets/removeButton.svg);
+
+    &:focus {
+      opacity: 0.8;
+    }
+
+    &:hover {
+      opacity: 0.8;
     }
   }
 }
