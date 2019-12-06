@@ -111,4 +111,5 @@ const mapStateToProps = (state) => {
     filters: state.filterController,
   }
 };
+
 export default  withTranslation()(connect(mapStateToProps)(ProductCatalog));

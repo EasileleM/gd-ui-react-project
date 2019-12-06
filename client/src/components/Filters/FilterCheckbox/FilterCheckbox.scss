@@ -68,4 +68,21 @@
       text-shadow: 0px 0px 1px $color-orange;
     }
   }
+
+  &__show-button {
+    align-items: center;
+    @include font-primary-regular-md;
+    color: $color-limed-spruce;
+    cursor: pointer;
+    margin-top: 15px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    align-self: flex-start;
+
+    &:focus, &:hover{
+      color: $color-orange;
+    }
+  }
 }

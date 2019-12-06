@@ -15,7 +15,6 @@ export class Filters extends Component {
     this.state = {
       filters: null
     }
-    // this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -31,26 +30,9 @@ export class Filters extends Component {
     });
   }
 
-  handleChange = () => {
-    // const storeState = store.getState().filterController || "";
-    // this.props.history.push(`/search?filter=true` +
-    //   `${storeState.sizes.length ? ("&sizes=" + storeState.sizes.join(',')) : ""}` +
-    //   `${storeState.brands.length ? ("&brands=" + storeState.brands.join(',')) : ""}` +
-    //   `${storeState.category ? ("&category=" + storeState.category) : ""}` +
-    //   `${storeState.maxPrice ? ("&maxPrice=" + storeState.maxPrice) : ""}` +
-    //   `${storeState.minPrice ? ("&minPrice=" + storeState.minPrice) : ""}` +
-    //   `${storeState.searchTarget ? ("&searchTarget=" + storeState.searchTarget) : ""}`);
-  };
-
   clearCategory = () => {
     this.setState({ searchTarget: "" });
   };
-
-  onInit = (category) => {
-    // const filters = this.props.filterUrl.split(/[&=]/);
-    // const res = filters.filter((item) => category.includes(item));
-    // return res.join();
-  }
 
   render() {
     const t = this.props.t;
