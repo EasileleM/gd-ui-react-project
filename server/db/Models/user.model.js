@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose, {ObjectId} from 'mongoose';
 
 const userSchema = new mongoose.Schema({
   email: String,
@@ -8,7 +7,7 @@ const userSchema = new mongoose.Schema({
   password: String,
   cart: [
     {
-      itemId: mongoose.Types.ObjectId,
+      itemId: ObjectId,
       size: String,
       color: String,
       amount: Number
@@ -33,4 +32,4 @@ const userSchema = new mongoose.Schema({
 //   }
 // });
 
-module.exports = mongoose.models.User || mongoose.model('User', userSchema);
+export const User = mongoose.models.User || mongoose.model('User', userSchema);
