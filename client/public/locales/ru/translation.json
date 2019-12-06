@@ -96,5 +96,6 @@
   "loginWindowContentHeader": "Авторизация",
   "userInfoHeader": "Профиль",
   "welcome": "Добро пожаловать",
-  "logout": "Выйти"
+  "logout": "Выйти",
+  "Reset": "Сброс"
 }

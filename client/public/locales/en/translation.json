@@ -96,5 +96,6 @@
   "loginWindowContentHeader": "Authorization",
   "userInfoHeader": "Profile",
   "welcome": "Welcome",
-  "logout": "Logout"
+  "logout": "Logout",
+  "Reset": "Reset"
 }
