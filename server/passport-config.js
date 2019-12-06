@@ -1,9 +1,11 @@
-const passportLocal = require( 'passport-local');
-const bcrypt = require( 'bcrypt');
-const {User} = require( "./db/Models/user.model");
-const {Items} = require( "./db/Models/item.model");
+import passportLocal from 'passport-local';
+import bcrypt from 'bcrypt';
+import passportAnonymUuid from 'passport-anonym-uuid';
+import {User} from "./db/Models/user.model"
+import {Items} from "./db/Models/item.model";
 
 const LocalStrategy = passportLocal.Strategy;
+const AnonymIdStrategy = passportAnonymUuid.Strategy;
 
 function initialize(passport) {
   const authenticateUser = function (email, password, done) {
@@ -22,12 +24,14 @@ function initialize(passport) {
         console.log(`wrong password`);
         return done(null, false);
       }
-      console.log("user was found successfully");
+      console.log("user was found successfully")
       return done(null, user);
     });
   };
 
   passport.use(new LocalStrategy({usernameField: 'email'}, authenticateUser));
+
+  passport.use(new AnonymIdStrategy());
 
   passport.serializeUser((user, done) => {
     return done(null, user._id)
@@ -74,4 +78,4 @@ function initialize(passport) {
   })
 }
 
-module.exports = initialize;
+export default initialize;
