@@ -41,7 +41,7 @@ export class SignInForm extends React.Component {
     if (this.state.emailValid && this.state.passwordValid) {
       signIn({ email: this.state.email, password: this.state.password })
         .then((res) => {
-          this.props.authorize(res.data);
+          this.props.authorize(res.data.info);
           this.props.close();
           notificationSuccess('Добро пожаловать!', 'Welcome!', '');
         })

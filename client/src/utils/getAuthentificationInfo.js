@@ -3,9 +3,11 @@ import { SERVER_URL } from '../constants/constants';
 
 export function getAuthentificationInfo() {
   return axios(`${SERVER_URL}/api/isAuth`, { //TODO change isAuth endpoint if it needs
+    method: 'get',
     withCredentials: true,
   })
   .then((res) => {
+    console.log(res)
     return res.data;
   });
 }

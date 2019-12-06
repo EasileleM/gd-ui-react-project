@@ -1,24 +1,23 @@
-const User = require("./db/Models/user.model");
+import {User} from "./db/Models/user.model";
+import express from 'express';
+import next from 'next';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import flash from 'express-flash';
+import passport from 'passport';
+import initialize from './passport-config';
+import cors from 'cors';
+import session from 'express-session';
+import connectMongo from 'connect-mongo';
+import bcrypt from 'bcrypt';
+import {Items} from "./db/Models/item.model";
 
-const express = require('express');
-const next = require('next');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const flash = require('express-flash');
-const {createServer} = require('http');
-const passport = require('passport')
-    , LocalStrategy = require('passport-local').Strategy;
-const initialize = require('./passport-config');
-const cors = require('cors');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const users = [];
+const MongoStore = connectMongo(session);
 const dev = process.env.NODE_DEV !== 'production';
 const nextApp = next({dev});
-const handle = nextApp.getRequestHandler();
+const nextHandle = nextApp.getRequestHandler();
 const port = process.env.PORT || 3000;
 const dbUri = process.env.MONGODB_URI || "mongodb+srv://admin:qwerty123456789@react-vptyr.mongodb.net/shop?retryWrites=true&w=majority";
-const bcrypt = require('bcrypt');
 
 mongoose.connect(dbUri, {
   useNewUrlParser: true,
@@ -40,7 +39,7 @@ nextApp.prepare().then(() => {
   app.use(session({
     secret: 'Meesha Track Jacket',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: new MongoStore({
       mongooseConnection: db,
       secret: 'Misha Track Jacket'
@@ -58,11 +57,93 @@ nextApp.prepare().then(() => {
   }));
   app.options('*', cors());
 
-  app.post('/api/signIn', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/api/isAuth',
-    failureRedirect: '/api/isAuth',
-    failureFlash: true
-  }));
+  app.get('/api/checkUser', checkAuthenticated, (req, res) => {
+    res.status(200).send(req.user);
+  });
+
+  app.get('/api/cart', (req, res) => {
+    if (req.isAuthenticated()) {
+      res.send(req.user.cartItems)
+    } else {
+      res.send(req.session.cart)
+    }
+  });
+
+  app.put('/api/cart', async (req, res) => {
+    if (!req.body) {
+      res.status(200).send()
+    }
+    const data = req.body;
+    const cart = data.map(current => {
+      return {
+        itemId: current.generalData._id,
+        size: current.size,
+        color: current.color,
+        amount: current.amount,
+      }
+    });
+    if (req.isAuthenticated()) {
+      await User.updateOne(
+          {"email": req.user.info.email},
+          {$set: {cart}},
+          {upsert: false}).exec();
+      res.status(200).send(req.user);
+
+    } else {
+      req.session.cart = cart;
+      res.status(200).send(req.session.cart)
+    }
+  });
+
+  app.post('/api/signIn', checkNotAuthenticated, function (req, res, next) {
+        passport.authenticate('local', function (err, user, info) {
+          if (err) {
+            return res.status(500).send(err);
+          }
+          if (!user) {
+            return res.status(400).send("wrong password or email");
+          }
+          req.logIn(user, async function (err) {
+            if (err) {
+              res.status(500).send(err);
+            }
+            if (req.session.cart) {
+              let userCart = await User.findOne({"email": req.user.email});
+              userCart = userCart.cart;
+              const anonCart = req.session.cart;
+
+              for (let i = 0; i < userCart.length; i++) {
+                for (let j = 0; j < anonCart.length; j++) {
+                  if (
+                      anonCart[j].itemId.toString() === userCart[i].itemId.toString() &&
+                      anonCart[j].size === userCart[i].size &&
+                      anonCart[j].color === userCart[i].color
+                  ) {
+                    userCart[i].amount += anonCart[j].amount;
+                    anonCart.splice(j, 1);
+                    j--;
+                  }
+                }
+              }
+
+              const mergedCart = [...userCart, ...anonCart];
+
+              await User
+                  .updateOne(
+                      {"email": req.user.email},
+                      {$set: {cart: mergedCart}},
+                      {upsert: true})
+                  .exec();
+              return res.redirect('/api/isAuth');
+
+            }
+            console.log(req.user);
+            return res.redirect('/api/isAuth');
+
+          });
+        })(req, res, next)
+      }
+  );
 
   app.post('/api/signUp', checkNotAuthenticated, async (req, res) => {
     try {
@@ -79,17 +160,55 @@ nextApp.prepare().then(() => {
         password: hashedPassword,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
+        cart: req.session.cart ? req.session.cart : [],
       });
-      newUser.save().then((user) => {
-        res.statusCode = 201;
-        req.login(user, function(err) {
-          if (err) { return next(err); }
-          return res.redirect('/api/isAuth');
+
+      await newUser.save();
+
+      passport.authenticate('local', function (err, user, info) {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        if (!user) {
+          return res.status(400).send("wrong password or email");
+        }
+        req.logIn(user, async function (err) {
+          if (err) {
+            res.status(500).send(err);
+          }
+          if (req.session.cart) {
+            let userCart = await User.findOne({"email": req.user.email});
+            userCart = userCart.cart;
+            const anonCart = req.session.cart;
+
+            for (let i = 0; i < userCart.length; i++) {
+              for (let j = 0; j < anonCart.length; j++) {
+                if (
+                    anonCart[j].itemId.toString() === userCart[i].itemId.toString() &&
+                    anonCart[j].size === userCart[i].size &&
+                    anonCart[j].color === userCart[i].color
+                ) {
+                  userCart[i].amount += anonCart[j].amount;
+                  anonCart.splice(j, 1);
+                  j--;
+                }
+              }
+            }
+
+            const mergedCart = [...userCart, ...anonCart];
+
+            await User
+                .updateOne(
+                    {"email": req.user.email},
+                    {$set: {cart: mergedCart}},
+                    {upsert: true})
+                .exec();
+            return res.status(200).send(req.user);
+          }
+          return res.status(200).send(req.user);
         });
-      }).catch(err => {
-        res.statusCode = 500;
-        res.json(JSON.stringify(err));
-      })
+      })(req, res, next)
+
     } catch (e) {
       res.statusCode = 500;
       console.log("error : " + e);
@@ -99,6 +218,7 @@ nextApp.prepare().then(() => {
 
   app.post('/api/logout', checkAuthenticated, (req, res) => {
     req.logout();
+    req.session.destroy();
     res.status(200).send();
   });
 
@@ -107,7 +227,7 @@ nextApp.prepare().then(() => {
   });
 
   app.all('*', (req, res) => {
-    return handle(req, res)
+    return nextHandle(req, res)
   });
 
   app.listen(port, err => {
@@ -118,23 +238,37 @@ nextApp.prepare().then(() => {
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    console.log(`isAuthenticated`);
-    console.log(`\nreq: ${req},\nres: ${res}`);
-    return res.redirect('/api/isAuth')
+    return res.status(400).send();
   }
-  console.log(`isNOTAuthenticated`);
-  console.log(`\nreq: ${req},\nres: ${res}`);
   next()
 }
 
-function checkAuthenticated(req, res, next) {
+async function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    console.log(`isAuthenticated`);
-    console.log(`\nreq: ${req},\nres: ${res}`);
-
     return next()
   }
-  console.log(`isNOTAuthenticated`);
-  console.log(`\nreq: ${req},\nres: ${res}`);
-  res.status(401).send();
+
+  if (!req.session.cart) {
+    return res.status(200).send({cartItems: []});
+  }
+  const cartDataPromises = req.session.cart.map((item) => {
+
+    return Items
+        .findById(item.itemId)
+        .lean()
+        .exec()
+        .then((generalData) => {
+          generalData.description = generalData.description["en"];
+          generalData.name = generalData.name["en"];
+          return {
+            color: item.color,
+            amount: item.amount,
+            size: item.size,
+            generalData
+          }
+        })
+  });
+
+  const result = await Promise.all(cartDataPromises);
+  res.status(200).send({cartItems: result});
 }

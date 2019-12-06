@@ -19,10 +19,9 @@ export default function removeItem(target) {
         _id: item.generalData._id
       }
     });
-
+    dispatch(setItems(currentItems));
     updateUserCart(currentItemsToServer)
       .then(() => {
-        dispatch(setItems(currentItems));
       })
       .catch((err) => {
         //TODO notify about cart error or do something another
