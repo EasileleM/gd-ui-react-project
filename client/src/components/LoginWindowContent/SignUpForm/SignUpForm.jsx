@@ -11,6 +11,7 @@ import { InvalidFormNotification } from '../InvalidFormNotification/InvalidFormN
 import notificationSuccess from '../../../utils/notificationSuccess';
 import { signUp } from '../../../utils/signUp';
 
+import { setItems as setCartItems } from '../../../redux/thunks/cart/setItems';
 import { userAuthorize } from '../../../redux/action-creators/user-action-creator';
 import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
 
@@ -56,7 +57,8 @@ export class SignUpForm extends React.Component {
         firstName: this.state.firstName, lastName: this.state.lastName
       })
         .then((res) => {
-          this.props.authorize(res.data);
+          this.props.authorize(res.data.info);
+          this.props.setCartItems(res.data.cartItems);
           this.props.close();
           notificationSuccess('Добро пожаловать!', 'Welcome!', '');
         })
@@ -186,7 +188,8 @@ export class SignUpForm extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     close: () => dispatch(closeModalWindow()),
-    authorize: (data) => dispatch(userAuthorize(data))
+    authorize: (data) => dispatch(userAuthorize(data)),
+    setCartItems: (data) => dispatch(setCartItems(data))
   }
 };
 

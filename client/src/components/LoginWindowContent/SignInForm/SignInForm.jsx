@@ -13,6 +13,7 @@ import notificationSuccess from '../../../utils/notificationSuccess';
 import { signIn } from '../../../utils/signIn';
 
 import { userAuthorize } from '../../../redux/action-creators/user-action-creator';
+import { setItems as setCartItems } from '../../../redux/thunks/cart/setItems';
 import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
 
 const formErrors = {
@@ -42,6 +43,7 @@ export class SignInForm extends React.Component {
       signIn({ email: this.state.email, password: this.state.password })
         .then((res) => {
           this.props.authorize(res.data.info);
+          this.props.setCartItems(res.data.cartItems);
           this.props.close();
           notificationSuccess('Добро пожаловать!', 'Welcome!', '');
         })
@@ -57,6 +59,7 @@ export class SignInForm extends React.Component {
   handleOnBlur = (e) => {
     e.preventDefault();
     if (!e.target.value.length) {
+      this.setState({ [e.target.name + 'Valid']: null });
       return;
     }
     this.checkValidity(e.target.name, e.target.value);
@@ -121,7 +124,8 @@ export class SignInForm extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     close: () => dispatch(closeModalWindow()),
-    authorize: (data) => dispatch(userAuthorize(data))
+    authorize: (data) => dispatch(userAuthorize(data)),
+    setCartItems: (data) => dispatch(setCartItems(data))
   }
 };
 

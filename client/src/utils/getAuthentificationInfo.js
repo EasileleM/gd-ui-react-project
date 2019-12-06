@@ -7,7 +7,6 @@ export function getAuthentificationInfo() {
     withCredentials: true,
   })
   .then((res) => {
-    console.log(res)
     return res.data;
   });
 }
