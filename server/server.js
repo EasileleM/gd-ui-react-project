@@ -134,9 +134,12 @@ nextApp.prepare().then(() => {
                       {$set: {cart: mergedCart}},
                       {upsert: true})
                   .exec();
-              return res.status(200).send(req.user);
+              return res.redirect('/api/isAuth');
+
             }
-            return res.status(200).send(req.user);
+            console.log(req.user);
+            return res.redirect('/api/isAuth');
+
           });
         })(req, res, next)
       }
