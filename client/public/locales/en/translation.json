@@ -63,7 +63,9 @@
     "categories": "Categories",
     "price": "Price Filter",
     "brands": "Brands",
-    "sizes": "Sizes"
+    "sizes": "Sizes",
+    "expand": "Show more",
+    "wrap": "Show less"
   },
   "catalog": {
     "notFound": "Sorry, we couldn't find anything"
