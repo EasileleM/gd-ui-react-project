@@ -22,21 +22,18 @@
     "express": "^4.17.1",
     "express-flash": "0.0.2",
     "express-session": "^1.17.0",
-    "micro-cors": "^0.1.1",
     "mongodb": "^3.3.3",
     "mongoose": "^5.7.12",
-    "next": "^9.1.1",
     "passport": "^0.4.0",
-    "passport-anonym-uuid": "^1.0.3",
     "passport-local": "^1.0.0",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "nodemon": "^2.0.1",
     "babel-loader": "^8.0.6",
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/node": "^7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
   }
 }
