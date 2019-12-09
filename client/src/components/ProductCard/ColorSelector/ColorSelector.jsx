@@ -6,8 +6,8 @@ export class ColorSelector extends React.Component {
 
   render() {
     const colorVariants = this.props.colors.map((color) =>
-      <div className="color-selector-container-wrapper">
-        <label key={color}
+      <div key={color} className="color-selector-container-wrapper">
+        <label
           style={{
             backgroundColor: color
           }}

@@ -8,8 +8,8 @@ export class SizesSelector extends React.Component {
     const t = this.props.t;
     const dash = <span className="sizes-selector__dash">-</span>;
     const sizeVariants = this.props.sizes.map((size, index) =>
-      <>
-        <div key={size} className="sizes-selector__size">
+      <div className="sizes-selector__wrapper" key={size}>
+        <div className="sizes-selector__size">
           <label key={index} className={`sizes-selector__label ${this.props.selectedOption === size ? 'sizes-selector__label_checked' : ''}`}>
             {size}
             <input type="radio"
@@ -21,7 +21,7 @@ export class SizesSelector extends React.Component {
           </label>
         </div>
         {this.props.sizes.length - 1 === index ? null : dash}
-      </>
+      </div>
     )
     return (
       <div className="sizes-selector">
