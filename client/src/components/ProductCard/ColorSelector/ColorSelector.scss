@@ -14,7 +14,6 @@
     position: relative;
     content: "";
     cursor: pointer;
-    margin-right: 6px;
     height: 14px;
     width: 14px;
     border-radius: 50%;
@@ -22,6 +21,11 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    &_checked {
+      width: 18px;
+      height: 18px;
+    }
 
     &:hover {
       box-shadow: 0 2px 3px rgba(0, 0, 0, .5);
@@ -31,4 +35,13 @@
   &__button {
     display: none;
   }
+}
+
+.color-selector-container-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 18px;
+  width: 18px;
+  padding: 0 3px;
 }
