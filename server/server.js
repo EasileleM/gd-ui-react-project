@@ -1,23 +1,22 @@
-import { User } from "./db/Models/user.model";
+import { User } from "./src/db/Models/user.model";
 import express from 'express';
 import next from 'next';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import flash from 'express-flash';
 import passport from 'passport';
-import initialize from './passport-config';
+import passportInit from './src/passport-config';
 import cors from 'cors';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
 import bcrypt from 'bcrypt';
-import { Items } from "./db/Models/item.model";
+import { Items } from "./src/db/Models/item.model";
 
 const MongoStore = connectMongo(session);
 const dev = process.env.NODE_DEV !== 'production';
 const nextApp = next({ dev });
 const nextHandle = nextApp.getRequestHandler();
 const port = process.env.PORT || 3000;
-const dbUri = process.env.MONGODB_URI || "mongodb+srv://admin:qwerty123456789@react-vptyr.mongodb.net/shop?retryWrites=true&w=majority";
 
 mongoose.connect(dbUri, {
   useNewUrlParser: true,
@@ -30,7 +29,7 @@ mongoose.connect(dbUri, {
 
 const db = mongoose.connection;
 
-initialize(passport);
+passportInit(passport);
 
 nextApp.prepare().then(() => {
   const app = express();
@@ -57,9 +56,6 @@ nextApp.prepare().then(() => {
   }));
   app.options('*', cors());
 
-  app.get('/api/checkUser', checkAuthenticated, (req, res) => {
-    res.status(200).send(req.user);
-  });
 
   app.get('/api/cart', (req, res) => {
     if (req.isAuthenticated()) {

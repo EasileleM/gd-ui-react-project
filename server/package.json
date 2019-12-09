@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js --exec babel-node --presets babel-preset-env",
-    "build": "next build",
-    "start": "nodemon server.js --exec babel-node --presets babel-preset-env",
+    "dev": "nodemon --exec babel-node src/app.js",
+    "start": "node build/app.js",
     "heroku-postbuild": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel-node": "babel-node",
+    "build": "NODE_ENV=production babel src --out-dir build"
   },
   "keywords": [],
   "author": "",
@@ -31,9 +32,11 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "nodemon": "^2.0.1",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
-    "babel-preset-env": "^1.7.0"
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/node": "^7.0.0"
   }
 }
