@@ -21,9 +21,17 @@ $color-text-sizes: $color-limed-spruce;
     display: none;
   }
 
+  &__size {
+    padding: 0 5px;
+  }
+
 
   &__label {
     cursor: pointer;
+
+    &_checked {
+      color: $color-orange;
+    }
 
     &:hover {
       opacity: .7;
