@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { ReactComponent as EyeShow } from "../../assets/eyeShow.svg";
+import { ReactComponent as EyeHide } from "../../assets/eyeHide.svg";
+
 import './UserInfoInput.scss';
 
 export class UserInfoInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state = {
+    hide: true
+  };
 
   render() {
     let additionalClasses;
@@ -21,17 +23,26 @@ export class UserInfoInput extends React.Component {
     }
     return (
       <>
-        <label className="user-info-input__label" htmlFor={this.props.name}>this.props.name</label>
-        <input
-          className={`user-info-input ${additionalClasses}`}
-          onChange={(e) => this.props.handleOnChange(e)}
-          maxLength={this.props.maxLength}
-          type={this.props.type}
-          placeholder={this.props.placeholder}
-          name={this.props.name}
-          value={this.props.value}
-          onBlur={this.props.handleOnBlur}
-        />
+        <label className="user-info-input-label" htmlFor={this.props.name}>{this.props.name}</label>
+        <div className={`user-info-input-wrapper`}>
+          <input
+            className={`user-info-input ${additionalClasses}`}
+            onChange={(e) => this.props.handleOnChange(e)}
+            maxLength={this.props.maxLength}
+            type={this.state.hide ? this.props.type : 'text'}
+            placeholder={this.props.placeholder}
+            name={this.props.name}
+            value={this.props.value}
+            onBlur={this.props.handleOnBlur}
+          />
+          {
+            this.props.type === 'password' &&
+            (this.state.hide ?
+              <EyeShow onClick={() => this.setState({ hide: !this.state.hide })} className="user-info-input-wrapper__show-password" /> :
+              <EyeHide onClick={() => this.setState({ hide: !this.state.hide })} className="user-info-input-wrapper__show-password" />)
+          }
+        </div>
+
       </>
     );
   }
