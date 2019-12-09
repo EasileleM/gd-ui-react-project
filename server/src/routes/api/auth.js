@@ -4,65 +4,46 @@ import {User} from "../../db/Models/user.model";
 import bcrypt from "bcrypt";
 import next from "next";
 import {Items} from "../../db/Models/item.model";
+
 const router = express.Router();
 
-router.post('/signIn', checkNotAuthenticated, function (req, res, next) {
-      passport.authenticate('local', function (err, user, info) {
-        if (err) {
-          return res.status(500).send(err);
-        }
-        if (!user) {
-          return res.status(400).send("wrong password or email");
-        }
-        req.logIn(user, async function (err) {
-          if (err) {
-            res.status(500).send(err);
-          }
-          if (req.session.cart) {
-            let userCart = await User.findOne({ "email": req.user.email });
-            userCart = userCart.cart;
-            const anonCart = req.session.cart;
+router.post('/signIn', function (req, res, next) {
+  passport.authenticate('local', function (err, user, info) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    if (!user) {
+      return res.status(400).send("wrong password or email");
+    }
+    req.logIn(user, async function (err) {
+      if (err) {
+        res.status(500).send(err);
+      }
+      if (req.session.cart) {
+        const {cart: userCart} = await User.findOne({"email": req.user.email});
+        const anonCart = req.session.cart;
+        const mergedCart = mergeCarts(anonCart, userCart);
+        await User
+            .updateOne(
+                {"email": req.user.email},
+                {$set: {cart: mergedCart}},
+                {upsert: true})
+            .exec();
+        return res.redirect('/api/auth/');
 
-            for (let i = 0; i < userCart.length; i++) {
-              for (let j = 0; j < anonCart.length; j++) {
-                if (
-                    anonCart[j].itemId.toString() === userCart[i].itemId.toString() &&
-                    anonCart[j].size === userCart[i].size &&
-                    anonCart[j].color === userCart[i].color
-                ) {
-                  userCart[i].amount += anonCart[j].amount;
-                  anonCart.splice(j, 1);
-                  j--;
-                }
-              }
-            }
+      }
+      return res.redirect('/api/auth/');
 
-            const mergedCart = [...userCart, ...anonCart];
-
-            await User
-                .updateOne(
-                    { "email": req.user.email },
-                    { $set: { cart: mergedCart } },
-                    { upsert: true })
-                .exec();
-            return res.redirect('/api/auth/isAuth');
-
-          }
-          console.log(req.user);
-          return res.redirect('/api/auth/isAuth');
-
-        });
-      })(req, res, next)
     });
+  })(req, res, next)
+});
 
-router.post('/signUp', checkNotAuthenticated, async (req, res) => {
-  console.log('yep')
+router.post('/signUp', async (req, res) => {
   try {
-    console.log('yep')
     const salt = await bcrypt.genSaltSync(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-    const userInDb = await User.findOne({ 'email': req.body.email }).exec();
+    const userInDb = await User.findOne({'email': req.body.email}).exec();
     if (userInDb) {
       res.status(409).send();
       return;
@@ -82,7 +63,6 @@ router.post('/signUp', checkNotAuthenticated, async (req, res) => {
         return res.status(500).send(err);
       }
       if (!user) {
-        console.log(1)
         return res.status(400).send("wrong password or email");
       }
       req.logIn(user, async function (err) {
@@ -90,73 +70,67 @@ router.post('/signUp', checkNotAuthenticated, async (req, res) => {
           res.status(500).send(err);
         }
         if (req.session.cart) {
-          let userCart = await User.findOne({ "email": req.user.email });
-          userCart = userCart.cart;
+          const {cart: userCart} = await User.findOne({"email": req.user.email});
           const anonCart = req.session.cart;
-
-          for (let i = 0; i < userCart.length; i++) {
-            for (let j = 0; j < anonCart.length; j++) {
-              if (
-                  anonCart[j].itemId.toString() === userCart[i].itemId.toString() &&
-                  anonCart[j].size === userCart[i].size &&
-                  anonCart[j].color === userCart[i].color
-              ) {
-                userCart[i].amount += anonCart[j].amount;
-                anonCart.splice(j, 1);
-                j--;
-              }
-            }
-          }
-
-          const mergedCart = [...userCart, ...anonCart];
-
+          const mergedCart = mergeCarts(anonCart, userCart);
           await User
               .updateOne(
-                  { "email": req.user.email },
-                  { $set: { cart: mergedCart } },
-                  { upsert: true })
+                  {"email": req.user.email},
+                  {$set: {cart: mergedCart}},
+                  {upsert: true})
               .exec();
-          return res.redirect('/api/isAuth');
         }
-        return res.redirect('/api/isAuth');
+        return res.redirect('/api//auth/');
       });
     })(req, res, next)
-
   } catch (e) {
-    res.statusCode = 500;
-    console.log("error : " + e);
-    res.json(JSON.stringify(e));
+    res.status(500);
+    console.error("error : " + e);
+    res.send(JSON.stringify(e));
   }
 });
 
-router.post('/logout', checkAuthenticated, (req, res) => {
+function mergeCarts(anonCart, userCart) {
+  let cart1 = [...userCart];
+  const cart2 = [...anonCart];
+
+  for (let i = 0; i < cart1.length; i++) {
+    for (let j = 0; j < anonCart.length; j++) {
+      const currentItem1 = cart1[j];
+      const currentItem2 = cart1[i];
+      if (
+          currentItem2.itemId.toString() === currentItem1.itemId.toString() &&
+          currentItem2.size === currentItem1.size &&
+          currentItem2.color === currentItem1.color
+      ) {
+        currentItem1.amount += currentItem2.amount;
+        currentItem2.splice(j, 1);
+        j--;
+      }
+    }
+  }
+
+  return [...cart1, ...cart2];
+}
+
+router.post('/logout', (req, res) => {
   req.logout();
   req.session.destroy();
   res.status(200).send();
 });
 
-router.get('/isAuth', checkAuthenticated, (req, res) => {
-  res.json(req.user);
+router.get('/', async (req, res) => {
+  if (req.isAuthenticated()) {
+    res.send(req.user);
+  } else if (!req.session.cart) {
+    return res.status(200).send({cartItems: []});
+  } else if (req.session.cart) {
+    return res.status(200).send(await getAnonCartWithItems(req.session.cart));
+  }
 });
 
-
-function checkNotAuthenticated(req, res, next) {
-  // if (req.isAuthenticated()) {
-  //   return res.status(400).send(); TODO
-  // }
-  next()
-}
-
-async function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next()
-  }
-
-  if (!req.session.cart) {
-    return res.status(200).send({ cartItems: [] });
-  }
-  const cartDataPromises = req.session.cart.map((item) => {
-
+async function getAnonCartWithItems(cart) {
+  const cartDataPromises = cart.map((item) => {
     return Items
         .findById(item.itemId)
         .lean()
@@ -173,8 +147,7 @@ async function checkAuthenticated(req, res, next) {
         })
   });
 
-  const result = await Promise.all(cartDataPromises);
-  res.status(200).send({ cartItems: result });
+  return Promise.all(cartDataPromises);
 }
 
 export default router;
