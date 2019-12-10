@@ -6,7 +6,7 @@ import FiltersButtonImage from "../../assets/controls.svg";
 import "./Search.scss";
 import queryString from 'query-string'
 import store from "../../redux/store";
-import {clear, search} from "../../redux/action-creators/filter-action-creator";
+import {clear, search} from "../../redux/action-creators/filter/actions";
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 export class Search extends Component {

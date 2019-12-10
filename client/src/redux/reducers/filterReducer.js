@@ -1,4 +1,4 @@
-import { FILTER_ACTIONS } from '../action-creators/filter-action-creator';
+import { FILTER_ACTIONS } from '../action-creators/filter/actions';
 
 export const initialState = {
   category: null,
