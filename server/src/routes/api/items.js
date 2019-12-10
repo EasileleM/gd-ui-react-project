@@ -10,9 +10,9 @@ router.get('/', (req, res) => {
       res.send("NO ID PROVIDED");
       return;
     }
-    const service = new ItemsService(req.query.lang);
+    ItemsService.setLang(req.query.lang);
     const idArray = req.query.id.split(',');
-    return service
+    return ItemsService
         .getByIdArray(idArray)
         .then(items => {
               res.status(200);
@@ -40,11 +40,11 @@ router.get('/', (req, res) => {
 
 router.get('/all', (req, res) => {
   try {
-    const service = new ItemsService(req.query.lang);
-    service.search(req.query)
+    ItemsService.setLang(req.query.lang);
+    ItemsService.search(req.query)
         .then(items => {
-              let result = service.filter(items, req.query);
-              result = service.pagination(result, req.query.size, req.query.page);
+              let result = ItemsService.filter(items, req.query);
+              result = ItemsService.pagination(result, req.query.size, req.query.page);
               res.status(200);
               res.send(JSON.stringify(result));
             }
@@ -64,10 +64,10 @@ router.get('/all', (req, res) => {
 
 router.get('/filter', (req, res) => {
   try {
-    const service = new ItemsService(req.query.lang);
-    service.filter(req.query)
+    ItemsService.setLang(req.query.lang);
+    ItemsService.filter(req.query)
         .then(items => {
-              const result = service.pagination(items, req.query.size, req.query.page);
+              const result = ItemsService.pagination(items, req.query.size, req.query.page);
               res.status(200);
               res.send(JSON.stringify(result))
             }
@@ -85,8 +85,8 @@ router.get('/filter', (req, res) => {
 
 router.get('/recent', (req, res) => {
   try {
-    const service = new ItemsService(req.query.lang);
-    service.getRecentItems(req.query.size, req.query.page)
+    ItemsService.setLang(req.query.lang);
+    ItemsService.getRecentItems(req.query.size, req.query.page)
         .then(items => {
               res.status(200);
               res.send(JSON.stringify(items))
@@ -110,8 +110,8 @@ router.get('/related', (req, res) => {
       res.send("NO ID PROVIDED");
       return;
     }
-    const service = new ItemsService(req.query.lang);
-    service.getRelatedItems(req.query.id, req.query.size, req.query.page)
+    ItemsService.setLang(req.query.lang);
+    ItemsService.getRelatedItems(req.query.id, req.query.size, req.query.page)
         .then(items => {
               res.status(200);
               res.send(JSON.stringify(items))
@@ -140,8 +140,8 @@ router.get('/related', (req, res) => {
 
 router.get('/sales', (req, res) => {
   try {
-    const service = new ItemsService(req.query.lang);
-    service.getSalesItems(req.query.size, req.query.page)
+    ItemsService.setLang(req.query.lang);
+    ItemsService.getSalesItems(req.query.size, req.query.page)
         .then(items => {
               res.status(200);
               res.send(items);
@@ -162,8 +162,8 @@ router.get('/sales', (req, res) => {
 
 router.get('/:id',  (req, res) => {
   try {
-    const service = new ItemsService(req.query.lang);
-    service.getById(req.params.id)
+    ItemsService.setLang(req.query.lang);
+    ItemsService.getById(req.params.id)
         .then(result => {
           if (!result) {
             res.status(404);

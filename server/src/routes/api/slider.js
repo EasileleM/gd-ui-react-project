@@ -5,8 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   try {
-    const service = new SliderService(req.query.lang);
-    service.getSliders(req.query.amount)
+    SliderService.getSliders(req.query.amount)
         .then(slides => {
               res.status(200);
               res.send(JSON.stringify(slides))

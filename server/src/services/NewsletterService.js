@@ -11,4 +11,6 @@ class NewsletterService {
     }
 }
 
-export default NewsletterService;
+const NewsletterServiceInstance = new NewsletterService();
+
+export default NewsletterServiceInstance;

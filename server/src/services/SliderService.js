@@ -3,8 +3,7 @@ import {Slider} from "../db/Models/slider.model"
 import {Items} from "../db/Models/item.model";
 
 class SlideService {
-    constructor(lang) {
-        this.itemService = new ItemsService(lang)
+    constructor() {
     }
 
     getSliders(amount) {
@@ -18,7 +17,7 @@ class SlideService {
             .exec()
             .then(res => {
                 const promises = res.map(async slider => {
-                    return await this.itemService.getById(slider.itemId)
+                    return await ItemsService.getById(slider.itemId)
                         .then(sliderItem => {
                                 slider.item = sliderItem;
                                 slider.itemId = undefined;
@@ -50,4 +49,6 @@ class SlideService {
     }
 }
 
-export default SlideService;
+const SlideServiceInstance = new SlideService();
+
+export default SlideServiceInstance;

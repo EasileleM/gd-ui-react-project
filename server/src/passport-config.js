@@ -1,5 +1,6 @@
 import passportLocal from 'passport-local';
 import bcrypt from 'bcrypt';
+
 import {User} from "./db/Models/user.model"
 import {Items} from "./db/Models/item.model";
 
@@ -8,21 +9,19 @@ const LocalStrategy = passportLocal.Strategy;
 function passportInit(passport) {
   const authenticateUser = function (email, password, done) {
     User.findOne({'email': email}, async function (err, user) {
-      console.log(user);
       if (err) {
-        console.log(`Error: ${err}`);
+        console.error(`Error: ${err}`);
         return done(err);
       }
       if (!user) {
-        console.log(`user wasn't found`);
+        console.error(`user wasn't found`);
         return done(null, false);
       }
       const isPasswordRight = await bcrypt.compare(password, user.password);
       if (!isPasswordRight) {
-        console.log(`wrong password`);
+        console.error(`wrong password`);
         return done(null, false);
       }
-      console.log("user was found successfully");
       return done(null, user);
     });
   };

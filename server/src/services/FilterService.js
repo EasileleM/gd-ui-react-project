@@ -13,6 +13,13 @@ class FilterService {
     this.lang = lang;
   }
 
+  setLang(lang) {
+    if (!Object.values(langs).includes(lang)) {
+      lang = langs.ENG;
+    }
+    this.lang = lang;
+  }
+
   languageSpecific(item, lang) {
     item.categories = item.categories[lang];
     return item;
@@ -27,4 +34,6 @@ class FilterService {
   }
 }
 
-export default FilterService;
+const FilterServiceInstance = new FilterService();
+
+export default FilterServiceInstance;

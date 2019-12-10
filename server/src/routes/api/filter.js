@@ -4,8 +4,8 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   try {
-    const service = new FilterService(req.query.lang);
-    return service
+    FilterService.setLang(req.query.lang);
+    return FilterService
         .getFilterFields()
         .then(item => {
               res.status(200);

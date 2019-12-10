@@ -16,6 +16,13 @@ class ItemsService {
         this.lang = lang;
     }
 
+    setLang(lang) {
+        if (!Object.values(langs).includes(lang)) {
+            lang = langs.ENG;
+        }
+        this.lang = lang;
+    }
+
     languageSpecific(items, lang) {
         if (!Array.isArray(items)) {
             items.description = items.description[lang];
@@ -213,4 +220,6 @@ class ItemsService {
     }
 }
 
-export default ItemsService;
+const ItemsServiceInstance = new ItemsService();
+
+export default ItemsServiceInstance;
