@@ -1,4 +1,4 @@
-import { FAVORITES_ACTIONS } from '../action-creators/favorites-action-creator';
+import { FAVORITES_ACTIONS } from '../action-creators/favorites/actions';
 
 export const initialState = {
   size: 0,

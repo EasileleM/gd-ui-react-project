@@ -1,7 +1,7 @@
 import axios from 'axios';
-import {SERVER_URL} from '../constants/constants';
+import { SERVER_URL } from '../constants/constants';
 
-export function logout() {
+export function logoutFetch() {
   return axios(`${SERVER_URL}/api/logout`, {
     method: 'post',
     withCredentials: true,

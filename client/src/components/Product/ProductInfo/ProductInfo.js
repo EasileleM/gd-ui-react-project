@@ -8,7 +8,7 @@ import {ReactComponent as AddToCartIcon} from "../../../assets/shopping-cart-add
 
 import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButton';
 
-import addItem from '../../../redux/thunks/cart/addItem';
+import addItem from '../../../redux/action-creators/cart/addItem';
 import store from '../../../redux/store';
 
 export class ProductInfo extends Component {
