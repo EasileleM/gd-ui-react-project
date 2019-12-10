@@ -1,6 +1,6 @@
 import { setItems as setCartItems } from './cart/setItems';
 import { setItems as setFavoritesItems } from './favorites/setItems';
-import { userAuthorize } from '../action-creators/user-action-creator';
+import { userAuthorize } from './user/actions';
 import { getAuthentificationInfo } from '../../utils/getAuthentificationInfo';
 import { interceptorInit } from '../../utils/interceptorResponse';
 /**
@@ -16,7 +16,7 @@ export function initialize() {
           dispatch(userAuthorize(data.info));
         }
         dispatch(setCartItems(data.cartItems));
-        //dispatch(setFavoritesItems(data.favoritesItems));
+        dispatch(setFavoritesItems(data.favoritesItems || []));
       });
   };
 }

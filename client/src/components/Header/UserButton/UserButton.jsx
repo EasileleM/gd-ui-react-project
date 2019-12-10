@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ReactComponent as UserIcon } from "../../../assets/user.svg";
-import { changeModalWindowContent } from '../../../redux/action-creators/modalWindow-action-creator';
+import { changeModalWindowContent } from '../../../redux/action-creators/modalWindow/actions';
 
 export class UserButton extends React.Component {
   render() {

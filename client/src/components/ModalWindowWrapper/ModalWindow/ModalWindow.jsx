@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
+import { closeModalWindow } from '../../../redux/action-creators/modalWindow/actions';
 
 import CloseButton from '../CloseButton/CloseButton';
 

@@ -1,4 +1,4 @@
-import { CART_ACTIONS } from '../action-creators/cart-action-creator';
+import { CART_ACTIONS } from '../action-creators/cart/actions';
 
 export const initialState = {
   size: 0,
