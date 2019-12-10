@@ -1,14 +1,14 @@
 import http from 'http';
 import express from 'express';
 import cors from 'cors';
-import bodyParser from "body-parser";
-import flash from "express-flash";
-import session from "express-session";
-import passport from "passport";
-import connectMongo from "connect-mongo";
-import mongoose from "mongoose";
+import bodyParser from 'body-parser';
+import flash from 'express-flash';
+import session from 'express-session';
+import passport from 'passport';
+import connectMongo from 'connect-mongo';
+import mongoose from 'mongoose';
 
-import passportInit from "./passport-config";
+import passportInit from './passport-config';
 import authRouter from './routes/api/auth';
 import itemsRouter from './routes/api/items';
 import filterRouter from './routes/api/filter';
@@ -18,14 +18,14 @@ import sliderRouter from './routes/api/slider';
 const MongoStore = connectMongo(session);
 const dev = process.env.NODE_DEV !== 'production';
 const port = process.env.PORT || 3000;
-const dbUri = process.env.MONGODB_URI || "mongodb+srv://admin:qwerty123456789@react-vptyr.mongodb.net/shop?retryWrites=true&w=majority";
+const dbUri = process.env.MONGODB_URI || 'mongodb+srv://admin:qwerty123456789@react-vptyr.mongodb.net/shop?retryWrites=true&w=majority';
 
 
 mongoose.connect(dbUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
-  console.log("DB is connected!")
+  console.log('DB is connected!')
 }).catch((err) => {
   console.log(`Error while connecting DB: ${err}!`)
 });

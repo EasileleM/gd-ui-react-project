@@ -1,21 +1,22 @@
-import express from "express";
-import FilterService from "../../services/FilterService";
+import express from 'express';
+import FilterService from '../../services/FilterService';
+
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
     FilterService.setLang(req.query.lang);
-    return FilterService
+    await FilterService
         .getFilterFields()
         .then(item => {
               res.status(200);
-              delete item._id;
-              res.send(JSON.stringify(item));
-            }
-        )
-        .catch(err => {
-              res.status(500);
-              res.send(JSON.stringify(err));
+              const newItem = {};
+              for (const key in item) {
+                if (item.hasOwnProperty(key) && key !== '_id') {
+                  newItem[key] = item[key];
+                }
+              }
+              res.send(JSON.stringify(newItem));
             }
         )
   } catch (err) {

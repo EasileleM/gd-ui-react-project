@@ -1,19 +1,14 @@
 import express from 'express';
-import SliderService from "../../services/SliderService";
+import SliderService from '../../services/SliderService';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    SliderService.getSliders(req.query.amount)
+    await SliderService.getSliders(req.query.amount)
         .then(slides => {
               res.status(200);
               res.send(JSON.stringify(slides))
-            }
-        )
-        .catch(err => {
-              res.status(500);
-              res.send(JSON.stringify(err));
             }
         )
   } catch (err) {
@@ -22,4 +17,4 @@ router.get('/', (req, res) => {
   }
 });
 
-export default router
+export default router;

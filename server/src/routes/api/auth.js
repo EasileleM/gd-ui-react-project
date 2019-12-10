@@ -1,9 +1,9 @@
 import express from 'express';
-import passport from "passport";
-import {User} from "../../db/Models/user.model";
-import bcrypt from "bcrypt";
-import next from "next";
-import {Items} from "../../db/Models/item.model";
+import passport from 'passport';
+import bcrypt from 'bcrypt';
+
+import {User} from '../../db/Models/user.model';
+import {Items} from '../../db/Models/item.model';
 
 const router = express.Router();
 
@@ -13,19 +13,19 @@ router.post('/signIn', function (req, res, next) {
       return res.status(500).send(err);
     }
     if (!user) {
-      return res.status(400).send("wrong password or email");
+      return res.status(400).send('wrong password or email');
     }
-    req.logIn(user, async function (err) {
+    req.logIn(user, async (err) => {
       if (err) {
         res.status(500).send(err);
       }
       if (req.session.cart) {
-        const {cart: userCart} = await User.findOne({"email": req.user.email});
+        const {cart: userCart} = await User.findOne({'email': req.user.email});
         const anonCart = req.session.cart;
         const mergedCart = mergeCarts(anonCart, userCart);
         await User
             .updateOne(
-                {"email": req.user.email},
+                {'email': req.user.email},
                 {$set: {cart: mergedCart}},
                 {upsert: true})
             .exec();
@@ -63,19 +63,19 @@ router.post('/signUp', async (req, res) => {
         return res.status(500).send(err);
       }
       if (!user) {
-        return res.status(400).send("wrong password or email");
+        return res.status(400).send('wrong password or email');
       }
       req.logIn(user, async function (err) {
         if (err) {
           res.status(500).send(err);
         }
         if (req.session.cart) {
-          const {cart: userCart} = await User.findOne({"email": req.user.email});
+          const {cart: userCart} = await User.findOne({'email': req.user.email});
           const anonCart = req.session.cart;
           const mergedCart = mergeCarts(anonCart, userCart);
           await User
               .updateOne(
-                  {"email": req.user.email},
+                  {'email': req.user.email},
                   {$set: {cart: mergedCart}},
                   {upsert: true})
               .exec();
@@ -84,8 +84,8 @@ router.post('/signUp', async (req, res) => {
       });
     })(req, res, next)
   } catch (e) {
+    console.error('error : ' + e);
     res.status(500);
-    console.error("error : " + e);
     res.send(JSON.stringify(e));
   }
 });
@@ -136,8 +136,8 @@ async function getAnonCartWithItems(cart) {
         .lean()
         .exec()
         .then((generalData) => {
-          generalData.description = generalData.description["en"];
-          generalData.name = generalData.name["en"];
+          generalData.description = generalData.description['en'];
+          generalData.name = generalData.name['en'];
           return {
             color: item.color,
             amount: item.amount,
