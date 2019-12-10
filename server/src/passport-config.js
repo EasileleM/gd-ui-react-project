@@ -1,21 +1,21 @@
 import passportLocal from 'passport-local';
 import bcrypt from 'bcrypt';
 
-import {User} from "./db/Models/user.model"
-import {Items} from "./db/Models/item.model";
+import { User } from "./db/Models/user.model"
+import { Items } from "./db/Models/item.model";
 
 const LocalStrategy = passportLocal.Strategy;
 
-function passportInit(passport) {
+export function passportInit(passport) {
   const authenticateUser = function (email, password, done) {
-    User.findOne({'email': email}, async function (err, user) {
+    User.findOne({ 'email': email }, async function (err, user) {
       if (err) {
         console.error(`Error: ${err}`);
         return done(err);
       }
       if (!user) {
         console.error(`user wasn't found`);
-        return done(null, false);
+        return done(null, false); // TODO done with flash error message
       }
       const isPasswordRight = await bcrypt.compare(password, user.password);
       if (!isPasswordRight) {
@@ -26,51 +26,41 @@ function passportInit(passport) {
     });
   };
 
-  passport.use(new LocalStrategy({usernameField: 'email'}, authenticateUser));
+  passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser));
 
   passport.serializeUser((user, done) => {
     return done(null, user._id)
   });
+
   passport.deserializeUser(async (id, done) => {
-    const user = await User.findOne({_id: id}).lean();
-
-    user.info = {
-      _id: user._id,
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
+    const user = await User.findOne({ _id: id }).lean();
+    const preparedUser = {
+      info: {
+        _id: user._id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      }
     };
-    delete user._id;
-    delete user.__v;
-    delete user.password;
-    delete user.email;
-    delete user.firstName;
-    delete user.lastName;
-
 
     const cartDataPromises = user.cart.map((item) => {
 
       return Items
-          .findById(item.itemId)
-          .lean()
-          .exec()
-          .then((generalData) => {
-            generalData.description = generalData.description["en"];
-            generalData.name = generalData.name["en"];
-
-
-            return {
-              color: item.color,
-              amount: item.amount,
-              size: item.size,
-              generalData
-            }
-          })
+        .findById(item.itemId)
+        .lean()
+        .exec()
+        .then((generalData) => { //TODO translation
+          generalData.description = generalData.description["en"];
+          generalData.name = generalData.name["en"];
+          return {
+            color: item.color,
+            amount: item.amount,
+            size: item.size,
+            generalData
+          }
+        });
     });
-    user.cartItems = await Promise.all(cartDataPromises);
-    delete user.cart;
-    return done(null, user);
+    preparedUser.cartItems = await Promise.all(cartDataPromises);
+    return done(null, preparedUser);
   })
 }
-
-export default passportInit;

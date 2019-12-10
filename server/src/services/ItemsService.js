@@ -1,4 +1,4 @@
-import {Items} from '../db/Models/item.model';
+import { Items } from '../db/Models/item.model';
 import mongoose from 'mongoose';
 
 const langs = Object.freeze({
@@ -43,8 +43,8 @@ class ItemsService {
             .lean()
             .exec()
             .then(items => {
-            return this.languageSpecific(items, this.lang);
-        });
+                return this.languageSpecific(items, this.lang);
+            });
     }
 
     getById(id) {
@@ -57,10 +57,10 @@ class ItemsService {
 
     getByIdArray(ids) {
         const objectIds = ids.map((current) => {
-           return mongoose.Types.ObjectId(current);
+            return mongoose.Types.ObjectId(current);
         });
         return Items
-            .find({'_id': { $in: objectIds}})
+            .find({ '_id': { $in: objectIds } })
             .lean()
             .exec()
             .then(items => this.languageSpecific(items, this.lang));
@@ -95,7 +95,7 @@ class ItemsService {
             .getById(id).then(items => this.languageSpecific(items, this.lang))
             .then((item) => {
                 if (!item) {
-                    return Promise.reject(new Error("NOT FOUND"));
+                    return Promise.reject(new Error('NOT FOUND'));
                 }
                 target = item;
                 return Items
@@ -109,7 +109,6 @@ class ItemsService {
                 const brandRelated = items.filter((item) => {
                     return item.brand === target.brand && alreadySorted.add(item._id);
                 });
-                console.log(alreadySorted);
                 const categoryRelated = items
                     .filter((item) => {
                         if (alreadySorted.has(item._id)) {
@@ -149,7 +148,7 @@ class ItemsService {
     search(query) {
         if (query.search) {
             return Items
-                .find({$text: {$search: query.search}})
+                .find({ $text: { $search: query.search } })
                 .lean()
                 .exec()
                 .then(items => this.languageSpecific(items, this.lang));
