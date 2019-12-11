@@ -3,20 +3,21 @@ import cors from 'cors';
 
 import express from 'express';
 import flash from "express-flash";
-
 import session from "express-session";
+
 import passport from "passport";
 
 import connectMongo from "connect-mongo";
 import mongoose from "mongoose";
 
 import { passportInit } from "./passport-config";
+
 import { authRouter } from './routers/auth';
 import { itemsRouter } from './routers/items';
 import { filterRouter } from './routers/filter';
 import { newsletterRouter } from './routers/newsletter';
 import { sliderRouter } from './routers/slider';
-import {config} from "dotenv";
+import { config } from "dotenv";
 
 const MongoStore = connectMongo(session);
 const port = process.env.PORT;
