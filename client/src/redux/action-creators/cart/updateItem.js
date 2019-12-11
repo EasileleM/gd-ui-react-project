@@ -28,7 +28,7 @@ export default function updateItem(target, color, size, amount) {
       currentItems.push({ generalData: target.generalData, size, color, amount });
     }
 
-    const currentItemsToServer = currentItems.filter((item) => {
+    const currentItemsToServer = currentItems.map((item) => {
       return {
         size: item.size,
         color: item.color,

@@ -11,7 +11,7 @@ export function addItem(itemToAdd) {
     }
     currentItems.push(itemToAdd);
 
-    const currentItemsToServer = currentItems.filter((item) => {
+    const currentItemsToServer = currentItems.map((item) => {
       return {
         _id: item._id
       }
