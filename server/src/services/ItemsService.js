@@ -48,7 +48,12 @@ class ItemsService {
 
     async getByIdArray(ids) {
         const objectIds = ids.map((current) => {
-            return mongoose.Types.ObjectId(current);
+            try {
+                return mongoose.Types.ObjectId(current);
+            }
+            catch (e) {
+                return null;
+            }
         });
 
         const items = await Items
@@ -58,7 +63,7 @@ class ItemsService {
         const rejectedId = [];
         if (ids.length > items.length) {
             for (const id of ids) {
-                if (!items.some((item) => item._id === id)) {
+                if (!items.some((item) => String(item._id) === String(id))) {
                     rejectedId.push(id);
                 }
             }
@@ -69,8 +74,8 @@ class ItemsService {
     async getRecentItems(size = 4, page = 1) {
         const items = await Items
             .find()
-            .sort({ creationDate: 1 })
-            .limit(size)
+            .sort({ creationDate: -1 })
+            .limit(Number(size))
             .lean()
             .exec();
         return this.pagination(this.languageSpecific(items), size, page);
