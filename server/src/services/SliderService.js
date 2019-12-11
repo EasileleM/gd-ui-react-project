@@ -3,49 +3,34 @@ import { Slider } from "../db/Models/slider.model"
 import { Items } from "../db/Models/item.model";
 
 class SlideService {
-    constructor() {
-    }
-
-    getSliders(amount) {
-        if (!amount) {
-            amount = 0;
-        }
-        return Slider
+    async getSliders(amount = 0) {
+        const SliderItems = await Slider
             .find()
             .limit(Number(amount))
             .lean()
-            .exec()
-            .then(res => {
-                const promises = res.map(async slider => {
-                    return await ItemsService.getById(slider.itemId)
-                        .then(sliderItem => {
-                            slider.item = sliderItem;
-                            slider.itemId = undefined;
-                            return slider
-                        }
-                        );
-                });
-                return Promise.all(promises);
-            })
+            .exec();
+
+        const promises = SliderItems.map(async (slide) => {
+            const slideItem = await ItemsService.getById(slider.itemId);
+            slide.item = sliderItem;
+            slide.itemId = undefined;
+            return slideItem;
+        });
+        return Promise.all(promises);
     }
 
     async getById(id) {
-        let slider;
-        await Slider.findById(id)
+        const slide = await Slider
+            .findById(id)
             .lean()
-            .exec()
-            .then(res => {
-                slider = res;
-                return Items.findById(slider.itemId)
-                    .lean()
-                    .exec();
-            }).then(res => {
-                slider.item = res;
-                slider.itemId = undefined;
-            }).catch(err => {
-                throw err;
-            });
-        return slider;
+            .exec();
+        const item = await Items
+            .findById(slide.itemId)
+            .lean()
+            .exec();
+        slide.item = item;
+        slide.itemId = undefined;
+        return slide;
     }
 }
 

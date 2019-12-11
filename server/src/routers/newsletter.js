@@ -11,6 +11,7 @@ newsletterRouter.post('/', async (req, res) => {
     res.status(201).send(result);
   }
   catch (err) {
+    console.trace(err);
     res.statis(500).send(err);
   }
 });

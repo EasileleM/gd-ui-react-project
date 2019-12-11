@@ -11,6 +11,7 @@ sliderRouter.get('/', async (req, res) => {
     res.status(200).send(slides);
   }
   catch (err) {
+    console.trace(err);
     res.status(500).send(err);
   }
 });

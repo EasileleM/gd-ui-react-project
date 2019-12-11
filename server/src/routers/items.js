@@ -15,6 +15,7 @@ itemsRouter.get('/', async (req, res) => {
     res.status(200).send({ items, rejectedId });
   }
   catch (err) {
+    console.trace(err);
     res.status(500).send();
   }
 });
@@ -28,7 +29,7 @@ itemsRouter.get('/all', async (req, res) => {
     res.status(200).send(result);
   }
   catch (err) {
-    console.log(err);
+    console.trace(err);
     res.status(500).send();
   }
 });
@@ -41,17 +42,19 @@ itemsRouter.get('/filter', async (req, res) => {
     res.status(200).send(result);
   }
   catch (err) {
+    console.trace(err);
     res.status(500).send();
   }
 });
 
-router.get('/filter', async (req, res) => {
+itemsRouter.get('/filter', async (req, res) => {
   try {
     ItemsService.setLang(req.query.lang);
     const items = await ItemsService.filter(req.query);
     const result = ItemsService.pagination(items, req.query.size, req.query.page);
     res.status(200).send(result)
   } catch (err) {
+    console.trace(err);
     res.status(500).send();
   }
 });
@@ -63,6 +66,7 @@ itemsRouter.get('/recent', async (req, res) => {
     res.status(200).send(items);
   }
   catch (err) {
+    console.trace(err);
     res.status(500).send();
   }
 });
@@ -82,6 +86,7 @@ itemsRouter.get('/related', async (req, res) => {
       res.status(404).send();
       return;
     }
+    console.trace(err);
     res.status(500).send();
   }
 });
@@ -93,7 +98,7 @@ itemsRouter.get('/sales', async (req, res) => {
     res.status(200).send(items);
   }
   catch (err) {
-    console.log(err);
+    console.trace(err);
     res.status(500).send();
   }
 });
@@ -110,6 +115,7 @@ itemsRouter.get('/:id', async (req, res) => {
     }
   }
   catch (err) {
+    console.trace(err);
     res.status(500).send();
   }
 });

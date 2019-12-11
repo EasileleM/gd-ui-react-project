@@ -69,9 +69,8 @@ authRouter.post('/signUp', async (req, res) => {
     authenticate(req, res);
   }
   catch (err) {
-    res.status(500);
-    console.error('error : ' + err);
-    res.send();
+    console.trace(err);
+    res.status(500).send();
   }
 });
 

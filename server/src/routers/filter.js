@@ -14,6 +14,7 @@ filterRouter.get('/', async (req, res) => {
     }
     res.status(200).send(itemCopy);
   } catch (err) {
+    console.trace(err);
     res.status(500).send();
   };
 });

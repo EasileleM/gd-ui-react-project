@@ -1,4 +1,4 @@
-import {Filters} from "../db/Models/filters.model";
+import { Filters } from "../db/Models/filters.model";
 
 const langs = Object.freeze({
   ENG: "en",
@@ -6,31 +6,22 @@ const langs = Object.freeze({
 });
 
 class FilterService {
-  constructor(lang = langs.ENG) {
-    if (!Object.values(langs).includes(lang)) {
-      lang = langs.ENG;
-    }
-    this.lang = lang;
+  constructor(lang) {
+    this.setLang(lang);
   }
 
   setLang(lang) {
-    if (!Object.values(langs).includes(lang)) {
-      lang = langs.ENG;
-    }
-    this.lang = lang;
+    this.lang = Object.values(langs).includes(lang) ? lang : langs.ENG;
   }
 
-  languageSpecific(item, lang) {
-    item.categories = item.categories[lang];
+  languageSpecific(item) {
+    item.categories = item.categories[this.lang];
     return item;
   }
 
-  getFilterFields() {
-    return Filters
-        .find()
-        .lean()
-        .exec()
-        .then(item => this.languageSpecific(item[0], this.lang));
+  async getFilterFields() {
+    const fields = await Filters.findOne().lean().exec();
+    return this.languageSpecific(fields);
   }
 }
 
