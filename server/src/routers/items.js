@@ -12,7 +12,7 @@ itemsRouter.get('/', async (req, res) => {
 
     ItemsService.setLang(req.query.lang);
     const idArray = req.query.id.split(',');
-    const items = ItemsService.getByIdArray(idArray);
+    const items = await ItemsService.getByIdArray(idArray);
     const rejectedId = [];
     if (idArray && idArray.length > items.length) {
       for (const id of idArray) {

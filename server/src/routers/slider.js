@@ -3,7 +3,7 @@ import SliderService from '../services/SliderService';
 
 export const sliderRouter = express.Router();
 
-sliderRouter.get('/', (req, res) => {
+sliderRouter.get('/', async (req, res) => {
   try {
     const slides = await SliderService.getSliders(req.query.amount);
     res.status(200).send(slides);
