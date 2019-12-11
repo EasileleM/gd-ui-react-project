@@ -21,6 +21,7 @@ import {config} from "dotenv";
 const MongoStore = connectMongo(session);
 const port = process.env.PORT;
 const dbUri = process.env.MONGODB_URI;
+const secret = "meesha track jacket";
 
 mongoose.connect(dbUri, {
   useNewUrlParser: true,
@@ -40,12 +41,12 @@ app.server = http.createServer(app);
 app.use(flash());
 
 app.use(session({
-  secret: 'Meesha Track Jacket',
+  secret: secret,
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({
     mongooseConnection: db,
-    secret: 'Misha Track Jacket'
+    secret: secret
   }),
   cookie: {
     maxAge: 10 * 60 * 1000
