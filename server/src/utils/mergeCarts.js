@@ -7,10 +7,10 @@
  * , {itemId: 2, color: 1, size: 1, amount: 1}],
  * [{itemId: 1, color: 1, size: 1, amount: 1}
   * , {itemId: 2, color: 1, size: 1, amount: 1}
-  * , {itemId: 2, color: 1, size: 1, amount: 3}]);
+  * , {itemId: 3, color: 1, size: 1, amount: 3}]);
   * //output - [{itemId: 1, color: 1, size: 1, amount: 2}
   * //, {itemId: 2, color: 1, size: 1, amount: 2}
-  * //, {itemId: 2, color: 1, size: 1, amount: 3}]
+  * //, {itemId: 3, color: 1, size: 1, amount: 3}]
  * @param {Object[]} firstCart
  * @param {Object[]} secondCart
  * @returns {Object[]}
