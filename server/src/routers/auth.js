@@ -13,7 +13,7 @@ function authenticate(req, res) { //TODO move it in services/utils
   passport.authenticate('local', function (err, user) {
     if (err) {
       console.log(err);
-      return res.status(500).send(err);
+      return res.status(500).send();
     }
     if (!user) {
       return res.status(400).send('wrong password or email'); // TODO more informative error message
@@ -21,7 +21,7 @@ function authenticate(req, res) { //TODO move it in services/utils
     req.logIn(user, async function (err) {
       if (err) {
         console.log(err);
-        res.status(500).send(err);
+        res.status(500).send();
       }
 
       const { cart: userCart } = await User.findOne({ 'email': req.user.email });
@@ -68,10 +68,10 @@ authRouter.post('/signUp', async (req, res) => {
 
     authenticate(req, res);
   }
-  catch (e) {
+  catch (err) {
     res.status(500);
-    console.error('error : ' + e);
-    res.send(e);
+    console.error('error : ' + err);
+    res.send();
   }
 });
 

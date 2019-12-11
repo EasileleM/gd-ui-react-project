@@ -1,6 +1,6 @@
 import ItemsService from "./ItemsService";
-import {Slider} from "../db/Models/slider.model"
-import {Items} from "../db/Models/item.model";
+import { Slider } from "../db/Models/slider.model"
+import { Items } from "../db/Models/item.model";
 
 class SlideService {
     constructor() {
@@ -19,10 +19,10 @@ class SlideService {
                 const promises = res.map(async slider => {
                     return await ItemsService.getById(slider.itemId)
                         .then(sliderItem => {
-                                slider.item = sliderItem;
-                                slider.itemId = undefined;
-                                return slider
-                            }
+                            slider.item = sliderItem;
+                            slider.itemId = undefined;
+                            return slider
+                        }
                         );
                 });
                 return Promise.all(promises);

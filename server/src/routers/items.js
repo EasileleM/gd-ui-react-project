@@ -6,25 +6,16 @@ export const itemsRouter = express.Router();
 itemsRouter.get('/', async (req, res) => {
   try {
     if (!req.query.id) {
-      res.status(400).send('NO ID PROVIDED');
+      res.status(400).send();
       return;
     }
-
     ItemsService.setLang(req.query.lang);
     const idArray = req.query.id.split(',');
-    const items = await ItemsService.getByIdArray(idArray);
-    const rejectedId = [];
-    if (idArray && idArray.length > items.length) {
-      for (const id of idArray) {
-        if (!items.some((item) => item._id === id)) {
-          rejectedId.push(id);
-        }
-      }
-    }
+    const { items, rejectedId } = await ItemsService.getByIdArray(idArray);
     res.status(200).send({ items, rejectedId });
   }
   catch (err) {
-    res.status(500).send(err);
+    res.status(500).send();
   }
 });
 
@@ -38,7 +29,7 @@ itemsRouter.get('/all', async (req, res) => {
   }
   catch (err) {
     console.log(err);
-    res.status(500).send(err);
+    res.status(500).send();
   }
 });
 
@@ -50,7 +41,7 @@ itemsRouter.get('/filter', async (req, res) => {
     res.status(200).send(result);
   }
   catch (err) {
-    res.status(500).send(err);
+    res.status(500).send();
   }
 });
 
@@ -59,11 +50,9 @@ router.get('/filter', async (req, res) => {
     ItemsService.setLang(req.query.lang);
     const items = await ItemsService.filter(req.query);
     const result = ItemsService.pagination(items, req.query.size, req.query.page);
-    res.status(200);
-    res.send(JSON.stringify(result))
+    res.status(200).send(result)
   } catch (err) {
-    res.status(500);
-    res.send(JSON.stringify(err));
+    res.status(500).send();
   }
 });
 
@@ -74,14 +63,14 @@ itemsRouter.get('/recent', async (req, res) => {
     res.status(200).send(items);
   }
   catch (err) {
-    res.status(500).send(err);
+    res.status(500).send();
   }
 });
 
 itemsRouter.get('/related', async (req, res) => {
   try {
     if (!req.query.id) {
-      res.status(400).send('NO ID PROVIDED');
+      res.status(400).send();
       return;
     }
     ItemsService.setLang(req.query.lang);
@@ -89,15 +78,11 @@ itemsRouter.get('/related', async (req, res) => {
     res.status(200).send(items);
   }
   catch (err) {
-    if (err.message === 'NOT FOUND') { // TODO excuse me, wtf?
-      res.status(404).send(`NOT FOUND ${req.query.id}`);
+    if (err.message === 404) {
+      res.status(404).send();
       return;
     }
-    if (err.message === 'BAD ID') {
-      res.status(400).send(`BAD ID ${req.query.id}`);
-      return;
-    }
-    res.status(500).send(err);
+    res.status(500).send();
   }
 });
 
@@ -109,7 +94,7 @@ itemsRouter.get('/sales', async (req, res) => {
   }
   catch (err) {
     console.log(err);
-    res.status(500).send(err);
+    res.status(500).send();
   }
 });
 
@@ -118,16 +103,13 @@ itemsRouter.get('/:id', async (req, res) => {
     ItemsService.setLang(req.query.lang);
     const result = await ItemsService.getById(req.params.id);
     if (!result) {
-      res.status(404).send(`NOT FOUND ${req.params.id}`);
-    } else {
+      res.status(404).send();
+    }
+    else {
       res.status(200).send(result);
     }
   }
   catch (err) {
-    if (err.message === 'BAD ID') { // TODO ???
-      res.status(400).send(`BAD ID ${req.params.id}`);
-      return;
-    }
-    res.status(500).send(err);
+    res.status(500).send();
   }
 });

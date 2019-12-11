@@ -12,10 +12,8 @@ filterRouter.get('/', async (req, res) => {
         itemCopy[field] = item[field];
       }
     }
-    res.status(200);
-    res.send(JSON.stringify(itemCopy));
+    res.status(200).send(itemCopy);
   } catch (err) {
-    res.status(500);
-    res.send(JSON.stringify(err));
+    res.status(500).send();
   };
 });

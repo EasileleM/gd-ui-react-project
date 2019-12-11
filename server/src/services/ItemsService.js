@@ -59,11 +59,23 @@ class ItemsService {
         const objectIds = ids.map((current) => {
             return mongoose.Types.ObjectId(current);
         });
+
         return Items
             .find({ '_id': { $in: objectIds } })
             .lean()
             .exec()
-            .then(items => this.languageSpecific(items, this.lang));
+            .then((items) => this.languageSpecific(items, this.lang))
+            .then((items) => {
+                const rejectedId = [];
+                if (ids.length > items.length) {
+                    for (const id of ids) {
+                        if (!items.some((item) => item._id === id)) {
+                            rejectedId.push(id);
+                        }
+                    }
+                }
+                return { rejectedId, items };
+            })
     }
 
     getRecentItems(size = 4, page = 1) {
@@ -92,10 +104,11 @@ class ItemsService {
     getRelatedItems(id, size = 4, page = 1) {
         let target;
         return this
-            .getById(id).then(items => this.languageSpecific(items, this.lang))
+            .getById(id)
+            .then(items => this.languageSpecific(items, this.lang))
             .then((item) => {
                 if (!item) {
-                    return Promise.reject(new Error('NOT FOUND'));
+                    return Promise.reject(new Error(404));
                 }
                 target = item;
                 return Items
