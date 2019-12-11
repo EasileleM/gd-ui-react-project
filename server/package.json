@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/app.js",
+    "dev": "nodemon --exec babel-node -r node_modules/dotenv/config src/app.js",
     "start": "node build/app.js",
     "heroku-postbuild": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -34,6 +34,7 @@
     "@babel/node": "^7.0.0"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.1"
   }
 }

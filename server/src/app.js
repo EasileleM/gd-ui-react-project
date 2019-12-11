@@ -16,10 +16,11 @@ import { itemsRouter } from './routers/items';
 import { filterRouter } from './routers/filter';
 import { newsletterRouter } from './routers/newsletter';
 import { sliderRouter } from './routers/slider';
+import {config} from "dotenv";
 
 const MongoStore = connectMongo(session);
-const port = process.env.PORT || 3000;
-const dbUri = process.env.MONGODB_URI || "mongodb+srv://admin:qwerty123456789@react-vptyr.mongodb.net/shop?retryWrites=true&w=majority";
+const port = process.env.PORT;
+const dbUri = process.env.MONGODB_URI;
 
 mongoose.connect(dbUri, {
   useNewUrlParser: true,
@@ -59,7 +60,7 @@ app.use(passport.session());
 
 app.use(cors({
   credentials: true,
-  origin: process.env.ORIGIN || 'http://localhost:3001',
+  origin: process.env.ORIGIN,
 }));
 
 app.options('*', cors());

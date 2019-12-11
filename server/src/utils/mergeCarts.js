@@ -1,5 +1,5 @@
 /**
- * mergeCarts - merges two cart
+ * mergeCarts - merges two carts
  * when it face with item collisions (same id, color and size)
  * it sum up it's amount
  * @example 
