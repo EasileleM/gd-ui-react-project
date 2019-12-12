@@ -1,14 +1,13 @@
 import express from "express";
-import {User} from '../db/Models/user.model'
 import UserServiceInstance from "../services/UserService";
 
 export const cartRouter = express.Router();
 
-cartRouter.put('/',  async (req, res) => {
+cartRouter.put('/', async (req, res) => {
   if (!req.body) {
     res.status(400).send()
   }
-  try{
+  try {
     const data = req.body;
     const cart = data.map(current => {
       return {
@@ -23,17 +22,18 @@ cartRouter.put('/',  async (req, res) => {
       res.status(200).send(req.user);
     } else {
       req.session.cartItems = cart;
-      res.status(200).send(req.session.cartItems)
+      res.status(200).send(req.session.cartItems);
     }
-  }catch (e) {
-    res.status(500).send(e)
+  } catch (err) {
+    console.trace(err);
+    res.status(500).send(err);
   }
 });
 
-cartRouter.get('/',  async (req, res) => {
+cartRouter.get('/', async (req, res) => {
   if (req.isAuthenticated()) {
-    res.send(req.user.cartItems)
+    res.send(req.user.cartItems);
   } else {
-    res.send(req.session.cartItems)
+    res.send(req.session.cartItems);
   }
 });

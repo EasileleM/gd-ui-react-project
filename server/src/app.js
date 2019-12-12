@@ -15,8 +15,8 @@ import { itemsRouter } from './routers/items';
 import { filterRouter } from './routers/filter';
 import { newsletterRouter } from './routers/newsletter';
 import { sliderRouter } from './routers/slider';
-import {cartRouter} from "./routers/cart";
-import {favoritesRouter} from "./routers/favorites";
+import { cartRouter } from "./routers/cart";
+import { favoritesRouter } from "./routers/favorites";
 
 const MongoStore = connectMongo(session);
 const port = process.env.PORT;

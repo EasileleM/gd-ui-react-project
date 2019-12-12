@@ -1,11 +1,6 @@
 import { Items } from '../db/Models/item.model';
-import {LANGS, FILTER_FIELDS} from "../constants/constants";
+import { LANGS, FILTER_FIELDS } from "../constants/constants";
 import mongoose from 'mongoose';
-
-const langs = Object.freeze({
-    ENG: "en",
-    RU: "ru",
-});
 
 class ItemsService {
     languageSpecific(items, lang = LANGS.ENG) {
@@ -60,7 +55,7 @@ class ItemsService {
                 }
             }
         }
-        return { rejectedId, items: this.languageSpecific(items,lang) };
+        return { rejectedId, items: this.languageSpecific(items, lang) };
     }
 
     async getRecentItems(size = 4, page = 1, lang = LANGS.ENG) {
@@ -73,7 +68,7 @@ class ItemsService {
         return this.pagination(this.languageSpecific(items, lang), size, page);
     }
 
-    async getSalesItems(size = 4, page = 1,lang = LANGS.ENG) {
+    async getSalesItems(size = 4, page = 1, lang = LANGS.ENG) {
         const items = await Items
             .find()
             .lean()
@@ -144,7 +139,7 @@ class ItemsService {
         let result = items;
         if (query.filter === 'true') {
             const filters = {};
-            for (const field of this.filterFields) {
+            for (const field of FILTER_FIELDS) {
                 if (query[field]) {
                     if (field === 'maxprice' || field === 'minprice') {
                         filters[field] = query[field];

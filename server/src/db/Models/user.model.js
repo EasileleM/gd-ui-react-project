@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import {EMAIL_REGEX, FIRST_NAME_REGEX, LAST_NAME_REGEX} from "../../constants/constants";
+import { EMAIL_REGEX, FIRST_NAME_REGEX, LAST_NAME_REGEX } from "../../constants/constants";
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   cart: [
     {
-      itemId: {type: ObjectId, required: true},
+      itemId: { type: ObjectId, required: true },
       size: { type: String, required: true },
       color: { type: String, required: true },
       amount: { type: Number, required: true },

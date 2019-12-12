@@ -1,6 +1,6 @@
 import ItemsService from "./ItemsService";
-import {Slider} from "../db/Models/slider.model"
-import {LANGS} from "../constants/constants";
+import { Slider } from "../db/Models/slider.model"
+import { LANGS } from "../constants/constants";
 
 class SlideService {
     async getSliders(amount = 0, lang = LANGS.ENG) {

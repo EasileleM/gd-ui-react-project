@@ -1,5 +1,5 @@
 import { Filters } from "../db/Models/filters.model";
-import {LANGS} from "../constants/constants";
+import { LANGS } from "../constants/constants";
 
 
 class FilterService {
@@ -10,8 +10,8 @@ class FilterService {
 
   async getFilterFields(lang = LANGS.ENG) {
     const fields = await Filters.findOne()
-        .lean()
-        .exec();
+      .lean()
+      .exec();
     return this.languageSpecific(fields, lang);
   }
 }

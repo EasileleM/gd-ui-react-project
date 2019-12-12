@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const filtersSchema = new mongoose.Schema({
-  categories:  {
+  categories: {
     en: [String],
     ru: [String]
   },
@@ -10,6 +10,6 @@ const filtersSchema = new mongoose.Schema({
   sizes: [Number],
   colors: [Number],
   brands: [String],
-}, {collection : 'filters'});
+}, { collection: 'filters' });
 
 export const Filters = mongoose.models.Filters || mongoose.model('Filters', filtersSchema);

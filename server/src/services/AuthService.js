@@ -2,7 +2,7 @@ import passport from "passport";
 import { User } from "../db/Models/user.model";
 import bcrypt from "bcrypt";
 import { Items } from "../db/Models/item.model";
-import {PASSWORD_REGEX} from "../constants/constants";
+import { PASSWORD_REGEX } from "../constants/constants";
 
 class AuthService {
   async signUp(req, res) {
@@ -70,16 +70,16 @@ class AuthService {
   }
 
   async getAnonFavoritesWithItems(favorites) {
-    return Items.find({'_id': {$in: favorites}})
-        .lean()
-        .exec()
-        .then((items) => {
-          return items.map((item) => {
-            item.description = item.description['en'];
-            item.name = item.name['en'];
-            return item;
-          })
-        });
+    return Items.find({ '_id': { $in: favorites } })
+      .lean()
+      .exec()
+      .then((items) => {
+        return items.map((item) => {
+          item.description = item.description['en'];
+          item.name = item.name['en'];
+          return item;
+        })
+      });
   }
 
   authenticate(req, res) {
@@ -97,19 +97,19 @@ class AuthService {
           res.status(500).send();
         }
 
-        const {cart: userCart, favorites: userFavorites} = await User.findOne({'email': req.user.email});
+        const { cart: userCart, favorites: userFavorites } = await User.findOne({ 'email': req.user.email });
         const anonCart = req.session.cart;
         const mergedCart = this.mergeCarts(anonCart, userCart);
         req.session.favoritesItems = req.session.favoritesItems ? req.session.favoritesItems : [];
         const mergedFavorites = new Set([...req.session.favoritesItems, ...userFavorites]);
 
         await User
-            .updateOne(
-                {'email': req.user.email},
-                {$set: {cart: mergedCart, favorites: Array.from(mergedFavorites)}},
-                {upsert: true}
-            )
-            .exec();
+          .updateOne(
+            { 'email': req.user.email },
+            { $set: { cart: mergedCart, favorites: Array.from(mergedFavorites) } },
+            { upsert: true }
+          )
+          .exec();
         return res.redirect('/api/auth/');
       });
     })(req, res);

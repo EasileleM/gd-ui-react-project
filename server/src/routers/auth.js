@@ -7,7 +7,7 @@ export const authRouter = express.Router();
 
 authRouter.post('/signIn', function (req, res, next) {
   try {
-    AuthServiceInstance.authenticate(req, res);
+    AuthServiceInstance.authenticate(req, res); // TODO rename service
   }
   catch (err) {
     console.trace(err);

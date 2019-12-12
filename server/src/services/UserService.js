@@ -1,20 +1,20 @@
-import {LANGS} from "../constants/constants";
-import {User} from "../db/Models/user.model";
+import { LANGS } from "../constants/constants";
+import { User } from "../db/Models/user.model";
 import ItemsServiceInstance from "./ItemsService";
 
 class UserService {
   async setFavorites(email, favorites) {
     return User.updateOne(
-        {email},
-        {$set: {favorites}},
-        {upsert: true}).exec();
+      { email },
+      { $set: { favorites } },
+      { upsert: true }).exec();
   }
 
   async setCart(email, cart) {
     return User.updateOne(
-        {email},
-        {$set: {cart}},
-        {upsert: false}).exec();
+      { email },
+      { $set: { cart } },
+      { upsert: false }).exec();
   }
 
   async prepare(rawUser, lang = LANGS.ENG) {
