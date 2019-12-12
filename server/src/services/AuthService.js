@@ -1,20 +1,19 @@
 import passport from "passport";
-import { User } from "../db/Models/user.model";
-import bcrypt from "bcrypt";
-import { Items } from "../db/Models/item.model";
-import { PASSWORD_REGEX } from "../constants/constants";
+import {User} from "../db/Models/user.model";
+import {LANGS, PASSWORD_REGEX} from "../constants/constants";
+import ItemsServiceInstance from "./ItemsService";
+import UserServiceInstance from "./UserService";
 
 class AuthService {
   async signUp(req, res) {
-    const userInDb = await User.findOne({ 'email': req.body.email }).exec();
+    const userInDb = await User.findOne({'email': req.body.email}).exec();
 
     if (userInDb) {
       res.status(409).send("User already exists.");
       return;
     }
 
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const hashedPassword = await UserServiceInstance.hashPassword(req.body.password);
 
     const newUser = new User({
       email: req.body.email,
@@ -28,13 +27,12 @@ class AuthService {
     const currentErrors = [];
 
     if (!PASSWORD_REGEX.test(req.body.password)) {
-      currentErrors.push({ properties: { message: 'Invalid email/password' } });
+      currentErrors.push({properties: {message: 'Invalid email/password'}});
     }
 
     try {
       await newUser.save();
-    }
-    catch (err) {
+    } catch (err) {
       const errorMessages = new Set([...Object.values(err.errors), ...currentErrors]);
       res.status(400).send([...errorMessages].map((item) => item.properties.message));
       return;
@@ -48,38 +46,20 @@ class AuthService {
     this.authenticate(req, res);
   }
 
-  async getAnonCartWithItems(cart) {
-    const cartDataPromises = cart.map((item) => {
-      return Items
-        .findById(item.itemId)
-        .lean()
-        .exec()
-        .then((generalData) => {
-          generalData.description = generalData.description['en']; // TODO translation
-          generalData.name = generalData.name['en'];
-          return {
-            color: item.color,
-            amount: item.amount,
-            size: item.size,
-            generalData
-          }
-        });
+  async getAnonCartWithItems(cart, lang = LANGS.ENG) {
+    return await cart.map(async (item) => {
+      return {
+        color: item.color,
+        amount: item.amount,
+        size: item.size,
+        generalData :await ItemsServiceInstance.getById(item.itemId),
+      }
     });
-
-    return Promise.all(cartDataPromises);
   }
 
-  async getAnonFavoritesWithItems(favorites) {
-    return Items.find({ '_id': { $in: favorites } })
-      .lean()
-      .exec()
-      .then((items) => {
-        return items.map((item) => {
-          item.description = item.description['en']; // TODO translation
-          item.name = item.name['en'];
-          return item;
-        })
-      });
+  async getAnonFavoritesWithItems(favorites, lang = LANGS.ENG) {
+    const favoritesItems = await ItemsServiceInstance.getByIdArray(favorites, lang);
+    return favoritesItems.items;
   }
 
   authenticate(req, res) {
@@ -96,20 +76,21 @@ class AuthService {
           console.trace(err);
           res.status(500).send();
         }
+        try {
+          const {cart: userCart, favorites: userFavorites} = await User.findOne({'email': req.user.email});
+          const anonCart = req.session.cart;
+          const mergedCart = this.mergeCarts(anonCart, userCart);
+          req.session.favoritesItems = req.session.favoritesItems ? req.session.favoritesItems : [];
+          const mergedFavorites = Array.from(new Set([...req.session.favoritesItems, ...userFavorites]));
 
-        const { cart: userCart, favorites: userFavorites } = await User.findOne({ 'email': req.user.email });
-        const anonCart = req.session.cart;
-        const mergedCart = this.mergeCarts(anonCart, userCart);
-        req.session.favoritesItems = req.session.favoritesItems ? req.session.favoritesItems : [];
-        const mergedFavorites = new Set([...req.session.favoritesItems, ...userFavorites]);
+          await UserServiceInstance.setCart(req.user.email, mergedCart);
+          await UserServiceInstance.setFavorites(mergedFavorites);
+        }
+        catch (e) {
+          console.trace(e);
+          res.status(500).send();
+        }
 
-        await User
-          .updateOne(
-            { 'email': req.user.email },
-            { $set: { cart: mergedCart, favorites: Array.from(mergedFavorites) } },
-            { upsert: true }
-          )
-          .exec();
         return res.redirect('/api/auth/');
       });
     })(req, res);
@@ -147,8 +128,8 @@ class AuthService {
     for (const targetItem of secondCart) {
       const collisionedItemIndex = result.findIndex((item) => {
         return item.itemId.toString() === targetItem.itemId.toString()
-          && item.color === targetItem.color
-          && item.size === targetItem.size
+            && item.color === targetItem.color
+            && item.size === targetItem.size
       });
       if (collisionedItemIndex === -1) {
         result[collisionedItemIndex].amount += targetItem.amount;

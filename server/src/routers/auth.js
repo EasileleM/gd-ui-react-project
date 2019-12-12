@@ -38,8 +38,8 @@ authRouter.get('/', async (req, res) => {
     req.session.cartItems = req.session.cartItems ? req.session.cartItems : [];
     req.session.favoritesItems = req.session.favoritesItems ? req.session.favoritesItems : [];
     return res.status(200).send({
-      cartItems: await AuthServiceInstance.getAnonCartWithItems(req.session.cartItems),
-      favoritesItems: await AuthServiceInstance.getAnonFavoritesWithItems(req.session.favoritesItems)
+      cartItems: await AuthServiceInstance.getAnonCartWithItems(req.session.cartItems, req.query.lang),
+      favoritesItems: await AuthServiceInstance.getAnonFavoritesWithItems(req.session.favoritesItems, req.query.lang)
     });
   }
 });
