@@ -75,7 +75,7 @@ class AuthService {
       .exec()
       .then((items) => {
         return items.map((item) => {
-          item.description = item.description['en'];
+          item.description = item.description['en']; // TODO translation
           item.name = item.name['en'];
           return item;
         })
