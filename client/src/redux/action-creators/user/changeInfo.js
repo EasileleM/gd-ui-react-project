@@ -1,8 +1,8 @@
-import { changeUserInfoFetch } from "../../../utils/signInFetch";
+import { changeUserInfoFetch } from "../../../utils/changeUserInfoFetch";
 import notificationSuccess from '../../../utils/notificationSuccess';
 import { userAuthorize } from './actions';
 
-export function signIn(data) {
+export function changeInfo(data) {
   return (dispatch) => {
     changeUserInfoFetch(data)
       .then(() => {
@@ -15,7 +15,6 @@ export function signIn(data) {
           return;
         }
         if (err.response.status === 409) {
-          dispatch(failureSignUp(409));
           notificationSuccess('Такая почта уже используется.', 'Such email has already been used.', '');
           return;
         }

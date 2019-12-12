@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 
 import { logout } from '../../redux/action-creators/user/logout';
 import { closeModalWindow } from '../../redux/action-creators/modalWindow/actions';
-import { signUp } from '../../redux/action-creators/user/signUp';
+import { changeInfo } from '../../redux/action-creators/user/changeInfo';
 
 import './UserInfoContent.scss';
 import { EMAIL_REGEX, PASSWORD_REGEX, FIRST_NAME_REGEX, LAST_NAME_REGEX } from '../../constants/constants';
@@ -13,14 +13,6 @@ import { LoginWindowFormButton } from '../LoginWindowContent/LoginWindowFormButt
 import { InvalidFormNotification } from '../LoginWindowContent/InvalidFormNotification/InvalidFormNotification';
 
 import notificationSuccess from '../../utils/notificationSuccess';
-
-const formErrors = {
-  firstName: null,
-  lastName: null,
-  email: null,
-  password: null,
-  confirmPassword: null
-};
 
 export class UserInfoContent extends React.Component {
   constructor(props) {
@@ -52,19 +44,19 @@ export class UserInfoContent extends React.Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault();
-    if (this.state.formValid) {
-      this.props
-        .saveData({
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          email: this.state.email,
-          password: this.state.password,
-          currentPassword: this.state.currentPassword,
-        });
-    }
-    else {
-      notificationSuccess('Заполните форму.', 'Fill the form.', '');
-    }
+    //if (this.state.formValid) {
+    this.props
+      .saveData({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        oldPassword: this.state.password,
+        newPassword: this.state.currentPassword,
+      });
+    // }
+    // else {
+    //   notificationSuccess('Заполните форму.', 'Fill the form.', '');
+    // }
   }
 
   handleOnBlur = (e) => {
@@ -115,16 +107,16 @@ export class UserInfoContent extends React.Component {
 
   render() {
     let buttonDisabledClass = '';
-    if (!this.state.formValid) {
+    /*if (!this.state.formValid) {
       buttonDisabledClass = 'login-window-content__form-button_disabled';
-    }
+    }*/
     let currentError = null;
-    for (const key of Object.keys(formErrors)) {
+    /*for (const key of Object.keys(formErrors)) {
       if (this.state[key + 'Valid'] === false) {
         currentError = key;
         break;
       }
-    }
+    }*/
 
     return (
       <div className="user-info-content">
@@ -217,9 +209,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     close: () => dispatch(closeModalWindow()),
-    saveData: (data) => dispatch(signUp(data)),
+    saveData: (data) => dispatch(changeInfo(data)),
     logout: () => dispatch(logout())
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(UserInfoContent));
