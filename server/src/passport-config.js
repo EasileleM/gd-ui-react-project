@@ -10,11 +10,10 @@ export function passportInit(passport) {
   const authenticateUser = function (email, password, done) {
     User.findOne({ 'email': email }, async function (err, user) {
       if (err) {
-        console.error(`Error: ${err}`);
+        console.trace(`Error: ${err}`);
         return done(err);
       }
       if (!user) {
-        console.log('here')
         console.trace(new Error(`user wasn't found`));
         return done(null, false); // TODO done with flash error message
       }

@@ -1,4 +1,5 @@
 import express from "express";
+import {User} from '../db/Models/user.model'
 
 export const cartRouter = express.Router();
 
@@ -17,12 +18,11 @@ cartRouter.put('/',  async (req, res) => {
       }
     });
     if (req.isAuthenticated()) {
-      await User.updateOne(
-          { "email": req.user.email },
+      const result = await User.updateOne(
+          { "email": req.user.info.email },
           { $set: { cart } },
           { upsert: false }).exec();
       res.status(200).send(req.user);
-
     } else {
       req.session.cart = cart;
       res.status(200).send(req.session.cart)
