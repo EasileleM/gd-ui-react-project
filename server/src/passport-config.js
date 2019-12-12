@@ -14,7 +14,8 @@ export function passportInit(passport) {
         return done(err);
       }
       if (!user) {
-        console.error(`user wasn't found`);
+        console.log('here')
+        console.trace(new Error(`user wasn't found`));
         return done(null, false); // TODO done with flash error message
       }
       const isPasswordRight = await bcrypt.compare(password, user.password);

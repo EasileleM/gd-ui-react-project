@@ -47,18 +47,6 @@ itemsRouter.get('/filter', async (req, res) => {
   }
 });
 
-itemsRouter.get('/filter', async (req, res) => {
-  try {
-    ItemsService.setLang(req.query.lang);
-    const items = await ItemsService.filter(req.query);
-    const result = ItemsService.pagination(items, req.query.size, req.query.page);
-    res.status(200).send(result)
-  } catch (err) {
-    console.trace(err);
-    res.status(500).send();
-  }
-});
-
 itemsRouter.get('/recent', async (req, res) => {
   try {
     ItemsService.setLang(req.query.lang);

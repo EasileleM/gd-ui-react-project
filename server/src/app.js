@@ -1,4 +1,3 @@
-import http from 'http';
 import cors from 'cors';
 
 import express from 'express';
@@ -17,6 +16,7 @@ import { filterRouter } from './routers/filter';
 import { newsletterRouter } from './routers/newsletter';
 import { sliderRouter } from './routers/slider';
 import { config } from 'dotenv';
+import {cartRouter} from "./routers/cart";
 
 const MongoStore = connectMongo(session);
 const port = process.env.PORT;
@@ -36,7 +36,7 @@ const db = mongoose.connection;
 
 const app = express();
 
-app.server = http.createServer(app);
+app.use(express.json());
 
 app.use(flash());
 
@@ -71,9 +71,10 @@ app.use('/api/items', itemsRouter);
 app.use('/api/slider', sliderRouter);
 app.use('/api/newsletter', newsletterRouter);
 app.use('/api/filter', filterRouter);
+app.use('/api/cart', cartRouter);
 
-app.server.listen(port, () => {
-  console.log(`Up and Runnin' at ${app.server.address().port} port`);
+app.listen(port, () => {
+  console.log(`Up and Runnin' at ${port} port`);
 });
 
 export default app;
