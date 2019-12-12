@@ -1,7 +1,7 @@
-import { updateUserFavorites } from '../../../utils/updateUserFavorites';
+import {updateUserFavorites} from '../../../utils/updateUserFavorites';
 import notificationSuccess from '../../../utils/notificationSuccess';
 
-import { setItems } from './setItems';
+import {setItems} from './setItems';
 
 export function addItem(itemToAdd) {
   return (dispatch, getState) => {
@@ -16,13 +16,13 @@ export function addItem(itemToAdd) {
         _id: item._id
       }
     });
+    dispatch(setItems(currentItems));
     updateUserFavorites(currentItemsToServer)
-      .then(() => {
-        notificationSuccess(' успешно добавлено в избранное', ' has been added to favorites', itemToAdd.name); //TODO dispatch it
-        dispatch(setItems(currentItems));
-      })
-      .catch((err) => {
-        //TODO notify about cart error or do something another
-      });
+        .then(() => {
+          notificationSuccess(' успешно добавлено в избранное', ' has been added to favorites', itemToAdd.name); //TODO dispatch it
+        })
+        .catch((err) => {
+          //TODO notify about cart error or do something another
+        });
   };
 }

@@ -1,5 +1,6 @@
 import express from "express";
 import {User} from '../db/Models/user.model'
+import UserServiceInstance from "../services/UserService";
 
 export const cartRouter = express.Router();
 
@@ -18,14 +19,11 @@ cartRouter.put('/',  async (req, res) => {
       }
     });
     if (req.isAuthenticated()) {
-      const result = await User.updateOne(
-          { "email": req.user.info.email },
-          { $set: { cart } },
-          { upsert: false }).exec();
+      const result = UserServiceInstance.setCart(req.user.info.email, cart);
       res.status(200).send(req.user);
     } else {
-      req.session.cart = cart;
-      res.status(200).send(req.session.cart)
+      req.session.cartItems = cart;
+      res.status(200).send(req.session.cartItems)
     }
   }catch (e) {
     res.status(500).send(e)
@@ -36,6 +34,6 @@ cartRouter.get('/',  async (req, res) => {
   if (req.isAuthenticated()) {
     res.send(req.user.cartItems)
   } else {
-    res.send(req.session.cart)
+    res.send(req.session.cartItems)
   }
 });

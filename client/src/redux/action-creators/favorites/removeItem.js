@@ -9,6 +9,7 @@ export function removeItem(target) {
       return item._id === target._id;
     }), 1);
 
+
     const currentItemsToServer = currentItems.map((item) => {
       return {
         _id: item._id
@@ -17,12 +18,6 @@ export function removeItem(target) {
 
     dispatch(setItems(currentItems));
 
-    updateUserFavorites(currentItemsToServer)
-      .then(() => {
-        
-      })
-      .catch((err) => {
-        //TODO notify about cart error or do something another
-      });
+    updateUserFavorites(currentItemsToServer); //todo notifications
   };
 }

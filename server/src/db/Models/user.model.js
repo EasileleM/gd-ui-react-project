@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 
-const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const FIRST_NAME_REGEX = /^[a-zA-Z]{1,}$/;
-const LAST_NAME_REGEX = /^[a-zA-Z]{1,}$/;
+import {EMAIL_REGEX, FIRST_NAME_REGEX, LAST_NAME_REGEX} from "../../constants/constants";
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -13,12 +11,13 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   cart: [
     {
-      itemId: ObjectId,
+      itemId: {type: ObjectId, required: true},
       size: { type: String, required: true },
       color: { type: String, required: true },
       amount: { type: Number, required: true },
     }
-  ]
+  ],
+  favorites: [ObjectId]
 }, { collection: 'users' });
 
 userSchema.path('email').validate(function (value) {

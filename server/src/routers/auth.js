@@ -1,6 +1,7 @@
 import express from 'express';
 
 import AuthServiceInstance from "../services/AuthService";
+import UserServiceInstance from "../services/UserService";
 
 export const authRouter = express.Router();
 
@@ -32,11 +33,14 @@ authRouter.post('/logout', (req, res) => {
 
 authRouter.get('/', async (req, res) => {
   if (req.isAuthenticated()) {
-    res.send(req.user);
-  } else if (!req.session.cart) {
-    return res.status(200).send({ cartItems: [] });
-  } else if (req.session.cart) {
-    return res.status(200).send(await AuthServiceInstance.getAnonCartWithItems(req.session.cart));
+    res.send(await UserServiceInstance.prepare(req.user, req.query.lang));
+  } else {
+    req.session.cartItems = req.session.cartItems ? req.session.cartItems : [];
+    req.session.favoritesItems = req.session.favoritesItems ? req.session.favoritesItems : [];
+    return res.status(200).send({
+      cartItems: await AuthServiceInstance.getAnonCartWithItems(req.session.cartItems),
+      favoritesItems: await AuthServiceInstance.getAnonFavoritesWithItems(req.session.favoritesItems)
+    });
   }
 });
 

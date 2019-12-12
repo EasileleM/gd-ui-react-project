@@ -1,4 +1,5 @@
 import { Items } from '../db/Models/item.model';
+import {LANGS, FILTER_FIELDS} from "../constants/constants";
 import mongoose from 'mongoose';
 
 const langs = Object.freeze({
@@ -7,46 +8,37 @@ const langs = Object.freeze({
 });
 
 class ItemsService {
-    constructor(lang) {
-        this.setLang(lang);
-        this.filterFields = ['categories', 'maxprice', 'minprice', 'sizes', 'brands', 'colors'];
-    }
-
-    setLang(lang) {
-        this.lang = Object.values(langs).includes(lang) ? lang : langs.ENG;
-    }
-
-    languageSpecific(items) {
+    languageSpecific(items, lang = LANGS.ENG) {
         if (!Array.isArray(items)) {
-            items.description = items.description[this.lang];
-            items.name = items.name[this.lang];
+            items.description = items.description[lang];
+            items.name = items.name[lang];
             return items;
         }
 
         return items.map(item => {
-            item.description = item.description[this.lang];
-            item.name = item.name[this.lang];
+            item.description = item.description[lang];
+            item.name = item.name[lang];
             return item;
         });
     }
 
-    async getAllItems() {
+    async getAllItems(lang = LANGS.ENG) {
         const items = await Items
             .find()
             .lean()
             .exec();
-        return this.languageSpecific(items);
+        return this.languageSpecific(items, lang);
     }
 
-    async getById(id) {
+    async getById(id, lang = LANGS.ENG) {
         const item = await Items
             .findById(id)
             .lean()
             .exec();
-        return this.languageSpecific(item);
+        return this.languageSpecific(item, lang);
     }
 
-    async getByIdArray(ids) {
+    async getByIdArray(ids, lang = LANGS.ENG) {
         const objectIds = ids.map((current) => {
             try {
                 return mongoose.Types.ObjectId(current);
@@ -68,34 +60,34 @@ class ItemsService {
                 }
             }
         }
-        return { rejectedId, items: this.languageSpecific(items) };
+        return { rejectedId, items: this.languageSpecific(items,lang) };
     }
 
-    async getRecentItems(size = 4, page = 1) {
+    async getRecentItems(size = 4, page = 1, lang = LANGS.ENG) {
         const items = await Items
             .find()
             .sort({ creationDate: -1 })
             .limit(Number(size))
             .lean()
             .exec();
-        return this.pagination(this.languageSpecific(items), size, page);
+        return this.pagination(this.languageSpecific(items, lang), size, page);
     }
 
-    async getSalesItems(size = 4, page = 1) {
+    async getSalesItems(size = 4, page = 1,lang = LANGS.ENG) {
         const items = await Items
             .find()
             .lean()
             .exec();
         items.sort((a, b) => Number(b.sale) - Number(a.sale));
-        return this.pagination(this.languageSpecific(items), size, page);
+        return this.pagination(this.languageSpecific(items, lang), size, page);
     }
 
-    async getRelatedItems(id, size = 4, page = 1) {
+    async getRelatedItems(id, size = 4, page = 1, lang = LANGS.ENG) {
         const target = await this.getById(id);
         if (!target) {
             throw new Error(404);
         }
-        const items = this.languageSpecific(await this.getAllItems());
+        const items = this.languageSpecific(await this.getAllItems(), lang);
         const alreadySorted = new Set();
         const brandRelated = items.filter((item) => {
             return item.brand === target.brand && alreadySorted.add(item._id);
@@ -137,7 +129,7 @@ class ItemsService {
                 .filter((item) => String(item._id) !== String(target._id)), size, page);
     }
 
-    async search(query) {
+    async search(query, lang) {
         if (!query.search) {
             return this.getAllItems();
         }
@@ -145,7 +137,7 @@ class ItemsService {
             .find({ $text: { $search: query.search } })
             .lean()
             .exec();
-        return this.languageSpecific(items);
+        return this.languageSpecific(items, lang);
     }
 
     filter(items, query) {

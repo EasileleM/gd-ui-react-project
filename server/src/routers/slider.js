@@ -6,8 +6,7 @@ export const sliderRouter = express.Router();
 
 sliderRouter.get('/', async (req, res) => {
   try {
-    ItemsService.setLang(req.query.lang);
-    const slides = await SliderService.getSliders(req.query.amount);
+    const slides = await SliderService.getSliders(req.query.amount, req.query.lang);
     res.status(200).send(slides);
   }
   catch (err) {

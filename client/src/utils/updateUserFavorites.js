@@ -3,7 +3,7 @@ import {SERVER_URL} from '../constants/constants';
 
 export function updateUserFavorites(data) {
   return axios(`${SERVER_URL}/api/favorites`, {
-    method: 'post',
+    method: 'put',
     withCredentials: true,
     'Content-Type' : 'application/json',
     data

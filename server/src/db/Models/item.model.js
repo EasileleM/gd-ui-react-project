@@ -15,7 +15,7 @@ const itemsSchema = new mongoose.Schema({
   colors: [Number],
   images: [{
     src: String,
-    srcset: String
+    srcset: [String]
   }],
   sale: String,
   rating: String,

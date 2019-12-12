@@ -1,27 +1,18 @@
 import { Filters } from "../db/Models/filters.model";
+import {LANGS} from "../constants/constants";
 
-const langs = Object.freeze({
-  ENG: "en",
-  RU: "ru",
-});
 
 class FilterService {
-  constructor(lang) {
-    this.setLang(lang);
-  }
-
-  setLang(lang) {
-    this.lang = Object.values(langs).includes(lang) ? lang : langs.ENG;
-  }
-
-  languageSpecific(item) {
-    item.categories = item.categories[this.lang];
+  languageSpecific(item, lang) {
+    item.categories = item.categories[lang];
     return item;
   }
 
-  async getFilterFields() {
-    const fields = await Filters.findOne().lean().exec();
-    return this.languageSpecific(fields);
+  async getFilterFields(lang = LANGS.ENG) {
+    const fields = await Filters.findOne()
+        .lean()
+        .exec();
+    return this.languageSpecific(fields, lang);
   }
 }
 

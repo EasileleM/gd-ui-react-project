@@ -1,14 +1,14 @@
 import express from 'express';
 import FilterService from '../services/FilterService';
+
 export const filterRouter = express.Router();
 
 filterRouter.get('/', async (req, res) => {
   try {
-    FilterService.setLang(req.query.lang);
-    const item = await FilterService.getFilterFields();
+    const item = await FilterService.getFilterFields(req.query.lang);
     const itemCopy = {};
     for (const field in item) {
-      if (item.hasOwnProperty(field) && field != '_id') {
+      if (item.hasOwnProperty(field) && field !== '_id') {
         itemCopy[field] = item[field];
       }
     }
@@ -16,5 +16,6 @@ filterRouter.get('/', async (req, res) => {
   } catch (err) {
     console.trace(err);
     res.status(500).send();
-  };
+  }
+  ;
 });
