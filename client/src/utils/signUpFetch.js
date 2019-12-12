@@ -1,11 +1,11 @@
 import axios from 'axios';
-import {SERVER_URL} from '../constants/constants';
+import { SERVER_URL } from '../constants/constants';
 
 export function signUpFetch(data) {
-  return axios(`${SERVER_URL}/api/signUp`, {
+  return axios(`${SERVER_URL}/api/auth/signUp`, {
     method: 'post',
     withCredentials: true,
-    'Content-Type' : 'application/json',
+    'Content-Type': 'application/json',
     data
   })
 }

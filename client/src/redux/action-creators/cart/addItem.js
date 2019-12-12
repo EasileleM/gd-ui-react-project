@@ -23,7 +23,7 @@ export default function addItem(itemToAdd, color, size, amount = 1) {
       currentItems.push({ generalData: itemToAdd, size, color, amount });
     }
 
-    const currentItemsToServer = currentItems.filter((item) => {
+    const currentItemsToServer = currentItems.map((item) => {
       return {
         size: item.size,
         color: item.color,

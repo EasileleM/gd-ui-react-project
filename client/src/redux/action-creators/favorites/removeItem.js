@@ -9,7 +9,7 @@ export function removeItem(target) {
       return item._id === target._id;
     }))
 
-    const currentItemsToServer = currentItems.filter((item) => {
+    const currentItemsToServer = currentItems.map((item) => {
       return {
         _id: item._id
       }

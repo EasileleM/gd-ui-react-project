@@ -11,7 +11,7 @@ export default function removeItem(target) {
         && item.size === target.size;
     }), 1);
 
-    const currentItemsToServer = currentItems.filter((item) => {
+    const currentItemsToServer = currentItems.map((item) => {
       return {
         size: item.size,
         color: item.color,
