@@ -54,3 +54,7 @@ export const failureSignUp = () => {
   return { type: USER_ACTIONS.SIGNUP_FAILURE };
 
 }
+=======
+export const userLogout = () => {
+  return { type: USER_ACTIONS.LOGOUT };
+}
