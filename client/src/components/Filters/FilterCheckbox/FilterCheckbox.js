@@ -4,7 +4,7 @@ import store from "../../../redux/store";
 import {
   changeBrandsFilter,
   changeSizeFilter
-} from "../../../redux/action-creators/filter-action-creator";
+} from "../../../redux/action-creators/filter/actions";
 import { withTranslation } from 'react-i18next';
 
 

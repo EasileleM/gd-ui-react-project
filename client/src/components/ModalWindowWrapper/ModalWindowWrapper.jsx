@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { closeModalWindow } from '../../redux/action-creators/modalWindow-action-creator';
+import { closeModalWindow } from '../../redux/action-creators/modalWindow/actions';
 
 import CartItems from '../CartItems/CartItems';
 import FavoritesItems from '../FavoritesItems/FavoritesItems';
@@ -12,9 +12,8 @@ import notificationSuccess from '../../utils/notificationSuccess';
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 export class ModalWindowWrapper extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  state = {
+    currentContent: undefined
   }
 
   componentDidUpdate(prevProps) {

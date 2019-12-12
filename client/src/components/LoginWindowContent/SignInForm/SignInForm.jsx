@@ -10,11 +10,9 @@ import { LoginWindowFormButton } from '../LoginWindowFormButton/LoginWindowFormB
 import { InvalidFormNotification } from '../InvalidFormNotification/InvalidFormNotification';
 
 import notificationSuccess from '../../../utils/notificationSuccess';
-import { signIn } from '../../../utils/signIn';
 
-import { userAuthorize } from '../../../redux/action-creators/user-action-creator';
-import { setItems as setCartItems } from '../../../redux/thunks/cart/setItems';
-import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
+import { signIn } from '../../../redux/action-creators/user/signIn';
+import { closeModalWindow } from '../../../redux/action-creators/modalWindow/actions';
 
 const formErrors = {
   email: null,
@@ -22,15 +20,12 @@ const formErrors = {
 };
 
 export class SignInForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      emailValid: null,
-      passwordValid: null
-    };
-  }
+  state = {
+    email: '',
+    password: '',
+    emailValid: null,
+    passwordValid: null
+  };
 
   handleOnChange = (e) => {
     e.preventDefault();
@@ -39,17 +34,9 @@ export class SignInForm extends React.Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault();
-    if (this.state.emailValid && this.state.passwordValid) {
-      signIn({ email: this.state.email, password: this.state.password })
-        .then((res) => {
-          this.props.authorize(res.data.info);
-          this.props.setCartItems(res.data.cartItems);
-          this.props.close();
-          notificationSuccess('Добро пожаловать!', 'Welcome!', '');
-        })
-        .catch((err) => {
-          notificationSuccess('Вот незадача...', 'Tough luck...', '');
-        })
+    if (this.state.formValid) {
+      this.props
+        .signIn({ password: this.state.password, email: this.state.email });
     }
     else {
       notificationSuccess('Заполните форму.', 'Fill the form.', '');
@@ -76,12 +63,17 @@ export class SignInForm extends React.Component {
         break;
       default: return;
     }
-    this.setState(currentStateUpdate);
+    this.setState(currentStateUpdate, () => {
+      this.setState({
+        formValid:
+          this.state.emailValid && this.state.passwordValid
+      });
+    });
   }
 
   render() {
     let buttonDisabledClass = '';
-    if (!(this.state.emailValid && this.state.passwordValid)) {
+    if (!this.state.formValid) {
       buttonDisabledClass = 'login-window-content__form-button_disabled';
     }
     let currentError = null;
@@ -124,8 +116,7 @@ export class SignInForm extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     close: () => dispatch(closeModalWindow()),
-    authorize: (data) => dispatch(userAuthorize(data)),
-    setCartItems: (data) => dispatch(setCartItems(data))
+    signIn: (data) => dispatch(signIn(data))
   }
 };
 

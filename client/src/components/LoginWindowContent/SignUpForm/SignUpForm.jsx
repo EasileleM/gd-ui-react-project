@@ -9,11 +9,9 @@ import { LoginWindowFormButton } from '../LoginWindowFormButton/LoginWindowFormB
 import { InvalidFormNotification } from '../InvalidFormNotification/InvalidFormNotification';
 
 import notificationSuccess from '../../../utils/notificationSuccess';
-import { signUp } from '../../../utils/signUp';
 
-import { setItems as setCartItems } from '../../../redux/thunks/cart/setItems';
-import { userAuthorize } from '../../../redux/action-creators/user-action-creator';
-import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
+import { signUp } from '../../../redux/action-creators/user/signUp';
+import { closeModalWindow } from '../../../redux/action-creators/modalWindow/actions';
 
 const formErrors = {
   firstName: null,
@@ -36,7 +34,8 @@ export class SignUpForm extends React.Component {
       lastNameValid: null,
       emailValid: null,
       passwordValid: null,
-      confirmPasswordValid: null
+      confirmPasswordValid: null,
+      formValid: false
     };
   }
 
@@ -47,24 +46,14 @@ export class SignUpForm extends React.Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault();
-    if (this.state.emailValid
-      && this.state.passwordValid
-      && this.state.firstNameValid
-      && this.state.lastNameValid
-      && this.state.confirmPasswordValid) {
-      signUp({
-        email: this.state.email, password: this.state.password,
-        firstName: this.state.firstName, lastName: this.state.lastName
-      })
-        .then((res) => {
-          this.props.authorize(res.data.info);
-          this.props.setCartItems(res.data.cartItems);
-          this.props.close();
-          notificationSuccess('Добро пожаловать!', 'Welcome!', '');
-        })
-        .catch((err) => {
-          notificationSuccess('Вот незадача...', 'Tough luck...', '');
-        })
+    if (this.state.formValid) {
+      this.props
+        .signUp({
+          email: this.state.email,
+          password: this.state.password,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName
+        });
     }
     else {
       notificationSuccess('Заполните форму.', 'Fill the form.', '');
@@ -106,16 +95,20 @@ export class SignUpForm extends React.Component {
         break;
       default: return;
     }
-    this.setState(currentStateUpdate);
+    ;
+    this.setState(currentStateUpdate, () => {
+      this.setState({
+        formValid:
+          this.state.emailValid && this.state.passwordValid
+          && this.state.firstNameValid && this.state.lastNameValid
+          && this.state.confirmPasswordValid
+      });
+    });
   }
 
   render() {
     let buttonDisabledClass = '';
-    if (!(this.state.emailValid
-      && this.state.passwordValid
-      && this.state.firstNameValid
-      && this.state.lastNameValid
-      && this.state.confirmPasswordValid)) {
+    if (!this.state.formValid) {
       buttonDisabledClass = 'login-window-content__form-button_disabled';
     }
     let currentError = null;
@@ -188,9 +181,8 @@ export class SignUpForm extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     close: () => dispatch(closeModalWindow()),
-    authorize: (data) => dispatch(userAuthorize(data)),
-    setCartItems: (data) => dispatch(setCartItems(data))
-  }
+    signUp: (data) => dispatch(signUp(data))
+  };
 };
 
 export default connect(null, mapDispatchToProps)(withTranslation()(SignUpForm));

@@ -1,4 +1,4 @@
-import { MODAL_WINDOW_ACTIONS } from '../action-creators/modalWindow-action-creator';
+import { MODAL_WINDOW_ACTIONS } from '../action-creators/modalWindow/actions';
 
 export const initialState = {
   currentModal: 'none'

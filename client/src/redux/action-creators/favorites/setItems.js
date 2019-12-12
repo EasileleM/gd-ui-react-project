@@ -1,4 +1,4 @@
-import { updateItems } from '../../action-creators/favorites-action-creator';
+import { updateItems } from './actions';
 
 export function setItems(items) {
   return async (dispatch) => {

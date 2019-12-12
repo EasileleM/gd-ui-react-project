@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { error404, error400, error500 } from "../redux/action-creators/error-action-creator";
+import { error404, error400, error500 } from "../redux/action-creators/error/actions";
 import store from "../redux/store"
 
 export const interceptorInit = () => {
