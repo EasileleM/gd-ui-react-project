@@ -1,21 +1,22 @@
 import passport from "passport";
-import {User} from "../db/Models/user.model";
+import { User } from "../db/Models/user.model";
 import bcrypt from "bcrypt";
-import {Items} from "../db/Models/item.model";
+import { Items } from "../db/Models/item.model";
 
+const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
 class AuthService {
   async signUp(req, res) {
-    console.log(req.body);
+    const userInDb = await User.findOne({ 'email': req.body.email }).exec();
+
+    if (userInDb) {
+      res.status(409).send("User already exists.");
+      return;
+    }
+
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-    const userInDb = await User.findOne({'email': req.body.email}).exec();
-
-    if (userInDb) {
-      res.status(409).send("User already exists");
-      return;
-    }
     const newUser = new User({
       email: req.body.email,
       password: hashedPassword,
@@ -23,59 +24,77 @@ class AuthService {
       lastName: req.body.lastName,
       cart: []
     });
-    await newUser.save();
 
-    req.session.destroy();
+    const currentErrors = [];
+
+    if (!PASSWORD_REGEX.test(req.body.password)) {
+      currentErrors.push({ properties: { message: 'Invalid email/password' } });
+    }
+
+    try {
+      await newUser.save();
+    }
+    catch (err) {
+      const errorMessages = new Set([...Object.values(err.errors), ...currentErrors]);
+      res.status(400).send([...errorMessages].map((item) => item.properties.message));
+      return;
+    }
+
+    if (currentErrors.length) {
+      res.status(400).send(currentErrors);
+      return;
+    }
+
     this.authenticate(req, res);
   }
 
   async getAnonCartWithItems(cart) {
     const cartDataPromises = cart.map((item) => {
       return Items
-          .findById(item.itemId)
-          .lean()
-          .exec()
-          .then((generalData) => {
-            generalData.description = generalData.description['en']; // TODO translation
-            generalData.name = generalData.name['en'];
-            return {
-              color: item.color,
-              amount: item.amount,
-              size: item.size,
-              generalData
-            }
-          });
+        .findById(item.itemId)
+        .lean()
+        .exec()
+        .then((generalData) => {
+          generalData.description = generalData.description['en']; // TODO translation
+          generalData.name = generalData.name['en'];
+          return {
+            color: item.color,
+            amount: item.amount,
+            size: item.size,
+            generalData
+          }
+        });
     });
 
     return Promise.all(cartDataPromises);
   }
 
   authenticate(req, res) {
-    passport.authenticate('local',  (err, user) => {
+    passport.authenticate('local', (err, user) => {
       if (err) {
-        console.log(err);
-        return res.status(500).send(err);
+        console.trance(err);
+        return res.status(500).send();
       }
       if (!user) {
-        return res.status(400).send('wrong password or email'); // TODO more informative error message
+        return res.status(400).send('Wrong password/email.');
       }
-      req.logIn(user, async (err) =>  {
+      req.logIn(user, async (err) => {
         if (err) {
-          console.log(err);
-          res.status(500).send(err);
+          console.trace(err);
+          res.status(500).send();
         }
 
-        const {cart: userCart} = await User.findOne({'email': req.user.email});
+        const { cart: userCart } = await User.findOne({ 'email': req.user.email });
         const anonCart = req.session.cart;
         const mergedCart = this.mergeCarts(anonCart, userCart);
 
         await User
-            .updateOne(
-                {'email': req.user.email},
-                {$set: {cart: mergedCart}},
-                {upsert: true}
-            )
-            .exec();
+          .updateOne(
+            { 'email': req.user.email },
+            { $set: { cart: mergedCart } },
+            { upsert: true }
+          )
+          .exec();
         return res.redirect('/api/auth/');
       });
     })(req, res);
@@ -113,10 +132,10 @@ class AuthService {
     for (const targetItem of secondCart) {
       const collisionedItemIndex = result.findIndex((item) => {
         return item.itemId.toString() === targetItem.itemId.toString()
-            && item.color === targetItem.color
-            && item.size === targetItem.size
+          && item.color === targetItem.color
+          && item.size === targetItem.size
       });
-      if (~collisionedItemIndex) {
+      if (collisionedItemIndex === -1) {
         result[collisionedItemIndex].amount += targetItem.amount;
       } else {
         result.push(targetItem);

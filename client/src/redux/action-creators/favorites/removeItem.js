@@ -5,9 +5,9 @@ export function removeItem(target) {
   return (dispatch, getState) => {
     const currentItems = getState().favoritesController.items.slice();
 
-    currentItems.splice(currentItems.find((item) => {
+    currentItems.splice(currentItems.findIndex((item) => {
       return item._id === target._id;
-    }))
+    }), 1);
 
     const currentItemsToServer = currentItems.map((item) => {
       return {
@@ -15,9 +15,11 @@ export function removeItem(target) {
       }
     });
 
+    dispatch(setItems(currentItems));
+
     updateUserFavorites(currentItemsToServer)
       .then(() => {
-        dispatch(setItems(currentItems));
+        
       })
       .catch((err) => {
         //TODO notify about cart error or do something another

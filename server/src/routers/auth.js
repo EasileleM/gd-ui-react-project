@@ -1,16 +1,17 @@
 import express from 'express';
-import passport from 'passport';
-import bcrypt from 'bcrypt';
 
 import AuthServiceInstance from "../services/AuthService";
-import { User } from '../db/Models/user.model';
-import { Items } from '../db/Models/item.model';
-
 
 export const authRouter = express.Router();
 
 authRouter.post('/signIn', function (req, res, next) {
-  AuthServiceInstance.authenticate(req, res);
+  try {
+    AuthServiceInstance.authenticate(req, res);
+  }
+  catch (err) {
+    console.trace(err);
+    res.status(500).send();
+  }
 });
 
 authRouter.post('/signUp', async (req, res) => {
