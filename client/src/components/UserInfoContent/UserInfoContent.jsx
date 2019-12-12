@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next';
 
 import { logout } from '../../redux/action-creators/user/logout';
 import { closeModalWindow } from '../../redux/action-creators/modalWindow/actions';
+import { signUp } from '../../redux/action-creators/user/signUp';
 
 import './UserInfoContent.scss';
 import { EMAIL_REGEX, PASSWORD_REGEX, FIRST_NAME_REGEX, LAST_NAME_REGEX } from '../../constants/constants';
@@ -30,12 +31,13 @@ export class UserInfoContent extends React.Component {
       email: '',
       password: '',
       confirmPassword: '',
+      currentPassword: '',
       firstNameValid: null,
       lastNameValid: null,
       emailValid: null,
       passwordValid: null,
       confirmPasswordValid: null,
-      formValid: false
+      formValid: false,
     };
   }
 
@@ -52,11 +54,12 @@ export class UserInfoContent extends React.Component {
     e.preventDefault();
     if (this.state.formValid) {
       this.props
-        .signUp({
+        .saveData({
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
           email: this.state.email,
           password: this.state.password,
-          firstName: this.state.firstName,
-          lastName: this.state.lastName
+          currentPassword: this.state.currentPassword,
         });
     }
     else {
@@ -122,6 +125,7 @@ export class UserInfoContent extends React.Component {
         break;
       }
     }
+
     return (
       <div className="user-info-content">
         <button onClick={() => this.handleOnLogout()} className="user-info-content__logout-button">{this.props.t('logout')}</button>
@@ -131,7 +135,7 @@ export class UserInfoContent extends React.Component {
             <UserInfoInput
               placeholder={this.props.t('userInfoContent.firstName')}
               name="firstName"
-              value={this.state.firstName}
+              value={this.props.firstName}
               handleOnChange={this.handleOnChange}
               handleOnBlur={this.handleOnBlur}
               valid={this.state.firstNameValid}
@@ -141,7 +145,7 @@ export class UserInfoContent extends React.Component {
             <UserInfoInput
               placeholder={this.props.t('userInfoContent.lastName')}
               name="lastName"
-              value={this.state.lastName}
+              value={this.props.lastName}
               handleOnChange={this.handleOnChange}
               handleOnBlur={this.handleOnBlur}
               valid={this.state.lastNameValid}
@@ -153,7 +157,7 @@ export class UserInfoContent extends React.Component {
             <UserInfoInput
               placeholder={this.props.t('userInfoContent.email')}
               name="email"
-              value={this.state.email}
+              value={this.props.email}
               handleOnChange={this.handleOnChange}
               handleOnBlur={this.handleOnBlur}
               valid={this.state.emailValid}
@@ -187,34 +191,33 @@ export class UserInfoContent extends React.Component {
             <UserInfoInput
               placeholder={this.props.t('userInfoContent.currentPassword')}
               name="currentPassword"
-              // value={this.state.confirmPassword}
+              value={this.state.currentPassword}
               handleOnChange={this.handleOnChange}
               handleOnBlur={this.handleOnBlur}
-              // valid={this.state.confirmPasswordValid}
               type="password"
               maxLength="140"
-              required
             />
           </div>
           <InvalidFormNotification content={currentError && this.props.t(`userInfoContent.${currentError}Error`)} />
           <LoginWindowFormButton additionalClasses={buttonDisabledClass} onSumbit={this.handleOnSubmit} content={this.props.t('userInfoContent.save')} />
         </form>
-
       </div>
     );
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
-    firstName: state.userController.firstName
+    firstName: state.userController.firstName,
+    lastName: state.userController.lastName,
+    email: state.userController.email,
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     close: () => dispatch(closeModalWindow()),
+    saveData: (data) => dispatch(signUp(data)),
     logout: () => dispatch(logout())
   }
 };
