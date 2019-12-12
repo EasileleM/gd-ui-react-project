@@ -1,9 +1,9 @@
 import ItemsService from "./ItemsService";
 import { Slider } from "../db/Models/slider.model"
-import { Items } from "../db/Models/item.model";
+import { LANGS } from "../constants/constants";
 
 class SlideService {
-    async getSliders(amount = 0) {
+    async getSliders(amount = 0, lang = LANGS.ENG) {
         const SliderItems = await Slider
             .find()
             .limit(Number(amount))
@@ -11,24 +11,19 @@ class SlideService {
             .exec();
 
         const promises = SliderItems.map(async (slide) => {
-            const slideItem = await ItemsService.getById(slider.itemId);
-            slide.item = sliderItem;
+            slide.item = await ItemsService.getById(slide.itemId, lang);
             slide.itemId = undefined;
-            return slideItem;
+            return slide;
         });
         return Promise.all(promises);
     }
 
-    async getById(id) {
+    async getById(id, lang = LANGS.ENG) {
         const slide = await Slider
             .findById(id)
             .lean()
             .exec();
-        const item = await Items
-            .findById(slide.itemId)
-            .lean()
-            .exec();
-        slide.item = item;
+        slide.item = ItemsService.getById(slide.itemId, lang);
         slide.itemId = undefined;
         return slide;
     }

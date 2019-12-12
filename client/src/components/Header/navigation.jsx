@@ -9,7 +9,7 @@ import AddToFavoriteButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import UserButton from './UserButton/UserButton';
 import { Logo } from '../Logo/Logo';
 import { withRouter } from "react-router-dom";
-import { search } from "../../redux/action-creators/filter-action-creator";
+import { search } from "../../redux/action-creators/filter/actions";
 import store from "../../redux/store";
 import { ReactComponent as DeleteIcon } from "../../assets/delete.svg";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";

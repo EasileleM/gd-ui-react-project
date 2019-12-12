@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 import './SaleItem.scss';
 
 import store from '../../redux/store';
-import addItem from '../../redux/thunks/cart/addItem';
+import addItem from '../../redux/action-creators/cart/addItem';
 
 import { LoadingSpinner } from '../LoadingSpinner/index';
 

@@ -3,23 +3,20 @@ import { withTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom'
 import { AddToCartButton } from '../AddToCartButton/AddToCartButton.jsx';
 import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
-import SizesSelector from './SizesSelector/index.js';
-import { ColorSelector } from './ColorSelector/index.js';
+import SizesSelector from './SizesSelector/SizesSelector.jsx';
+import { ColorSelector } from './ColorSelector/ColorSelector.jsx';
 import { connect } from 'react-redux';
 import { ReactComponent as ShareIcon } from "../../assets/share.svg";
 
 import './ProductCard.scss';
 
 export class ProductCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      amount: 1,
-      size: this.props.product.sizes[0],
-      color: this.props.product.colors[0],
-      width: 0,
-    };
-  }
+  state = {
+    amount: 1,
+    size: this.props.product.sizes[0],
+    color: this.props.product.colors[0],
+    width: 0,
+  };
 
 
   handleSizeChange(changeEvent) {
@@ -34,14 +31,14 @@ export class ProductCard extends Component {
     });
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     return (
       <div className={`product-card ${this.props.rowSize === 3 ? "product-card_three-cards" : ""}`}>
         <div className='product-card__inner'>
           <div className='product-card__front'>
-            <img srcSet={this.props.product.images[0].srcset.join(", ")} alt={this.props.product.name} src={this.props.product.images[0].src}  className='product-card__image product-card__image_front' />
+            <img srcSet={this.props.product.images[0].srcset.join(", ")} alt={this.props.product.name} src={this.props.product.images[0].src} className='product-card__image product-card__image_front' />
             <div className='product-card__description'>
               <div className='product-card__name product-card__name_front'>
                 {this.props.product.name}

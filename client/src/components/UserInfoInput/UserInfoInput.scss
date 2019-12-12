@@ -1,9 +1,8 @@
-@import '../../style/main.scss';
+@import "../../style/main.scss";
 
 .user-info-input {
   @include font-primary-regular-md;
   transition: 200ms ease;
-  margin: 20px 0;
   border: 0;
   border-bottom: 2px solid $color-porcelain;
   height: 35px;
@@ -11,10 +10,6 @@
   padding: 0 10px;
   color: $color-limed-spruce;
   outline: 0;
-
-  &__label {
-    display: none;
-  }
 
   &_valid {
     border-bottom: 2px solid $color-green;
@@ -32,5 +27,24 @@
 
   &:focus {
     border-bottom: 2px solid $color-slate-gray;
+  }
+}
+
+.user-info-input-label {
+  display: none;
+}
+
+.user-info-input-wrapper {
+  position: relative;
+  margin: 20px 0;
+
+  &__show-password {
+    position: absolute;
+    top: 50%;
+    right: 1%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
   }
 }

@@ -1,17 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import Item from './Item/Item';
+import { closeModalWindow } from '../../redux/action-creators/modalWindow/actions';
 
 import './CartItems.scss';
-import { connect } from 'react-redux';
-import Item from './Item/Item';
-import store from '../../redux/store';
-import { closeModalWindow } from '../../redux/action-creators/modalWindow-action-creator';
 
 export class CartItems extends React.Component {
   componentDidMount() { }
 
   render() {
     if (!this.props.items.length) {
-      store.dispatch(closeModalWindow());
+      this.props.close();
       return null;
     }
     const items = this.props.items.map((item, index) => {
@@ -35,4 +35,11 @@ const mapStateToProps = (state) => {
     items: state.cartController.items
   }
 };
-export default connect(mapStateToProps)(CartItems);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    close: () => dispatch(closeModalWindow())
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartItems);

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const itemsSchema = new mongoose.Schema({
-  name:  {
+  name: {
     en: String,
     ru: String
   },
@@ -15,13 +15,13 @@ const itemsSchema = new mongoose.Schema({
   colors: [Number],
   images: [{
     src: String,
-    srcset: String
+    srcset: [String]
   }],
   sale: String,
   rating: String,
   categories: [String],
   brand: String,
   creationDate: Date
-}, {collection : 'items'});
+}, { collection: 'items' });
 
 export const Items = mongoose.models.Items || mongoose.model('Items', itemsSchema);

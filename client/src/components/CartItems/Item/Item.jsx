@@ -1,23 +1,24 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import store from '../../../redux/store';
-import removeItem from '../../../redux/thunks/cart/removeItem';
-import updateItem from '../../../redux/thunks/cart/updateItem';
-import { closeModalWindow } from '../../../redux/action-creators/modalWindow-action-creator';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import removeItem from '../../../redux/action-creators/cart/removeItem';
+import updateItem from '../../../redux/action-creators/cart/updateItem';
+import { closeModalWindow } from '../../../redux/action-creators/modalWindow/actions';
 
 import './Item.scss';
 
 export class Item extends React.Component {
-  handleOnClickIncrement(event) {
+  handleOnClickIncrement() {
     if (Number(this.props.data.amount) < 99) {
-      store.dispatch(updateItem(this.props.data, this.props.data.color, this.props.data.size, this.props.data.amount + 1));
+      this.props.updateItem(this.props.data, this.props.data.color, this.props.data.size, this.props.data.amount + 1);
     }
   }
 
-  handleOnClickDecrement(event) {
+  handleOnClickDecrement() {
     if (Number(this.props.data.amount) > 1) {
-      store.dispatch(updateItem(this.props.data, this.props.data.color, this.props.data.size, this.props.data.amount - 1));
+      this.props.updateItem(this.props.data, this.props.data.color, this.props.data.size, this.props.data.amount - 1);
     }
   }
 
@@ -26,16 +27,16 @@ export class Item extends React.Component {
   render() {
     return (
       <div className="card-window__item cart-window-item">
-        <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
+        <Link onClick={() => this.props.close()} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
           <img srcSet={this.props.data.generalData.images[0].srcset.join(", ")} className="cart-window-item__image" alt="item" />
         </Link>
         <div className="cart-window-item__info">
-          <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
+          <Link onClick={() => this.props.close()} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
             <h2 className="cart-window-item__name">
               {this.props.data.generalData.name}
             </h2>
           </Link>
-          <Link onClick={() => store.dispatch(closeModalWindow())} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
+          <Link onClick={() => this.props.close()} to={`/item/${this.props.data.generalData._id}`} style={{ textDecoration: 'none' }}>
             <p className="cart-window-item__description">
               {this.props.data.generalData.description}
             </p>
@@ -56,11 +57,11 @@ export class Item extends React.Component {
           </div>
         </div>
         <div className="cart-window-item__item-controls">
-          <button onClick={() => store.dispatch(removeItem(this.props.data))} tabIndex="2" className="cart-window-item__item-controls-remove"></button>
+          <button onClick={() => this.props.removeItem(this.props.data)} tabIndex="2" className="cart-window-item__item-controls-remove"></button>
           <div className="cart-window-item__item-controls-amount-wrapper">
-            <button onClick={(event) => this.handleOnClickIncrement(event)} tabIndex="2" className="cart-window-item__item-controls-amount-button">+</button>
+            <button onClick={() => this.handleOnClickIncrement()} tabIndex="2" className="cart-window-item__item-controls-amount-button">+</button>
             <input disabled tabIndex="2" maxLength="2" value={this.props.data.amount} className="cart-window-item__item-controls-amount-input" />
-            <button onClick={(event) => this.handleOnClickDecrement(event)} tabIndex="2" className="cart-window-item__item-controls-amount-button cart-window-item">-</button>
+            <button onClick={() => this.handleOnClickDecrement()} tabIndex="2" className="cart-window-item__item-controls-amount-button cart-window-item">-</button>
           </div>
         </div>
       </div>
@@ -68,4 +69,12 @@ export class Item extends React.Component {
   }
 }
 
-export default withTranslation()(Item);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    close: () => dispatch(closeModalWindow()),
+    removeItem: (data) => dispatch(removeItem(data)),
+    updateItem: (data, color, size, amount) => dispatch(updateItem(data, color, size, amount))
+  }
+};
+
+export default connect(null, mapDispatchToProps)(withTranslation()(Item));

@@ -12,7 +12,7 @@ import ModalWindowWrapper from '../../components/ModalWindowWrapper/ModalWindowW
 import { RedirectWrapper } from '../../components/RedirectWrapper/RedirectWrapper';
 
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
-import { setInitSearchState } from '../../redux/action-creators/filter-action-creator';
+import { setInitSearchState } from '../../redux/action-creators/filter/actions';
 
 import Search from "../Search/Search";
 import Home from "../Home/Home";
