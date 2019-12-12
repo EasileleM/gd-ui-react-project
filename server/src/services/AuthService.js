@@ -34,12 +34,12 @@ class AuthService {
       await newUser.save();
     } catch (err) {
       const errorMessages = new Set([...Object.values(err.errors), ...currentErrors]);
-      res.status(400).send([...errorMessages].map((item) => item.properties.message));
+      res.status(403).send([...errorMessages].map((item) => item.properties.message));
       return;
     }
 
     if (currentErrors.length) {
-      res.status(400).send(currentErrors);
+      res.status(403).send(currentErrors);
       return;
     }
 
@@ -69,7 +69,7 @@ class AuthService {
         return res.status(500).send();
       }
       if (!user) {
-        return res.status(400).send('Wrong password/email.');
+        return res.status(403).send('Wrong password/email.');
       }
       req.logIn(user, async (err) => {
         if (err) {

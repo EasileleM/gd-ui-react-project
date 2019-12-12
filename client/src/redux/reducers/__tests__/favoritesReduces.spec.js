@@ -1,4 +1,4 @@
-import { favoritesReducer, initialState } from './favoritesReducer';
+import { favoritesReducer, initialState } from '../favoritesReducer';
 import * as favoritesActionCreators from '../action-creators/favorites-action-creator';
 
 describe('Favorites reducer', () => {

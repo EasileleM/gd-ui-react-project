@@ -17,7 +17,6 @@ export function removeItem(target) {
     });
 
     dispatch(setItems(currentItems));
-
-    updateUserFavorites(currentItemsToServer); //todo notifications
+    updateUserFavorites(currentItemsToServer); //TODO notifications
   };
 }
