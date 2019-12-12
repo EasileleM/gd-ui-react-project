@@ -1,4 +1,4 @@
-import { filterReducer, initialState } from './filterReducer';
+import { filterReducer, initialState } from '../filterReducer';
 import * as filterActionCreator from '../action-creators/filter-action-creator';
 
 

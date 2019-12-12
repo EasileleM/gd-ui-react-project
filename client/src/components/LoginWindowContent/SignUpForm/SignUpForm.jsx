@@ -46,6 +46,9 @@ export class SignUpForm extends React.Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault();
+    if (this.props.signUpStatus !== null) {
+      return;
+    }
     if (this.state.formValid) {
       this.props
         .signUp({
@@ -108,7 +111,7 @@ export class SignUpForm extends React.Component {
 
   render() {
     let buttonDisabledClass = '';
-    if (!this.state.formValid) {
+    if (!this.state.formValid || this.props.signUpStatus !== null) {
       buttonDisabledClass = 'login-window-content__form-button_disabled';
     }
     let currentError = null;
@@ -178,6 +181,13 @@ export class SignUpForm extends React.Component {
 }
 
 
+const mapStateToProps = (store) => {
+  return {
+    signInStatus: store.userController.signUpStatus
+  }
+};
+
+
 const mapDispatchToProps = (dispatch) => {
   return {
     close: () => dispatch(closeModalWindow()),
@@ -185,4 +195,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(withTranslation()(SignUpForm));
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SignUpForm));
