@@ -1,13 +1,23 @@
 import express from "express";
 import {User} from "../db/Models/user.model";
 import UserServiceInstance from "../services/UserService";
+import {EMAIL_REGEX, FIRST_NAME_REGEX, LAST_NAME_REGEX, PASSWORD_REGEX} from "../constants/constants";
 
 export const accountRouter = express.Router();
 
 accountRouter.put('/edit', async (req, res) => {
   if (!req.body) {
     return res.status(400).send();
-  }//todo validate req.body
+  }
+
+  if (!(LAST_NAME_REGEX.test(req.body.lastName) &&
+      FIRST_NAME_REGEX.test(req.body.firstName) &&
+      EMAIL_REGEX.test(req.body.email) &&
+      PASSWORD_REGEX.test(req.body.newPassword) &&
+      PASSWORD_REGEX.test(req.body.oldPassword))) {
+    return res.status(400).send("Data is not valid");
+  }
+
   try {
     if (req.isAuthenticated() &&
         req.body.email === req.user.email &&
@@ -19,7 +29,8 @@ accountRouter.put('/edit', async (req, res) => {
             $set: {
               password: await UserServiceInstance.hashPassword(req.body.newPassword),
               firstName: req.body.firstName,
-              lastName: req.body.lastName
+              lastName: req.body.lastName,
+              email: req.body.email
             }
           });//todo make it work for emails
       return res.status(200).send(user);
@@ -29,6 +40,4 @@ accountRouter.put('/edit', async (req, res) => {
     console.trace(err);
     return res.status(500).send(err);
   }
-
-
 });

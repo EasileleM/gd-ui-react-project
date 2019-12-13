@@ -1,13 +1,17 @@
 import passport from "passport";
-import { User } from "../db/Models/user.model";
-import { LANGS, PASSWORD_REGEX } from "../constants/constants";
+import {User} from "../db/Models/user.model";
+import {EMAIL_REGEX, FIRST_NAME_REGEX, LANGS, LAST_NAME_REGEX, PASSWORD_REGEX} from "../constants/constants";
 import ItemsServiceInstance from "./ItemsService";
 import UserServiceInstance from "./UserService";
 
 class AuthService {
   async signUp(req, res) {
-    const userInDb = await User.findOne({ 'email': req.body.email }).exec();
+    if(!this.validateUser(req.body)) {
+      res.status(400).send("Data is not valid");
+      return;
+    }
 
+    const userInDb = await User.findOne({'email': req.body.email}).exec();
     if (userInDb) {
       res.status(409).send("User already exists.");
       return;
@@ -27,7 +31,7 @@ class AuthService {
     const currentErrors = [];
 
     if (!PASSWORD_REGEX.test(req.body.password)) {
-      currentErrors.push({ properties: { message: 'Invalid email/password' } });
+      currentErrors.push({properties: {message: 'Invalid email/password'}});
     }
 
     try {
@@ -77,7 +81,7 @@ class AuthService {
           res.status(500).send();
         }
         try {
-          const { cart: userCart, favorites: userFavorites } = await User.findOne({ 'email': req.user.email });
+          const {cart: userCart, favorites: userFavorites} = await User.findOne({'email': req.user.email});
           const anonCart = req.session.cart;
           const mergedCart = this.mergeCarts(anonCart, userCart);
           req.session.favoritesItems = req.session.favoritesItems ? req.session.favoritesItems : [];
@@ -85,8 +89,7 @@ class AuthService {
 
           await UserServiceInstance.setCart(req.user.email, mergedCart);
           await UserServiceInstance.setFavorites(mergedFavorites);
-        }
-        catch (e) {
+        } catch (e) {
           console.trace(e);
           res.status(500).send();
         }
@@ -94,6 +97,13 @@ class AuthService {
         return res.redirect('/api/auth/');
       });
     })(req, res);
+  }
+
+  validateUser(user) {
+    return PASSWORD_REGEX.test(user.password) &&
+        FIRST_NAME_REGEX.test(user.firstName) &&
+        LAST_NAME_REGEX.test(user.lastName) &&
+        EMAIL_REGEX.test(user.email)
   }
 
   /**
@@ -128,8 +138,8 @@ class AuthService {
     for (const targetItem of secondCart) {
       const collisionedItemIndex = result.findIndex((item) => {
         return item.itemId.toString() === targetItem.itemId.toString()
-          && item.color === targetItem.color
-          && item.size === targetItem.size
+            && item.color === targetItem.color
+            && item.size === targetItem.size
       });
       if (collisionedItemIndex !== -1) {
         result[collisionedItemIndex].amount += targetItem.amount;
