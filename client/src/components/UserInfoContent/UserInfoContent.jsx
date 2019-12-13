@@ -26,9 +26,9 @@ export class UserInfoContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
+      firstName: this.props.firstName,
+      lastName: this.props.lastName,
+      email: this.props.email,
       password: '',
       confirmPassword: '',
       currentPassword: '',
@@ -132,43 +132,61 @@ export class UserInfoContent extends React.Component {
         <p className="user-info-content__greetings">{`${this.props.t('welcome')}, ${this.props.firstName}!`}</p>
         <form style={{ display: this.props.display }} onSubmit={this.handleOnSubmit} method="POST" className="user-info-content__form">
           <div className="user-info-content__wrapper_line">
-            <UserInfoInput
-              placeholder={this.props.t('userInfoContent.firstName')}
-              name="firstName"
-              value={this.props.firstName}
-              handleOnChange={this.handleOnChange}
-              handleOnBlur={this.handleOnBlur}
-              valid={this.state.firstNameValid}
-              type="text"
-              maxLength="140"
-            />
-            <UserInfoInput
-              placeholder={this.props.t('userInfoContent.lastName')}
-              name="lastName"
-              value={this.props.lastName}
-              handleOnChange={this.handleOnChange}
-              handleOnBlur={this.handleOnBlur}
-              valid={this.state.lastNameValid}
-              type="text"
-              maxLength="140"
-            />
+            <div className="user-info-content__wrapper_labeled">
+              <label className="user-info-content__text">
+                {this.props.t('userInfoContent.firstName')}
+              </label>
+              <UserInfoInput
+                placeholder={this.props.t('userInfoContent.firstName')}
+                name="firstName"
+                value={this.state.firstName}
+                handleOnChange={this.handleOnChange}
+                handleOnBlur={this.handleOnBlur}
+                valid={this.state.firstNameValid}
+                type="text"
+                maxLength="140"
+              />
+            </div>
+            <div className="user-info-content__wrapper_labeled">
+              <label className="user-info-content__text">
+                {this.props.t('userInfoContent.lastName')}
+              </label>
+              <UserInfoInput
+                placeholder={this.props.t('userInfoContent.lastName')}
+                name="lastName"
+                id="lastName"
+                value={this.state.lastName}
+                handleOnChange={this.handleOnChange}
+                handleOnBlur={this.handleOnBlur}
+                valid={this.state.lastNameValid}
+                type="text"
+                maxLength="140"
+              />
+            </div>
           </div>
           <div className="user-info-content__wrapper_line">
-            <UserInfoInput
-              placeholder={this.props.t('userInfoContent.email')}
-              name="email"
-              value={this.props.email}
-              handleOnChange={this.handleOnChange}
-              handleOnBlur={this.handleOnBlur}
-              valid={this.state.emailValid}
-              type="email"
-              maxLength="140"
-            />
+            <div className="user-info-content__wrapper_labeled">
+              <label className="user-info-content__text">
+                {this.props.t('userInfoContent.email')}
+              </label>
+              <UserInfoInput
+                placeholder={this.props.t('userInfoContent.email')}
+                name="email"
+                id="email"
+                value={this.state.email}
+                handleOnChange={this.handleOnChange}
+                handleOnBlur={this.handleOnBlur}
+                valid={this.state.emailValid}
+                type="email"
+                maxLength="140"
+              />
+            </div>
           </div>
           <div className="user-info-content__wrapper_line">
             <UserInfoInput
               placeholder={this.props.t('userInfoContent.password')}
               name="password"
+              id="password"
               value={this.state.password}
               handleOnChange={this.handleOnChange}
               handleOnBlur={this.handleOnBlur}
@@ -179,6 +197,7 @@ export class UserInfoContent extends React.Component {
             <UserInfoInput
               placeholder={this.props.t('userInfoContent.confirmPassword')}
               name="confirmPassword"
+              id="confirmPassword"
               value={this.state.confirmPassword}
               handleOnChange={this.handleOnChange}
               handleOnBlur={this.handleOnBlur}
@@ -191,6 +210,7 @@ export class UserInfoContent extends React.Component {
             <UserInfoInput
               placeholder={this.props.t('userInfoContent.currentPassword')}
               name="currentPassword"
+              id="currentPassword"
               value={this.state.currentPassword}
               handleOnChange={this.handleOnChange}
               handleOnBlur={this.handleOnBlur}

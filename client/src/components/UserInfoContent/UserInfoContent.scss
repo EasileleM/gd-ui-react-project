@@ -53,9 +53,21 @@
     &_line {
       display: flex;
       justify-content: space-between;
+      align-items: flex-end;
       width: 100%;
       box-sizing: border-box;
       padding: 0 100px;
     }
+
+    &_labeled {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__text {
+    @include font-primary-regular-md;
+    color: $color-limed-spruce;
   }
 }
