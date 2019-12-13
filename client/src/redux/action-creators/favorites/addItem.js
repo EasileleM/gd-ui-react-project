@@ -16,13 +16,10 @@ export function addItem(itemToAdd) {
         _id: item._id
       }
     });
-    updateUserFavorites(currentItemsToServer)
-      .then(() => {
-        notificationSuccess(' успешно добавлено в избранное', ' has been added to favorites', itemToAdd.name); //TODO dispatch it
-        dispatch(setItems(currentItems));
-      })
-      .catch((err) => {
-        //TODO notify about cart error or do something another
-      });
+    dispatch(setItems(currentItems));
+    notificationSuccess(' успешно добавлено в избранное', ' has been added to favorites', itemToAdd.name); //TODO dispatch it
+
+    updateUserFavorites(currentItemsToServer);
+    //TODO notify about cart error or do something another
   };
 }

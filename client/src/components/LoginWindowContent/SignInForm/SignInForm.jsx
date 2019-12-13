@@ -34,6 +34,9 @@ export class SignInForm extends React.Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault();
+    if (this.props.signInStatus !== null) {
+      return;
+    }
     if (this.state.formValid) {
       this.props
         .signIn({ password: this.state.password, email: this.state.email });
@@ -73,7 +76,7 @@ export class SignInForm extends React.Component {
 
   render() {
     let buttonDisabledClass = '';
-    if (!this.state.formValid) {
+    if (!this.state.formValid || this.props.signInStatus !== null) {
       buttonDisabledClass = 'login-window-content__form-button_disabled';
     }
     let currentError = null;
@@ -113,6 +116,12 @@ export class SignInForm extends React.Component {
   }
 }
 
+const mapStateToProps = (store) => {
+  return {
+    signInStatus: store.userController.signInStatus
+  }
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     close: () => dispatch(closeModalWindow()),
@@ -120,4 +129,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(null, mapDispatchToProps)(withTranslation()(SignInForm));
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SignInForm));

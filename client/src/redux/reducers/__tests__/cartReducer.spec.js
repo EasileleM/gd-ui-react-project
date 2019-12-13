@@ -1,4 +1,4 @@
-import { cartReducer, initialState } from './cartReducer';
+import { cartReducer, initialState } from '../cartReducer';
 import * as cartActionCreators from '../action-creators/cart-action-creator';
 
 describe('Cart reducer', () => {

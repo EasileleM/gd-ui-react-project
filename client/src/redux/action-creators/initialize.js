@@ -16,7 +16,7 @@ export function initialize() {
           dispatch(userAuthorize(data.info));
         }
         dispatch(setCartItems(data.cartItems));
-        dispatch(setFavoritesItems(data.favoritesItems || []));
+        dispatch(setFavoritesItems(data.favoritesItems));
       });
   };
 }
