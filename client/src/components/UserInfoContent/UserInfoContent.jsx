@@ -14,6 +14,14 @@ import { InvalidFormNotification } from '../LoginWindowContent/InvalidFormNotifi
 
 import notificationSuccess from '../../utils/notificationSuccess';
 
+const formErrors = {
+  firstName: null,
+  lastName: null,
+  email: null,
+  password: null,
+  confirmPassword: null
+};
+
 export class UserInfoContent extends React.Component {
   constructor(props) {
     super(props);
@@ -24,9 +32,9 @@ export class UserInfoContent extends React.Component {
       password: '',
       confirmPassword: '',
       currentPassword: '',
-      firstNameValid: null,
-      lastNameValid: null,
-      emailValid: null,
+      firstNameValid: true,
+      lastNameValid: true,
+      emailValid: true,
       passwordValid: null,
       confirmPasswordValid: null,
       formValid: false,
@@ -44,19 +52,19 @@ export class UserInfoContent extends React.Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault();
-    //if (this.state.formValid) {
-    this.props
-      .saveData({
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-        newPassword: this.state.password,
-        oldPassword: this.state.currentPassword,
-      });
-    // }
-    // else {
-    //   notificationSuccess('Заполните форму.', 'Fill the form.', '');
-    // }
+    if (this.state.formValid) {
+      this.props
+        .saveData({
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          email: this.state.email,
+          newPassword: this.state.password,
+          oldPassword: this.state.currentPassword,
+        });
+    }
+    else {
+      notificationSuccess('Заполните форму', 'Fill the form', '');
+    }
   }
 
   handleOnBlur = (e) => {
@@ -107,16 +115,16 @@ export class UserInfoContent extends React.Component {
 
   render() {
     let buttonDisabledClass = '';
-    /*if (!this.state.formValid) {
+    if (!this.state.formValid) {
       buttonDisabledClass = 'login-window-content__form-button_disabled';
-    }*/
+    }
     let currentError = null;
-    /*for (const key of Object.keys(formErrors)) {
+    for (const key of Object.keys(formErrors)) {
       if (this.state[key + 'Valid'] === false) {
         currentError = key;
         break;
       }
-    }*/
+    }
 
     return (
       <div className="user-info-content">
@@ -210,7 +218,9 @@ export class UserInfoContent extends React.Component {
               maxLength="140"
             />
           </div>
-          <InvalidFormNotification content={currentError && this.props.t(`userInfoContent.${currentError}Error`)} />
+          <div className="user-info-content__message">
+            <InvalidFormNotification content={currentError && this.props.t(`userInfoContent.${currentError}Error`)} />
+          </div>
           <LoginWindowFormButton additionalClasses={buttonDisabledClass} onSumbit={this.handleOnSubmit} content={this.props.t('userInfoContent.save')} />
         </form>
       </div>
