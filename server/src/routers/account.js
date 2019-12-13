@@ -13,26 +13,37 @@ accountRouter.put('/edit', async (req, res) => {
   if (!(LAST_NAME_REGEX.test(req.body.lastName) &&
       FIRST_NAME_REGEX.test(req.body.firstName) &&
       EMAIL_REGEX.test(req.body.email) &&
-      PASSWORD_REGEX.test(req.body.newPassword) &&
+      (!req.body.newPassword || PASSWORD_REGEX.test(req.body.newPassword)) &&
       PASSWORD_REGEX.test(req.body.oldPassword))) {
     return res.status(400).send("Data is not valid");
   }
 
   try {
-    if (req.isAuthenticated() &&
-        await UserServiceInstance.authenticateUser(req.body.email, req.body.oldPassword)
-    ) {
-
-      const user = await User.updateOne({email: req.user.email},
-          {
-            $set: {
-              password: await UserServiceInstance.hashPassword(req.body.newPassword),
-              firstName: req.body.firstName,
-              lastName: req.body.lastName,
-              email: req.body.email
-            }
-          });//todo make it work for emails
-      return res.status(200).send(user);
+    if (req.isAuthenticated()) {
+      const isPasswordCorrect = await UserServiceInstance.authenticateUser(req.user.email, req.body.oldPassword);
+      if (isPasswordCorrect) {
+        if (!req.body.newPassword) {
+          await User.updateOne({email: req.user.email},
+              {
+                $set: {
+                  firstName: req.body.firstName,
+                  lastName: req.body.lastName,
+                  email: req.body.email
+                }
+              });
+        } else {
+          await User.updateOne({email: req.user.email},
+              {
+                $set: {
+                  password: await UserServiceInstance.hashPassword(req.body.newPassword),
+                  firstName: req.body.firstName,
+                  lastName: req.body.lastName,
+                  email: req.body.email
+                }
+              });
+        }
+      }
+      return res.status(200).send('Ok');
     }
     return res.status(400).send('Wrong password/email');
   } catch (err) {

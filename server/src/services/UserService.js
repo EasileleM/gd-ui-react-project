@@ -1,4 +1,4 @@
-import {LANGS, PASSWORD_REGEX} from "../constants/constants";
+import {LANGS} from "../constants/constants";
 import {User} from "../db/Models/user.model";
 import ItemsServiceInstance from "./ItemsService";
 import bcrypt from "bcrypt";
@@ -53,23 +53,17 @@ class UserService {
     return preparedUser;
   }
 
-  authenticateUser(email, password) {
-    return User.findOne({'email': email}, async function (err, user) {
-      if (err) {
-        throw err;
-      }
+   async authenticateUser(email, password) {
+    try{
+      const user = await User.findOne({'email': email});
       if (!user) {
-        throw new Error('User was not found')
+        return false
       }
-      console.log(password)
-      console.log(user.password)
-      const isPasswordRight = await bcrypt.compare(password, user.password);
-      if (!isPasswordRight) {
-        throw new Error('Wrong password/email');
-      }
-      console.log("authenticateUser === true")
-      return user;
-    });
+      return await bcrypt.compare(password, user.password);
+    }
+    catch {
+      return false
+    }
   }
 }
 
