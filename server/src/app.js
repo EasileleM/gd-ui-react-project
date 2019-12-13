@@ -73,7 +73,7 @@ app.use('/api/slider', sliderRouter);
 app.use('/api/newsletter', newsletterRouter);
 app.use('/api/filter', filterRouter);
 app.use('/api/cart', cartRouter);
-app.use('/api/favorites', favoritesRouter);accountRouter
+app.use('/api/favorites', favoritesRouter);
 app.use('/api/account', accountRouter);
 
 

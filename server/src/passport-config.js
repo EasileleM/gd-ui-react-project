@@ -7,7 +7,7 @@ const LocalStrategy = passportLocal.Strategy;
 
 export function passportInit(passport) {
   const authenticateUser = function (email, password, done) {
-    User.findOne({ 'email': email }, async function (err, user) {
+    User.findOne({ 'email': email }, async function (err, user) {//todo maybe use similar function from UserService
       if (err) {
         console.trace(err);
         return done(err);
