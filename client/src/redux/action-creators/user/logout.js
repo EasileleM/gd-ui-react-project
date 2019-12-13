@@ -19,7 +19,7 @@ export function logout() {
       .catch(() => {
         dispatch(failureLogout());
         notificationSuccess('У нас возникли проблемы на сервере, попробуйте повторить позже.',
-          'We have troubles on out server, please try again later.', '');
+          'We have troubles on our server, please try again later.', '');
       });
   };
 }

@@ -91,6 +91,20 @@
     "emailError": "Incorrect email.",
     "passwordError": "Incorrect password. Password should contain minimum eight characters, at least one letter, one number and one special character."
   },
+  "userInfoContent": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "New password",
+    "confirmPassword": "Confirm new password",
+    "currentPassword": "Current password",
+    "save": "Save",
+    "emailError": "Incorrect email.",
+    "passwordError": "Incorrect password. Password should contain minimum eight characters, at least one letter, one number and one special character.",
+    "firstNameError": "Incorrect first name. It should contain one or more latin characters",
+    "lastNameError": "Incorrect last name. It should contain one or more latin characters",
+    "confirmPasswordError": "Passwords don't match."
+  },
   "cartHeader": "Cart",
   "favoritesHeader": "Favorites",
   "loginWindowContentHeader": "Authorization",

@@ -13,24 +13,24 @@
   color: $color-white;
   background: $color-orange;
 
+  &:hover {
+    opacity: .8;
+  }
+
   &_none-margin-top {
     margin-top: 0;
   }
 
   &_disabled {
-    opacity: .8;
+    opacity: .5;
     cursor: not-allowed;
     &:hover {
-      opacity: .8;
+      opacity: .5;
     }
   }
 
   @media screen and (max-width: $breakpoint-mobile) {
     margin-bottom: 0;
     width: 100%;
-  }
-
-  &:hover {
-    opacity: .8;
   }
 }

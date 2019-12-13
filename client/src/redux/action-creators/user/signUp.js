@@ -29,7 +29,7 @@ export function signUp(data) {
         }
         dispatch(failureSignUp(500));
         notificationSuccess('У нас возникли проблемы на сервере, попробуйте повторить позже.',
-          'We have troubles on out server, please try again later.', ''); // TODO weird handling, refactor!
+          'We have troubles on our server, please try again later.', ''); // TODO weird handling, refactor!
       })
   };
 }
