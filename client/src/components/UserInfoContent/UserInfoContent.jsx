@@ -35,8 +35,8 @@ export class UserInfoContent extends React.Component {
       firstNameValid: true,
       lastNameValid: true,
       emailValid: true,
-      passwordValid: null,
-      confirmPasswordValid: null,
+      passwordValid: true,
+      confirmPasswordValid: true,
       formValid: false,
     };
   }
