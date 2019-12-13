@@ -131,7 +131,7 @@ class AuthService {
             && item.color === targetItem.color
             && item.size === targetItem.size
       });
-      if (collisionedItemIndex === -1) {
+      if (collisionedItemIndex !== -1) {
         result[collisionedItemIndex].amount += targetItem.amount;
       } else {
         result.push(targetItem);
