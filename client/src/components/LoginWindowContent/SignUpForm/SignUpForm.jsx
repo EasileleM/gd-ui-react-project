@@ -184,7 +184,7 @@ export class SignUpForm extends React.Component {
 
 const mapStateToProps = (store) => {
   return {
-    signInStatus: store.userController.signUpStatus
+    signUpStatus: store.userController.signUpStatus
   }
 };
 
