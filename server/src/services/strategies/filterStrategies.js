@@ -1,22 +1,13 @@
 const minPriceStrategy = (item, filters, filter) => {
-  if (Number(item.price) < Number(filters[filter])) {
-    return false;
-  }
-  return true;
+  return Number(item.price) > Number(filters[filter]);
 };
 
 const maxPriceStrategy = (item, filters, filter) => {
-  if (Number(item.price) > Number(filters[filter])) {
-    return false;
-  }
-  return true;
+  return Number(item.price) < Number(filters[filter]);
 };
 
 const brandStrategy = (item, filters, filter) => {
-  if (!filters[filter].has(item.brand)) {
-    return false;
-  }
-  return true;
+  return filters[filter].has(item.brand);
 };
 
 const defaultStrategy = (item, filters, filter) => {
@@ -29,10 +20,7 @@ const defaultStrategy = (item, filters, filter) => {
       matches++;
     }
   }
-  if (!matches) {
-    return false;
-  }
-  return true;
+  return matches;
 };
 
 export const filterStrategies = {
