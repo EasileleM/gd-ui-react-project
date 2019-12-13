@@ -50,8 +50,8 @@ export class UserInfoContent extends React.Component {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         email: this.state.email,
-        oldPassword: this.state.password,
-        newPassword: this.state.currentPassword,
+        newPassword: this.state.password,
+        oldPassword: this.state.currentPassword,
       });
     // }
     // else {
