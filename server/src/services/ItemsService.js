@@ -1,5 +1,6 @@
 import { Items } from '../db/Models/item.model';
-import { LANGS, FILTER_FIELDS } from "../constants/constants";
+import { LANGS } from "../constants/constants";
+import { filterStrategies } from './strategies/filterStrategies';
 import mongoose from 'mongoose';
 
 class ItemsService {
@@ -90,7 +91,7 @@ class ItemsService {
         if (!target) {
             throw new Error(404);
         }
-        const items = await this.getAllExcludeOne(target._id);
+        const items = await this.getAllExcludeOne(target._id, lang);
         items.sort((firstItem, secondItem) => {
             if (firstItem.brand !== target.brand || secondItem.brand !== target.brand) {
                 return (secondItem.brand === target.brand) - (firstItem.brand === target.brand);
@@ -112,7 +113,7 @@ class ItemsService {
 
     async search(query, lang) {
         if (!query.search) {
-            return this.getAllItems();
+            return await this.getAllItems();
         }
         const items = await Items
             .find({ $text: { $search: query.search } })
@@ -125,7 +126,7 @@ class ItemsService {
         let result = items;
         if (query.filter === 'true') {
             const filters = {};
-            for (const field of FILTER_FIELDS) {
+            for (const field in filterStrategies) {
                 if (query[field]) {
                     if (field === 'maxprice' || field === 'minprice') {
                         filters[field] = query[field];
@@ -135,37 +136,12 @@ class ItemsService {
                     }
                 }
             }
+
             result = items.filter((item) => {
                 for (const field in filters) {
-                    if (field === 'minprice') {
-                        if (Number(item.price) < Number(filters[field])) {
-                            return false;
-                        }
-                    }
-                    else if (field === 'maxprice') {
-                        if (Number(item.price) > Number(filters[field])) {
-                            return false;
-                        }
-                    }
-                    else if (field === 'brands') {
-                        if (!filters[field].has(item.brand)) {
-                            return false;
-                        }
-                    }
-                    else {
-                        if (!item[field].length) {
-                            return false;
-                        }
-                        let matches = 0;
-                        for (const value of item[field]) {
-                            if (filters[field].has(value)) {
-                                matches++;
-                            }
-                        }
-                        if (!matches) {
-                            return false;
-                        }
-                    }
+                    if (!filterStrategies[field](item, filters, field)) {
+                        return false;
+                    };
                 }
                 return true;
             });
