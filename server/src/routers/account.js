@@ -20,11 +20,10 @@ accountRouter.put('/edit', async (req, res) => {
 
   try {
     if (req.isAuthenticated() &&
-        req.body.email === req.user.email &&
         await UserServiceInstance.authenticateUser(req.body.email, req.body.oldPassword)
     ) {
 
-      const user = await User.updateOne({email: req.body.email},
+      const user = await User.updateOne({email: req.user.email},
           {
             $set: {
               password: await UserServiceInstance.hashPassword(req.body.newPassword),
