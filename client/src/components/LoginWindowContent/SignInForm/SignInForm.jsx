@@ -34,7 +34,7 @@ export class SignInForm extends React.Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault();
-    if (this.props.signInStatus !== null) {
+    if (this.props.signInStatus !== null && this.props.signInStatus !== 'failed') {
       return;
     }
     if (this.state.formValid) {
@@ -76,7 +76,8 @@ export class SignInForm extends React.Component {
 
   render() {
     let buttonDisabledClass = '';
-    if (!this.state.formValid || this.props.signInStatus !== null) {
+    if (!this.state.formValid ||
+      (this.props.signInStatus !== null && this.props.signInStatus !== 'failed')) {
       buttonDisabledClass = 'login-window-content__form-button_disabled';
     }
     let currentError = null;
