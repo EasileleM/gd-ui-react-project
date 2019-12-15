@@ -42,8 +42,8 @@ accountRouter.put('/edit', async (req, res) => {
                 }
               });
         }
-      }
       return res.status(200).send('Ok');
+      }
     }
     return res.status(400).send('Wrong password/email');
   } catch (err) {

@@ -82,13 +82,12 @@ class AuthService {
         }
         try {
           const {cart: userCart, favorites: userFavorites} = await User.findOne({'email': req.user.email});
-          const anonCart = req.session.cart;
+          const anonCart = req.session.cartItems;
           const mergedCart = this.mergeCarts(anonCart, userCart);
           req.session.favoritesItems = req.session.favoritesItems ? req.session.favoritesItems : [];
           const mergedFavorites = Array.from(new Set([...req.session.favoritesItems, ...userFavorites]));
-
           await UserServiceInstance.setCart(req.user.email, mergedCart);
-          await UserServiceInstance.setFavorites(mergedFavorites);
+          await UserServiceInstance.setFavorites(req.user.email, mergedFavorites);
         } catch (e) {
           console.trace(e);
           res.status(500).send();

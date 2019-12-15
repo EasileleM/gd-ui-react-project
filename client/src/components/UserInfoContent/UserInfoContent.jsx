@@ -46,7 +46,7 @@ export class UserInfoContent extends React.Component {
   }
 
   handleOnChange = (e) => {
-    e.preventDefault();
+    e.preventDefault();//todo fix for autosuggest
     this.setState({ [e.target.name]: e.target.value });
   }
 

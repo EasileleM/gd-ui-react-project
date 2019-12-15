@@ -14,7 +14,7 @@ favoritesRouter.put('/', async (req, res) => {
     });
     if (req.isAuthenticated()) {
       const result = await UserServiceInstance
-        .setFavorites(req.user.info.email, favorites);
+        .setFavorites(req.user.email, favorites);
       res.status(200).send(req.user);
     } else {
       req.session.favoritesItems = favorites;

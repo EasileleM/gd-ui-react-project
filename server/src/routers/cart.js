@@ -18,7 +18,7 @@ cartRouter.put('/', async (req, res) => {
       }
     });
     if (req.isAuthenticated()) {
-      const result = UserServiceInstance.setCart(req.user.info.email, cart);
+      const result = UserServiceInstance.setCart(req.user.email, cart);
       res.status(200).send(req.user);
     } else {
       req.session.cartItems = cart;
