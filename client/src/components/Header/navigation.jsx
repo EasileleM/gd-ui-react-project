@@ -96,6 +96,7 @@ export class Navigation extends Component {
             data-closed="≡"></label>
           <Link onClick={this.closeMenu}
             className={`
+      link_decoration-none
       header__burger-menu
       header__text
       header__links-item
@@ -105,6 +106,7 @@ export class Navigation extends Component {
           </Link>
           <Link onClick={this.closeMenu}
             className={`
+      link_decoration-none
       header__burger-menu
       header__text
       header__links-item

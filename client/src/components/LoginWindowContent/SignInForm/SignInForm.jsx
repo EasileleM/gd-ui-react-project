@@ -110,7 +110,7 @@ export class SignInForm extends React.Component {
           maxLength="140"
         />
         <InvalidFormNotification content={currentError && this.props.t(`signUpForm.${currentError}Error`)} />
-        <Link to='/404' onClick={this.props.close} className="login-window-content__form-password-link">{this.props.t('signInForm.forgotPassword')}</Link>
+        <Link to='/404' onClick={this.props.close} className="login-window-content__form-password-link link_decoration-none">{this.props.t('signInForm.forgotPassword')}</Link>
         <LoginWindowFormButton additionalClasses={`login-window-content__form-button_none-margin-top ${buttonDisabledClass}`} content={this.props.t('signInForm.signIn')} />
       </form>
     )

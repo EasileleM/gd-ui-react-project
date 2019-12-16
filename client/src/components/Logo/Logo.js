@@ -8,7 +8,7 @@ export class Logo extends React.Component {
 
   render() {
     return (
-      <Link className="logo" to="/">
+      <Link className="logo link_decoration-none" to="/">
         <div className="logo__title">
           sh
           <div className="logo__image"></div>

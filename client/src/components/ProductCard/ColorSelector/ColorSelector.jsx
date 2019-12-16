@@ -5,19 +5,20 @@ import './ColorSelector.scss';
 export class ColorSelector extends React.Component {
 
   render() {
-    const colorVariants = this.props.colors.map((color) =>
+    const { colors, selectedOption, handleOptionChange } = this.props;
+    const colorVariants = colors.map((color) =>
       <div key={color} className="color-selector-container-wrapper">
         <label
           style={{
             backgroundColor: color
           }}
-          className={`color-selector__container ${this.props.selectedOption === color ? 'color-selector__container_checked' : ''}`}>
+          className={`color-selector__container ${selectedOption === color ? 'color-selector__container_checked' : ''}`}>
 
           <input type="radio"
             name="color"
             value={color}
-            checked={this.props.selectedOption === color}
-            onChange={(e) => this.props.handleOptionChange(e)}
+            checked={selectedOption === color}
+            onChange={(e) => handleOptionChange(e)}
             className="color-selector__button"
           />
         </label>

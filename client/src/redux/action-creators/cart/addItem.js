@@ -16,7 +16,11 @@ export default function addItem(itemToAdd, color, size, amount = 1) {
         && item.size === size;
     });
 
-    if (~targetItemIndex) {
+    if (targetItemIndex >= 0) {
+      if (currentItems[targetItemIndex].amount + 1 > 99) {
+        notificationSuccess(' уже добавлен в корзину в максимальном количестве', ' has already been added in max quantity', itemToAdd.name);
+        return;
+      }
       currentItems[targetItemIndex].amount++;
     }
     else {
