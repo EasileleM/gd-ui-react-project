@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../SectionHeader/index.js';
 import ProductCatalog from '../ProductCatalog/ProductCatalog.js';
 
-import './main.scss';
+import './NewArrivalsBlock.scss';
 
 export function NewArrivalsBlock() {
   const [ t ] = useTranslation();

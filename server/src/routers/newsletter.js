@@ -1,18 +1,21 @@
 import express from 'express';
-import NewsletterService from '../services/NewsletterService';
+import NewsletterServiceInstance from '../services/NewsletterService';
+import {EMAIL_REGEX} from "../constants/constants";
 
 export const newsletterRouter = express.Router();
 
 newsletterRouter.post('/', async (req, res) => {
   try {
-    const service = new NewsletterService();
-    //TODO add email validation
-    const result = await service.addSignee(req.body);
+    const email = req.body.email;
+    if(!EMAIL_REGEX.test(email)) {
+      throw new Error("Email is not valid")
+    }
+    const result = await NewsletterServiceInstance.addSignee(req.body.email);
     res.status(201).send(result);
   }
   catch (err) {
     console.trace(err);
-    res.statis(500).send(err);
+    res.status(500).send(err);
   }
 });
 
