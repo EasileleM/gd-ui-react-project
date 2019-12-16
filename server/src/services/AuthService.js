@@ -51,7 +51,7 @@ class AuthService {
   }
 
   async getAnonCartWithItems(cart, lang = LANGS.ENG) {
-    return await cart.map(async (item) => {
+    const promises =  cart.map(async (item) => {
       return {
         color: item.color,
         amount: item.amount,
@@ -59,6 +59,7 @@ class AuthService {
         generalData: await ItemsServiceInstance.getById(item.itemId, lang),
       }
     });
+    return Promise.all(promises);
   }
 
   async getAnonFavoritesWithItems(favorites, lang = LANGS.ENG) {
