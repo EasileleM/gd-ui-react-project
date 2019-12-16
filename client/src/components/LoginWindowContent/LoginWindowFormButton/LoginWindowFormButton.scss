@@ -29,6 +29,14 @@
     }
   }
 
+  &_loading {
+    opacity: .5;
+    cursor: wait;
+    &:hover {
+      opacity: .5;
+    }
+  }
+
   @media screen and (max-width: $breakpoint-mobile) {
     margin-bottom: 0;
     width: 100%;

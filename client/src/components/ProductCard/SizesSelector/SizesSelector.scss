@@ -17,6 +17,10 @@ $color-text-sizes: $color-limed-spruce;
     flex-wrap: nowrap;
   }
 
+  &__title {
+    margin-right: 5px;
+  }
+
   &__input {
     display: none;
   }

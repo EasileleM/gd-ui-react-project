@@ -7,7 +7,7 @@ import { closeModalWindow } from '../../redux/action-creators/modalWindow/action
 import { changeInfo } from '../../redux/action-creators/user/changeInfo';
 
 import './UserInfoContent.scss';
-import { EMAIL_REGEX, PASSWORD_REGEX, FIRST_NAME_REGEX, LAST_NAME_REGEX } from '../../constants/constants';
+import { emailRegex, passwordRegex, minLength, maxLength, onlyLatinRussian } from '../../utils/rulesForValidation/generalRules';
 import { UserInfoInput } from '../UserInfoInput/UserInfoInput';
 import { LoginWindowFormButton } from '../LoginWindowContent/LoginWindowFormButton/LoginWindowFormButton';
 import { InvalidFormNotification } from '../LoginWindowContent/InvalidFormNotification/InvalidFormNotification';
@@ -23,22 +23,35 @@ const formErrors = {
 };
 
 export class UserInfoContent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstName: this.props.firstName,
-      lastName: this.props.lastName,
-      email: this.props.email,
-      password: '',
-      confirmPassword: '',
-      currentPassword: '',
-      firstNameValid: true,
-      lastNameValid: true,
-      emailValid: true,
-      passwordValid: true,
-      confirmPasswordValid: true,
-      formValid: false,
-    };
+  state = {
+    firstName: this.props.firstName,
+    lastName: this.props.lastName,
+    email: this.props.email,
+    password: '',
+    confirmPassword: '',
+    currentPassword: '',
+    firstNameValid: true,
+    lastNameValid: true,
+    emailValid: true,
+    passwordValid: true,
+    confirmPasswordValid: true,
+    formValid: false,
+  };
+
+  rulesForFields = {
+    email: [emailRegex, minLength(0), maxLength(140)],
+    password: [passwordRegex, minLength(8), maxLength(30)],
+    confirmPassword: [
+      (value) => this.state.password === value,
+      () => {
+        if (!this.state.passwordValid) {
+          return null;
+        }
+        return true;
+      }
+    ],
+    firstName: [onlyLatinRussian, minLength(0), maxLength(140)],
+    lastName: [onlyLatinRussian, minLength(0), maxLength(140)]
   }
 
   handleOnLogout() {
@@ -77,32 +90,23 @@ export class UserInfoContent extends React.Component {
   }
 
   checkValidity(name, value) {
-    let currentStateUpdate = {};
-    switch (name) {
-      case 'email':
-        currentStateUpdate.emailValid = EMAIL_REGEX.test(value);
-        break;
-      case 'password':
-        currentStateUpdate.passwordValid = PASSWORD_REGEX.test(value);
-        if (this.state.confirmPasswordValid !== null) {
-          currentStateUpdate.confirmPasswordValid = currentStateUpdate.passwordValid && (this.state.password === this.state.confirmPassword);
-        }
-        break;
-      case 'firstName':
-        currentStateUpdate.firstNameValid = FIRST_NAME_REGEX.test(value);
-        break;
-      case 'lastName':
-        currentStateUpdate.lastNameValid = LAST_NAME_REGEX.test(value);
-        break;
-      case 'confirmPassword':
-        if (!this.state.passwordValid) {
-          return;
-        }
-        currentStateUpdate.confirmPasswordValid = this.state.passwordValid !== false && this.state.password === this.state.confirmPassword;
-        break;
-      default: return;
+    let currentStateUpdate = {
+      [name + 'Valid']: true
     };
-
+    for (const rule of this.rulesForFields[name]) {
+      const result = rule(value);
+      if (!result) {
+        currentStateUpdate[name + 'Valid'] = result;
+        break;
+      }
+    }
+    if (name === 'password') {
+      if (this.state.confirmPasswordValid !== null) {
+        currentStateUpdate.confirmPasswordValid =
+          currentStateUpdate.passwordValid
+          && (this.state.password === this.state.confirmPassword);
+      }
+    }
     this.setState(currentStateUpdate, () => {
       this.setState({
         formValid:
