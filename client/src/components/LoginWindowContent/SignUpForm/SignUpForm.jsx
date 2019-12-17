@@ -85,6 +85,13 @@ export class SignUpForm extends React.Component {
     this.checkValidity(e.target.name, e.target.value);
   }
 
+
+  handleOnMouseOver = () => {
+    for (const inputName in this.rulesForFields) {
+      this.checkValidity(inputName, this.state[inputName]);
+    }
+  }
+
   checkValidity(name, value) {
     let currentStateUpdate = {
       [name + 'Valid']: true
@@ -119,7 +126,7 @@ export class SignUpForm extends React.Component {
     if (!this.state.formValid) {
       buttonDisabledClass = 'login-window-content__form-button_disabled';
     }
-    else if (this.props.signInStatus === 'pending') {
+    else if (this.props.signUpStatus === 'pending') {
       buttonDisabledClass = 'login-window-content__form-button_loading';
     }
 
@@ -187,6 +194,7 @@ export class SignUpForm extends React.Component {
           additionalClasses={buttonDisabledClass}
           onSumbit={this.handleOnSubmit}
           content={this.props.t('signUpForm.signUp')}
+          onMouseOver={this.handleOnMouseOver}
         />
       </form>
     )
