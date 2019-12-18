@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './main.scss';
+import './SectionHeader.scss';
 
 export class SectionHeader extends React.Component {
   componentDidMount() {}
@@ -10,9 +10,11 @@ export class SectionHeader extends React.Component {
         <div className='section-header__title'>
           <span className='section-header__title section-header__title_colored'>{this.props.title_colored}</span>&nbsp;{this.props.title}
         </div>
+        {this.props.description ?
         <div className='section-header__description'>
           {this.props.description}
-        </div>
+        </div> : null}
+
       </div>
     );
   }

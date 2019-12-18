@@ -2,14 +2,14 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {expect} from 'chai';
 import sinon from 'sinon';
-import {Search} from './Search';
+import {SearchPage} from './SearchPage';
 import {configure} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 configure({adapter: new Adapter()});
 
 
-describe('<Search />', () => {
+describe('<SearchPage />', () => {
 
   let sandbox;
   beforeEach(function () {
@@ -21,9 +21,9 @@ describe('<Search />', () => {
   });
 
   it('calls componentDidMount', () => {
-    sandbox.spy(Search.prototype, 'componentDidMount');
+    sandbox.spy(SearchPage.prototype, 'componentDidMount');
     const fakeProps = {search: ""}
-    const wrapper = shallow(<Search location={fakeProps}/>);
-    expect(Search.prototype.componentDidMount).to.have.property('callCount', 1);
+    const wrapper = shallow(<SearchPage location={fakeProps}/>);
+    expect(SearchPage.prototype.componentDidMount).to.have.property('callCount', 1);
   });
 });
