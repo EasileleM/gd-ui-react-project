@@ -20,11 +20,7 @@ export default function removeItem(target) {
       }
     });
     dispatch(setItems(currentItems));
-    updateUserCart(currentItemsToServer)
-      .then(() => {
-      })
-      .catch((err) => {
-        //TODO notify about cart error or do something another
-      });
+    updateUserCart(currentItemsToServer);
+    //TODO notify about cart error or do something another
   };
 }

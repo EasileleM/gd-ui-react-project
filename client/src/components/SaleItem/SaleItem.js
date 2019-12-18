@@ -42,10 +42,10 @@ export class SaleItem extends React.Component {
             </div>
           </div>
           <div className="sale-item__item-info">
-            <Link to={`/item/${this.state.data._id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/item/${this.state.data._id}`} className={'link_decoration-none'}>
               <h2 className="sale-item__item-name">{this.state.data.name}</h2>
             </Link>
-            <Link to={`/item/${this.state.data._id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/item/${this.state.data._id}`} className={'link_decoration-none'}>
               <p className="sale-item__item-description">
                 {this.state.data.bundleInfo}
               </p>

@@ -33,12 +33,12 @@ export class ItemCardSmall extends Component {
   render() {
     return (
       <div className="item-card-small">
-        <Link to={`/item/${this.props.item._id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/item/${this.props.item._id}`} className={'link_decoration-none'}>
           <img srcSet={this.props.item.images[0].srcset.join(", ")} src={this.props.item.images[0].src} alt="item" className="item-card-small__image" />
         </Link>
         <div className="item-card-small__devider"></div>
         <div className="item-card-small__info">
-          <Link to={`/item/${this.props.item._id}`} style={{ textDecoration: 'none' }}>
+          <Link to={`/item/${this.props.item._id}`} className={'link_decoration-none'}>
             <h2 className="item-card-small__name">{this.props.item.name}</h2>
           </Link>
           <div className="item-card-small__info-dynamic">

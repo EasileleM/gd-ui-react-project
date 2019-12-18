@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 
-import { SectionHeader } from '../SectionHeader/index.js';
+import { SectionHeader } from '../SectionHeader/SectionHeader.js';
 import { ProductCatalogRow } from '../ProductCatalogRow/ProductCatalogRow';
 
 import './RelatedProductsBlock.scss';

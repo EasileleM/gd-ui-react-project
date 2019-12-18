@@ -26,7 +26,7 @@ export class SizesSelector extends React.Component {
     return (
       <div className="sizes-selector">
         <div className="sizes-selector__title">
-          {t('productCard.size')}:&nbsp;
+          {t('productCard.size')}:
         </div>
         <form className="sizes-selector__form">
           {sizeVariants}

@@ -7,7 +7,7 @@ export class Item extends React.Component {
   render() {
     return (
       <div className="slider-item">
-        <Link to={`/item/${this.props.data._id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/item/${this.props.data._id}`} className={'link_decoration-none'}>
           <h2 className="slider-item__name">{this.props.data.name}</h2>
           <p className="slider-item__bundle-info">{this.props.data.bundleInfo}</p>
           <p className="slider-item__description">{this.props.data.description}</p>

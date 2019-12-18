@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
-import { EMAIL_REGEX, PASSWORD_REGEX, FIRST_NAME_REGEX, LAST_NAME_REGEX } from '../../../constants/constants';
+import { emailRegex, passwordRegex, minLength, maxLength, onlyLatinRussian } from '../../../utils/rulesForValidation/generalRules';
 
 import { UserInfoInput } from '../../UserInfoInput/UserInfoInput';
 import { LoginWindowFormButton } from '../LoginWindowFormButton/LoginWindowFormButton';
@@ -22,21 +22,34 @@ const formErrors = {
 };
 
 export class SignUpForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      firstNameValid: null,
-      lastNameValid: null,
-      emailValid: null,
-      passwordValid: null,
-      confirmPasswordValid: null,
-      formValid: false
-    };
+  state = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    firstNameValid: null,
+    lastNameValid: null,
+    emailValid: null,
+    passwordValid: null,
+    confirmPasswordValid: null,
+    formValid: false
+  };
+
+  rulesForFields = {
+    email: [emailRegex, minLength(0), maxLength(140)],
+    password: [passwordRegex, minLength(8), maxLength(30)],
+    confirmPassword: [
+      (value) => this.state.password === value,
+      () => {
+        if (!this.state.passwordValid) {
+          return null;
+        }
+        return true;
+      }
+    ],
+    firstName: [onlyLatinRussian, minLength(0), maxLength(140)],
+    lastName: [onlyLatinRussian, minLength(0), maxLength(140)]
   }
 
   handleOnChange = (e) => {
@@ -46,14 +59,17 @@ export class SignUpForm extends React.Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault();
+    if (this.props.signInStatus === 'pending') {
+      return;
+    }
     if (this.state.formValid) {
-      this.props
-        .signUp({
-          email: this.state.email,
-          password: this.state.password,
-          firstName: this.state.firstName,
-          lastName: this.state.lastName
-        });
+      const data = {
+        email: this.state.email,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName
+      };
+      this.props.signUp(data);
     }
     else {
       notificationSuccess('Заполните форму.', 'Fill the form.', '');
@@ -69,33 +85,31 @@ export class SignUpForm extends React.Component {
     this.checkValidity(e.target.name, e.target.value);
   }
 
-  checkValidity(name, value) {
-    let currentStateUpdate = {};
-    switch (name) {
-      case 'email':
-        currentStateUpdate.emailValid = EMAIL_REGEX.test(value);
-        break;
-      case 'password':
-        currentStateUpdate.passwordValid = PASSWORD_REGEX.test(value);
-        if (this.state.confirmPasswordValid !== null) {
-          currentStateUpdate.confirmPasswordValid = currentStateUpdate.passwordValid && (this.state.password === this.state.confirmPassword);
-        }
-        break;
-      case 'firstName':
-        currentStateUpdate.firstNameValid = FIRST_NAME_REGEX.test(value);
-        break;
-      case 'lastName':
-        currentStateUpdate.lastNameValid = LAST_NAME_REGEX.test(value);
-        break;
-      case 'confirmPassword':
-        if (!this.state.passwordValid) {
-          return;
-        }
-        currentStateUpdate.confirmPasswordValid = this.state.passwordValid !== false && this.state.password === this.state.confirmPassword;
-        break;
-      default: return;
+
+  handleOnMouseOver = () => {
+    for (const inputName in this.rulesForFields) {
+      this.checkValidity(inputName, this.state[inputName]);
     }
-    ;
+  }
+
+  checkValidity(name, value) {
+    let currentStateUpdate = {
+      [name + 'Valid']: true
+    };
+    for (const rule of this.rulesForFields[name]) {
+      const result = rule(value);
+      if (!result) {
+        currentStateUpdate[name + 'Valid'] = result;
+        break;
+      }
+    }
+    if (name === 'password') {
+      if (this.state.confirmPasswordValid !== null) {
+        currentStateUpdate.confirmPasswordValid =
+          currentStateUpdate.passwordValid
+          && (this.state.password === this.state.confirmPassword);
+      }
+    }
     this.setState(currentStateUpdate, () => {
       this.setState({
         formValid:
@@ -108,18 +122,28 @@ export class SignUpForm extends React.Component {
 
   render() {
     let buttonDisabledClass = '';
+
     if (!this.state.formValid) {
       buttonDisabledClass = 'login-window-content__form-button_disabled';
     }
+    else if (this.props.signUpStatus === 'pending') {
+      buttonDisabledClass = 'login-window-content__form-button_loading';
+    }
+
     let currentError = null;
+
     for (const key of Object.keys(formErrors)) {
       if (this.state[key + 'Valid'] === false) {
         currentError = key;
         break;
       }
     }
+
     return (
-      <form style={{ display: this.props.display }} onSubmit={this.handleOnSubmit} method="POST" className="login-window-content__form">
+      <form style={{ display: this.props.display }}
+        onSubmit={this.handleOnSubmit}
+        method="POST"
+        className="login-window-content__form">
         <UserInfoInput
           placeholder={this.props.t('signUpForm.firstName')}
           name="firstName"
@@ -128,7 +152,6 @@ export class SignUpForm extends React.Component {
           handleOnBlur={this.handleOnBlur}
           valid={this.state.firstNameValid}
           type="text"
-          maxLength="140"
         />
         <UserInfoInput
           placeholder={this.props.t('signUpForm.lastName')}
@@ -138,7 +161,6 @@ export class SignUpForm extends React.Component {
           handleOnBlur={this.handleOnBlur}
           valid={this.state.lastNameValid}
           type="text"
-          maxLength="140"
         />
         <UserInfoInput
           placeholder={this.props.t('signUpForm.email')}
@@ -148,7 +170,6 @@ export class SignUpForm extends React.Component {
           handleOnBlur={this.handleOnBlur}
           valid={this.state.emailValid}
           type="email"
-          maxLength="140"
         />
         <UserInfoInput
           placeholder={this.props.t('signUpForm.password')}
@@ -158,7 +179,6 @@ export class SignUpForm extends React.Component {
           handleOnBlur={this.handleOnBlur}
           valid={this.state.passwordValid}
           type="password"
-          maxLength="140"
         />
         <UserInfoInput
           placeholder={this.props.t('signUpForm.confirmPassword')}
@@ -168,14 +188,25 @@ export class SignUpForm extends React.Component {
           handleOnBlur={this.handleOnBlur}
           valid={this.state.confirmPasswordValid}
           type="password"
-          maxLength="140"
         />
         <InvalidFormNotification content={currentError && this.props.t(`signUpForm.${currentError}Error`)} />
-        <LoginWindowFormButton additionalClasses={buttonDisabledClass} onSumbit={this.handleOnSubmit} content={this.props.t('signUpForm.signUp')} />
+        <LoginWindowFormButton
+          additionalClasses={buttonDisabledClass}
+          onSumbit={this.handleOnSubmit}
+          content={this.props.t('signUpForm.signUp')}
+          onMouseOver={this.handleOnMouseOver}
+        />
       </form>
     )
   }
 }
+
+
+const mapStateToProps = (store) => {
+  return {
+    signUpStatus: store.userController.signUpStatus
+  }
+};
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -185,4 +216,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(withTranslation()(SignUpForm));
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SignUpForm));

@@ -1,7 +1,7 @@
 import { setItems } from './setItems';
 import { updateUserCart } from '../../../utils/updateUserCart';
 
-export default function updateItem(target, color, size, amount) {
+export default function updateItem({ target, color, size, amount }) {
   return (dispatch, getState) => {
     const currentItems = getState().cartController.items.slice();
     const bucketChanged = target.color !== color || target.size !== size;
@@ -37,11 +37,7 @@ export default function updateItem(target, color, size, amount) {
       }
     });
     dispatch(setItems(currentItems));
-    updateUserCart(currentItemsToServer)
-      .then(() => {
-      })
-      .catch((err) => {
-        //TODO notify about cart error or do something another
-      });
+    updateUserCart(currentItemsToServer);
+    //TODO notify about cart error or do something another
   };
 }

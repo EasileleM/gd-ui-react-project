@@ -96,6 +96,7 @@ export class Navigation extends Component {
             data-closed="≡"></label>
           <Link onClick={this.closeMenu}
             className={`
+      link_decoration-none
       header__burger-menu
       header__text
       header__links-item
@@ -105,6 +106,7 @@ export class Navigation extends Component {
           </Link>
           <Link onClick={this.closeMenu}
             className={`
+      link_decoration-none
       header__burger-menu
       header__text
       header__links-item
@@ -112,11 +114,11 @@ export class Navigation extends Component {
             to="/search">
             {this.props.t('navigation.products')}
           </Link>
-          <a onClick={this.closeMenu}
+          <Link to='/hot-deals' onClick={this.closeMenu}
             className="header__burger-menu header__text header__links-item header__text_lg"
             href="google.com">
             {this.props.t('navigation.hotDeals')}
-          </a>
+          </Link>
           <a onClick={this.closeMenu}
             className="header__burger-menu header__text header__links-item header__text_lg"
             href="google.com">

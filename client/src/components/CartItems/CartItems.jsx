@@ -7,8 +7,6 @@ import { closeModalWindow } from '../../redux/action-creators/modalWindow/action
 import './CartItems.scss';
 
 export class CartItems extends React.Component {
-  componentDidMount() { }
-
   render() {
     if (!this.props.items.length) {
       this.props.close();

@@ -130,3 +130,6 @@ dist
 
 .idea
 .DS_Store
+
+server/build
+server/.env

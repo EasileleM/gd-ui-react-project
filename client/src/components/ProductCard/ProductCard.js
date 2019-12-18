@@ -31,8 +31,6 @@ export class ProductCard extends Component {
     });
   }
 
-  componentDidMount() { }
-
   render() {
     return (
       <div className={`product-card ${this.props.rowSize === 3 ? "product-card_three-cards" : ""}`}>
@@ -49,7 +47,7 @@ export class ProductCard extends Component {
             </div>
           </div>
           <div className='product-card__back'>
-            <Link to={`/item/${this.props.product._id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/item/${this.props.product._id}`} className={'link_decoration-none'}>
               <img src={this.props.product.images[0].src} srcSet={this.props.product.images[0].srcset.join(", ")} alt={this.props.product.name} className='product-card__image product-card__image_back' />
               <div className='product-card__name product-card__name_back'>
                 {this.props.product.name}

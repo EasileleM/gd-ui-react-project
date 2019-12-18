@@ -16,7 +16,11 @@ export default function addItem(itemToAdd, color, size, amount = 1) {
         && item.size === size;
     });
 
-    if (~targetItemIndex) {
+    if (targetItemIndex >= 0) {
+      if (currentItems[targetItemIndex].amount + 1 > 99) {
+        notificationSuccess(' уже добавлен в корзину в максимальном количестве', ' has already been added in max quantity', itemToAdd.name);
+        return;
+      }
       currentItems[targetItemIndex].amount++;
     }
     else {
@@ -31,14 +35,9 @@ export default function addItem(itemToAdd, color, size, amount = 1) {
         _id: item.generalData._id
       }
     });
+    notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', itemToAdd.name); //TODO dispatch it
     dispatch(setItems(currentItems));
-    updateUserCart(currentItemsToServer)
-      .then(() => {
-        notificationSuccess(' успешно добавлено в корзину', ' has been added to cart', itemToAdd.name); //TODO dispatch it
-      })
-      .catch((err) => {
-        console.log(err);
-        //TODO notify about cart error or do something another
-      });
+    updateUserCart(currentItemsToServer);
+    //TODO handle fetch error
   };
 }
