@@ -16,7 +16,7 @@ export class ProductSmallContainer extends Component {
   }
 
   componentDidMount() {
-    loadCard(1, 3).then(result => {
+    this.props.loadContent(1, this.props.numberOfCards).then(result => {
       this.setState({
         ready: true,
         cards: [...this.state.cards, ...result.data.items],
@@ -32,9 +32,9 @@ export class ProductSmallContainer extends Component {
     if (this.state.ready) {
       const smallCards = this.state.cards.map((card) => {
         return <ItemCardSmall key={card._id} item={card} />
-      }).slice(0, 3)
+      }).slice(0, this.props.numberOfCards)
       return (
-        <div className='product-small-container'>
+        <div className={`product-small-container ${this.props.className}`}>
           {smallCards}
         </div>
       );
@@ -44,4 +44,10 @@ export class ProductSmallContainer extends Component {
       </div>
     );
   }
+
+  static defaultProps = {
+    loadContent: loadCard,
+    className: '',
+    numberOfCards: 3,
+  };
 }

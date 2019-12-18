@@ -14,10 +14,11 @@ import { RedirectWrapper } from '../../components/RedirectWrapper/RedirectWrappe
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
 import { setInitSearchState } from '../../redux/action-creators/filter/actions';
 
-import Search from "../Search/Search";
-import Home from "../Home/Home";
+import SearchPage from "../SearchPage/SearchPage";
+import HomePage from "../HomePage/HomePage";
 import ErrorPage from "../errors/ErrorPage";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
+import HotDealsPage from "../HotDealsPage/HotDealsPage";
 
 export class Layout extends Component {
     componentDidMount() {
@@ -38,9 +39,10 @@ export class Layout extends Component {
                     <RedirectWrapper error={this.props.error} />
                     <Header />
                     <Switch>
-                        <Route path="/" exact component={Home} />
+                        <Route path="/" exact component={HomePage} />
                         <Route path="/item/:id" component={ProductDescriptionPage} />
-                        <Route path="/search" component={Search} />
+                        <Route path="/search" component={SearchPage} />
+                        <Route path="/hot-deals" component={HotDealsPage} />
                         <Route path="/400" component={() => <ErrorPage error={400} />} />
                         <Route path="/404" component={() => <ErrorPage error={404} />} />
                         <Route path="/500" component={() => <ErrorPage error={500} />} />

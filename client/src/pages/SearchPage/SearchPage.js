@@ -3,13 +3,13 @@ import Filters from "../../components/Filters/Filters";
 import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import FiltersButtonImage from "../../assets/controls.svg";
-import "./Search.scss";
+import "./SearchPage.scss";
 import queryString from 'query-string'
 import store from "../../redux/store";
 import {clear, search} from "../../redux/action-creators/filter/actions";
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
-export class Search extends Component {
+export class SearchPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,4 +79,4 @@ export class Search extends Component {
   }
 }
 
-export default Search;
+export default SearchPage;

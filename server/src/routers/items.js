@@ -72,6 +72,28 @@ itemsRouter.get('/sales', async (req, res) => {
   }
 });
 
+itemsRouter.get('/hot-deals-this-month', async (req, res) => {
+  try {
+    const items = await ItemsService.getHotDeals(req.query.size, req.query.page, req.query.lang);
+    res.status(200).send(items);
+  }
+  catch (err) {
+    console.trace(err);
+    res.status(500).send();
+  }
+});
+
+itemsRouter.get('/hot-deals-this-week', async (req, res) => {
+  try {
+    const items = await ItemsService.getHotDeals(req.query.size, req.query.page, req.query.lang);
+    res.status(200).send(items);
+  }
+  catch (err) {
+    console.trace(err);
+    res.status(500).send();
+  }
+});
+
 itemsRouter.get('/:id', async (req, res) => {
   try {
     const result = await ItemsService.getById(req.params.id, req.query.lang);
