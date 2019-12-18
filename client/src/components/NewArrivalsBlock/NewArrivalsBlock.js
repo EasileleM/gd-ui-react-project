@@ -4,8 +4,6 @@ import { SectionHeader } from '../SectionHeader/SectionHeader.js';
 import ProductCatalog from '../ProductCatalog/ProductCatalog.js';
 
 import './NewArrivalsBlock.scss';
-import loadItem from "../../utils/loadItem";
-import loadCard from "../../utils/loadCard";
 
 export function NewArrivalsBlock() {
   const [ t ] = useTranslation();

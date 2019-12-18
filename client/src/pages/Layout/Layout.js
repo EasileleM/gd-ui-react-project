@@ -19,6 +19,7 @@ import HomePage from "../HomePage/HomePage";
 import ErrorPage from "../errors/ErrorPage";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
 import HotDealsPage from "../HotDealsPage/HotDealsPage";
+import ContactPage from '../ContactPage/ContactPage';
 
 export class Layout extends Component {
     componentDidMount() {
@@ -43,6 +44,8 @@ export class Layout extends Component {
                         <Route path="/item/:id" component={ProductDescriptionPage} />
                         <Route path="/search" component={SearchPage} />
                         <Route path="/hot-deals" component={HotDealsPage} />
+                        <Route path="/about" component={ContactPage} />
+                        <Route path="/contact" component={ContactPage} />
                         <Route path="/400" component={() => <ErrorPage error={400} />} />
                         <Route path="/404" component={() => <ErrorPage error={404} />} />
                         <Route path="/500" component={() => <ErrorPage error={500} />} />
