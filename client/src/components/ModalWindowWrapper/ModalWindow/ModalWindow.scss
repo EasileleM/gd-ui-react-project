@@ -41,7 +41,8 @@
     max-width: 900px;
     width: 100%;
     max-height: 700px;
-    height: 90%;
+    height: 90%; //used for additional vertical space to avoid collapsing
+    padding-bottom: 43px; //equal to modal header height
 
     @media screen and (max-width: $breakpoint-tablet) {
       height: 100%;
