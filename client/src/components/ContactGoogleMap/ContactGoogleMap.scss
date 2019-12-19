@@ -28,11 +28,14 @@ $color-text-header-colored: $color-limed-spruce;
     position: relative;
     top: 10px;
     left: 0;
-    border-radius: 8px;
+    border-radius: 2px;
     padding: 5px 5px 5px 0;
     width: 300px;
     background-color: white;
-    box-shadow: 10px 10px 29px -4px rgba(158, 158, 158, 1);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+    @media all and (max-width: 470px) {
+      width: calc(100% - 5px);
+    }
   }
 
   &__header-wrapper {

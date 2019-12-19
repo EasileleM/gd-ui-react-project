@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {withTranslation } from 'react-i18next';
 
-import { SectionHeader } from '../SectionHeader/SectionHeader.js';
+import { SectionHeader } from '../SectionHeader/SectionHeader.jsx';
 import { ProductSmallContainer } from '../ProductSmallContainer/ProductSmallContainer.js';
 
 import './BestSalesBlock.scss';

@@ -7,15 +7,18 @@ export class SectionHeader extends React.Component {
     return (
       <div
         className={`section-header
-          ${this.props.margin ? `section-header_${this.props.margin}` : ''}
+          ${this.props.additionalClass || ''}
         `}
       >
         <div className='section-header__title'>
           <span className='section-header__title section-header__title_colored'>{this.props.title_colored}</span>{this.props.title}
         </div>
-        <div className='section-header__description'>
-          {this.props.description}
-        </div>
+        {
+          this.props.description ?
+            <div className='section-header__description'>
+              {this.props.description}
+            </div> : null
+        }
       </div>
     );
   }

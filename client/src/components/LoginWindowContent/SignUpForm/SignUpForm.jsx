@@ -5,8 +5,8 @@ import { withTranslation } from 'react-i18next';
 import { emailRegex, passwordRegex, minLength, maxLength, onlyLatinRussian } from '../../../utils/rulesForValidation/generalRules';
 
 import { UserInfoInput } from '../../UserInfoInput/UserInfoInput';
-import { LoginWindowFormButton } from '../LoginWindowFormButton/LoginWindowFormButton';
-import { InvalidFormNotification } from '../InvalidFormNotification/InvalidFormNotification';
+import { LoginWindowFormButton } from '../../LoginWindowFormButton/LoginWindowFormButton.jsx';
+import { InvalidFormNotification } from '../../InvalidFormNotification/InvalidFormNotification.jsx';
 
 import notificationSuccess from '../../../utils/notificationSuccess';
 
@@ -37,8 +37,8 @@ export class SignUpForm extends React.Component {
   };
 
   rulesForFields = {
-    email: [emailRegex, minLength(0), maxLength(140)],
-    password: [passwordRegex, minLength(8), maxLength(30)],
+    email: [emailRegex, minLength(1), maxLength(140)],
+    password: [passwordRegex, minLength(8), maxLength(50)],
     confirmPassword: [
       (value) => this.state.password === value,
       () => {
@@ -48,8 +48,8 @@ export class SignUpForm extends React.Component {
         return true;
       }
     ],
-    firstName: [onlyLatinRussian, minLength(0), maxLength(140)],
-    lastName: [onlyLatinRussian, minLength(0), maxLength(140)]
+    firstName: [onlyLatinRussian, minLength(1), maxLength(140)],
+    lastName: [onlyLatinRussian, minLength(1), maxLength(140)]
   }
 
   handleOnChange = (e) => {
@@ -88,7 +88,9 @@ export class SignUpForm extends React.Component {
 
   handleOnMouseOver = () => {
     for (const inputName in this.rulesForFields) {
-      this.checkValidity(inputName, this.state[inputName]);
+      if (this.state[inputName + 'Valid'] != null || this.state[inputName]) {
+        this.checkValidity(inputName, this.state[inputName]);
+      }
     }
   }
 

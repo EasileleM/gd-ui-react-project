@@ -1,8 +1,7 @@
-@import "../../../style/main.scss";
+@import "../../style/main.scss";
 
 .login-window-content__form-button {
   @include font-primary-regular-md;
-  margin-top: auto;
   margin-bottom: 20px;
   transition: 200ms ease-out;
   border: 0;
@@ -13,6 +12,14 @@
   color: $color-white;
   background: $color-orange;
 
+  &_width-auto {
+    width: auto;
+  }
+
+  &_margin-top {
+    margin-top: 40px;
+  }
+
   &:hover {
     opacity: .8;
   }
@@ -20,6 +27,8 @@
   &_none-margin-top {
     margin-top: 0;
   }
+
+  
 
   &_disabled {
     opacity: .5;
@@ -41,4 +50,8 @@
     margin-bottom: 0;
     width: 100%;
   }
+}
+
+.login-window-content__form-button_margin-top {
+  margin-top: 40px;
 }

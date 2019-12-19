@@ -1,19 +1,13 @@
 @import "../../style/main.scss";
-
-.user-info-input {
+.test-area-input {
   @include font-primary-regular-md;
-  transition: 200ms ease;
   border: 0;
   border-bottom: 2px solid $color-porcelain;
-  height: 35px;
-  width: 290px;
-  padding: 0 10px;
+  height: 300px;
+  padding: 10px;
+  resize: none;
   color: $color-limed-spruce;
   outline: 0;
-
-  &_width-auto {
-    width: auto;
-  }
 
   &_valid {
     border-bottom: 2px solid $color-green;
@@ -32,25 +26,17 @@
   &:focus {
     border-bottom: 2px solid $color-slate-gray;
   }
-}
 
-.user-info-input-label {
-  display: none;
-}
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
 
-.user-info-input-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin: 20px 0;
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
-  &__show-password {
-    position: absolute;
-    top: 50%;
-    right: 1%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #ff5912;
   }
 }

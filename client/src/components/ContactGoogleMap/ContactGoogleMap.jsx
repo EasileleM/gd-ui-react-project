@@ -26,7 +26,12 @@ export class ContactGoogleMap extends React.Component {
   };
 
   handleApiLoaded = (map, maps) => {
-    map.setOptions({ styles: mapStyleConfig });
+    map.setOptions(
+      {
+        styles: mapStyleConfig,
+        fullscreenControl: false
+      }
+    );
     const t = this.props.t;
     this.props.markersCoord.forEach((place) => {
       const marker = new maps.Marker({
