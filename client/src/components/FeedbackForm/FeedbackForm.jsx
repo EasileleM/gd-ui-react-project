@@ -6,12 +6,12 @@ import './FeedbackForm.scss';
 import { emailRegex, minLength, maxLength } from '../../utils/rulesForValidation/generalRules';
 import notificationSuccess from '../../utils/notificationSuccess';
 import sendFeedback from '../../utils/sendFeedback';
-
 import TextAreaInput from '../TextAreaInput/TextAreaInput.jsx';
 
 import { UserInfoInput } from '../UserInfoInput/UserInfoInput.jsx';
 import { LoginWindowFormButton } from '../LoginWindowFormButton/LoginWindowFormButton.jsx';
 import { InvalidFormNotification } from '../InvalidFormNotification/InvalidFormNotification';
+import { SectionHeader } from '../SectionHeader/SectionHeader.jsx';
 
 const formErrors = {
   email: null,
@@ -107,6 +107,10 @@ export class FeedbackForm extends React.Component {
       onSubmit={this.handleOnSubmit}
       method="POST"
       className="feedback-form">
+      <SectionHeader
+        additionalClass="section-header_margin-small"
+        title_colored={this.props.t('leave-feedback-left')}
+        title={this.props.t('leave-feedback-right')} />
       <UserInfoInput
         placeholder={this.props.t('FeedbackForm.email')}
         type="email"
