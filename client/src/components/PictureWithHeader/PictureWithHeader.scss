@@ -1,0 +1,41 @@
+@import "../../style/main.scss";
+
+$color-text-header: $color-orange;
+$color-text-header-colored: $color-athens-gray;
+
+.picture-width-header {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: 70%;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 1270px;
+    height: 300px;
+    padding: 0 50px;
+
+    @media all and (max-width: 1220px) {
+      padding: 0 30px;
+    }
+    @media all and (max-width: 767px) {
+      padding: 0 5px;
+    }
+  }
+
+  &__header {
+    margin: 0;
+    color: $color-text-header;
+    font-family: "Open Sans";
+    font-size: 56px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: left;
+
+    &_colored {
+      color: $color-text-header-colored;
+    }
+  }
+}

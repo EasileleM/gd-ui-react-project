@@ -101,13 +101,15 @@
     "save": "Save",
     "emailError": "Incorrect email.",
     "passwordError": "Incorrect password. Password should contain minimum eight characters, at least one letter, one number and one special character.",
-    "firstNameError": "Incorrect first name. It should contain one or more latin characters",
-    "lastNameError": "Incorrect last name. It should contain one or more latin characters",
+    "firstNameError": "Incorrect first name. It should contain one or more cyrillic or latin characters",
+    "lastNameError": "Incorrect last name. It should contain one or more cyrillic or latin characters",
     "confirmPasswordError": "Passwords don't match."
   },
   "FeedbackForm": {
     "email": "Email",
     "feedback": "Feedback",
+    "name": "Name",
+    "nameError": "Name should contain one or more cyrillic or latin characters",
     "emailError": "Incorrect email.",
     "feedbackError": "Your feedback should contain more than 5 and less then 400 characters.",
     "button": "Send"
@@ -124,5 +126,63 @@
   "Kovcheg-map-label": "BC \"Kovcheg\",<br/>7 floor, office 701-727,<br/>Vavilova st., 38/114, Saratov,<br/>Saratov Oblast, 410000",
   "Samson-map-label": "BC \"Samson\",<br/>6 floor, office 701-727,<br/>Rabochaya st., 145А, Saratov,<br/>Saratov Oblast, 410012",
   "leave-feedback-left": "Leave",
-  "leave-feedback-right": "Feedback"
+  "leave-feedback-right": "Feedback",
+  "about": {
+    "team": {
+      "header": {
+        "left": "our",
+        "right": "team"
+      },
+      "sashaKir": {
+        "name": "Alexander Kirilushkin",
+        "pos": "Intern UI Developer"
+      },
+      "savva": {
+        "name": "Savva Dzhumaliev",
+        "pos": "Intern UI Developer"
+      },
+      "asman": {
+        "name": "Asman Umbetov",
+        "pos": "Intern UI Developer"
+      },
+      "sashaKond": {
+        "name": "Alexander Kondratiev",
+        "pos": "Middle UI Developer",
+        "mentorship": "*Mentor to Sasha"
+      },
+      "vova": {
+        "name": "Vladimir Fedin",
+        "pos": "Middle UI Developer",
+        "mentorship": "*Mentor to Asman"
+      },
+      "artemii": {
+        "name": "Artemii Akimov",
+        "pos": "Middle UI Developer",
+        "mentorship": "*Mentor to Savva"
+      },
+      "vovaKalach": {
+        "name": "Vladimir Kalachev",
+        "pos": "Middle UI Developer",
+        "mentorship": "*Mentor to Misha"
+      },
+      "misha": {
+        "name": "Mikhail Ilichev",
+        "pos": "Intern UI Developer"
+      }
+    },
+    "shopInfo": {
+      "header": {
+        "left": "Shoppy",
+        "right": "Shop"
+      },
+      "text": "Shoppy was made by Grid Dynamics interns in educational purposes."
+    },
+    "gd": {
+      "header": {
+        "left": "We are part of",
+        "right": "a global family"
+      },
+      "text": "Grid Dynamics is majority-owned by Automated Systems Holding Limited, a publicly traded Bermuda company (Hong Kong Stock Exchange 00771) and subsidiary of Beijing Teamsun Technology Co., Ltd, a publicly traded Chinese company (Shanghai Stock Exchange 600410-SH)."
+    }
+  }
 }

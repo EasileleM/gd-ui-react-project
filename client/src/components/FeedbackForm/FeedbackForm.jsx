@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 
 import './FeedbackForm.scss';
 
-import { emailRegex, minLength, maxLength } from '../../utils/rulesForValidation/generalRules';
+import { emailRegex, minLength, maxLength, onlyLatinRussian } from '../../utils/rulesForValidation/generalRules';
 import notificationSuccess from '../../utils/notificationSuccess';
 import sendFeedback from '../../utils/sendFeedback';
 import TextAreaInput from '../TextAreaInput/TextAreaInput.jsx';
@@ -15,13 +15,16 @@ import { SectionHeader } from '../SectionHeader/SectionHeader.jsx';
 
 const formErrors = {
   email: null,
-  feedback: null
+  feedback: null,
+  name: null
 };
 
 export class FeedbackForm extends React.Component {
   state = {
     email: '',
     feedback: '',
+    name: '',
+    nameValid: null,
     emailValid: null,
     feedbackValid: null
   };
@@ -33,7 +36,8 @@ export class FeedbackForm extends React.Component {
 
   rulesForFields = {
     email: [emailRegex, minLength(1), maxLength(140)],
-    feedback: [minLength(5), maxLength(400)]
+    feedback: [minLength(5), maxLength(400)],
+    name: [onlyLatinRussian, minLength(1), maxLength(140)]
   }
 
   handleOnBlur = (e) => {
@@ -67,7 +71,7 @@ export class FeedbackForm extends React.Component {
     this.setState(currentStateUpdate, () => {
       this.setState({
         formValid:
-          this.state.emailValid && this.state.feedbackValid
+          this.state.emailValid && this.state.feedbackValid && this.state.nameValid
       });
     });
   }
@@ -77,7 +81,8 @@ export class FeedbackForm extends React.Component {
     if (this.state.formValid) {
       const data = {
         feedback: this.state.feedback,
-        email: this.state.email
+        email: this.state.email,
+        name: this.state.name
       };
       sendFeedback(data)
         .then(() => {
@@ -111,6 +116,16 @@ export class FeedbackForm extends React.Component {
         additionalClass="section-header_margin-small"
         title_colored={this.props.t('leave-feedback-left')}
         title={this.props.t('leave-feedback-right')} />
+      <UserInfoInput
+        placeholder={this.props.t('FeedbackForm.name')}
+        type="text"
+        name="name"
+        value={this.state.name}
+        handleOnChange={this.handleOnChange}
+        valid={this.state.nameValid}
+        additionalClasses="user-info-input_width-auto"
+        handleOnBlur={this.handleOnBlur}
+      />
       <UserInfoInput
         placeholder={this.props.t('FeedbackForm.email')}
         type="email"

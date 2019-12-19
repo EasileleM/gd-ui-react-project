@@ -1,6 +1,23 @@
-@import '../../style/main.scss';
+@import "../../style/main.scss";
 
-.contact {
+.about {
+  @include font-primary-regular-md;
   background-color: $color-athens-gray;
-  padding-bottom: 100px;
+
+  &__info-wrapper {
+    box-sizing: border-box;
+    margin: 30px auto 100px auto;
+    max-width: 1000px;
+    padding: 0 50px;
+    @media all and (max-width: 1220px) {
+      padding: 0 30px;
+    }
+    @media all and (max-width: 767px) {
+      padding: 0 5px;
+    }
+  }
+
+  &__info {
+    text-align: center;
+  }
 }
