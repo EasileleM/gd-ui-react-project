@@ -7,7 +7,6 @@
   display: flex;
   flex-direction: column;
   background: $color-white;
-  padding-bottom: 20px;
 
   &::-webkit-scrollbar {
     width: 3px;
@@ -19,7 +18,7 @@
    
   &::-webkit-scrollbar-thumb {
     border-radius: 4px;
-    background: #ff5912; 
+    background: $color-orange; 
   }
 
   &__form {
@@ -27,21 +26,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 100px;
   }
- 
-  &__logout-button {
-    @include font-primary-regular-sm-italic;
-    transition: 200ms ease;
-    align-self: flex-end;
+
+  &__button {
+    @include font-primary-regular-md;
+    transition: 200ms ease-out;
     border: 0;
-    background: transparent;
+    width: 310px;
+    height: 45px;
     cursor: pointer;
-    color: $color-limed-spruce;
-    margin: 20px 20px -20px 0;
+    outline: none;
+    color: $color-white;
+    background: $color-orange;
 
     &:hover {
       opacity: .6;
+    }
+
+    &_disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      &:hover {
+        opacity: .5;
+      }
+    }
+
+    @media screen and (max-width: $breakpoint-mobile) {
+      margin-bottom: 0;
+      width: 100%;
     }
   }
 
@@ -49,30 +61,70 @@
     @include font-logo-bold-xl;
     align-self: center;
     color: $color-orange;
+    margin: 15px 0 0 0;
   }
 
   &__wrapper {
+    display: flex;
     &_line {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      justify-content: space-evenly;
+      align-items: flex-start;
       width: 100%;
-      box-sizing: border-box;
+
+      @media screen and (max-width: $breakpoint-tablet){
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+      }
     }
 
-    &_labeled {
-      display: flex;
+    &_column {
       flex-direction: column;
-      align-items: flex-start;
+    }
+
+    &_input {
+      height: 120px;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      &-disabled > div {
+        opacity: 0.5;
+      }
+    }
+
+    &_hidden {
+      visibility: hidden;
+
+      @media screen and (max-width: $breakpoint-tablet){
+        display: none;
+      }
     }
   }
 
-  &__text {
+  &__border-line {
+    background-color: $color-porcelain;
+    height: 300px;
+    width: 2px;
+    position: absolute;
+    align-self: flex-end;
+
+    @media screen and (max-width: $breakpoint-tablet){
+      display: none;
+    }
+  }
+
+  &__label {
     @include font-primary-regular-md;
     color: $color-limed-spruce;
     padding-left: 10px;
   }
 
   &__message {
+    height: 100px;
+    & > p{
+      max-width: initial;
+      text-align: center;
+      padding: 0 100px;
+    }
   }
 }
