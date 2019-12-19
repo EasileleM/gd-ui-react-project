@@ -9,8 +9,8 @@ import { changeInfo } from '../../redux/action-creators/user/changeInfo';
 import './UserInfoContent.scss';
 import { emailRegex, passwordRegex, minLength, maxLength, onlyLatinRussian } from '../../utils/rulesForValidation/generalRules';
 import { UserInfoInput } from '../UserInfoInput/UserInfoInput';
-import { LoginWindowFormButton } from '../LoginWindowContent/LoginWindowFormButton/LoginWindowFormButton';
-import { InvalidFormNotification } from '../LoginWindowContent/InvalidFormNotification/InvalidFormNotification';
+import { LoginWindowFormButton } from '../LoginWindowFormButton/LoginWindowFormButton.jsx';
+import { InvalidFormNotification } from '../InvalidFormNotification/InvalidFormNotification.jsx';
 
 import notificationSuccess from '../../utils/notificationSuccess';
 

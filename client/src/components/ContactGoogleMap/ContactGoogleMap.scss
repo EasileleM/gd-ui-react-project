@@ -1,0 +1,56 @@
+@import "../../style/main.scss";
+$color-text-header: $color-orange;
+$color-text-header-colored: $color-limed-spruce;
+.map-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 400px;
+
+  &__header {
+    margin: 0;
+    color: $color-text-header;
+    font-family: "Open Sans";
+    font-size: 36px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 0px 0px 12px $color-white;
+
+    &_colored {
+      color: $color-text-header-colored;
+    }
+  }
+
+  &__header-panel {
+    position: relative;
+    top: 10px;
+    left: 0;
+    border-radius: 2px;
+    padding: 5px 5px 5px 0;
+    width: 300px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+    @media all and (max-width: 470px) {
+      width: calc(100% - 5px);
+    }
+  }
+
+  &__header-wrapper {
+    z-index: 3;
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1270px;
+    padding: 0 50px;
+
+    @media all and (max-width: 1220px) {
+      padding: 0 30px;
+    }
+    @media all and (max-width: 767px) {
+      padding: 0 5px;
+    }
+  }
+}

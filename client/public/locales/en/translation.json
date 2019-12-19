@@ -9,12 +9,12 @@
   "newArrivals": {
     "new": "New",
     "arrivals": "Arrivals",
-    "description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
   },
   "bestSales": {
     "best": "Best",
     "sales": "Sales",
-    "description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
   },
   "newsLetter": {
     "header": "News letter",
@@ -105,11 +105,24 @@
     "lastNameError": "Incorrect last name. It should contain one or more latin characters",
     "confirmPasswordError": "Passwords don't match."
   },
+  "FeedbackForm": {
+    "email": "Email",
+    "feedback": "Feedback",
+    "emailError": "Incorrect email.",
+    "feedbackError": "Your feedback should contain more than 5 and less then 400 characters.",
+    "button": "Send"
+  },
   "cartHeader": "Cart",
   "favoritesHeader": "Favorites",
   "loginWindowContentHeader": "Authorization",
   "userInfoHeader": "Profile",
   "welcome": "Welcome",
   "logout": "Logout",
-  "Reset": "Reset"
+  "Reset": "Reset",
+  "our-office-left": "Our",
+  "our-office-right": "Office",
+  "Kovcheg-map-label": "BC \"Kovcheg\",<br/>7 floor, office 701-727,<br/>Vavilova st., 38/114, Saratov,<br/>Saratov Oblast, 410000",
+  "Samson-map-label": "BC \"Samson\",<br/>6 floor, office 701-727,<br/>Rabochaya st., 145А, Saratov,<br/>Saratov Oblast, 410012",
+  "leave-feedback-left": "Leave",
+  "leave-feedback-right": "Feedback"
 }

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import i18n from '../i18n';
 import {SERVER_URL} from '../constants/constants';
 
 export default function loadHotDealsThisMonth(page = 1, size = 8) {
