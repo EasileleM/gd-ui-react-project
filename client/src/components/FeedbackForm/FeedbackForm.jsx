@@ -81,7 +81,7 @@ export class FeedbackForm extends React.Component {
       };
       sendFeedback(data)
         .then(() => {
-          notificationSuccess('Спасибо за ваш отзыв!.', 'Thanks you for feedback!.', '');
+          notificationSuccess('Спасибо за ваш отзыв!', 'Thanks you for feedback!', '');
         });
     }
     else {

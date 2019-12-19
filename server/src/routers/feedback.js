@@ -1,17 +1,17 @@
 import express from 'express';
-import NewsletterServiceInstance from '../services/NewsletterService';
+import FeedbackServiceInstance from '../services/FeedbackService';
 import { EMAIL_REGEX } from "../constants/constants";
 
-export const newsletterRouter = express.Router();
+export const feedbackRouter = express.Router();
 
-newsletterRouter.post('/', async (req, res) => {
+feedbackRouter.post('/', async (req, res) => {
   try {
     const email = req.body.email;
     if (!EMAIL_REGEX.test(email)) {
       res.status(404).send("Email is not valid");
       return;
     }
-    const result = await NewsletterServiceInstance.addSignee(req.body.email);
+    const result = await FeedbackServiceInstance.addFeedback(req.body);
     res.status(201).send(result);
   }
   catch (err) {
