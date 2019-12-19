@@ -1,9 +1,10 @@
 .person-block {
   display: flex;
   flex-direction: column;
-  margin: 100px 0 100px 0;
+  margin: 100px auto;
 
-  @media all and (max-width: 767px) {
+  @media all and (max-width: 980px) {
+    max-width: 570px;
     justify-content: space-around;
     flex-direction: row;
   }
@@ -18,16 +19,18 @@
     justify-content: space-around;
     box-sizing: border-box;
     margin: 0 auto;
-    max-width: 1070px;
+    max-width: 1270px;
     width: 100%;
     padding: 0 50px;
 
     @media all and (max-width: 1220px) {
       padding: 0 30px;
     }
+    @media all and (max-width: 980px) {
+      flex-direction: column;
+    }
     @media all and (max-width: 767px) {
       padding: 0 5px;
-      flex-direction: column;
     }
   }
 }

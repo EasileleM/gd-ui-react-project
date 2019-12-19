@@ -11,8 +11,10 @@ import VovaPhoto from '../../assets/VovaPhoto.jpeg';
 import AsmanPhoto from '../../assets/AsmanPhoto.jpeg';
 import SavvaPhoto from '../../assets/SavvaPhoto.jpeg';
 import ArtemiiPhoto from '../../assets/ArtemiiPhoto.png';
+import MishaPhoto from '../../assets/MishaPhoto.jpeg';
+import VovaKalachevPhoto from '../../assets/VovaKalachevPhoto.jpeg';
 
-export function PersonBlock({t}) {
+export function PersonBlock({ t }) {
   return <div className="person-block">
     <div className="person-block__row">
       <PersonCard photo={SashaPhoto}
@@ -24,6 +26,9 @@ export function PersonBlock({t}) {
       <PersonCard photo={SavvaPhoto}
         name={t('about.team.savva.name')}
         position={t('about.team.savva.pos')} />
+      <PersonCard photo={MishaPhoto}
+        name={t('about.team.misha.name')}
+        position={t('about.team.misha.pos')} />
     </div>
     <div className="person-block__row">
       <PersonCard photo={SashaKondPhoto}
@@ -38,6 +43,10 @@ export function PersonBlock({t}) {
         name={t('about.team.artemii.name')}
         position={t('about.team.artemii.pos')}
         mentorText={t('about.team.artemii.mentorship')} />
+      <PersonCard photo={VovaKalachevPhoto}
+        name={t('about.team.vovaKalach.name')}
+        position={t('about.team.vovaKalach.pos')}
+        mentorText={t('about.team.vovaKalach.mentorship')} />
     </div>
   </div>
 }

@@ -1,9 +1,11 @@
 @import "../../style/main.scss";
 .test-area-input {
   @include font-primary-regular-md;
+  box-sizing: border-box;
+  margin-top: 20px;
   border: 0;
   border-bottom: 2px solid $color-porcelain;
-  height: 100px;
+  height: 120px;
   padding: 10px;
   resize: none;
   color: $color-limed-spruce;

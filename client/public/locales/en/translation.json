@@ -101,13 +101,15 @@
     "save": "Save",
     "emailError": "Incorrect email.",
     "passwordError": "Incorrect password. Password should contain minimum eight characters, at least one letter, one number and one special character.",
-    "firstNameError": "Incorrect first name. It should contain one or more latin characters",
-    "lastNameError": "Incorrect last name. It should contain one or more latin characters",
+    "firstNameError": "Incorrect first name. It should contain one or more cyrillic or latin characters",
+    "lastNameError": "Incorrect last name. It should contain one or more cyrillic or latin characters",
     "confirmPasswordError": "Passwords don't match."
   },
   "FeedbackForm": {
     "email": "Email",
     "feedback": "Feedback",
+    "name": "Name",
+    "nameError": "Name should contain one or more cyrillic or latin characters",
     "emailError": "Incorrect email.",
     "feedbackError": "Your feedback should contain more than 5 and less then 400 characters.",
     "button": "Send"
@@ -157,11 +159,30 @@
         "name": "Artemii Akimov",
         "pos": "Middle UI Developer",
         "mentorship": "*Mentor to Savva"
+      },
+      "vovaKalach": {
+        "name": "Vladimir Kalachev",
+        "pos": "Middle UI Developer",
+        "mentorship": "*Mentor to Misha"
+      },
+      "misha": {
+        "name": "Mikhail Ilichev",
+        "pos": "Intern UI Developer"
       }
     },
     "shopInfo": {
-      "left": "Shoppy",
-      "right": "Shop"
+      "header": {
+        "left": "Shoppy",
+        "right": "Shop"
+      },
+      "text": "Shoppy was made by Grid Dynamics interns in educational purposes."
+    },
+    "gd": {
+      "header": {
+        "left": "We are part of",
+        "right": "a global family"
+      },
+      "text": "Grid Dynamics is majority-owned by Automated Systems Holding Limited, a publicly traded Bermuda company (Hong Kong Stock Exchange 00771) and subsidiary of Beijing Teamsun Technology Co., Ltd, a publicly traded Chinese company (Shanghai Stock Exchange 600410-SH)."
     }
   }
 }
