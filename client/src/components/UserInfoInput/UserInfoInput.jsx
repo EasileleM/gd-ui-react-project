@@ -26,6 +26,7 @@ export class UserInfoInput extends React.Component {
             className={`user-info-input ${additionalClasses} ${this.props.additionalClasses || ''}`}
             onChange={this.props.handleOnChange ? (e) => this.props.handleOnChange(e) : (() => { })}
             maxLength={this.props.maxLength}
+            disabled={this.props.disabled || false}
             type={this.state.hide ? this.props.type : 'text'}
             placeholder={this.props.placeholder}
             name={this.props.name}

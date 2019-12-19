@@ -80,7 +80,23 @@
       height: 120px;
       flex-direction: column;
       justify-content: flex-end;
+
+      &-disabled > div {
+        opacity: 0.5;
+      }
     }
+
+    &_hidden {
+      visibility: hidden;
+    }
+  }
+
+  &__border-line {
+    background-color: $color-porcelain;
+    height: 300px;
+    width: 2px;
+    position: absolute;
+    align-self: flex-end;
   }
 
   &__label {

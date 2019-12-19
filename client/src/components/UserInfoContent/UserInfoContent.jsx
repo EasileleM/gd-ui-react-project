@@ -60,7 +60,8 @@ export class UserInfoContent extends React.Component {
     this.props.logout();
   }
 
-  handleOnEdit() {
+  handleOnEdit = (e) => {
+    e.preventDefault();
     this.setState({ formDisabled: false });
   }
 
@@ -125,8 +126,12 @@ export class UserInfoContent extends React.Component {
 
   render() {
     let buttonDisabledClass = '';
+    let inputsHiddenClass = '';
     if (!this.state.formValid) {
       buttonDisabledClass = 'user-info-content__button_disabled';
+    }
+    if (this.state.formDisabled) {
+      inputsHiddenClass = 'user-info-content__wrapper_hidden'
     }
     let currentError = null;
     for (const key of Object.keys(formErrors)) {
@@ -142,7 +147,8 @@ export class UserInfoContent extends React.Component {
         <form style={{ display: this.props.display }} onSubmit={this.handleOnSubmit} method='POST' className='user-info-content__form'>
           <div className='user-info-content__wrapper user-info-content__wrapper_line'>
             <div className='user-info-content__wrapper user-info-content__wrapper_column'>
-              <div className='user-info-content__wrapper user-info-content__wrapper_input'>
+              <div className={`user-info-content__wrapper user-info-content__wrapper_input 
+                              ${this.state.formDisabled && 'user-info-content__wrapper_input-disabled'}`}>
                 <label className='user-info-content__label'>
                   {this.props.t('userInfoContent.firstName')}
                 </label>
@@ -153,11 +159,13 @@ export class UserInfoContent extends React.Component {
                   handleOnChange={this.handleOnChange}
                   handleOnBlur={this.handleOnBlur}
                   valid={this.state.firstNameValid}
+                  disabled={this.state.formDisabled}
                   type='text'
                   maxLength='140'
                 />
               </div>
-              <div className='user-info-content__wrapper user-info-content__wrapper_input'>
+              <div className={`user-info-content__wrapper user-info-content__wrapper_input 
+                              ${this.state.formDisabled && 'user-info-content__wrapper_input-disabled'}`}>
                 <label className='user-info-content__label'>
                   {this.props.t('userInfoContent.lastName')}
                 </label>
@@ -169,11 +177,13 @@ export class UserInfoContent extends React.Component {
                   handleOnChange={this.handleOnChange}
                   handleOnBlur={this.handleOnBlur}
                   valid={this.state.lastNameValid}
+                  disabled={this.state.formDisabled}
                   type='text'
                   maxLength='140'
                 />
               </div>
-              <div className='user-info-content__wrapper user-info-content__wrapper_input'>
+              <div className={`user-info-content__wrapper user-info-content__wrapper_input 
+                              ${this.state.formDisabled && 'user-info-content__wrapper_input-disabled'}`}>
                 <label className='user-info-content__label'>
                   {this.props.t('userInfoContent.email')}
                 </label>
@@ -185,12 +195,14 @@ export class UserInfoContent extends React.Component {
                   handleOnChange={this.handleOnChange}
                   handleOnBlur={this.handleOnBlur}
                   valid={this.state.emailValid}
+                  disabled={this.state.formDisabled}
                   type='email'
                   maxLength='140'
                 />
               </div>
             </div>
-            <div className='user-info-content__wrapper user-info-content__wrapper_column'>
+            <div className={`user-info-content__border-line ${inputsHiddenClass}`}></div>
+            <div className={`user-info-content__wrapper user-info-content__wrapper_column ${inputsHiddenClass}`}>
               <div className='user-info-content__wrapper user-info-content__wrapper_input'>
                 <UserInfoInput
                   placeholder={this.props.t('userInfoContent.password')}
@@ -237,8 +249,8 @@ export class UserInfoContent extends React.Component {
           <div className='user-info-content__wrapper user-info-content__wrapper_line'>
             {
               this.state.formDisabled ?
-                <button type="button" onClick={() => this.handleOnEdit()} className='user-info-content__button'>{this.props.t('userInfoContent.edit')}</button> :
-                <button additionalClasses={buttonDisabledClass} className={`user-info-content__button ${buttonDisabledClass}`} onSubmit={this.handleOnSubmit}>{this.props.t('userInfoContent.save')}</button>
+                <button type='button' onClick={this.handleOnEdit} className='user-info-content__button'>{this.props.t('userInfoContent.edit')}</button> :
+                <button type='submit' additionalClasses={buttonDisabledClass} className={`user-info-content__button ${buttonDisabledClass}`} onSubmit={this.handleOnSubmit}>{this.props.t('userInfoContent.save')}</button>
             }
             <button onClick={() => this.handleOnLogout()} className='user-info-content__button' type='button'>{this.props.t('logout')}</button>
           </div>
