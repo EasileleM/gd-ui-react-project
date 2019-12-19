@@ -16,10 +16,11 @@ import { setInitSearchState } from '../../redux/action-creators/filter/actions';
 
 import SearchPage from "../SearchPage/SearchPage";
 import HomePage from "../HomePage/HomePage";
-import ErrorPage from "../errors/ErrorPage";
+import ErrorPage from "../ErrorPage/ErrorPage";
 import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
 import HotDealsPage from "../HotDealsPage/HotDealsPage";
 import ContactPage from '../ContactPage/ContactPage';
+import AboutPage from '../AboutPage/AboutPage';
 
 export class Layout extends Component {
     componentDidMount() {
@@ -44,7 +45,7 @@ export class Layout extends Component {
                         <Route path="/item/:id" component={ProductDescriptionPage} />
                         <Route path="/search" component={SearchPage} />
                         <Route path="/hot-deals" component={HotDealsPage} />
-                        <Route path="/about" component={ContactPage} />
+                        <Route path="/about" component={AboutPage} />
                         <Route path="/contact" component={ContactPage} />
                         <Route path="/400" component={() => <ErrorPage error={400} />} />
                         <Route path="/404" component={() => <ErrorPage error={404} />} />
