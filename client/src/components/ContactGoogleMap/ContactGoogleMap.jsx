@@ -60,7 +60,7 @@ export class ContactGoogleMap extends React.Component {
       </div>
 
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyD1mpPY_8nO_wQ15dI4nEgDgukSgG82FfE' }}
+        bootstrapURLKeys={{ key: 'AIzaSyC2jpPDSnEWvKrqcDBPgm4SLk5UM8VHndg' }}
         defaultCenter={this.props.center}
         defaultZoom={this.props.zoom}
         onGoogleApiLoaded={({ map, maps }) => this.handleApiLoaded(map, maps)}
