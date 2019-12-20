@@ -18,6 +18,7 @@ import { sliderRouter } from './routers/slider';
 import { cartRouter } from "./routers/cart";
 import { favoritesRouter } from "./routers/favorites";
 import { accountRouter } from './routers/account';
+import { feedbackRouter } from './routers/feedback';
 
 const MongoStore = connectMongo(session);
 const port = process.env.PORT;
@@ -75,6 +76,7 @@ app.use('/api/filter', filterRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/favorites', favoritesRouter);
 app.use('/api/account', accountRouter);
+app.use('/api/feedback', feedbackRouter);
 
 
 app.listen(port, () => {

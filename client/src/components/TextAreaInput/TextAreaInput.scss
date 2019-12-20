@@ -1,0 +1,45 @@
+@import "../../style/main.scss";
+.test-area-input {
+  @include font-primary-regular-md;
+  box-sizing: border-box;
+  margin-top: 20px;
+  border: 0;
+  border-bottom: 2px solid $color-porcelain;
+  height: 120px;
+  padding: 10px;
+  resize: none;
+  color: $color-limed-spruce;
+  outline: 0;
+  background: inherit;
+
+  &_valid {
+    border-bottom: 2px solid $color-green;
+    &:focus {
+      border-bottom: 2px solid $color-green;
+    }
+  }
+
+  &_invalid {
+    border-bottom: 2px solid $color-red;
+    &:focus {
+      border-bottom: 2px solid $color-red;
+    }
+  }
+
+  &:focus {
+    border-bottom: 2px solid $color-slate-gray;
+  }
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #ff5912;
+  }
+}

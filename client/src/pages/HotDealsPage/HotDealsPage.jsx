@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './HotDealsPage.scss'
-import {SectionHeader} from "../../components/SectionHeader/SectionHeader";
+import { SectionHeader } from "../../components/SectionHeader/SectionHeader.jsx";
 import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import loadHotDealsThisMonth from "../../utils/loadHotDealsThisMonth";
 import loadHotDealsThisWeek from "../../utils/loadHotDealsThisWeek";
-import {ProductSmallContainer} from "../../components/ProductSmallContainer/ProductSmallContainer";
+import { ProductSmallContainer } from "../../components/ProductSmallContainer/ProductSmallContainer";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import { withTranslation } from 'react-i18next';
 

@@ -6,8 +6,8 @@ import { withTranslation } from 'react-i18next';
 import { emailRegex, passwordRegex, minLength, maxLength } from '../../../utils/rulesForValidation/generalRules';
 
 import { UserInfoInput } from '../../UserInfoInput/UserInfoInput';
-import { LoginWindowFormButton } from '../LoginWindowFormButton/LoginWindowFormButton';
-import { InvalidFormNotification } from '../InvalidFormNotification/InvalidFormNotification';
+import { LoginWindowFormButton } from '../../LoginWindowFormButton/LoginWindowFormButton';
+import { InvalidFormNotification } from '../../InvalidFormNotification/InvalidFormNotification';
 
 import notificationSuccess from '../../../utils/notificationSuccess';
 
@@ -28,8 +28,8 @@ export class SignInForm extends React.Component {
   };
 
   rulesForFields = {
-    email: [emailRegex, minLength(0), maxLength(140)],
-    password: [passwordRegex, minLength(8), maxLength(30)]
+    email: [emailRegex, minLength(1), maxLength(140)],
+    password: [passwordRegex, minLength(8), maxLength(50)]
   }
 
   handleOnChange = (e) => {
@@ -84,7 +84,9 @@ export class SignInForm extends React.Component {
 
   handleOnMouseOver = () => {
     for (const inputName in this.rulesForFields) {
-      this.checkValidity(inputName, this.state[inputName]);
+      if (this.state[inputName + 'Valid'] != null || this.state[inputName]) {
+        this.checkValidity(inputName, this.state[inputName]);
+      }
     }
   }
 

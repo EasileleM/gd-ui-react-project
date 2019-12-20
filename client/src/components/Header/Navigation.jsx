@@ -119,16 +119,16 @@ export class Navigation extends Component {
             href="google.com">
             {this.props.t('navigation.hotDeals')}
           </Link>
-          <a onClick={this.closeMenu}
+          <Link onClick={this.closeMenu}
             className="header__burger-menu header__text header__links-item header__text_lg"
-            href="google.com">
+            to="/about">
             {this.props.t('navigation.about')}
-          </a>
-          <a onClick={this.closeMenu}
+          </Link>
+          <Link onClick={this.closeMenu}
             className="header__burger-menu header__text header__links-item header__text_lg"
-            href="google.com">
+            to="/contact">
             {this.props.t('navigation.contact')}
-          </a>
+          </Link>
           <form onSubmit={this.handleSearch} className="header__burger-menu header__search-container"
             name="search">
             <input

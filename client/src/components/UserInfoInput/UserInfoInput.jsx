@@ -11,29 +11,27 @@ export class UserInfoInput extends React.Component {
   };
 
   render() {
-    let additionalClasses;
+    let additionalClasses = '';
     if (this.props.valid === true) {
       additionalClasses = 'user-info-input_valid';
     }
     else if (this.props.valid === false) {
       additionalClasses = 'user-info-input_invalid';
     }
-    else {
-      additionalClasses = '';
-    }
     return (
       <>
         <label className="user-info-input-label" htmlFor={this.props.name}>{this.props.name}</label>
         <div className={`user-info-input-wrapper`}>
           <input
-            className={`user-info-input ${additionalClasses}`}
-            onChange={(e) => this.props.handleOnChange(e)}
+            className={`user-info-input ${additionalClasses} ${this.props.additionalClasses || ''}`}
+            onChange={this.props.handleOnChange ? (e) => this.props.handleOnChange(e) : (() => { })}
             maxLength={this.props.maxLength}
+            disabled={this.props.disabled || false}
             type={this.state.hide ? this.props.type : 'text'}
             placeholder={this.props.placeholder}
             name={this.props.name}
             value={this.props.value}
-            onBlur={this.props.handleOnBlur}
+            onBlur={this.props.handleOnBlur ? (e) => this.props.handleOnBlur(e) : (() => { })}
           />
           {
             this.props.type === 'password' &&
