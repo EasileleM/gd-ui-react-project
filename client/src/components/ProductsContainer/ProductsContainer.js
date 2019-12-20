@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ProductCard from '../ProductCard/ProductCard.js';
+import ProductCard from '../ProductCard/ProductCard.jsx';
 
 import './ProductsContainer.scss';
 
