@@ -115,6 +115,11 @@
     "lastNameError": "Некорректно указана фамилия. Она должна состоять только из одного и более латинских символов.",
     "confirmPasswordError": "Пароли не совпадают"
   },
+  "hot-deals" : {
+    "hot-deals": "Горячие предложения",
+    "this-month": "в этом месяце",
+    "this-week": "на этой неделе"
+  },
   "cartHeader": "Корзина",
   "favoritesHeader": "Избранное",
   "loginWindowContentHeader": "Авторизация",
