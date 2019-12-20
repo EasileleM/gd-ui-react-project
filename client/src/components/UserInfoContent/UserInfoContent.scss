@@ -87,7 +87,9 @@
       flex-direction: column;
       justify-content: flex-end;
 
-      &-disabled > div {
+      &-disabled .user-info-input {
+        cursor: not-allowed;
+        background-color: #e4e4e4;
         opacity: 0.5;
       }
     }
