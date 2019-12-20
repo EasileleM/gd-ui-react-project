@@ -13,7 +13,7 @@ class AuthService {
 
     const userInDb = await User.findOne({'email': req.body.email}).exec();
     if (userInDb) {
-      res.status(409).send("User already exists.");
+      res.status(409).send("User already exists");
       return;
     }
 
@@ -74,7 +74,7 @@ class AuthService {
         return res.status(500).send();
       }
       if (!user) {
-        return res.status(403).send('Wrong password/email.');
+        return res.status(403).send('Wrong password/email');
       }
       req.logIn(user, async (err) => {
         if (err) {
