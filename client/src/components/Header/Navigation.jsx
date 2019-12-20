@@ -115,18 +115,17 @@ export class Navigation extends Component {
             {this.props.t('navigation.products')}
           </Link>
           <Link to='/hot-deals' onClick={this.closeMenu}
-            className="header__burger-menu header__text header__links-item header__text_lg"
-            href="google.com">
+            className={`header__burger-menu header__text header__links-item header__text_lg ${this.props.location.pathname === '/hot-deals' ? `header__links-item_active ` : ''}`}>
             {this.props.t('navigation.hotDeals')}
           </Link>
           <Link onClick={this.closeMenu}
-            className="header__burger-menu header__text header__links-item header__text_lg"
+                className={`header__burger-menu header__text header__links-item header__text_lg ${this.props.location.pathname === '/about' ? `header__links-item_active ` : ''}`}
             to="/about">
             {this.props.t('navigation.about')}
           </Link>
           <Link onClick={this.closeMenu}
-            className="header__burger-menu header__text header__links-item header__text_lg"
-            to="/contact">
+                className={`header__burger-menu header__text header__links-item header__text_lg ${this.props.location.pathname === '/contact' ? `header__links-item_active ` : ''}`}
+                to="/contact">
             {this.props.t('navigation.contact')}
           </Link>
           <form onSubmit={this.handleSearch} className="header__burger-menu header__search-container"
