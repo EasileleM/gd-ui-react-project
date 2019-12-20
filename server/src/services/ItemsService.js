@@ -125,7 +125,7 @@ class ItemsService {
 
   async search(query, lang) {
     if (!query.search) {
-      return await this.getAllItems();
+      return await this.getAllItems(lang);
     }
     const items = await Items
         .find({$text: {$search: query.search}})
