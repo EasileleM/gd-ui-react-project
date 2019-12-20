@@ -1,5 +1,5 @@
 import React from 'react';
-import './main.scss';
+import './AdsBlock.scss';
 
 export class AdsBlock extends React.Component {
   componentDidMount() {}

@@ -6,8 +6,7 @@ import loadHotDealsThisMonth from "../../utils/loadHotDealsThisMonth";
 import loadHotDealsThisWeek from "../../utils/loadHotDealsThisWeek";
 import {ProductSmallContainer} from "../../components/ProductSmallContainer/ProductSmallContainer";
 import Newsletter from "../../components/Newsletter/Newsletter";
-
-
+import { withTranslation } from 'react-i18next';
 
 class HotDealsPage extends Component {
   render() {
@@ -16,14 +15,14 @@ class HotDealsPage extends Component {
           <div className="hot-deals__content">
             <section className='hot-deals__section'>
               <div className=''>
-                <SectionHeader title_colored='Hot Deals' title='This Week' />
+                <SectionHeader title_colored={this.props.t('hot-deals.hot-deals')} title={this.props.t('hot-deals.this-week')} />
               </div>
               <ProductCatalog loadContent={loadHotDealsThisMonth} hideMoreButton={true} size={8} />
             </section>
 
             <section className='hot-deals__section'>
               <div className=''>
-                <SectionHeader title_colored='Hot Deals' title='This Month' />
+                <SectionHeader title_colored={this.props.t('hot-deals.hot-deals')} title={this.props.t('hot-deals.this-month')} />
               </div>
               <ProductSmallContainer numberOfCards={6} loadContent={loadHotDealsThisWeek}/>
             </section>
@@ -34,4 +33,4 @@ class HotDealsPage extends Component {
   }
 }
 
-export default HotDealsPage;
+export default withTranslation()(HotDealsPage);

@@ -105,6 +105,11 @@
     "lastNameError": "Incorrect last name. It should contain one or more latin characters",
     "confirmPasswordError": "Passwords don't match."
   },
+  "hot-deals" : {
+    "hot-deals": "Hot deals",
+    "this-month": "this month",
+    "this-week": "this week"
+  },
   "cartHeader": "Cart",
   "favoritesHeader": "Favorites",
   "loginWindowContentHeader": "Authorization",

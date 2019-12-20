@@ -1,6 +1,6 @@
 import React from 'react';
 import './SpecialOfferSection.scss';
-import { AdsBlock } from '../AdsBlock/index';
+import { AdsBlock } from '../AdsBlock/AdsBlock';
 import SaleItem from '../SaleItem/SaleItem';
 
 export function SpecialOfferSection(props) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
+import {connect} from "react-redux";
 
 import ShopCart from './cart.jsx';
 
@@ -10,7 +11,6 @@ import UserButton from './UserButton/UserButton';
 import { Logo } from '../Logo/Logo';
 import { withRouter } from "react-router-dom";
 import { search } from "../../redux/action-creators/filter/actions";
-import store from "../../redux/store";
 import { ReactComponent as DeleteIcon } from "../../assets/delete.svg";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
@@ -49,7 +49,7 @@ export class Navigation extends Component {
         this.state.searchInput.current.focus();
       }
     } else {
-      store.dispatch(search(this.state.searchValue));
+      this.props.search(this.state.searchValue);
       this.closeMenu();
     }
     e.preventDefault();
@@ -57,7 +57,7 @@ export class Navigation extends Component {
 
   clearSearch = (e) => {
     this.setState({ searchValue: "" });
-    store.dispatch(search(null));
+    this.props.search(null);
   };
 
   closeMenu = () => {
@@ -157,4 +157,10 @@ export class Navigation extends Component {
   }
 }
 
-export default withRouter(withTranslation()(Navigation));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    search: (searchValue) => dispatch(search(searchValue))
+  }
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(withTranslation()(Navigation)));
