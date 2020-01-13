@@ -7,7 +7,7 @@ import FavoritesItems from '../FavoritesItems/FavoritesItems';
 import OrderBlock from '../OrderBlock/OrderBlock';
 import { LoginWindowContent } from '../LoginWindowContent/LoginWindowContent';
 import UserInfoContent from '../UserInfoContent/UserInfoContent';
-import ModalWindow from './ModalWindow/ModalWindow';
+import ModalWindow from './ModalWindow/ModalWindow.jsx';
 import notificationSuccess from '../../utils/notificationSuccess';
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 

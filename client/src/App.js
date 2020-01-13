@@ -3,16 +3,16 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 import Layout from "./pages/Layout/Layout";
-import store from './redux/store';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from 'history';
+
+const history = createMemoryHistory();
 
 
 function App() {
   return (
     <div className="App">
-      <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <Layout />
         </Router>
         <ToastContainer 
@@ -27,7 +27,6 @@ function App() {
         draggable
         closeButton={false}
         pauseOnHover={false}/>
-      </Provider>
     </div>
   );
 }

@@ -34,3 +34,5 @@ export class ChangeLanguageButton extends Component {
     )
   }
 }
+
+export default ChangeLanguageButton;
