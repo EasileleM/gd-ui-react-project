@@ -1,0 +1,194 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "products": "Des produits",
+    "hotDeals": "Bonnes affaires",
+    "about": "Sur",
+    "contact": "le Contact"
+  },
+  "newArrivals": {
+    "new": "Nouveau",
+    "arrivals": "Arrivées",
+    "description": "le Lorem Ipsum est tout simplement un texte factice de l'industrie de l'impression et de la composition"
+  },
+  "bestSales": {
+    "best": "Meilleur",
+    "sales": "Ventes",
+    "description": "le Lorem Ipsum est tout simplement un texte factice de l'industrie de l'impression et de la composition"
+  },
+  "newsLetter": {
+    "header": "Lettre de nouvelles",
+    "description": "rejoignez-nous maintenant pour obtenir toutes les nouvelles et offres spéciales",
+    "placeholder": "tapez votre email ici",
+    "join": "Rejoignez-nous"
+  },
+  "footer": {
+    "about": "à propos de nous",
+    "contact": "Nous contacter",
+    "support": "soutien",
+    "feed": "notre flux",
+    "terms": "Termes et conditions",
+    "privacy": "notre intimité",
+    "join": "Rejoignez-nous",
+    "live": "support en direct",
+    "banking": "méthodes de payement"
+  },
+  "smallCard": {
+    "add": "ajouter au chariot"
+  },
+  "currency": "$",
+  "order": "Commandez maintenant",
+  "price": "Prix",
+  "productChooser": {
+    "quantity": "Choisissez la quantité",
+    "size": "Choisir la taille"
+  },
+  "productCard": {
+    "size": "tailles"
+  },
+  "relatedProducts": {
+    "related": "en relation",
+    "products": "Des produits",
+    "description": "le Lorem Ipsum est tout simplement un texte factice de l'industrie de l'impression et de la composition"
+  },
+  "orderBlock": {
+    "price": "Prix de la commande:"
+  },
+  "orderItem": {
+    "size": "Taille",
+    "price": "Prix",
+    "color": "Couleur"
+  },
+  "filters": {
+    "categories": "Les catégories",
+    "price": "Filtre de prix",
+    "brands": "Marques",
+    "sizes": "Tailles",
+    "expand": "Montre plus",
+    "wrap": "Montrer moins"
+  },
+  "catalog": {
+    "notFound": "Désolé, nous n'avons rien trouvé"
+  },
+  "signUpForm": {
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "email": "Email",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmez le mot de passe",
+    "signUp": "S'inscrire",
+    "emailError": "Adresse Email incorrecte",
+    "passwordError": "Mot de passe incorrect. Le mot de passe doit contenir au moins huit caractères, au moins une lettre, un chiffre et un caractère spécial",
+    "firstNameError": "Prénom incorrect. Il doit contenir un ou plusieurs caractères latins",
+    "lastNameError": "Nom de famille incorrect. Il doit contenir un ou plusieurs caractères latins",
+    "confirmPasswordError": "Les mots de passe ne correspondent pas"
+  },
+  "signInForm": {
+    "email": "Email",
+    "password": "Mot de passe",
+    "signIn": "Se connecter",
+    "forgotPassword": "Mot de passe oublié?",
+    "emailError": "Adresse Email incorrecte",
+    "passwordError": "Mot de passe incorrect. Le mot de passe doit contenir au moins huit caractères, au moins une lettre, un chiffre et un caractère spécial."
+  },
+  "userInfoContent": {
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "email": "Email",
+    "password": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le nouveau mot de passe",
+    "currentPassword": "Mot de passe actuel",
+    "edit": "Éditer",
+    "save": "Sauvegarder",
+    "emailError": "Adresse Email incorrecte",
+    "passwordError": "Mot de passe incorrect. Le mot de passe doit contenir au moins huit caractères, au moins une lettre, un chiffre et un caractère spécial",
+    "firstNameError": "Prénom incorrect. Il doit contenir un ou plusieurs caractères latins",
+    "lastNameError": "Nom de famille incorrect. Il doit contenir un ou plusieurs caractères latins",
+    "confirmPasswordError": "Les mots de passe ne correspondent pas"
+  },
+  "hot-deals" : {
+    "hot-deals": "Bonnes affaires",
+    "this-month": "ce mois-ci",
+    "this-week": "cette semaine"
+  },
+  "FeedbackForm": {
+    "email": "Email",
+    "feedback": "Retour d'information",
+    "name": "Nom",
+    "nameError": "Le nom doit contenir un ou plusieurs caractères cyrilliques ou latins",
+    "emailError": "Adresse Email incorrecte",
+    "feedbackError": "Vos commentaires doivent contenir plus de 5 et moins de 400 caractères",
+    "button": "Envoyer"
+  },
+  "cartHeader": "Chariot",
+  "favoritesHeader": "Favoris",
+  "loginWindowContentHeader": "Autorisation",
+  "userInfoHeader": "Profil",
+  "welcome": "Bienvenu",
+  "logout": "Se déconnecter",
+  "Reset": "Réinitialiser",
+  "our-office-left": "Notre",
+  "our-office-right": "Bureau",
+  "Kovcheg-map-label": "CA \"L'arche\",<br/>7 sol, bureau 701-727,<br/>Vavilova r., 38/114, Saratov,<br/>Oblast de Saratov, 410000",
+  "Samson-map-label": "BC \"Samson\",<br/>6 sol, bureau 701-727,<br/>Travailler r., 145А, Saratov,<br/>Oblast de Saratov, 410012",
+  "leave-feedback-left": "Laisser",
+  "leave-feedback-right": "Retour d'information",
+  "about": {
+    "team": {
+      "header": {
+        "left": "notre",
+        "right": "équipe"
+      },
+      "sashaKir": {
+        "name": "Alexandre Kirilushkin",
+        "pos": "Stagiaire UI Développeur"
+      },
+      "savva": {
+        "name": "Savva Dzhumaliev",
+        "pos": "Stagiaire UI Développeur"
+      },
+      "asman": {
+        "name": "Asman Umbetov",
+        "pos": "Stagiaire UI Développeur"
+      },
+      "sashaKond": {
+        "name": "Alexandre Kondratiev",
+        "pos": "Milieu UI Développeur",
+        "mentorship": "*Mentor à Sasha"
+      },
+      "vova": {
+        "name": "Vladimir Fedin",
+        "pos": "Milieu UI Développeur",
+        "mentorship": "*Mentor à Asman"
+      },
+      "artemii": {
+        "name": "Artemii Akimov",
+        "pos": "Milieu UI Développeur",
+        "mentorship": "*Mentor à Savva"
+      },
+      "vovaKalach": {
+        "name": "Vladimir Kalachev",
+        "pos": "Milieu UI Développeur",
+        "mentorship": "*Mentor à Misha"
+      },
+      "misha": {
+        "name": "Mikhail Ilichev",
+        "pos": "Stagiaire UI Développeur"
+      }
+    },
+    "shopInfo": {
+      "header": {
+        "left": "Shoppy",
+        "right": "Magasin"
+      },
+      "text": "Shoppy a été réalisé par des stagiaires de Grid Dynamics à des fins éducatives"
+    },
+    "gd": {
+      "header": {
+        "left": "Nous faisons partie de",
+        "right": "une famille mondiale"
+      },
+      "text": "Grid Dynamics est détenue majoritairement par Automated Systems Holding Limited, une société cotée en bourse des Bermudes (Hong Kong Bourse 00771) et filiale de Pékin Teamsun Technology En., Lmt, une société chinoise cotée en bourse (Shanghai Bourse 600410-SH)"
+    }
+  }
+}
