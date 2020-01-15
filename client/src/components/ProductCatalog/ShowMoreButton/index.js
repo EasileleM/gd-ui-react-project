@@ -1,18 +1,16 @@
 import React from 'react';
 
-import dots from '../../../assets/dots.svg';
-import loadingDots from '../../../assets/loadingDots.svg';
+import Dots from '../../../assets/dots.svg';
+import LoadingDots from '../../../assets/loadingDots.svg';
 
 import './main.scss';
 
 export function ShowMoreButton(props){
-  let buttonImage = dots;
-  if (props.loading) {
-    buttonImage = loadingDots;
-  }
   return (
     <button onClick={props.onClick} className='show-more-button'>
-      <img src={buttonImage} className="show-more-button__image" alt="loading"/>
+      {
+        props.loading ? <LoadingDots className="show-more-button__image"/> : <Dots className="show-more-button__image"/>
+      }
     </button>
   );
 }

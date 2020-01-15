@@ -1,20 +1,14 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+//import 'react-toastify/dist/ReactToastify.css';//todo get toasts back!
 import './App.scss';
-import { withSSR } from 'react-i18next';
 import Layout from "./pages/Layout/Layout";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from 'history';
-const history = createMemoryHistory();
 
 
 function App(props) {
     return (
     <div className="App">
-        <Router history={history}>
           <Layout />
-        </Router>
         <ToastContainer
         toastClassName='notification-info'
         position='bottom-right'
@@ -31,4 +25,4 @@ function App(props) {
   );
 }
 
-export default withSSR()(App);
+export default App;

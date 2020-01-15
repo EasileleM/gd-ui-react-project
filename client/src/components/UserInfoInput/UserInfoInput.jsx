@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ReactComponent as EyeShow } from "../../assets/eyeShow.svg";
-import { ReactComponent as EyeHide } from "../../assets/eyeHide.svg";
+import EyeShow from "../../assets/eyeShow.svg";
+import EyeHide from "../../assets/eyeHide.svg";
 
 import './UserInfoInput.scss';
 

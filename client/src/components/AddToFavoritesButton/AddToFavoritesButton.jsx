@@ -1,6 +1,6 @@
 import React from 'react';
-import {ReactComponent as FavoritesIcon} from "../../assets/likeDisabled.svg";
-import {ReactComponent as FavoritesIconEnabled} from "../../assets/likeEnabled.svg";
+import FavoritesIcon from "../../assets/likeDisabled.svg";
+import FavoritesIconEnabled from "../../assets/likeEnabled.svg";
 
 import './AddToFavoritesButton.scss';
 

@@ -66,7 +66,7 @@ export class SearchPage extends Component {
               </div>
               <div className="search__items">
                 <button className="search__toggle" onClick={this.handleClick}>
-                  <img className="search__toggle-icon" src={FiltersButtonImage} alt="Controls icon"/>
+                  <FiltersButtonImage className="search__toggle-icon"/>
                   Filters
                 </button>
                 <ProductCatalog filterUrl={this.props.location.search} filtered={true} rowSize={3} size={3}/>

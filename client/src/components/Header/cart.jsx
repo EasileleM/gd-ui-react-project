@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import store from '../../redux/store';
 import { changeModalWindowContent } from '../../redux/action-creators/modalWindow/actions';
-import {ReactComponent as CartIcon} from "../../assets/shopping-basket1.svg";
+import CartIcon from "../../assets/shopping-basket1.svg";
 
 import './Header.scss';
 

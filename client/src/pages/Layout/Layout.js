@@ -38,6 +38,7 @@ export class Layout extends Component {
             <ScrollToTop>
                     <ModalWindowWrapper />
                     <RedirectWrapper error={this.props.error} />
+                    <Header />
                     <Switch>
                         <Route path="/" exact component={HomePage} />
                         <Route path="/item/:id" component={ProductDescriptionPage} />

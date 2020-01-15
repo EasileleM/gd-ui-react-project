@@ -6,7 +6,7 @@ import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import SizesSelector from './SizesSelector/SizesSelector.jsx';
 import { ColorSelector } from './ColorSelector/ColorSelector.jsx';
 import { connect } from 'react-redux';
-import { ReactComponent as ShareIcon } from "../../assets/share.svg";
+import ShareIcon from "../../assets/share.svg";
 
 import './ProductCard.scss';
 

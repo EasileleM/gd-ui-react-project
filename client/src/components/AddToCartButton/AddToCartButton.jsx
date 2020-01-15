@@ -4,7 +4,7 @@ import './AddToCartButton.scss';
 
 import store from '../../redux/store';
 import addItem from '../../redux/action-creators/cart/addItem';
-import { ReactComponent as AddToCartIcon } from "../../assets/shopping-cart-add.svg";
+import AddToCartIcon from "../../assets/shopping-cart-add.svg";
 
 export function AddToCartButton(props) {
   return (

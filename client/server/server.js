@@ -11,6 +11,7 @@ import i18next from "i18next"
 import i18nextMiddleware from 'i18next-express-middleware'
 import Backend from 'i18next-node-fs-backend'
 import fs from 'fs';
+import { StaticRouter } from 'react-router-dom';
 
 i18next
     .use(Backend)
@@ -46,12 +47,14 @@ i18next
 
 function handleRender(req, res) {
     const store = createStore(rootReducer);
-    console.log('============================')
+    const context = {};
     const html = renderToString(
         <Provider store={store}>
-            <I18nextProvider i18n={req.i18n}>
-                <App/>
-            </I18nextProvider>
+            <StaticRouter location={req.url} context={context}>
+                <I18nextProvider i18n={req.i18n}>
+                    <App/>
+                </I18nextProvider>
+            </StaticRouter>
         </Provider>
     );
     const preloadedState = store.getState();
