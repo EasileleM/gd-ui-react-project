@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import store from '../../redux/store';
@@ -38,25 +38,15 @@ export class Layout extends Component {
             <ScrollToTop>
                     <ModalWindowWrapper />
                     <RedirectWrapper error={this.props.error} />
-                    <Header />
                     <Switch>
-                        {console.log("1")}
                         <Route path="/" exact component={HomePage} />
-                        {console.log("2")}
                         <Route path="/item/:id" component={ProductDescriptionPage} />
-                        {console.log("3")}
                         <Route path="/search" component={SearchPage} />
-                        {console.log("4")}
                         <Route path="/hot-deals" component={HotDealsPage} />
-                        {console.log("5")}
                         <Route path="/about" component={AboutPage} />
-                        {console.log("6")}
                         <Route path="/contact" component={ContactPage} />
-                        {console.log("7")}
                         <Route path="/400" component={() => <ErrorPage error={400} />} />
-                        {console.log("8")}
                         <Route path="/404" component={() => <ErrorPage error={404} />} />
-                        {console.log("9")}
                         <Route path="/500" component={() => <ErrorPage error={500} />} />
                         <Redirect to="/" />
                     </Switch>

@@ -7,6 +7,9 @@ import { Logo } from '../Logo/Logo';
 import './main.scss';
 
 export class Footer extends React.Component {
+    constructor(props) {
+        super(props);
+    }
   componentDidMount() {}
 
   render() {
@@ -18,8 +21,8 @@ export class Footer extends React.Component {
             shopy © 2015 . your copy right here
           </div>
         </div>
-        <Links />
-        <Banking />
+        <Links/>
+        <Banking/>
       </footer>
     );
   }

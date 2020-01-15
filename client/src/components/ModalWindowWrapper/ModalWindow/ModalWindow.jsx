@@ -11,8 +11,6 @@ export function ModalWindow(props) {
   if (!props.currentContent) {
     return null;
   }
-  console.log("here")
-
   return (
     <div className="modal-window">
       <button className="modal-window__background" onClick={props.close}></button>

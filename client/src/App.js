@@ -2,20 +2,20 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
+import { withSSR } from 'react-i18next';
 import Layout from "./pages/Layout/Layout";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from 'history';
-
 const history = createMemoryHistory();
 
 
-function App() {
-  return (
+function App(props) {
+    return (
     <div className="App">
         <Router history={history}>
           <Layout />
         </Router>
-        <ToastContainer 
+        <ToastContainer
         toastClassName='notification-info'
         position='bottom-right'
         autoClose={3000}
@@ -31,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default withSSR()(App);

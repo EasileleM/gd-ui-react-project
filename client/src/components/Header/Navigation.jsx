@@ -6,11 +6,11 @@ import ShopCart from './cart.jsx';
 
 import './Header.scss';
 import { Link } from "react-router-dom";
-import AddToFavoriteButton from '../AddToFavoritesButton/AddToFavoritesButton';
-import UserButton from './UserButton/UserButton';
-import { Logo } from '../Logo/Logo';
+import AddToFavoriteButton from '../AddToFavoritesButton/AddToFavoritesButton.jsx';
+import UserButton from './UserButton/UserButton.jsx';
+import { Logo } from '../Logo/Logo.js';
 import { withRouter } from "react-router-dom";
-import { search } from "../../redux/action-creators/filter/actions";
+import { search } from "../../redux/action-creators/filter/actions.js";
 import { ReactComponent as DeleteIcon } from "../../assets/delete.svg";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
