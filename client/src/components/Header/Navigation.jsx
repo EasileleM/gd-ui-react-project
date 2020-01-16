@@ -11,8 +11,8 @@ import UserButton from './UserButton/UserButton.jsx';
 import { Logo } from '../Logo/Logo.js';
 import { withRouter } from "react-router-dom";
 import { search } from "../../redux/action-creators/filter/actions.js";
-import  DeleteIcon from "../../assets/delete.svg";
-import  SearchIcon  from "../../assets/search.svg";
+import  {ReactComponent as DeleteIcon} from '../../assets/delete.svg';
+import  {ReactComponent as SearchIcon}  from '../../assets/search.svg';
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 export class Navigation extends Component {

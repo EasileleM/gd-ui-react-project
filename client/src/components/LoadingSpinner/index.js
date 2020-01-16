@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Loading from '../../assets/loading.svg';
+import {ReactComponent as Loading} from '../../assets/loading.svg';
 import './main.scss';
 
 export function LoadingSpinner() {

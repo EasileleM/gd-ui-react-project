@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Dots from '../../../assets/dots.svg';
-import LoadingDots from '../../../assets/loadingDots.svg';
+import {ReactComponent as Dots} from '../../../assets/dots.svg';
+import {ReactComponent as LoadingDots} from '../../../assets/loadingDots.svg';
 
 import './main.scss';
 

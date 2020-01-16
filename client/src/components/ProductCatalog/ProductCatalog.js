@@ -6,7 +6,7 @@ import loadCard from "../../utils/loadCard";
 import './ProductCatalog.scss';
 import notificationError from '../../utils/notificationError.js';
 import {connect} from "react-redux";
-import NotFoundIcon from "../../assets/not-found.svg";
+import {ReactComponent as NotFoundIcon} from '../../assets/not-found.svg';
 
 export class ProductCatalog extends React.Component {
   constructor(props) {

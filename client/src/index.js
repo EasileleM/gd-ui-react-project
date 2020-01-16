@@ -11,41 +11,25 @@ import {initReactI18next} from "react-i18next";
 import axios from 'axios';
 import {BrowserRouter} from "react-router-dom";
 
-i18next
-    .use(Backend)
-    .use(LanguageDetector)
-    .use(initReactI18next)
-    .init(
-        {
-            react: {
-                useSuspense: false,
-                wait: false,
-            },
-            backend: {
-                ajax: axios,
-            },
-            lng: 'en',
-            fallbackLng: 'en',
-            load: 'languageOnly',
-            ns: ['translation'],
-            defaultNS: 'translation',
-            debug: true,
-        }, () => {
-            if (typeof window !== 'undefined') {
-                const preloadedState = window.__PRELOADED_STATE__
+console.log("GOT IN: index.js")
 
-                delete window.__PRELOADED_STATE__
 
-                const store = createStore(rootReducer, preloadedState)
-                hydrate(
-                    <Provider store={store}>
-                        <BrowserRouter>
-                            <App />
-                        </BrowserRouter>
-                    </Provider>,
-                    document.getElementById('root')
-                )
-            }
-        });
+
+if (typeof window !== 'undefined') {
+    console.log("here we goooo")
+    const preloadedState = window.__PRELOADED_STATE__
+
+    delete window.__PRELOADED_STATE__
+
+    const store = createStore(rootReducer, preloadedState)
+    hydrate(
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>,
+        document.getElementById('root')
+    )
+}
 
 

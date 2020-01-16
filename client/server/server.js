@@ -26,7 +26,7 @@ i18next
             lng: 'en',
             fallbackLng: 'en',
             load: 'languageOnly',
-            debug: true,
+            debug: false,
             ns: ['translation'],
             defaultNS: 'translation',
             backend: {
@@ -38,6 +38,7 @@ i18next
             const port = 3001;
             app.use(i18nextMiddleware.handle(i18next));
             app.use('/static', Express.static(path.join(__dirname, '../build/static')))
+            app.use('/static', Express.static(path.join(__dirname, '../build-server/static')))
             app.use('/locales', Express.static(path.join(__dirname, '../build/locales')))
             app.get('/*', handleRender);
 

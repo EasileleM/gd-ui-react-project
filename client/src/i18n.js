@@ -1,8 +1,7 @@
 import i18next from "i18next";
-import Backend from 'i18next-xhr-backend';
-import LanguageDetector from 'i18next-browser-languagedetector';
+import Backend from "i18next-xhr-backend";
+import LanguageDetector from "i18next-browser-languagedetector";
 import {initReactI18next} from "react-i18next";
-import axios from 'axios';
 
 i18next
     .use(Backend)
@@ -15,7 +14,7 @@ i18next
                 wait: false,
             },
             backend: {
-                ajax: axios,
+                loadPath: '/locales/{{lng}}/{{ns}}.json'
             },
             lng: 'en',
             fallbackLng: 'en',
@@ -25,4 +24,4 @@ i18next
             debug: true,
         });
 
-export default i18next;
+export default i18next

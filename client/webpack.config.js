@@ -5,8 +5,8 @@ module.exports = {
     context: path.resolve(__dirname, 'server'),
     entry: ['./server.js'],
     output: {
-        path: path.join(__dirname, 'build'),
-        filename: 'server-bundle.js'
+        path: path.join(__dirname, 'build-server'),
+        filename: 'bundle-server.js'
     },
     target: 'node',
     node: { // has been added
@@ -48,7 +48,7 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
-                use: ['@svgr/webpack'],
+                use: ['@svgr/webpack','url-loader'],
             },
         ]
     },

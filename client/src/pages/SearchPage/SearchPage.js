@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Filters from "../../components/Filters/Filters";
 import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import Newsletter from "../../components/Newsletter/Newsletter";
-import FiltersButtonImage from "../../assets/controls.svg";
+import {ReactComponent as FiltersButtonImage} from '../../assets/controls.svg';
 import "./SearchPage.scss";
 import queryString from 'query-string'
 import store from "../../redux/store";
