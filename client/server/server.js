@@ -12,7 +12,6 @@ import i18nextMiddleware from 'i18next-express-middleware'
 import Backend from 'i18next-sync-fs-backend'
 import fs from 'fs';
 import {StaticRouter} from 'react-router-dom';
-import serialize from 'serialize-to-js';
 
 i18next
     .use(Backend)
@@ -38,7 +37,7 @@ i18next
     );
 
 const app = Express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 app.use(i18nextMiddleware.handle(i18next));
 app.use('/static', Express.static(path.join(__dirname, '../build/static')))
 app.use('/static', Express.static(path.join(__dirname, '../build-server/static')))
