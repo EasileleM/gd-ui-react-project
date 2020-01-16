@@ -27,7 +27,7 @@ const secret = 'meesha track jacket';
 
 mongoose.connect(dbUri, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 }).then(() => {
   console.log('DB is connected!')
 }).catch((err) => {
