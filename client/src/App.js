@@ -3,11 +3,8 @@ import { ToastContainer } from 'react-toastify';
 //import 'react-toastify/dist/ReactToastify.css';//todo get toasts back!
 import './App.scss';
 import Layout from "./pages/Layout/Layout";
-import './i18n'
 
 function App(props) {
-    console.log("GOT IN: App.js")
-
     return (
     <div className="App">
           <Layout />

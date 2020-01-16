@@ -9,9 +9,10 @@ import {initReactI18next, I18nextProvider} from 'react-i18next'
 import {renderToString} from 'react-dom/server'
 import i18next from "i18next"
 import i18nextMiddleware from 'i18next-express-middleware'
-import Backend from 'i18next-node-fs-backend'
+import Backend from 'i18next-sync-fs-backend'
 import fs from 'fs';
-import { StaticRouter } from 'react-router-dom';
+import {StaticRouter} from 'react-router-dom';
+import serialize from 'serialize-to-js';
 
 i18next
     .use(Backend)
@@ -19,11 +20,11 @@ i18next
     .use(initReactI18next)
     .init(
         {
+            initImmediate: false,
             react: {
                 useSuspense: false,
                 wait: false,
             },
-            lng: 'en',
             fallbackLng: 'en',
             load: 'languageOnly',
             debug: false,
@@ -33,22 +34,25 @@ i18next
                 loadPath: path.resolve(__dirname, '../public/locales/{{lng}}/{{ns}}.json'),
                 addPath: path.resolve(__dirname, '../public/locales/{{lng}}/{{ns}}.json'),
             },
-        }, () => {
-            const app = Express();
-            const port = 3001;
-            app.use(i18nextMiddleware.handle(i18next));
-            app.use('/static', Express.static(path.join(__dirname, '../build/static')))
-            app.use('/static', Express.static(path.join(__dirname, '../build-server/static')))
-            app.use('/locales', Express.static(path.join(__dirname, '../build/locales')))
-            app.get('/*', handleRender);
+        }
+    );
 
-            app.listen(port);
-        });
+const app = Express();
+const port = 3001;
+app.use(i18nextMiddleware.handle(i18next));
+app.use('/static', Express.static(path.join(__dirname, '../build/static')))
+app.use('/static', Express.static(path.join(__dirname, '../build-server/static')))
+app.use('/locales', Express.static(path.join(__dirname, '../build/locales')))
+app.get('/*', handleRender);
+
+app.listen(port);
 
 
 function handleRender(req, res) {
     const store = createStore(rootReducer);
     const context = {};
+    console.log(req.i18n.getResourceBundle('en', 'translation'))
+    console.log("req.i18n.getResourceBundle('en', 'translation')")
     const html = renderToString(
         <Provider store={store}>
             <StaticRouter location={req.url} context={context}>
@@ -70,14 +74,21 @@ function handleRender(req, res) {
         return res.send(
             data
                 .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
-                .replace('</body>',
+                .replace('<script>',
                     `<script>
                       window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
                         /</g,
                         '\\u003c'
                     )};
+                      window.__i18nextInstance__ = ${JSON.stringify(
+                        req.i18n
+                            .getResourceBundle('en', 'translation'))
+                        .replace(
+                            /</g,
+                            '\\u003c'
+                        )};
                 </script>
-                </body>`)
+                <script>`)
         );
     });
 }

@@ -11,26 +11,21 @@ export class ChangeLanguageButton extends Component {
     };
   }
 
-  handleOnClick = (lng) => {
-    i18n.changeLanguage(lng);
-    this.setState({
-      language: lng
-    })
+  handleChange = (event) => {
+    i18n.changeLanguage(event.target.value);
     document.location.reload();
-  };
+  }
 
   render() {
-    if (this.state.language === 'ru') {
-      return (
-        <button onClick={() => this.handleOnClick('en')} className='change-language-button'>
-          ru
-        </button>
-      );
-    }
     return (
-      <button onClick={() => this.handleOnClick('ru')} className='change-language-button'>
-        en
-      </button>
+        <label>
+          <select value={i18n.language} onChange={this.handleChange}>
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+            <option value="gr">ελληνικά</option>
+            <option value="fr">Français</option>
+          </select>
+        </label>
     )
   }
 }
