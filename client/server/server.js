@@ -50,8 +50,6 @@ app.listen(port);
 function handleRender(req, res) {
     const store = createStore(rootReducer);
     const context = {};
-    console.log(req.i18n.getResourceBundle('en', 'translation'))
-    console.log("req.i18n.getResourceBundle('en', 'translation')")
     const html = renderToString(
         <Provider store={store}>
             <StaticRouter location={req.url} context={context}>

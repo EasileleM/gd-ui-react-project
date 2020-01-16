@@ -51,7 +51,7 @@
     "watch": "npm-watch",
     "start:react": "react-scripts start",
     "build:react": "react-scripts build",
-    "build:ssr": "NODE_ENV=development webpack --config webpack.config.js",
+    "build:ssr": "webpack --config webpack.config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "coverage": "react-scripts test --env=jsdom --watchAll=false --coverage"
