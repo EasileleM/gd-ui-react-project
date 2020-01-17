@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-dom'
+import { hydrate } from 'react-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import App from './App'
@@ -18,7 +18,7 @@ export function Hydration() {
         delete window.__PRELOADED_STATE__
 
         const store = createStore(rootReducer, preloadedState)
-        render(
+        hydrate(
             <Provider store={store}>
                 <BrowserRouter>
                     <App />
