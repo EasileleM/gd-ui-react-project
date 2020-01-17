@@ -1,6 +1,6 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.css';//todo get toasts back!
+import './style/ReactToastify.css';
 import './App.scss';
 import Layout from "./pages/Layout/Layout";
 

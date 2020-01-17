@@ -1,7 +1,7 @@
 import path from 'path'
 import Express from 'express'
 import React from 'react'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 import rootReducer from '../src/redux/reducers'
 import App from '../src/App'
@@ -13,7 +13,8 @@ import Backend from 'i18next-sync-fs-backend'
 import fs from 'fs';
 import {StaticRouter} from 'react-router-dom';
 import compression from 'compression'
-
+import thunk from "redux-thunk";
+import {initialize} from "../src/redux/action-creators/initialize"
 i18next
     .use(Backend)
     .use(i18nextMiddleware.LanguageDetector)
@@ -50,7 +51,13 @@ app.listen(port);
 
 
 function handleRender(req, res) {
-    const store = createStore(rootReducer);
+
+    //----------------------------------
+    //todo refactor it the hell outta here
+    const initialState = {};
+    const store = createStore(rootReducer, initialState , applyMiddleware(thunk));
+    store.dispatch(initialize());
+    //----------------------------------
     const context = {};
     const html = renderToString(
         <Provider store={store}>

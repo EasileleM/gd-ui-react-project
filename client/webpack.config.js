@@ -34,8 +34,12 @@ module.exports = {
             },
             { //this rule will only be used for any vendors
                 test: /\.css$/,
-                loaders: ['css-loader', 'css-loader'],
-                include: [/node_modules/]
+                use: [
+                    // Translates CSS into CommonJS
+                    'css-loader',
+                    // Compiles Sass to CSS
+                    'sass-loader',
+                ],
             },
             {
                 test: /\.(s[ac]ss)$/i,

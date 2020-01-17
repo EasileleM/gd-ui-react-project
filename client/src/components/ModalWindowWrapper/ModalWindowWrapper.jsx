@@ -17,10 +17,16 @@ export class ModalWindowWrapper extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(1)
     if (this.props.modalWindowMode !== prevProps.modalWindowMode) {
+      console.log(2)
+
       switch (this.props.modalWindowMode) {
         case 'cart':
+          console.log(3)
+
           if (!this.props.cartSize) {
+            console.log(4)
             notificationSuccess('Нет товаров в корзине.', 'Cart is empty.', '');
             this.props.close();
             break;
