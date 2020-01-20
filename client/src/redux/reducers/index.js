@@ -5,6 +5,7 @@ import { combineReducers } from "redux";
 import { filterReducer } from "./filterReducer";
 import { modalWindowReducer } from './modalWindowReducer';
 import { userReducer } from './userReducer';
+import {itemReducer} from "./itemReducer";
 
 const rootReducer = combineReducers({
   errorHandler: errorReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   favoritesController: favoritesReducer,
   filterController: filterReducer,
   modalWindowController: modalWindowReducer,
-  userController: userReducer
+  userController: userReducer,
+  itemLoader: itemReducer
 });
 
 export default rootReducer;

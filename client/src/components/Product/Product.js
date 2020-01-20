@@ -3,40 +3,32 @@ import ProductImages from "./ProductImages/ProductImages";
 import ProductInfo from "./ProductInfo/ProductInfo";
 import "./Product.scss"
 import {LoadingSpinner} from "../LoadingSpinner";
-import loadItem from "../../utils/loadItem";
+import {loadItemAction} from "../../redux/action-creators/items/loadItem";
 import {toast} from "react-toastify";
+import { connect } from 'react-redux';
 
 
 export class Product extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            item: {},
-            ready: false
+            item: props.item,
+            ready: !!props.item
         }
     }
 
     componentDidMount() {
-        loadItem(this.props.id).then(res => {
-            this.setState({
-                item: res.data,
-                ready: true,
-            })
-        }).catch(err => {
-            (() => toast(err, {type: toast.TYPE.ERROR}))();
-        });
+        this.props.loadItem(this.props.id);
     }
 
      componentDidUpdate(prevProps) {
-        if (this.props.id !== prevProps.id) {
-            loadItem(this.props.id).then(res => {
-                this.setState({
-                    item: res.data,
-                    ready: true,
-                })
-            }).catch(err => {
-                (() => toast(err, {type: toast.TYPE.ERROR}))();
-            });
+        if(!prevProps.item || this.props.item.id !== prevProps.item.id) {
+            this.setState({
+                item: this.props.item,
+                ready: true
+            }, () => {
+                console.log(this.state.ready)
+            })
         }
     }
 
@@ -61,4 +53,16 @@ export class Product extends Component {
     }
 }
 
-export default Product;
+const mapStateToProps = (state) => {
+    return {
+        item: state.itemLoader.item
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadItem: (id) => dispatch(loadItemAction(id))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

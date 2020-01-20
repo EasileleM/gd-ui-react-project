@@ -22,7 +22,12 @@ i18next
             defaultNS: 'translation',
             debug: false,
         }, () => {
-            Hydration()
+            if(typeof window !== "undefined")
+            {
+                document.cookie = `i18nextLang=${i18next.language}`;
+                Hydration();
+            }
         });
+
 
 export default i18next

@@ -15,6 +15,8 @@ import {StaticRouter} from 'react-router-dom';
 import compression from 'compression'
 import thunk from "redux-thunk";
 import {initialize} from "../src/redux/action-creators/initialize"
+import cookieParser from 'cookie-parser';
+
 i18next
     .use(Backend)
     .use(i18nextMiddleware.LanguageDetector)
@@ -41,6 +43,7 @@ i18next
 const app = Express();
 const port = process.env.PORT || 3001;
 app.use(compression())
+app.use(cookieParser());
 app.use(i18nextMiddleware.handle(i18next));
 app.use('/static', Express.static(path.join(__dirname, '../build/static')))
 app.use('/static', Express.static(path.join(__dirname, '../build-server/static')))
@@ -50,7 +53,9 @@ app.get('/*', handleRender);
 app.listen(port);
 
 
-function handleRender(req, res) {
+async function handleRender(req, res) {
+
+    await req.i18n.changeLanguage(req.cookies.i18nextLang);
 
     //----------------------------------
     //todo refactor it the hell outta here
@@ -58,6 +63,10 @@ function handleRender(req, res) {
     const store = createStore(rootReducer, initialState , applyMiddleware(thunk));
     store.dispatch(initialize());
     //----------------------------------
+
+
+
+
     const context = {};
     const html = renderToString(
         <Provider store={store}>

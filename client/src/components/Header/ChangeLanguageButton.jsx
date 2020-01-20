@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import i18n from '../../i18n';
 import './ChangeLanguageButton.scss';
+import i18next from "i18next";
 
 export class ChangeLanguageButton extends Component {
   constructor() {
     super();
-    i18n.changeLanguage(i18n.language);
-    this.state = {
-      language: i18n.language,
-    };
   }
 
   handleChange = (event) => {
     i18n.changeLanguage(event.target.value);
+    document.cookie = `i18nextLang=${event.target.value}`;
     document.location.reload();
   }
 
