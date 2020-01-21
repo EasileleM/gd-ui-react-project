@@ -7,20 +7,12 @@ import "./Layout.scss";
 
 import { Header } from "../../components/Header/Header.jsx";
 import { Footer } from "../../components/Footer/Footer";
-import { LoadingSpinner } from '../../components/LoadingSpinner/index';
 import ModalWindowWrapper from '../../components/ModalWindowWrapper/ModalWindowWrapper';
 import { RedirectWrapper } from '../../components/RedirectWrapper/RedirectWrapper';
 
 import ScrollToTop from "../../components/SectionHeader/ScrollOnTop";
 import { setInitSearchState } from '../../redux/action-creators/filter/actions';
-
-import SearchPage from "../SearchPage/SearchPage";
-import HomePage from "../HomePage/HomePage";
-import ErrorPage from "../ErrorPage/ErrorPage";
-import ProductDescriptionPage from "../ProductDescriptionPage/ProductDescriptionPage";
-import HotDealsPage from "../HotDealsPage/HotDealsPage";
-import ContactPage from '../ContactPage/ContactPage';
-import AboutPage from '../AboutPage/AboutPage';
+import Routes from "../../Routes";
 
 export class Layout extends Component {
     componentDidMount() {
@@ -40,15 +32,14 @@ export class Layout extends Component {
                     <RedirectWrapper error={this.props.error} />
                     <Header />
                     <Switch>
-                        <Route path="/" exact component={HomePage} />
-                        <Route path="/item/:id" component={ProductDescriptionPage} />
-                        <Route path="/search" component={SearchPage} />
-                        <Route path="/hot-deals" component={HotDealsPage} />
-                        <Route path="/about" component={AboutPage} />
-                        <Route path="/contact" component={ContactPage} />
-                        <Route path="/400" component={() => <ErrorPage error={400} />} />
-                        <Route path="/404" component={() => <ErrorPage error={404} />} />
-                        <Route path="/500" component={() => <ErrorPage error={500} />} />
+                        {Routes.map((route) => (
+                            <Route
+                                exact={route.exact}
+                                key={route.path}
+                                path={route.path}
+                                component={route.component}
+                            />
+                        ))}
                         <Redirect to="/" />
                     </Switch>
                     <Footer />

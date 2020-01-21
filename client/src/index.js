@@ -11,12 +11,12 @@ import {initialize} from "./redux/action-creators/initialize";
 
 export function Hydration() {
     if (typeof window !== 'undefined') {
-     //   const preloadedState = window.__PRELOADED_STATE__
+        const preloadedState = window.__PRELOADED_STATE__ ? window.__PRELOADED_STATE__ : {};
 
-        delete window.__PRELOADED_STATE__
+        delete window.__PRELOADED_STATE__;
 
-        const store = createStore(rootReducer, {}, applyMiddleware(thunk))
-        store.dispatch(initialize())
+        const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
+        store.dispatch(initialize());
         render(
             <Provider store={store}>
                 <BrowserRouter>

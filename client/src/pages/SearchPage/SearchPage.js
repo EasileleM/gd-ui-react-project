@@ -12,6 +12,7 @@ import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 export class SearchPage extends Component {
   constructor(props) {
     super(props);
+    console.log("here")
     this.state = {
       filtersToggle: false,
     }

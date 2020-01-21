@@ -11,11 +11,14 @@ import i18next from "i18next"
 import i18nextMiddleware from 'i18next-express-middleware'
 import Backend from 'i18next-sync-fs-backend'
 import fs from 'fs';
-import {StaticRouter} from 'react-router-dom';
+import {StaticRouter, matchPath} from 'react-router-dom';
 import compression from 'compression'
 import thunk from "redux-thunk";
 import {initialize} from "../src/redux/action-creators/initialize"
 import cookieParser from 'cookie-parser';
+import Routes from "../src/Routes";
+import store from "../src/redux/store";
+
 
 i18next
     .use(Backend)
@@ -47,25 +50,25 @@ app.use(cookieParser());
 app.use(i18nextMiddleware.handle(i18next));
 app.use('/static', Express.static(path.join(__dirname, '../build/static')))
 app.use('/static', Express.static(path.join(__dirname, '../build-server/static')))
+app.use('/item/static', Express.static(path.join(__dirname, '../build-server/static')))//todo do smth about it
 app.use('/locales', Express.static(path.join(__dirname, '../build/locales')))
 app.get('/*', handleRender);
 
-app.listen(port);
+app.listen(port, () => {
+    console.log(`🤖 Everything works fine on port ${port}... Bzzd Bzzzzd`)
+});
 
 
 async function handleRender(req, res) {
-
     await req.i18n.changeLanguage(req.cookies.i18nextLang);
-
-    //----------------------------------
-    //todo refactor it the hell outta here
-    const initialState = {};
-    const store = createStore(rootReducer, initialState , applyMiddleware(thunk));
-    store.dispatch(initialize());
-    //----------------------------------
-
-
-
+    const currentRoute = Routes.find(route => matchPath(req.url, route)) || {};
+    let promise;
+    if (currentRoute.loadData) {
+        promise = currentRoute.loadData(store, req.url, req.i18n.language);
+    } else {
+        promise = Promise.resolve(null);
+    }
+    await promise;
 
     const context = {};
     const html = renderToString(
@@ -78,7 +81,6 @@ async function handleRender(req, res) {
         </Provider>
     );
     const preloadedState = store.getState();
-
 
     const indexFile = path.resolve('./build/index.html');
     fs.readFile(indexFile, 'utf8', (err, data) => {
