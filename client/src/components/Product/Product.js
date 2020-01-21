@@ -26,8 +26,6 @@ export class Product extends Component {
             this.setState({
                 item: this.props.item,
                 ready: true
-            }, () => {
-                console.log(this.state.ready)
             })
         }
     }

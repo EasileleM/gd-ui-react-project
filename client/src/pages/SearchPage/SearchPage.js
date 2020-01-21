@@ -8,11 +8,11 @@ import queryString from 'query-string'
 import store from "../../redux/store";
 import {clear, search} from "../../redux/action-creators/filter/actions";
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import {clearCatalog} from "../../redux/action-creators/items/actions";
 
 export class SearchPage extends Component {
   constructor(props) {
     super(props);
-    console.log("here")
     this.state = {
       filtersToggle: false,
     }

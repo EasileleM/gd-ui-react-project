@@ -6,6 +6,7 @@ import { filterReducer } from "./filterReducer";
 import { modalWindowReducer } from './modalWindowReducer';
 import { userReducer } from './userReducer';
 import {itemReducer} from "./itemReducer";
+import {sliderReducer} from "./sliderReducer";
 
 const rootReducer = combineReducers({
   errorHandler: errorReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   filterController: filterReducer,
   modalWindowController: modalWindowReducer,
   userController: userReducer,
-  itemLoader: itemReducer
+  itemLoader: itemReducer,
+  sliderController: sliderReducer,
 });
 
 export default rootReducer;

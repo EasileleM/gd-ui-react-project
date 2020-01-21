@@ -2,10 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../SectionHeader/SectionHeader.jsx';
 import ProductCatalog from '../ProductCatalog/ProductCatalog.js';
-
+import {connect} from "react-redux";
 import './NewArrivalsBlock.scss';
+import {clearCatalog} from "../../redux/action-creators/items/actions";
 
-export function NewArrivalsBlock() {
+export function NewArrivalsBlock(props) {
   const [ t ] = useTranslation();
   return (
     <section className='new-arrivals-block'>
@@ -16,3 +17,6 @@ export function NewArrivalsBlock() {
     </section>
   );
 }
+
+
+export default connect(null, null)(NewArrivalsBlock)

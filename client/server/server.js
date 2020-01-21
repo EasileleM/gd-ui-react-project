@@ -80,6 +80,7 @@ async function handleRender(req, res) {
             </StaticRouter>
         </Provider>
     );
+
     const preloadedState = store.getState();
 
     const indexFile = path.resolve('./build/index.html');
@@ -104,6 +105,7 @@ async function handleRender(req, res) {
                             /</g,
                             '\\u003c'
                         )};
+                      window.firstRender = true;
                 </script>
                 <script>`)
         );

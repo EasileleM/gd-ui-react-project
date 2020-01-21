@@ -2,8 +2,8 @@ import axios from 'axios';
 import i18n from '../i18n';
 import {SERVER_URL} from '../constants/constants';
 
-export default function loadCard(page = 1, size = 4, filters, filtersUrl) {
-  let url = `${SERVER_URL}/api/items/all?page=${page}&size=${size}&lang=${i18n.language}`;
+export default function loadCard(page = 1, size = 4, filters, filtersUrl, language = i18n.language) {
+  let url = `${SERVER_URL}/api/items/all?page=${page}&size=${size}&lang=${language}`;
 
   if(filtersUrl) {
     return axios.get(`${url}&${filtersUrl.slice(1)}`);

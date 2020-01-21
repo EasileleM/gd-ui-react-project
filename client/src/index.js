@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-dom'
+import { hydrate } from 'react-dom'
 import {applyMiddleware, createStore} from 'redux'
 import { Provider } from 'react-redux'
 import App from './App'
@@ -17,7 +17,7 @@ export function Hydration() {
 
         const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
         store.dispatch(initialize());
-        render(
+        hydrate(
             <Provider store={store}>
                 <BrowserRouter>
                     <App />
@@ -25,6 +25,7 @@ export function Hydration() {
             </Provider>,
             document.getElementById('root')
         )
+        delete window.firstRender
     }
 }
 

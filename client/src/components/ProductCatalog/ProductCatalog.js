@@ -4,26 +4,30 @@ import {ShowMoreButton} from './ShowMoreButton/index.js';
 import {ProductsContainer} from '../ProductsContainer/ProductsContainer.js'
 import loadCard from "../../utils/loadCard";
 import './ProductCatalog.scss';
-import notificationError from '../../utils/notificationError.js';
 import {connect} from "react-redux";
 import {ReactComponent as NotFoundIcon} from '../../assets/not-found.svg';
+import {loadCatalog} from "../../redux/action-creators/items/loadCatalog";
+import {clearCatalog} from "../../redux/action-creators/items/actions";
 
 export class ProductCatalog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       page: 1,
-      cards: [],
-      ready: false,
-      loading: true,
-      nextPage: true,
+      cards: this.props.cards,
+      ready: this.props.cards.length > 0,
+      loading: false,
+      nextPage: this.props.nextPage,
       filtered: this.props.filtered,
       notFound: false
     };
   }
 
   componentDidMount() {
-    this.loadItems();
+    if(!window.firstRender) {
+      this.props.clearCatalog();
+      this.loadItems();
+    }
   }
 
   handleOnClick() {
@@ -35,32 +39,31 @@ export class ProductCatalog extends React.Component {
     });
   }
 
-  loadItems = () => {
+  loadItems = async () => {
     let filters = {};
     let size = this.props.size;
     if (this.state.filtered) {
       filters = this.props.filters;
       size *= 3;
     }
-    this.props.loadContent(this.state.page, size, filters).then(result => {
-      this.setState({
-        ready: true,
-        cards: [...this.state.cards, ...result.data.items],
-        loading: false,
-        nextPage: result.data.nextPage
-      }, () => {
-        if (this.state.cards.length < 1) {
-          this.setState({notFound: true})
-        } else {
-          this.setState({notFound: false})
-        }
-      })
-    }).catch((error) => {
-      notificationError('Таких товаров не существует', 'Products you\'re looking for are nowhere to be found.', error);
-    });
+    await this.props.loadCatalog(this.state.page, size, filters);
   };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    if(!prevProps.cards || this.props.cards.length !== prevProps.cards.length) {
+      this.setState({
+        ready: true,
+        loading: false,
+        cards:this.props.cards,
+        nextPage: this.props.nextPage
+      });
+      if (this.props.cards.length < 1) {
+        this.setState({notFound: true})
+      } else {
+        this.setState({notFound: false})
+      }
+    }
+
     if ((JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) && this.props.filtered) {
       this.setState(
           {
@@ -87,14 +90,14 @@ export class ProductCatalog extends React.Component {
     } else if (this.state.ready && this.state.nextPage) {
       return (
           <div className='product-catalog'>
-            <ProductsContainer rowSize={this.props.rowSize} products={this.state.cards}/>
+            <ProductsContainer rowSize={this.props.rowSize} products={this.props.cards}/>
             <ShowMoreButton loading={this.state.loading} onClick={() => this.handleOnClick()}/>
           </div>
       );
     } else if (this.state.ready && !this.state.nextPage) {
       return (
           <div className='product-catalog'>
-            <ProductsContainer rowSize={this.props.rowSize} products={this.state.cards}/>
+            <ProductsContainer rowSize={this.props.rowSize} products={this.props.cards}/>
           </div>
       );
     }
@@ -113,7 +116,16 @@ export class ProductCatalog extends React.Component {
 const mapStateToProps = (state) => {
   return {
     filters: state.filterController,
+    cards: state.itemLoader.catalogCards,
+    nextPage: state.itemLoader.nextPage
   }
 };
 
-export default  withTranslation()(connect(mapStateToProps)(ProductCatalog));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadCatalog: (page, size, filters, filtersUrl) => dispatch(loadCatalog(page, size, filters, filtersUrl)),
+    clearCatalog: () => dispatch(clearCatalog())
+  }
+};
+
+export default  withTranslation()(connect(mapStateToProps, mapDispatchToProps)(ProductCatalog));

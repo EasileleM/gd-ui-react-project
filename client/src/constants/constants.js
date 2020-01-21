@@ -1,6 +1,6 @@
 export const SERVER_URL = process.env.NODE_ENV === `production`
-    ? "http://localhost:3000"
-    : "http://localhost:3000";
+    ? "https://gd-ui-react-project-server.herokuapp.com"
+    : "https://gd-ui-react-project-server.herokuapp.com";
 export const SLIDER_HEIGHT = 650;
 export const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{0,}$/;

@@ -8,11 +8,23 @@ import AboutPage from "./pages/AboutPage/AboutPage";
 import ContactPage from "./pages/ContactPage/ContactPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import {loadItemAction} from "./redux/action-creators/items/loadItem";
+import {loadCatalog} from "./redux/action-creators/items/loadCatalog";
+import {clearCatalog} from "./redux/action-creators/items/actions";
+import {loadSliderData} from "./redux/action-creators/slider/loadSliderData";
 const Routes = [
     {
         path: '/',
         component: HomePage,
-        exact: true
+        exact: true,
+        loadData: (store, url, language) => {
+            store.dispatch(clearCatalog());
+            const promises = [];
+            promises
+                .push(store.dispatch(loadSliderData(3, language)));
+            promises
+                .push(store.dispatch(loadCatalog(1,4, null, null, language)));
+            return Promise.allSettled(promises);
+        }
     },
     {
         path: '/item/:id',
@@ -25,6 +37,10 @@ const Routes = [
     {
         path: '/search',
         component: SearchPage,
+        loadData: (store, url, language) => {
+            store.dispatch(clearCatalog());
+            return store.dispatch(loadCatalog(1,9, null, null, language));
+        }
     },
     {
         path: '/hot-deals',
