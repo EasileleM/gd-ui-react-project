@@ -8,6 +8,7 @@ export const initialState = {
   sizes: [],
   searchTarget: null,
   URI: null,
+  availableFilters: null
 };
 
 export const filterReducer = (state = initialState, action) => {
@@ -69,8 +70,15 @@ export const filterReducer = (state = initialState, action) => {
         URI: updateURI(filters),
       };
     case FILTER_ACTIONS.CLEAR:
+      const clearedState = {...initialState};
+      clearedState.availableFilters = state.availableFilters;
       return {
-        ...initialState,
+        ...clearedState,
+      };
+    case FILTER_ACTIONS.SET_AVAILABLE:
+      state.availableFilters = action.payload;
+      return {
+        ...state
       };
     case FILTER_ACTIONS.SET_INITIAL_STATE:
       if (!action.payload) {

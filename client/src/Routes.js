@@ -11,6 +11,7 @@ import {loadItemAction} from "./redux/action-creators/items/loadItem";
 import {loadCatalog} from "./redux/action-creators/items/loadCatalog";
 import {clearCatalog} from "./redux/action-creators/items/actions";
 import {loadSliderData} from "./redux/action-creators/slider/loadSliderData";
+import {loadAvailableFilters} from "./redux/action-creators/filter/loadAvailableFilters";
 const Routes = [
     {
         path: '/',
@@ -39,7 +40,12 @@ const Routes = [
         component: SearchPage,
         loadData: (store, url, language) => {
             store.dispatch(clearCatalog());
-            return store.dispatch(loadCatalog(1,9, null, null, language));
+            const promises = [];
+            promises
+                .push(store.dispatch(loadAvailableFilters(language)))
+            promises
+                .push(store.dispatch(loadCatalog(1,9, null, null, language)))
+            return Promise.allSettled(promises);
         }
     },
     {
@@ -47,7 +53,7 @@ const Routes = [
         component: HotDealsPage
     },
     {
-        path: 'about',
+        path: '/about',
         component: AboutPage
     },
     {

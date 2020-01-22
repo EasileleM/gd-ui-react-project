@@ -7,6 +7,7 @@ export const FILTER_ACTIONS = {
   SEARCH: 'SEARCH_FILTER',
   CLEAR: 'CLEAR_FILTER',
   SET_INITIAL_STATE: 'SET_STATE_FILTER',
+  SET_AVAILABLE: 'SET_AVAILABLE_FILTER'
 };
 
 export const changeSizeFilter = (sizes) => {
@@ -63,4 +64,12 @@ export const setInitSearchState = (URI) => {
     type: FILTER_ACTIONS.SET_INITIAL_STATE,
     payload: URI,
   }
-}
+};
+
+export const setAvailableFilters = (filters) => {
+  return {
+    type: FILTER_ACTIONS.SET_AVAILABLE,
+    payload: filters,
+  }
+};
+
