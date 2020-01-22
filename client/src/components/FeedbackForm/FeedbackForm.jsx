@@ -113,7 +113,7 @@ export class FeedbackForm extends React.Component {
       method="POST"
       className="feedback-form">
       <SectionHeader
-        additionalClass="section-header_margin-small"
+        additionalClass="section-header_margin-small section-header_text-wrap"
         title_colored={this.props.t('leave-feedback-left')}
         title={this.props.t('leave-feedback-right')} />
       <UserInfoInput

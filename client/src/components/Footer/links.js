@@ -1,11 +1,15 @@
 import React from 'react';
-import { withTranslation } from 'react-i18next';
-
 import './main.scss';
+import { withTranslation} from 'react-i18next';
 
 class Links extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     const t = this.props.t;
+
+
     return (
       <section className="footer__mobile footer__wrapper footer__wrapper_links">
         <div className="footer__wrapper_column">

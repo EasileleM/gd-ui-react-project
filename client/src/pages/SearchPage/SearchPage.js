@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import Filters from "../../components/Filters/Filters";
 import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import Newsletter from "../../components/Newsletter/Newsletter";
-import FiltersButtonImage from "../../assets/controls.svg";
+import {ReactComponent as FiltersButtonImage} from '../../assets/controls.svg';
 import "./SearchPage.scss";
 import queryString from 'query-string'
 import store from "../../redux/store";
 import {clear, search} from "../../redux/action-creators/filter/actions";
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import {clearCatalog} from "../../redux/action-creators/items/actions";
 
 export class SearchPage extends Component {
   constructor(props) {
@@ -66,7 +67,7 @@ export class SearchPage extends Component {
               </div>
               <div className="search__items">
                 <button className="search__toggle" onClick={this.handleClick}>
-                  <img className="search__toggle-icon" src={FiltersButtonImage} alt="Controls icon"/>
+                  <FiltersButtonImage className="search__toggle-icon"/>
                   Filters
                 </button>
                 <ProductCatalog filterUrl={this.props.location.search} filtered={true} rowSize={3} size={3}/>

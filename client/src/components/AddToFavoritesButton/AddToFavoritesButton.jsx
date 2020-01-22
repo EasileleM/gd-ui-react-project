@@ -29,6 +29,7 @@ export class AddToFavoritesButton extends React.Component {
     if (this.state.enabled) {
       this.props.removeItem(this.props.data);
     } else {
+      console.log(this.props.data);
       this.props.addItem(this.props.data);
     }
     this.setState({enabled: !this.state.enabled});
@@ -54,7 +55,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changeModalWindowContent: (content) => dispatch(changeModalWindowContent(content)),
     removeItem: (item) => dispatch(removeItem(item)),
-    addItem: (item) => dispatch(addItem(item))
+    addItem: (item) => {
+      dispatch(addItem(item))
+    }
   }
 };
 export default connect(null, mapDispatchToProps)(AddToFavoritesButton);

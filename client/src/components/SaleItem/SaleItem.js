@@ -8,8 +8,8 @@ import addItem from '../../redux/action-creators/cart/addItem';
 
 import { LoadingSpinner } from '../LoadingSpinner/index';
 
-import square1 from '../../assets/square-1.svg';
-import square2 from '../../assets/square-2.svg';
+import {ReactComponent as Square1} from '../../assets/square-1.svg';
+import {ReactComponent as Square2} from '../../assets/square-2.svg';
 import loadItemSales from "../../utils/loadItemSales";
 import notificationError from "../../utils/notificationError";
 
@@ -34,8 +34,8 @@ export class SaleItem extends React.Component {
       return (
         <div className="sale-item">
           <div className="sale-item__sale">
-            <img src={square2} className="sale-item__decorator sale-item__decorator_2" alt="square" />
-            <img src={square1} className="sale-item__decorator sale-item__decorator_1" alt="square" />
+            <Square2 className="sale-item__decorator sale-item__decorator_2" alt="square" />
+            <Square1 className="sale-item__decorator sale-item__decorator_1" alt="square" />
             <div className="sale-item__sale-text-block">
               <p className="sale-item__sale-label">Sale</p>
               <p className="sale-item__sale-size">{this.state.data.sale + '%'}</p>

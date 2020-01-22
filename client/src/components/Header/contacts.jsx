@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ChangeLanguageButton} from './ChangeLanguageButton';
+import ChangeLanguageButton from './ChangeLanguageButton.jsx';
 
 import './Header.scss';
 

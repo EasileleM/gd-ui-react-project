@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Slider} from "../../components/Slider";
-import {NewArrivalsBlock} from "../../components/NewArrivalsBlock/NewArrivalsBlock";
+import Slider from "../../components/Slider";
+import NewArrivalsBlock from "../../components/NewArrivalsBlock/NewArrivalsBlock";
 import {SpecialOfferSection} from "../../components/SpecialOfferSection/SpecialOfferSection";
 import BestSalesBlock from "../../components/BestSalesBlock/BestSalesBlock";
 import Newsletter from "../../components/Newsletter/Newsletter";

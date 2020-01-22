@@ -1,6 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
+import './main.scss'
 
 export class Item extends React.Component {
   componentDidMount(){}

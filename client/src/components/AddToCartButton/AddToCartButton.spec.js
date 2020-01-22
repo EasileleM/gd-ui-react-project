@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import sinon from 'sinon';
 import {configure} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import {AddToCartButton} from './AddToCartButton';
+import AddToCartButton from './AddToCartButton';
 import store from "../../redux/store";
 import {Chooser} from "../Product/ProductInfo/Chooser/Chooser";
 

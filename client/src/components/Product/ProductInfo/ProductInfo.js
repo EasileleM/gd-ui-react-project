@@ -3,10 +3,10 @@ import {withTranslation} from 'react-i18next';
 import "./ProductInfo.scss"
 import Chooser from "./Chooser/Chooser";
 import { connect } from 'react-redux';
-import {ReactComponent as ShareIcon} from "../../../assets/share.svg";
-import {ReactComponent as AddToCartIcon} from "../../../assets/shopping-cart-add.svg";
+import {ReactComponent as ShareIcon} from '../../../assets/share.svg';
+import {ReactComponent as AddToCartIcon} from '../../../assets/shopping-cart-add.svg';
 
-import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButton';
+import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButton.jsx';
 
 import addItem from '../../../redux/action-creators/cart/addItem';
 import store from '../../../redux/store';

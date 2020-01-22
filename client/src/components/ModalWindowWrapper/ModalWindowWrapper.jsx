@@ -7,7 +7,7 @@ import FavoritesItems from '../FavoritesItems/FavoritesItems';
 import OrderBlock from '../OrderBlock/OrderBlock';
 import { LoginWindowContent } from '../LoginWindowContent/LoginWindowContent';
 import UserInfoContent from '../UserInfoContent/UserInfoContent';
-import ModalWindow from './ModalWindow/ModalWindow';
+import ModalWindow from './ModalWindow/ModalWindow.jsx';
 import notificationSuccess from '../../utils/notificationSuccess';
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
@@ -17,10 +17,16 @@ export class ModalWindowWrapper extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(1)
     if (this.props.modalWindowMode !== prevProps.modalWindowMode) {
+      console.log(2)
+
       switch (this.props.modalWindowMode) {
         case 'cart':
+          console.log(3)
+
           if (!this.props.cartSize) {
+            console.log(4)
             notificationSuccess('Нет товаров в корзине.', 'Cart is empty.', '');
             this.props.close();
             break;

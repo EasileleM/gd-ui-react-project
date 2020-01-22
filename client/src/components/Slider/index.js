@@ -5,8 +5,9 @@ import { LoadingSpinner } from '../LoadingSpinner/index';
 import { Buttons } from './Buttons/Buttons.js';
 import { Images } from './Images/index.js';
 import { ContentBlock } from './ContentBlock/ContentBlock.js';
-import loadSlides from "../../utils/loadSlides";
-import notificationError from "../../utils/notificationError";
+
+import {connect} from "react-redux";
+import {loadSliderData} from "../../redux/action-creators/slider/loadSliderData";
 
 export class Slider extends React.Component {
   constructor(props) {
@@ -15,20 +16,16 @@ export class Slider extends React.Component {
     this.state = {
       currentSlide: 1,
       slidesAmount: 3,
-      ready: false
+      ready: false,
     };
   }
 
   componentDidMount() {
-    loadSlides(3).then(res => {
-      this.setState({
-        ready: true,
-        data: res.data
-      })
-    }).catch((error) => {
-      notificationError('Таких товаров для слайдера не существует', 'Products you\'re looking for slider is nowhere to be found.', error)
-    });
-    this.setState({ slideTimer: this.switchSlideTimer() });
+    if(!window.firstRender) {
+      this.props.loadSlides(3).then(() => {
+        this.setState({ slideTimer: this.switchSlideTimer() });
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -54,32 +51,47 @@ export class Slider extends React.Component {
   }
 
   render() {
-    if (!this.state.ready) {
+    if (!this.props.sliderData) {
       return (
         <div className="slider">
           <div className="slider__loading">
             <LoadingSpinner />
           </div>
         </div>);
+    }else {
+      return (
+          <div className="slider">
+            <Images
+                images={this.props.sliderData.map((item) => item.sliderImg)}
+                currentSlide={this.state.currentSlide}
+            />
+            <div className="slider__content">
+              <Buttons
+                  currentSlide={this.state.currentSlide}
+                  onClick={(i) => this.handleOnClick(i)}
+              />
+              <ContentBlock
+                  items={this.props.sliderData.map((item) => item.item)}
+                  currentSlide={this.state.currentSlide}
+              />
+            </div>
+          </div>
+      )
     }
-    return (
-      <div className="slider">
-        <Images
-          images={this.state.data.map((item) => item.sliderImg)}
-          currentSlide={this.state.currentSlide}
-        />
-        <div className="slider__content">
-          <Buttons
-            currentSlide={this.state.currentSlide}
-            onClick={(i) => this.handleOnClick(i)}
-          />
-          <ContentBlock
-            items={this.state.data.map((item) => item.item)}
-            currentSlide={this.state.currentSlide}
-          />
-        </div>
-      </div>
-    )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    sliderData: state.sliderController.sliderData
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadSlides: (amount) => dispatch(loadSliderData(amount))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Slider)
 

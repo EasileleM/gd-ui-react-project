@@ -7,18 +7,18 @@ import addItem from '../../redux/action-creators/cart/addItem';
 
 import './ItemCardSmall.scss';
 
-import star from '../../assets/star.svg';
-import starEmpty from '../../assets/star-empty.svg';
+import {ReactComponent as Star} from '../../assets/star.svg';
+import {ReactComponent as StarEmpty} from '../../assets/star-empty.svg';
 
 export class ItemCardSmall extends Component {
   createStars(rate, maxRate = 4) {
     const stars = new Array(+rate);
     for (let i = 0; i < Number(rate); i++) {
-      stars[i] = <img key={i} src={star} className="item-card-small__rating-star" alt="*" />
+      stars[i] = <Star className="item-card-small__rating-star" alt="*" />
     }
     const emptyStars = new Array(maxRate - rate);
     for (let i = 0; i < maxRate - rate; i++) {
-      emptyStars[i] = <img key={i} src={starEmpty} className="item-card-small__rating-star" alt="O" />
+      emptyStars[i] = <StarEmpty className="item-card-small__rating-star" alt="O" />
     }
     return (
       <div className="item-card-small__rating">

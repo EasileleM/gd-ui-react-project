@@ -8,33 +8,23 @@ import { LoadingSpinner } from "../LoadingSpinner";
 import FilterSearchBar from "./FilterSearchBar/FilterSearchBar";
 import notificationError from "../../utils/notificationError";
 import { withTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import {loadAvailableFilters} from "../../redux/action-creators/filter/loadAvailableFilters";
 
 export class Filters extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      filters: null
-    }
   }
 
   componentDidMount() {
-    loadFilters().then(res => {
-      this.setState({
-        filters: res.data,
-      })
-    }
-    ).catch(error => {
-      notificationError("Ошибка во время загрузки фильтров",
-        "Error while loading filters",
-        error)
-    });
+      this.props.loadAvailableFilters()
   }
 
   clearCategory = () => {
     this.setState({ searchTarget: "" });
   };
 
-  render() {
+    render() {
     const t = this.props.t;
     return (
       <div className="filters-container">
@@ -45,8 +35,7 @@ export class Filters extends Component {
         <div className="filter">
           <h2 className="filter__heading">{t('filters.categories')}</h2>
           {
-            this.state.filters
-              ? <FilterRadio options={this.state.filters.categories}
+            this.props.availableFilters ? <FilterRadio options={this.props.availableFilters.categories}
                 onStateChange={this.handleChange}
                 onClear={this.clearCategory}
                 onInit={this.onInit} />
@@ -57,10 +46,9 @@ export class Filters extends Component {
         <div className="filter">
           <h2 className="filter__heading">{t('filters.price')}</h2>
           {
-            this.state.filters
-              ? <FilterSlider slideIn={this.props.slideIn}
-                maxValue={Number(this.state.filters.maxprice)}
-                minValue={Number(this.state.filters.minprice)}
+            this.props.availableFilters ? <FilterSlider slideIn={this.props.slideIn}
+                maxValue={Number(this.props.availableFilters.maxprice)}
+                minValue={Number(this.props.availableFilters.minprice)}
                 onStateChange={this.handleChange}
                 onInit={this.onInit} />
               : <LoadingSpinner />
@@ -70,9 +58,8 @@ export class Filters extends Component {
         <div className="filter">
           <h2 className="filter__heading">{t('filters.sizes')}</h2>
           {
-            this.state.filters
-              ? <FilterCheckbox name="sizes"
-                options={this.state.filters.sizes}
+              this.props.availableFilters ? <FilterCheckbox name="sizes"
+                options={this.props.availableFilters.sizes}
                 onStateChange={this.handleChange}
                 onInit={this.onInit} />
               : <LoadingSpinner />
@@ -82,9 +69,8 @@ export class Filters extends Component {
         <div className="filter">
           <h2 className="filter__heading">{t('filters.brands')}</h2>
           {
-            this.state.filters
-              ? <FilterCheckbox name="brands"
-                options={this.state.filters.brands}
+              this.props.availableFilters ? <FilterCheckbox name="brands"
+                options={this.props.availableFilters.brands}
                 onStateChange={this.handleChange}
                 onInit={this.onInit} />
               : <LoadingSpinner />
@@ -95,4 +81,15 @@ export class Filters extends Component {
   }
 }
 
-export default withTranslation()(Filters);
+const mapStateToProps = (state) => {
+    return {
+        availableFilters: state.filterController.availableFilters,
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadAvailableFilters: () => dispatch(loadAvailableFilters())
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Filters));

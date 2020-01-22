@@ -21,6 +21,7 @@ $color-text-secondary: $color-orange;
     font-weight: 700;
     text-transform: uppercase;
 
+
     &_colored {
       margin-right: 5px;
       color: $color-text-secondary;
@@ -43,5 +44,9 @@ $color-text-secondary: $color-orange;
 
   &_margin-small {
     margin: 10px 0 30px 0;
+  }
+
+  &_text-wrap {
+    word-break: break-word;
   }
 }
