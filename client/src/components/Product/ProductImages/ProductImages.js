@@ -1,54 +1,61 @@
 import React, {Component} from 'react';
 import "./ProductImages.scss"
+import ProductImagesModal from "./ProductImagesModal/ProductImagesModal";
+import ProductImagesRow from "./ProductImagesRow/ProductImagesRow";
 
 
 export class ProductImages extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: props.images,
       currentIndex: 0,
+      zoomedModal: false,
     }
   }
 
-  setIndex(index) {
-    if (index > this.state.images.length) {
-      return;
+  setIndex = (index) => {
+    if (index < this.props.images.length && index >= 0) {
+      this.setState({currentIndex: index});
     }
-    this.setState({currentIndex: index});
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.images !== prevProps.images) {
       this.setState({
-        images: this.props.images,
         currentIndex: 0,
       })
     }
   }
 
-  componentDidMount() {
-  }
+  zoomModalToggle = (e) => {
+    if (e.target.className === "product-images-modal__exit" || e.target.className === 'product-images-modal__backdrop') {
+      this.setState({
+        zoomedModal: false,
+      })
+    }else if(e.target.className ===  'product-images__main') {
+      this.setState({
+        zoomedModal: true,
+      })
+    }
+  };
 
   render() {
     return (
         <div className="product-images">
-          <img className="product-images__main"srcSet={this.state.images[this.state.currentIndex].srcset.join(", ")} src={this.state.images[this.state.currentIndex].src}
+          <img className="product-images__main"
+               srcSet={this.props.images[this.state.currentIndex].srcset.join(", ")}
+               src={this.props.images[this.state.currentIndex].src}
+               onClick={this.zoomModalToggle}
                alt="Product"/>
 
-          <div className="product-images__row">
-            {this.state.images.map((image, index) => {
-              return <div key={index} onClick={() => this.setIndex(index)}
-                          className={`product-images__image-wrapper 
-                                       ${
-                              this.state.currentIndex === index ?
-                                  "product-images__image-wrapper_selected" : ""}`
-                          }>
-                <img srcSet={image.srcset.join(", ")} src={image.src}
-                     className={`product-images__small-image`} alt="Miniature of the product"/>
-              </div>
-            })}
-          </div>
+          <ProductImagesRow images={this.props.images} currentIndex={this.state.currentIndex} setIndex={this.setIndex}/>
+          {this.state.zoomedModal
+              ? <ProductImagesModal
+                images={this.props.images}
+                currentIndex={this.state.currentIndex}
+                toggle={this.zoomModalToggle}
+                setIndex={this.setIndex}
+          /> : null}
         </div>
     );
   }

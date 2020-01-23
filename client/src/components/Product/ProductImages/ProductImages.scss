@@ -6,64 +6,12 @@ $color-border: $color-athens-gray;
   align-items: center;
   width: 40%;
 
-  &__row {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 100px;
-
-    @media screen and (max-width: $breakpoint-tablet) {
-      padding-bottom: 0px;
-    }
-  }
-
   &__main {
     height: 275px;
     object-fit: contain;
     width: 100%;
     padding: 80px 0 60px;
-
-  }
-
-  &__small-image {
-    object-fit: contain;
-    width: 85px;
-    height: 59px;
-
-    @media screen and (max-width: $breakpoint-tablet) {
-      width: 55px;
-
-    }
-  }
-
-  &__image-wrapper {
-    position: relative;
-    border: 2px solid $color-border;
-    padding: 10px;
-    margin: 0 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    &:hover {
-      opacity: .6;
-    }
-
-    &_selected {
-      border: 2px solid $color-orange;
-      opacity: .6;
-
-      &:before {
-        width: 100%;
-        height: 100%;
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: $color-orange;
-        opacity: .8;
-      }
-    }
+    cursor: zoom-in;
   }
 
   @media screen and (max-width: $breakpoint-smartphone) {

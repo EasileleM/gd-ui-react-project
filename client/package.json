@@ -47,7 +47,7 @@
     "dev": "nodemon build/server-bundle.js",
     "build": "npm-run-all --parallel build:*",
     "watch": "npm-watch",
-    "start:react": "react-scripts start",
+    "start:react": "PORT=3001 react-scripts start",
     "build:react": "react-scripts build",
     "build:ssr": "NODE_ENV=development webpack --config webpack.config.js",
     "test": "react-scripts test",
