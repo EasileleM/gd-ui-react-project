@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./FilterCheckbox.scss"
-import store from "../../../redux/store";
+import { connect } from 'react-redux';
 import {
   changeBrandsFilter,
   changeSizeFilter
@@ -23,11 +23,11 @@ export class FilterCheckbox extends Component {
     let selectedValues = [];
     switch (this.state.name) {
       case "brands":
-        selectedValues = [...store.getState().filterController.brands];
+        selectedValues = [...this.props.brands];
         this.setState({ selectedValues });
         break;
       case "sizes":
-        selectedValues = [...store.getState().filterController.sizes];
+        selectedValues = [...this.props.sizes];
         this.setState({ selectedValues });
         break;
       default:
@@ -50,10 +50,10 @@ export class FilterCheckbox extends Component {
     this.setState({ selectedValues: selectedValues });
     switch (this.state.name) {
       case "brands":
-        store.dispatch(changeBrandsFilter(selectedValues));
+        this.props.changeBrandsFilter(selectedValues);
         break;
       case "sizes":
-        store.dispatch(changeSizeFilter(selectedValues));
+        this.props.changeSizeFilter(selectedValues);
         break;
       default:
         break;
@@ -102,4 +102,17 @@ export class FilterCheckbox extends Component {
   }
 }
 
-export default withTranslation()(FilterCheckbox);
+const mapStateToProps = (state) => {
+    return {
+        brands: state.filterController.brands,
+        sizes: state.filterController.sizes
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeBrandsFilter: (selectedValues) => dispatch(changeBrandsFilter(selectedValues)),
+        changeSizeFilter: (selectedValues) => dispatch(changeSizeFilter(selectedValues))
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(FilterCheckbox));

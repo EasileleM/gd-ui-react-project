@@ -3,10 +3,8 @@ import "./Filters.scss"
 import FilterRadio from "./FilterRadio/FilterRadio";
 import FilterSlider from "./FIlterSlider/FilterSlider";
 import FilterCheckbox from "./FilterCheckbox/FilterCheckbox";
-import { loadFilters } from "../../utils/loadFilters";
 import { LoadingSpinner } from "../LoadingSpinner";
 import FilterSearchBar from "./FilterSearchBar/FilterSearchBar";
-import notificationError from "../../utils/notificationError";
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import {loadAvailableFilters} from "../../redux/action-creators/filter/loadAvailableFilters";

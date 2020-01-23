@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./FilterRadio.scss"
-import store from '../../../redux/store';
+import { connect } from 'react-redux';
 import { changeCategoryFilter } from "../../../redux/action-creators/filter/actions";
 import { withTranslation } from 'react-i18next';
 
@@ -16,18 +16,18 @@ export class FilterRadio extends Component {
   }
 
   componentDidMount() {
-    const selectedValue = store.getState().filterController.category;
+    const selectedValue = this.props.selectedValue;
     this.setState({ selectedValue });
   }
 
   handleClick = (e) => {
     this.setState({ selectedValue: e.target.value });
-    store.dispatch(changeCategoryFilter(e.target.value));
+    this.props.changeCategoryFilter(e.target.value);
   };
 
   resetFilters = () => {
     this.setState({ selectedValue: null });
-    store.dispatch(changeCategoryFilter(null));
+    this.props.changeCategoryFilter(null);
     this.props.onClear();
   };
 
@@ -81,4 +81,17 @@ export class FilterRadio extends Component {
   }
 }
 
-export default withTranslation()(FilterRadio);
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+      selectedValue: state.filterController.category,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      changeCategoryFilter: (categoryValue) => dispatch(changeCategoryFilter(categoryValue))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(FilterRadio));

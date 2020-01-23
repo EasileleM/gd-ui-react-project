@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {ReactComponent as DeleteIcon} from "../../../assets/delete.svg";
 import "./FilterSearchBar.scss"
-import store from "../../../redux/store";
+import { connect } from 'react-redux';
 import {search} from "../../../redux/action-creators/filter/actions";
 
 export class FilterSearchBar extends Component {
@@ -13,7 +13,7 @@ export class FilterSearchBar extends Component {
   }
 
   handleSearch = (e) => {
-    store.dispatch(search(this.state.searchValue));
+    this.props.search(this.state.searchValue);
   };
 
   handleChange = (e) => {
@@ -22,7 +22,7 @@ export class FilterSearchBar extends Component {
 
   clearSearch = () => {
     this.setState({searchValue: ""});
-    store.dispatch(search(null));
+    this.props.search(null);
   };
 
   componentDidMount() {
@@ -43,4 +43,9 @@ export class FilterSearchBar extends Component {
   }
 }
 
-export default FilterSearchBar;
+const mapDispatchToProps = (dispatch) => {
+  return {
+      search: (searchValue) => dispatch(search(searchValue))
+  }
+};
+export default connect(mapDispatchToProps)(FilterSearchBar);

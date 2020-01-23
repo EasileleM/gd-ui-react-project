@@ -16,7 +16,7 @@ import Routes from "../../Routes";
 
 export class Layout extends Component {
     componentDidMount() {
-        store.dispatch(setInitSearchState(this.props.location.search))
+        this.props.setInitSearchState(this.props.location.search);
     }
 
     componentDidUpdate(prevProps) {
@@ -56,4 +56,11 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default withRouter(connect(mapStateToProps)(Layout));
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setInitSearchState: (search) => dispatch(setInitSearchState(search))
+
+    }
+  };
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));

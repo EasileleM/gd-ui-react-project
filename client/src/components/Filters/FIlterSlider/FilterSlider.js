@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "./FilterSlider.scss"
 import ReactSlider from 'react-slider'
-import store from "../../../redux/store";
+import { connect } from 'react-redux';
 import {changeMinPriceFilter, changeMaxPriceFilter} from "../../../redux/action-creators/filter/actions";
 
 
@@ -52,23 +52,23 @@ export class FilterSlider extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if(prevState.maxChosenValue !== this.state.maxChosenValue) {
       if (this.state.maxChosenValue === this.state.maxValue) {
-        store.dispatch(changeMaxPriceFilter(null));
+        this.props.changeMaxPriceFilter(null);
       } else {
-        store.dispatch(changeMaxPriceFilter(this.state.maxChosenValue));
+        this.props.changeMaxPriceFilter(this.state.maxChosenValue);
       }
     }
     if (prevState.minChosenValue !== this.state.minChosenValue) {
       if (this.state.minChosenValue === this.state.minValue) {
-        store.dispatch(changeMinPriceFilter(null));
+        this.props.changeMinPriceFilter(null);
       } else {
-        store.dispatch(changeMinPriceFilter(this.state.minChosenValue));
+        this.props.changeMinPriceFilter(this.state.minChosenValue);
       }
     }
   }
 
   componentDidMount() {
-    const minChosenValue = store.getState().filterController.minPrice;
-    const maxChosenValue = store.getState().filterController.maxPrice;
+    const maxChosenValue = this.props.maxPrice;
+    const minChosenValue = this.props.minPrice;
     if (minChosenValue && maxChosenValue) {
       this.setState({minChosenValue, maxChosenValue});
     }
@@ -113,5 +113,18 @@ export class FilterSlider extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+      maxChosenValue: state.filterController.maxPrice,
+      minChosenValue: state.filterController.minPrice
+  }
+};
 
-export default FilterSlider;
+const mapDispatchToProps = (dispatch) => {
+  return {
+      changeMaxPriceFilter: (maxChosenValue) => dispatch(changeMaxPriceFilter(maxChosenValue)),
+      changeMinPriceFilter: (minChosenValue) => dispatch(changeMinPriceFilter(minChosenValue))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterSlider);

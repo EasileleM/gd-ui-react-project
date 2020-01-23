@@ -26,7 +26,7 @@ export class ProductCatalog extends React.Component {
   componentDidMount() {
     if(!window.firstRender) {
       this.props.clearCatalog();
-      this.loadItems();
+      this.loadItems();//fix async logic
     }
   }
 
@@ -65,11 +65,14 @@ export class ProductCatalog extends React.Component {
     }
 
     if ((JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) && this.props.filtered) {
+   
       this.setState(
           {
             cards: [],
-            page: 1
+            page: 1,
+            filtered: true
           }, () => {
+            this.props.clearCatalog();
             this.loadItems();
           }
       );
