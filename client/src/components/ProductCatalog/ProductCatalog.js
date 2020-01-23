@@ -15,7 +15,7 @@ export class ProductCatalog extends React.Component {
     this.state = {
       page: 1,
       cards: this.props.cards,
-      ready: this.props.cards.length > 0,
+      ready: !!this.props.cards && this.props.cards.length > 0,
       loading: false,
       nextPage: this.props.nextPage,
       filtered: this.props.filtered,

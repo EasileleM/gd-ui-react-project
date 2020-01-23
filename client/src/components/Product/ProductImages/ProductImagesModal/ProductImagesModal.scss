@@ -1,0 +1,127 @@
+@import './../../../../style/main.scss';
+
+.product-images-modal {
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fade-in 0.25s ease;
+  }
+
+  &__content {
+    z-index: 2;
+    position: absolute;
+    width: 900px;
+    height: 70%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: zoom-in 0.25s ease;
+
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      width: 700px;
+      height: 80%;
+      flex-direction: column;
+    }
+
+    @media screen and (max-width: $breakpoint-smartphone) {
+      height: 100%;
+      width: 100%;
+    }
+
+    & > * {
+      animation: fade-in-delayed 0.7s ease;
+    }
+  }
+
+  &__row {
+    & > * {
+      flex-direction: column;
+    }
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      order: 1;
+      & > * {
+        flex-direction: row;
+      }
+    }
+  }
+
+  &__exit {
+    all: unset;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: calc(100% - 60px);
+    padding-top: 10px;
+    font-size: 50px;
+  }
+
+  &__zoom-inner {
+    display: block;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  &__zoom-outer {
+    width: 250px;
+    background-repeat: no-repeat;
+    padding: 30px;
+    border: 1px gray solid;
+
+    @media screen and (max-width: $breakpoint-smartphone) {
+      border: none;
+    }
+    &:hover img {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0
+    }
+    100% {
+      opacity: 1
+    }
+  }
+
+  @keyframes fade-in-delayed {
+    0% {
+      opacity: 0
+    }
+    50% {
+      opacity: 0
+    }
+    100% {
+      opacity: 1
+    }
+  }
+
+
+  @keyframes zoom-in {
+    0% {
+      opacity: 0;
+      height: 0;
+      width: 0;
+    }
+    80% {
+      opacity: 0;
+      height: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+}

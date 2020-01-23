@@ -4,7 +4,6 @@ import ProductInfo from "./ProductInfo/ProductInfo";
 import "./Product.scss"
 import {LoadingSpinner} from "../LoadingSpinner";
 import {loadItemAction} from "../../redux/action-creators/items/loadItem";
-import {toast} from "react-toastify";
 import { connect } from 'react-redux';
 
 
