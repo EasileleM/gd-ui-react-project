@@ -13,6 +13,8 @@ import notificationSuccess from '../../../utils/notificationSuccess';
 import { signUp } from '../../../redux/action-creators/user/signUp';
 import { closeModalWindow } from '../../../redux/action-creators/modalWindow/actions';
 
+import i18n from '../../../i18n'
+
 const formErrors = {
   firstName: null,
   lastName: null,
@@ -67,7 +69,8 @@ export class SignUpForm extends React.Component {
         email: this.state.email,
         password: this.state.password,
         firstName: this.state.firstName,
-        lastName: this.state.lastName
+        lastName: this.state.lastName,
+        lang: i18n.language
       };
       this.props.signUp(data);
     }
