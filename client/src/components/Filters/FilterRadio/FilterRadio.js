@@ -82,7 +82,6 @@ export class FilterRadio extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
       selectedValue: state.filterController.category,
   }

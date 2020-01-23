@@ -14,7 +14,7 @@ export const itemReducer = (state = initialState, action) => {
             };
         case ITEM_ACTION.SET_CATALOG:
             return {
-                catalogCards: [...state.catalogCards, ...action.payload.cards],
+                catalogCards: [...action.payload.cards],
                 nextPage: action.payload.nextPage
             };
         case ITEM_ACTION.CLEAR_CATALOG:

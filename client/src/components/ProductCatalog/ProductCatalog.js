@@ -65,14 +65,12 @@ export class ProductCatalog extends React.Component {
     }
 
     if ((JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) && this.props.filtered) {
-   
       this.setState(
           {
-            cards: [],
             page: 1,
             filtered: true
-          }, () => {
-            this.props.clearCatalog();
+          },  () => {
+            setTimeout( this.props.clearCatalog(), 1 );
             this.loadItems();
           }
       );

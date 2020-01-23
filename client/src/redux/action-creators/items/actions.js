@@ -1,3 +1,4 @@
+
 export const ITEM_ACTION = {
     LOAD: 'LOAD_ITEM',
     SET: 'SET_ITEM',
@@ -14,6 +15,7 @@ export const setItem = (item) => {
 };
 
 export const setCatalog = (cards, nextPage) => {
+    console.log('set')
     return {
         type: ITEM_ACTION.SET_CATALOG,
         payload: {cards, nextPage},
@@ -21,6 +23,7 @@ export const setCatalog = (cards, nextPage) => {
 };
 
 export const clearCatalog = () => {
+    console.log('clear')
     return {
         type: ITEM_ACTION.CLEAR_CATALOG,
     }
