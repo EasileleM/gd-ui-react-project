@@ -29,7 +29,8 @@ class UserService {
         _id: rawUser._id,
         email: rawUser.email,
         firstName: rawUser.firstName,
-        lastName: rawUser.lastName
+        lastName: rawUser.lastName,
+        lang: rawUser.lang
       },
     };
 

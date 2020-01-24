@@ -28,7 +28,8 @@ accountRouter.put('/edit', async (req, res) => {
                 $set: {
                   firstName: req.body.firstName,
                   lastName: req.body.lastName,
-                  email: req.body.email
+                  email: req.body.email,
+                  lang: req.body.lang,//todo add check if language is supported
                 }
               });
         } else {
@@ -38,7 +39,8 @@ accountRouter.put('/edit', async (req, res) => {
                   password: await UserServiceInstance.hashPassword(req.body.newPassword),
                   firstName: req.body.firstName,
                   lastName: req.body.lastName,
-                  email: req.body.email
+                  email: req.body.email,
+                  lang: req.body.lang,
                 }
               });
         }

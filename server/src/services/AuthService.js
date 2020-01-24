@@ -24,6 +24,7 @@ class AuthService {
       password: hashedPassword,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      lang: req.body.lang,
       cart: [],
       favorites: [],
     });
